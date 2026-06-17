@@ -1,0 +1,89 @@
+{
+  "raw_data_info": {
+    "fire_info": {
+      "fire_incident_id": "PC20230330",
+      "region": "경기도",
+      "fire_size": "중형",
+      "incident_name": "경기 포천 영북 운천",
+      "fire_location": {
+        "lat": 38.08409,
+        "lon": 127.28028
+      },
+      "fire_report_number": "영북소방서-20230330-001",
+      "start_timestamp": "2023-03-30 14:17:00",
+      "detection_timestamp": "2023-03-30 14:17:00",
+      "end_timestamp": "2023-04-03 16:29:00",
+      "response_phase": "1단계",
+      "fire_cause": "성묘객(담뱃불)실화",
+      "affected_area": 40.49,
+      "fire_spread_track": "[38.084062,127.280088],[38.086106,127.279337],[38.088436,127.280753],[38.089179,127.284058],[38.089433,127.286396],[38.088504,127.289443],[38.086714,127.289186],[38.08494,127.287319],[38.084096,127.282856],[38.084062,127.280088]"
+    }
+  },
+  "source_data_info": {
+    "file_name": "PC20230330_S_P0002_T001",
+    "file_format": "json",
+    "user_info": {
+      "user_type": "GO",
+      "user_type_description": "공무원",
+      "query_time": "2023-03-30 15:00",
+      "query_location": {
+        "lat": 38.084957,
+        "lon": 127.281583
+      },
+      "query_location_description": "다아 8084 0944"
+    },
+    "weather_conditions": {
+      "observation_time": "2023-03-30 15:00",
+      "observatory_type": "기상",
+      "observatory_location": "동두천",
+      "temperature": 22.4,
+      "rainfall": 0.0,
+      "wind_speed": 4.4,
+      "wind_direction": 290.0,
+      "humidity_percent": 17.0,
+      "atmospheric_pressure": 1004.2,
+      "visibility": 2306.0,
+      "past_rainfall_7days": 0.0,
+      "surface_temperature": 20.4,
+      "observation_height": 10.0
+    },
+    "terrain_conditions": {
+      "elevation": 222.46,
+      "slope": 9.07,
+      "slope_aspect": 225.13,
+      "curvature": 0.0023,
+      "topographic_position_index": 10.25,
+      "terrain_complexity": 45.8,
+      "hydrological_features": 0.8
+    },
+    "fuel_conditions": {
+      "fuel_type": "혼효림",
+      "fuel_density": 5.89,
+      "surface_fuel_depth": 3.0,
+      "fuel_moisture": 15.0,
+      "fuel_average_age": 45.0,
+      "canopy_height": 6.0,
+      "canopy_coverage": 75.0
+    },
+    "Infra_Social": {
+      "population": 7362.0,
+      "households": 4142.0,
+      "vulnerable": 4118.0,
+      "fire_station_distance": 0.59,
+      "Important_Infra_distance": 0.49,
+      "road_accessibility": "보통",
+      "shelter": "영북고등학교"
+    },
+    "occurrence_status": {
+      "drought_duration_days": 35.0,
+      "wildfire_duration_time": "0:43",
+      "wind_direction_slope_aspect_alignment": {
+        "wind_direction": 290.0,
+        "slope_aspect": 225.13
+      },
+      "fire_length": 2.2,
+      "fire_intensity": "약함",
+      "flame_length": 1.0
+    }
+  }
+}

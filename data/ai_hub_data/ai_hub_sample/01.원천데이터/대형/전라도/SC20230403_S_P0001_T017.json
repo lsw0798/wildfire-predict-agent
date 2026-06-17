@@ -1,0 +1,89 @@
+{
+  "raw_data_info": {
+    "fire_info": {
+      "fire_incident_id": "SC20230403",
+      "region": "전라도",
+      "fire_size": "대형",
+      "incident_name": "전남 순천 송광 봉산",
+      "fire_location": {
+        "lat": 34.992953,
+        "lon": 127.245011
+      },
+      "fire_report_number": "주암소방서-20230403-001",
+      "start_timestamp": "2023-04-03 13:02:00",
+      "detection_timestamp": "2023-04-03 13:02:00",
+      "end_timestamp": "2023-04-04 17:15:00",
+      "response_phase": "3단계",
+      "fire_cause": "과자봉지소각",
+      "affected_area": 97.0,
+      "fire_spread_track": "[34.994863,127.237362],[34.996612,127.237802],[34.997557,127.237485],[34.997834,127.236954],[34.998027,127.236428],[34.998853,127.236289],[34.999433,127.236418],[34.999662,127.237061],[35.000303,127.238842],[35.000558,127.240452],[35.000681,127.241525],[34.999925,127.242941],[34.999503,127.244486],[34.999714,127.245516],[35.001437,127.24646],[35.001894,127.247318],[35.000312,127.248091],[34.99982,127.250193],[34.99967,127.25059],[34.999468,127.25161],[34.999837,127.251695],[35.000086,127.25143],[35.000492,127.25198],[35.00025,127.253487],[34.999169,127.254056],[34.997249,127.254415],[34.995417,127.254732],[34.994519,127.254677],[34.993938,127.253763],[34.994025,127.253097],[34.994322,127.252516],[34.994478,127.251666],[34.994388,127.250816],[34.991711,127.25034],[34.990914,127.249844],[34.988793,127.245245],[34.989198,127.244903],[34.989745,127.24499],[34.990205,127.246215],[34.990773,127.246134],[34.9915,127.246751],[34.992989,127.248502],[34.993576,127.247154],[34.992677,127.244845],[34.991123,127.243401],[34.99118,127.243004],[34.991927,127.242423],[34.992541,127.242034],[34.993207,127.240655],[34.994856,127.242018],[34.995799,127.243069],[34.996348,127.242854],[34.996322,127.24238],[34.995601,127.241433],[34.994845,127.240701],[34.994089,127.240012],[34.993843,127.239357],[34.994863,127.237362]"
+    }
+  },
+  "source_data_info": {
+    "file_name": "SC20230403_S_P0001_T017",
+    "file_format": "json",
+    "user_info": {
+      "user_type": "FF",
+      "user_type_description": "진압대원",
+      "query_time": "2023-04-04 06:00",
+      "query_location": {
+        "lat": 34.989666,
+        "lon": 127.246053
+      },
+      "query_location_description": "다라 7682 6611"
+    },
+    "weather_conditions": {
+      "observation_time": "2023-04-04 06:00",
+      "observatory_type": "기상",
+      "observatory_location": "순천",
+      "temperature": 7.2,
+      "rainfall": 0.0,
+      "wind_speed": 1.0,
+      "wind_direction": 110.0,
+      "humidity_percent": 84.0,
+      "atmospheric_pressure": 1001.9,
+      "visibility": 1761.0,
+      "past_rainfall_7days": 0.0,
+      "surface_temperature": 23.8,
+      "observation_height": 10.0
+    },
+    "terrain_conditions": {
+      "elevation": 155.01,
+      "slope": 18.11,
+      "slope_aspect": 262.48,
+      "curvature": 0.0018,
+      "topographic_position_index": 2.74,
+      "terrain_complexity": 26.41,
+      "hydrological_features": 0.1
+    },
+    "fuel_conditions": {
+      "fuel_type": "침엽수림",
+      "fuel_density": 5.02,
+      "surface_fuel_depth": 2.0,
+      "fuel_moisture": 20.0,
+      "fuel_average_age": 45.0,
+      "canopy_height": 14.0,
+      "canopy_coverage": 75.0
+    },
+    "Infra_Social": {
+      "population": 1355.0,
+      "households": 827.0,
+      "vulnerable": 1102.0,
+      "fire_station_distance": 2.4,
+      "Important_Infra_distance": 1.43,
+      "road_accessibility": "나쁨",
+      "shelter": ""
+    },
+    "occurrence_status": {
+      "drought_duration_days": 35.0,
+      "wildfire_duration_time": "28:13",
+      "wind_direction_slope_aspect_alignment": {
+        "wind_direction": 110.0,
+        "slope_aspect": 262.48
+      },
+      "fire_length": 3.3,
+      "fire_intensity": "매우강함",
+      "flame_length": 2.0
+    }
+  }
+}

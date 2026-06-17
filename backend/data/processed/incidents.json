@@ -1,0 +1,23 @@
+[
+  {
+    "incident_id": "AS20240324",
+    "region": "경기도",
+    "lat": 37.110673,
+    "lon": 127.297152,
+    "user_type": "공무원",
+    "risk_features": {
+      "temperature": 18.4,
+      "humidity_percent": 25.0,
+      "wind_speed": 0.8,
+      "slope": 6.74,
+      "fuel_moisture": 15.0,
+      "vulnerable": 1082.0
+    },
+    "label_metadata": {
+      "query_purpose": "현황파악",
+      "query_subject": "대피전략",
+      "query_type": "composite",
+      "root_confidence": 0.85
+    }
+  }
+]

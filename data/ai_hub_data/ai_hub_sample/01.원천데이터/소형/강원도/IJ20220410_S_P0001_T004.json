@@ -1,0 +1,89 @@
+{
+  "raw_data_info": {
+    "fire_info": {
+      "fire_incident_id": "IJ20220410",
+      "region": "강원도",
+      "fire_size": "소형",
+      "incident_name": "강원 인제 북 월학",
+      "fire_location": {
+        "lat": 38.16103,
+        "lon": 128.17778
+      },
+      "fire_report_number": "인제소방서-20220410-001",
+      "start_timestamp": "2022-04-10 12:41:00",
+      "detection_timestamp": "2022-04-10 12:41:00",
+      "end_timestamp": "2022-04-11 17:00:00",
+      "response_phase": "초기 대응",
+      "fire_cause": "담뱃불실화",
+      "affected_area": 13.0,
+      "fire_spread_track": "[38.160927,128.177836],[38.159611,128.178522],[38.1587,128.180496],[38.160134,128.182084],[38.160353,128.184573],[38.161956,128.18556],[38.163559,128.182857],[38.163593,128.180711],[38.163677,128.177879],[38.160927,128.177836]"
+    }
+  },
+  "source_data_info": {
+    "file_name": "IJ20220410_S_P0001_T004",
+    "file_format": "json",
+    "user_info": {
+      "user_type": "GO",
+      "user_type_description": "공무원",
+      "query_time": "2022-04-10 16:00",
+      "query_location": {
+        "lat": 38.15953,
+        "lon": 128.178939
+      },
+      "query_location_description": "라아 5948 1791"
+    },
+    "weather_conditions": {
+      "observation_time": "2022-04-10 16:00",
+      "observatory_type": "기상",
+      "observatory_location": "인제",
+      "temperature": 26.0,
+      "rainfall": 0.0,
+      "wind_speed": 2.3,
+      "wind_direction": 180.0,
+      "humidity_percent": 16.0,
+      "atmospheric_pressure": 989.7,
+      "visibility": 5009.0,
+      "past_rainfall_7days": 0.0,
+      "surface_temperature": 22.1,
+      "observation_height": 10.0
+    },
+    "terrain_conditions": {
+      "elevation": 538.87,
+      "slope": 23.04,
+      "slope_aspect": 193.27,
+      "curvature": 0.0004,
+      "topographic_position_index": 0.64,
+      "terrain_complexity": 95.33,
+      "hydrological_features": 0.7
+    },
+    "fuel_conditions": {
+      "fuel_type": "활엽수림",
+      "fuel_density": 11.79,
+      "surface_fuel_depth": 4.0,
+      "fuel_moisture": 14.0,
+      "fuel_average_age": 35.0,
+      "canopy_height": 14.0,
+      "canopy_coverage": 75.0
+    },
+    "Infra_Social": {
+      "population": 7623.0,
+      "households": 4123.0,
+      "vulnerable": 3934.0,
+      "fire_station_distance": 2.49,
+      "Important_Infra_distance": 2.64,
+      "road_accessibility": "보통",
+      "shelter": "월학1리마을회관"
+    },
+    "occurrence_status": {
+      "drought_duration_days": 35.0,
+      "wildfire_duration_time": "3:19",
+      "wind_direction_slope_aspect_alignment": {
+        "wind_direction": 180.0,
+        "slope_aspect": 193.27
+      },
+      "fire_length": 2.2,
+      "fire_intensity": "약함",
+      "flame_length": 1.0
+    }
+  }
+}

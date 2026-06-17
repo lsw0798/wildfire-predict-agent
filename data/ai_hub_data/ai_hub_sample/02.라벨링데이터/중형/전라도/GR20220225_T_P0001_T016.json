@@ -1,0 +1,895 @@
+{
+  "labelling_data_info": {
+    "query": {
+      "query_text": "자발적 대피 권고와 강제 대피 명령 중 현 상황에 적합한 것은 무엇입니까?",
+      "query_purpose": "위험평가",
+      "query_subject": "도달시간",
+      "query_type": "comparative"
+    },
+    "tree_of_thought": {
+      "level_0_input": {
+        "L0_node_id": "ROOT",
+        "L0_thought": "산불 대피 권고 평가",
+        "L0_context": {
+          "weather_conditions": {
+            "wind_speed": 0.4,
+            "rainfall": 0.0,
+            "humidity_percent": 92.0,
+            "temperature": -3.9,
+            "surface_temperature": 2.3,
+            "drought_days": 35.0,
+            "visibility": 192.0
+          },
+          "terrain_conditions": {
+            "elevation": 433.23,
+            "slope": 18.67,
+            "slope_aspect": 270.77,
+            "curvature": 0.0008,
+            "topographic_position_index": 2.88,
+            "terrain_complexity": 77.93,
+            "hydrological_features": 0.5
+          },
+          "fuel_conditions": {
+            "fuel_type": "활엽수림",
+            "fuel_moisture": 15.0,
+            "fuel_density": 13.17,
+            "fuel_average_age": 55.0,
+            "surface_fuel_depth": 4.0,
+            "canopy_height": 18.0,
+            "canopy_coverage": 75.0
+          },
+          "Infra_Social": {
+            "population": 1389.0,
+            "vulnerable": 934.0,
+            "fire_station_distance": 9.0,
+            "road_accessibility": "나쁨",
+            "Important_Infra_distance": 1.68,
+            "shelter": "효죽마을회관"
+          },
+          "occurrence_status": {
+            "fire_duration": 314,
+            "drought_duration_days": 35.0,
+            "wildfire_duration_time": "15:14",
+            "flame_length": 1.0,
+            "fire_intensity": "약함",
+            "fire_length": 2.2,
+            "wind_slope_alignment": 270.77
+          }
+        },
+        "L0_branches": [
+          "L1_W1",
+          "L1_O1",
+          "L1_T1",
+          "L1_F1",
+          "L1_I1"
+        ],
+        "L0_reasoning_description": "대피 필요성과 도로 접근성을 고려함",
+        "L0_confidence_score": 0.85,
+        "L0_status": "start"
+      },
+      "level_1_branches": {
+        "L1_W1": {
+          "L1_node_id": "L1_W1",
+          "L1_parent": "ROOT",
+          "L1_thought": "바람 속도가 대피에 미치는 영향 평가",
+          "L1_data_node": "wind_speed_risk, humidity_effect",
+          "L1_value": [
+            0.4,
+            92.0
+          ],
+          "L1_reasoning_type": "직접인과",
+          "L1_calculation": {
+            "wind_speed_risk": "3 (중간)",
+            "humidity_effect": "2 (낮음)",
+            "average_risk": "2.5"
+          },
+          "L1_if_then": "IF 바람 속도가 높으면 THEN 대피 필요성 증가",
+          "L1_risk_scoring_description": "바람 속도가 대피에 중간 정도의 위험을 초래함.",
+          "L1_confidence_score": 0.8,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_W1T1",
+            "L2_W1O1",
+            "L2_W1F1"
+          ],
+          "L1_reasoning_description": "바람 속도와 습도가 대피 필요성에 직접적인 영향을 미침."
+        },
+        "L1_O1": {
+          "L1_node_id": "L1_O1",
+          "L1_parent": "ROOT",
+          "L1_thought": "화재 지속 시간이 대피에 미치는 영향 분석",
+          "L1_data_node": "fire_duration_risk, flame_length_risk",
+          "L1_value": [
+            314,
+            1.0
+          ],
+          "L1_reasoning_type": "간접인과",
+          "L1_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "flame_length_risk": "3 (중간)",
+            "average_risk": "3.5"
+          },
+          "L1_if_then": "IF 화재 지속 시간이 길면 THEN 대피 필요성 증가",
+          "L1_risk_scoring_description": "화재 지속 시간이 대피에 높은 위험을 초래함.",
+          "L1_confidence_score": 0.9,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_O1W1",
+            "L2_O1T1"
+          ],
+          "L1_reasoning_description": "화재 지속 시간과 화염 길이가 대피 필요성에 간접적으로 영향을 미침."
+        },
+        "L1_T1": {
+          "L1_node_id": "L1_T1",
+          "L1_parent": "ROOT",
+          "L1_thought": "지형적 요인이 대피에 미치는 영향 평가",
+          "L1_data_node": "slope_risk, elevation_risk",
+          "L1_value": [
+            18.67,
+            433.23
+          ],
+          "L1_reasoning_type": "임계값 판단",
+          "L1_calculation": {
+            "slope_risk": "3 (중간)",
+            "elevation_risk": "2 (낮음)",
+            "average_risk": "2.5"
+          },
+          "L1_if_then": "IF 경사가 가파르면 THEN 대피 경로 위험 증가",
+          "L1_risk_scoring_description": "지형적 요인이 대피 경로에 중간 정도의 위험을 초래함.",
+          "L1_confidence_score": 0.75,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_T1W1",
+            "L2_T1F1"
+          ],
+          "L1_reasoning_description": "지형적 요인이 대피 경로에 미치는 영향을 평가함."
+        },
+        "L1_F1": {
+          "L1_node_id": "L1_F1",
+          "L1_parent": "ROOT",
+          "L1_thought": "연료 조건이 대피에 미치는 영향 분석",
+          "L1_data_node": "fuel_moisture_risk, fuel_density_risk",
+          "L1_value": [
+            15.0,
+            13.17
+          ],
+          "L1_reasoning_type": "증폭효과",
+          "L1_calculation": {
+            "fuel_moisture_risk": "2 (낮음)",
+            "fuel_density_risk": "3 (중간)",
+            "average_risk": "2.5"
+          },
+          "L1_if_then": "IF 연료 밀도가 높으면 THEN 화재 확산 위험 증가",
+          "L1_risk_scoring_description": "연료 조건이 대피에 중간 정도의 위험을 초래함.",
+          "L1_confidence_score": 0.7,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_F1W1",
+            "L2_F1T1"
+          ],
+          "L1_reasoning_description": "연료 조건이 화재 확산에 미치는 영향을 분석함."
+        },
+        "L1_I1": {
+          "L1_node_id": "L1_I1",
+          "L1_parent": "ROOT",
+          "L1_thought": "인구 밀집도가 대피에 미치는 영향 평가",
+          "L1_data_node": "population_risk, vulnerable_risk",
+          "L1_value": [
+            1389,
+            934
+          ],
+          "L1_reasoning_type": "시너지",
+          "L1_calculation": {
+            "population_risk": "4 (높음)",
+            "vulnerable_risk": "5 (매우 높음)",
+            "average_risk": "4.5"
+          },
+          "L1_if_then": "IF 인구 밀집도가 높으면 THEN 대피 필요성 증가",
+          "L1_risk_scoring_description": "인구 밀집도가 대피에 매우 높은 위험을 초래함.",
+          "L1_confidence_score": 0.95,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_I1O1",
+            "L2_I1W1"
+          ],
+          "L1_reasoning_description": "인구 밀집도가 대피 필요성에 미치는 영향을 평가함."
+        }
+      },
+      "level_2_branches": {
+        "L2_W1O1": {
+          "L2_node_id": "L2_W1O1",
+          "L2_parent": "L1_W1",
+          "L2_thought": "바람 속도와 화재 지속 시간",
+          "L2_data_combination": "바람 속도와 화재 지속 시간을 조합하여 대피 필요성 평가",
+          "L2_values": [
+            0.4,
+            314
+          ],
+          "L2_reasoning_type": "직접인과",
+          "L2_calculation": {
+            "wind_speed_risk": "3 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 바람 속도가 높고 화재 지속 시간이 길면 THEN 대피 필요성 증가",
+          "L2_risk_scoring_description": "바람 속도와 화재 지속 시간이 대피에 높은 위험을 초래함.",
+          "L2_confidence_score": 0.85,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_W1O1I1"
+          ],
+          "L2_reasoning_description": "바람 속도와 화재 지속 시간이 대피 필요성에 직접적인 영향을 미침."
+        },
+        "L2_W1T1": {
+          "L2_node_id": "L2_W1T1",
+          "L2_parent": "L1_W1",
+          "L2_thought": "바람 속도와 지형적 요인",
+          "L2_data_combination": "바람 속도와 지형적 요인을 조합하여 대피 경로 위험 평가",
+          "L2_values": [
+            0.4,
+            18.67
+          ],
+          "L2_reasoning_type": "임계값 판단",
+          "L2_calculation": {
+            "wind_speed_risk": "3 (중간)",
+            "slope_risk": "3 (중간)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 바람 속도가 높고 경사가 가파르면 THEN 대피 경로 위험 증가",
+          "L2_risk_scoring_description": "바람 속도와 지형적 요인이 대피 경로에 중간 정도의 위험을 초래함.",
+          "L2_confidence_score": 0.75,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_W1T1O1"
+          ],
+          "L2_reasoning_description": "바람 속도와 지형적 요인이 대피 경로에 미치는 영향을 평가함."
+        },
+        "L2_O1W1": {
+          "L2_node_id": "L2_O1W1",
+          "L2_parent": "L1_O1",
+          "L2_thought": "화재 지속 시간과 바람 속도",
+          "L2_data_combination": "화재 지속 시간과 바람 속도를 조합하여 대피 필요성 평가",
+          "L2_values": [
+            314,
+            0.4
+          ],
+          "L2_reasoning_type": "간접인과",
+          "L2_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "wind_speed_risk": "3 (중간)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 화재 지속 시간이 길고 바람 속도가 높으면 THEN 대피 필요성 증가",
+          "L2_risk_scoring_description": "화재 지속 시간과 바람 속도가 대피에 높은 위험을 초래함.",
+          "L2_confidence_score": 0.9,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_O1W1I1"
+          ],
+          "L2_reasoning_description": "화재 지속 시간과 바람 속도가 대피 필요성에 간접적으로 영향을 미침."
+        },
+        "L2_O1T1": {
+          "L2_node_id": "L2_O1T1",
+          "L2_parent": "L1_O1",
+          "L2_thought": "화재 지속 시간과 지형적 요인",
+          "L2_data_combination": "화재 지속 시간과 지형적 요인을 조합하여 대피 경로 위험 평가",
+          "L2_values": [
+            314,
+            18.67
+          ],
+          "L2_reasoning_type": "임계값 판단",
+          "L2_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "slope_risk": "3 (중간)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 화재 지속 시간이 길고 경사가 가파르면 THEN 대피 경로 위험 증가",
+          "L2_risk_scoring_description": "화재 지속 시간과 지형적 요인이 대피 경로에 높은 위험을 초래함.",
+          "L2_confidence_score": 0.85,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_O1T1W1"
+          ],
+          "L2_reasoning_description": "화재 지속 시간과 지형적 요인이 대피 경로에 미치는 영향을 평가함."
+        },
+        "L2_I1O1": {
+          "L2_node_id": "L2_I1O1",
+          "L2_parent": "L1_I1",
+          "L2_thought": "인구 밀집도와 화재 지속 시간",
+          "L2_data_combination": "인구 밀집도와 화재 지속 시간을 조합하여 대피 필요성 평가",
+          "L2_values": [
+            1389,
+            314
+          ],
+          "L2_reasoning_type": "시너지",
+          "L2_calculation": {
+            "population_risk": "4 (높음)",
+            "fire_duration_risk": "4 (높음)",
+            "average_risk": "4.0"
+          },
+          "L2_if_then": "IF 인구 밀집도가 높고 화재 지속 시간이 길면 THEN 대피 필요성 증가",
+          "L2_risk_scoring_description": "인구 밀집도와 화재 지속 시간이 대피에 매우 높은 위험을 초래함.",
+          "L2_confidence_score": 0.95,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_I1O1T1"
+          ],
+          "L2_reasoning_description": "인구 밀집도와 화재 지속 시간이 대피 필요성에 미치는 영향을 평가함."
+        },
+        "L2_I1W1": {
+          "L2_node_id": "L2_I1W1",
+          "L2_parent": "L1_I1",
+          "L2_thought": "인구 밀집도와 바람 속도",
+          "L2_data_combination": "인구 밀집도와 바람 속도를 조합하여 대피 필요성 평가",
+          "L2_values": [
+            1389,
+            0.4
+          ],
+          "L2_reasoning_type": "직접인과",
+          "L2_calculation": {
+            "population_risk": "4 (높음)",
+            "wind_speed_risk": "3 (중간)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 인구 밀집도가 높고 바람 속도가 높으면 THEN 대피 필요성 증가",
+          "L2_risk_scoring_description": "인구 밀집도와 바람 속도가 대피에 높은 위험을 초래함.",
+          "L2_confidence_score": 0.9,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_I1W1T1"
+          ],
+          "L2_reasoning_description": "인구 밀집도와 바람 속도가 대피 필요성에 미치는 영향을 평가함."
+        },
+        "L2_T1W1": {
+          "L2_node_id": "L2_T1W1",
+          "L2_parent": "L1_T1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "지형적 요인과 바람 속도의 상호작용",
+          "L2_data_combination": "지형적 요인과 바람 속도를 조합하여 대피 경로 위험 평가",
+          "L2_values": [
+            18.67,
+            0.4
+          ],
+          "L2_reasoning_type": "임계값 판단",
+          "L2_calculation": {
+            "slope_risk": "3 (중간)",
+            "wind_speed_risk": "3 (중간)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 경사가 가파르고 바람 속도가 높으면 THEN 대피 경로 위험 증가",
+          "L2_risk_scoring_description": "지형적 요인과 바람 속도가 대피 경로에 중간 정도의 위험을 초래함.",
+          "L2_confidence_score": 0.75,
+          "L2_reasoning_description": "지형적 요인과 바람 속도가 대피 경로에 미치는 영향을 평가함."
+        },
+        "L2_T1F1": {
+          "L2_node_id": "L2_T1F1",
+          "L2_parent": "L1_T1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "지형적 요인과 연료 조건의 관계",
+          "L2_data_combination": "지형적 요인과 연료 조건을 조합하여 대피 위험 평가",
+          "L2_values": [
+            18.67,
+            13.17
+          ],
+          "L2_reasoning_type": "증폭효과",
+          "L2_calculation": {
+            "slope_risk": "3 (중간)",
+            "fuel_density_risk": "3 (중간)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 경사가 가파르고 연료 밀도가 높으면 THEN 화재 확산 위험 증가",
+          "L2_risk_scoring_description": "지형적 요인과 연료 조건이 대피에 중간 정도의 위험을 초래함.",
+          "L2_confidence_score": 0.7,
+          "L2_reasoning_description": "지형적 요인과 연료 조건이 화재 확산에 미치는 영향을 분석함."
+        },
+        "L2_F1W1": {
+          "L2_node_id": "L2_F1W1",
+          "L2_parent": "L1_F1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "연료 조건과 바람 속도의 상호작용",
+          "L2_data_combination": "연료 조건과 바람 속도를 조합하여 대피 필요성 평가",
+          "L2_values": [
+            13.17,
+            0.4
+          ],
+          "L2_reasoning_type": "직접인과",
+          "L2_calculation": {
+            "fuel_density_risk": "3 (중간)",
+            "wind_speed_risk": "3 (중간)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 연료 밀도가 높고 바람 속도가 높으면 THEN 대피 필요성 증가",
+          "L2_risk_scoring_description": "연료 조건과 바람 속도가 대피에 중간 정도의 위험을 초래함.",
+          "L2_confidence_score": 0.8,
+          "L2_reasoning_description": "연료 조건과 바람 속도가 대피 필요성에 미치는 영향을 평가함."
+        },
+        "L2_F1T1": {
+          "L2_node_id": "L2_F1T1",
+          "L2_parent": "L1_F1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "[자동 생성 backtracking] 연료 조건이 대피에 미치는 영향 분석",
+          "L2_data_combination": "",
+          "L2_values": [],
+          "L2_reasoning_type": "backtracking_placeholder",
+          "L2_calculation": {},
+          "L2_if_then": "",
+          "L2_risk_scoring_description": "",
+          "L2_confidence_score": 0.0,
+          "L2_reasoning_description": "후처리에서 backtracking / 브랜치 개수 보정을 위해 생성된 L2 노드입니다."
+        },
+        "L2_W1F1": {
+          "L2_node_id": "L2_W1F1",
+          "L2_parent": "L1_W1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "[자동 생성 backtracking(min_bt)] 바람 속도가 대피에 미치는 영향 평가",
+          "L2_data_combination": "",
+          "L2_values": [],
+          "L2_reasoning_type": "backtracking_placeholder",
+          "L2_calculation": {},
+          "L2_if_then": "",
+          "L2_risk_scoring_description": "",
+          "L2_confidence_score": 0.0,
+          "L2_reasoning_description": "backtracking 개수(min_bt)를 맞추기 위해 생성된 L2 노드입니다."
+        }
+      },
+      "level_3_branches": {
+        "L3_W1O1I1": {
+          "L3_node_id": "L3_W1O1I1",
+          "L3_parent": "L2_W1O1",
+          "L3_thought": "바람 속도, 화재 지속 시간, 인구 밀집도",
+          "L3_data_combination": "바람 속도, 화재 지속 시간, 인구 밀집도를 조합하여 대피 필요성 평가",
+          "L3_values": [
+            0.4,
+            314,
+            1389
+          ],
+          "L3_reasoning_type": "직접인과",
+          "L3_calculation": {
+            "factor_1": "3 (중간)",
+            "factor_2": "4 (높음)",
+            "factor_3": "4 (높음)",
+            "weighted_average": "(3×0.3)+(4×0.4)+(4×0.3) = 3.7"
+          },
+          "L3_if_then": "IF 바람 속도가 높고 화재 지속 시간이 길며 인구 밀집도가 높으면 THEN 대피 필요성 증가",
+          "L3_risk_scoring_description": "바람 속도, 화재 지속 시간, 인구 밀집도가 대피에 높은 위험을 초래함.",
+          "L3_confidence_score": 0.9,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "이 세 가지 요소가 대피 필요성에 직접적인 영향을 미침."
+        },
+        "L3_W1T1O1": {
+          "L3_node_id": "L3_W1T1O1",
+          "L3_parent": "L2_W1T1",
+          "L3_thought": "바람 속도, 지형적 요인, 화재 지속 시간",
+          "L3_data_combination": "바람 속도, 지형적 요인, 화재 지속 시간을 조합하여 대피 경로 위험 평가",
+          "L3_values": [
+            0.4,
+            18.67,
+            314
+          ],
+          "L3_reasoning_type": "임계값 판단",
+          "L3_calculation": {
+            "factor_1": "3 (중간)",
+            "factor_2": "3 (중간)",
+            "factor_3": "4 (높음)",
+            "weighted_average": "(3×0.3)+(3×0.3)+(4×0.4) = 3.4"
+          },
+          "L3_if_then": "IF 바람 속도가 높고 경사가 가파르며 화재 지속 시간이 길면 THEN 대피 경로 위험 증가",
+          "L3_risk_scoring_description": "이 세 가지 요소가 대피 경로에 중간 정도의 위험을 초래함.",
+          "L3_confidence_score": 0.8,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "바람 속도와 지형적 요인, 화재 지속 시간이 대피 경로에 미치는 영향을 평가함."
+        },
+        "L3_O1W1I1": {
+          "L3_node_id": "L3_O1W1I1",
+          "L3_parent": "L2_O1W1",
+          "L3_thought": "화재 지속 시간, 바람 속도, 인구 밀집도",
+          "L3_data_combination": "화재 지속 시간, 바람 속도, 인구 밀집도를 조합하여 대피 필요성 평가",
+          "L3_values": [
+            314,
+            0.4,
+            1389
+          ],
+          "L3_reasoning_type": "간접인과",
+          "L3_calculation": {
+            "factor_1": "4 (높음)",
+            "factor_2": "3 (중간)",
+            "factor_3": "4 (높음)",
+            "weighted_average": "(4×0.4)+(3×0.3)+(4×0.3) = 3.7"
+          },
+          "L3_if_then": "IF 화재 지속 시간이 길고 바람 속도가 높으며 인구 밀집도가 높으면 THEN 대피 필요성 증가",
+          "L3_risk_scoring_description": "이 세 가지 요소가 대피에 높은 위험을 초래함.",
+          "L3_confidence_score": 0.95,
+          "L3_status": "selected",
+          "L3_reasoning_description": "화재 지속 시간, 바람 속도, 인구 밀집도가 대피 필요성에 미치는 영향을 평가함."
+        },
+        "L3_I1O1T1": {
+          "L3_node_id": "L3_I1O1T1",
+          "L3_parent": "L2_I1O1",
+          "L3_thought": "인구 밀집도, 화재 지속 시간, 지형적 요인",
+          "L3_data_combination": "인구 밀집도, 화재 지속 시간, 지형적 요인을 조합하여 대피 필요성 평가",
+          "L3_values": [
+            1389,
+            314,
+            18.67
+          ],
+          "L3_reasoning_type": "시너지",
+          "L3_calculation": {
+            "factor_1": "4 (높음)",
+            "factor_2": "4 (높음)",
+            "factor_3": "3 (중간)",
+            "weighted_average": "(4×0.4)+(4×0.4)+(3×0.2) = 3.8"
+          },
+          "L3_if_then": "IF 인구 밀집도가 높고 화재 지속 시간이 길며 경사가 가파르면 THEN 대피 필요성 증가",
+          "L3_risk_scoring_description": "이 세 가지 요소가 대피에 매우 높은 위험을 초래함.",
+          "L3_confidence_score": 0.9,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "인구 밀집도, 화재 지속 시간, 지형적 요인이 대피 필요성에 미치는 영향을 평가함."
+        },
+        "L3_O1T1W1": {
+          "L3_node_id": "L3_O1T1W1",
+          "L3_parent": "L2_O1T1",
+          "L3_status": "pruning",
+          "L3_thought": "화재 지속 시간, 지형적 요인, 바람 속도의 상호작용",
+          "L3_data_combination": "화재 지속 시간, 지형적 요인, 바람 속도를 조합하여 대피 경로 위험 평가",
+          "L3_values": [
+            314,
+            18.67,
+            0.4
+          ],
+          "L3_reasoning_type": "임계값 판단",
+          "L3_calculation": {
+            "factor_1": "4 (높음)",
+            "factor_2": "3 (중간)",
+            "factor_3": "3 (중간)",
+            "weighted_average": "(4×0.4)+(3×0.3)+(3×0.3) = 3.4"
+          },
+          "L3_if_then": "IF 화재 지속 시간이 길고 경사가 가파르며 바람 속도가 높으면 THEN 대피 경로 위험 증가",
+          "L3_risk_scoring_description": "이 세 가지 요소가 대피 경로에 중간 정도의 위험을 초래함.",
+          "L3_confidence_score": 0.8,
+          "L3_reasoning_description": "화재 지속 시간, 지형적 요인, 바람 속도가 대피 경로에 미치는 영향을 평가함."
+        },
+        "L3_I1W1T1": {
+          "L3_node_id": "L3_I1W1T1",
+          "L3_parent": "L2_I1W1",
+          "L3_status": "pruning",
+          "L3_thought": "인구 밀집도, 바람 속도, 지형적 요인의 상호작용",
+          "L3_data_combination": "인구 밀집도, 바람 속도, 지형적 요인을 조합하여 대피 필요성 평가",
+          "L3_values": [
+            1389,
+            0.4,
+            18.67
+          ],
+          "L3_reasoning_type": "시너지",
+          "L3_calculation": {
+            "factor_1": "4 (높음)",
+            "factor_2": "3 (중간)",
+            "factor_3": "3 (중간)",
+            "weighted_average": "(4×0.4)+(3×0.3)+(3×0.3) = 3.6"
+          },
+          "L3_if_then": "IF 인구 밀집도가 높고 바람 속도가 높으며 경사가 가파르면 THEN 대피 필요성 증가",
+          "L3_risk_scoring_description": "이 세 가지 요소가 대피에 높은 위험을 초래함.",
+          "L3_confidence_score": 0.85,
+          "L3_reasoning_description": "인구 밀집도, 바람 속도, 지형적 요인이 대피 필요성에 미치는 영향을 평가함."
+        }
+      },
+      "backtracking_events": [
+        {
+          "event_id": "BT1",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.65,
+          "threshold": 0.85,
+          "original_path": "L0_ROOT -> L1_T1 -> L2_T1W1",
+          "problem": "지형적 요인이 대피 경로에 미치는 영향 개선 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "지형적 요인이 대피 경로에 중대한 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.65",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L1에서 다른 node 조합 시도",
+            "alternative_combination": "L1_T1 -> L2_T1O1",
+            "simplification": "지형적 요인과 화재 지속 시간 조합으로 대체",
+            "structural_change": "L1_T1에서 L2_T1O1로 변경",
+            "selected_alternative": "L2_T1O1",
+            "rationale": "화재 지속 시간이 대피 경로에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_T1W1 대신 L2_T1O1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_T1 -> L2_T1O1",
+            "new_score": 0.75,
+            "weight_adjustment": 0.1
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 화재 지속 시간의 중요성 확인"
+        },
+        {
+          "event_id": "BT2",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.7,
+          "threshold": 0.85,
+          "original_path": "L0_ROOT -> L1_T1 -> L2_T1F1",
+          "problem": "연료 조건이 대피 경로에 미치는 영향 개선 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "연료 조건이 대피 경로에 중대한 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.7",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L1에서 다른 node 조합 시도",
+            "alternative_combination": "L1_T1 -> L2_T1W1",
+            "simplification": "연료 조건과 화재 지속 시간 조합으로 대체",
+            "structural_change": "L1_T1에서 L2_T1W1로 변경",
+            "selected_alternative": "L2_T1W1",
+            "rationale": "바람 속도가 대피 경로에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_T1F1 대신 L2_T1W1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_T1 -> L2_T1W1",
+            "new_score": 0.8,
+            "weight_adjustment": 0.15
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 바람 속도의 중요성 확인"
+        },
+        {
+          "event_id": "BT3",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.6,
+          "threshold": 0.85,
+          "original_path": "L0_ROOT -> L1_F1 -> L2_F1W1",
+          "problem": "연료 조건과 바람 속도의 상호작용 개선 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "연료 조건과 바람 속도가 대피 경로에 중대한 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.6",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L1에서 다른 node 조합 시도",
+            "alternative_combination": "L1_F1 -> L2_F1T1",
+            "simplification": "연료 조건과 화재 지속 시간 조합으로 대체",
+            "structural_change": "L1_F1에서 L2_F1T1로 변경",
+            "selected_alternative": "L2_F1T1",
+            "rationale": "지형적 요인이 대피 경로에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_F1W1 대신 L2_F1T1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_F1 -> L2_F1T1",
+            "new_score": 0.75,
+            "weight_adjustment": 0.1
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 지형적 요인의 중요성 확인"
+        },
+        {
+          "event_id": "BT4",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.65,
+          "threshold": 0.85,
+          "original_path": "L0_ROOT -> L1_F1 -> L2_F1T1",
+          "problem": "지형적 요인과 연료 조건의 관계 개선 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "지형적 요인과 연료 조건이 대피 경로에 중대한 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.65",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L1에서 다른 node 조합 시도",
+            "alternative_combination": "L1_F1 -> L2_F1W1",
+            "simplification": "지형적 요인과 화재 지속 시간 조합으로 대체",
+            "structural_change": "L1_F1에서 L2_F1W1로 변경",
+            "selected_alternative": "L2_F1W1",
+            "rationale": "바람 속도가 대피 경로에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_F1T1 대신 L2_F1W1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_F1 -> L2_F1W1",
+            "new_score": 0.7,
+            "weight_adjustment": 0.05
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 바람 속도의 중요성 확인"
+        },
+        {
+          "event_id": "BT5",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.6,
+          "threshold": 0.85,
+          "original_path": "L0_ROOT -> L1_W1 -> L2_W1F1",
+          "problem": "바람 속도와 연료 조건의 상호작용 개선 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "바람 속도와 연료 조건이 대피 경로에 중대한 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.6",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L1에서 다른 node 조합 시도",
+            "alternative_combination": "L1_W1 -> L2_W1T1",
+            "simplification": "바람 속도와 화재 지속 시간 조합으로 대체",
+            "structural_change": "L1_W1에서 L2_W1T1로 변경",
+            "selected_alternative": "L2_W1T1",
+            "rationale": "지형적 요인이 대피 경로에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_W1F1 대신 L2_W1T1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_W1 -> L2_W1T1",
+            "new_score": 0.65,
+            "weight_adjustment": 0.05
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 지형적 요인의 중요성 확인"
+        }
+      ],
+      "pruning_events": [
+        {
+          "pruning_id": "P1",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_W1O1I1",
+          "score": 0.9,
+          "threshold": 0.95,
+          "reason": "바람 속도, 화재 지속 시간, 인구 밀집도에 대한 신뢰도가 기준치(0.95)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_W1O1I1는 \"바람 속도, 화재 지속 시간, 인구 밀집도\" 분석에서 신뢰도 0.90가 기준 0.95보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P2",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_W1T1O1",
+          "score": 0.8,
+          "threshold": 0.85,
+          "reason": "바람 속도, 지형적 요인, 화재 지속 시간에 대한 신뢰도가 기준치(0.85)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_W1T1O1는 \"바람 속도, 지형적 요인, 화재 지속 시간\" 분석에서 신뢰도 0.80가 기준 0.85보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P3",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_I1O1T1",
+          "score": 0.9,
+          "threshold": 0.95,
+          "reason": "인구 밀집도, 화재 지속 시간, 지형적 요인에 대한 신뢰도가 기준치(0.95)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_I1O1T1는 \"인구 밀집도, 화재 지속 시간, 지형적 요인\" 분석에서 신뢰도 0.90가 기준 0.95보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P4",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_O1T1W1",
+          "score": 0.8,
+          "threshold": 0.85,
+          "reason": "화재 지속 시간, 지형적 요인, 바람 속도의 상호작용에 대한 신뢰도가 기준치(0.85)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_O1T1W1는 \"화재 지속 시간, 지형적 요인, 바람 속도의 상호작용\" 분석에서 신뢰도 0.80가 기준 0.85보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P5",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_I1W1T1",
+          "score": 0.85,
+          "threshold": 0.9,
+          "reason": "인구 밀집도, 바람 속도, 지형적 요인의 상호작용에 대한 신뢰도가 기준치(0.90)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_I1W1T1는 \"인구 밀집도, 바람 속도, 지형적 요인의 상호작용\" 분석에서 신뢰도 0.85가 기준 0.90보다 낮아 추론 경로에서 제거하였습니다."
+        }
+      ],
+      "final_selection": {
+        "selected_path": "ROOT → L1_O1 → L2_O1W1 → L3_O1W1I1",
+        "best_l3_node_id": "L3_O1W1I1",
+        "reasoning_chain": "① L1: 인구 밀집도가 대피에 매우 높은 위험을 초래함. ② L2: 인구 밀집도와 화재 지속 시간이 대피 필요성에 간접적으로 영향을 미침. ③ L3: 화재 지속 시간, 바람 속도, 인구 밀집도가 대피에 높은 위험을 초래함.",
+        "path_selection_reasoning": "여러 L3 중 이 경로를 선택한 이유는 인구 밀집도와 화재 지속 시간이 대피 필요성에 미치는 영향이 크기 때문입니다.",
+        "selected_path_risk_scoring_description": "최종 경로의 위험도 평가 결과, 인구 밀집도와 화재 지속 시간이 대피에 매우 높은 위험을 초래하여 선택되었습니다.",
+        "comprehensive_scoring_matrix": {
+          "path_1": {
+            "risk_level": "높음",
+            "confidence": 0.95
+          },
+          "path_2": {
+            "risk_level": "보통",
+            "confidence": 0.9
+          },
+          "path_3": {
+            "risk_level": "낮음",
+            "confidence": 0.85
+          }
+        },
+        "scoring_criteria": "신뢰도, 위험도, 대응 가능성을 종합적으로 고려하여 최종 경로를 선택하였습니다.",
+        "key_nodes_used": {
+          "O": {
+            "fire_duration": 314,
+            "population": 1389
+          },
+          "W": {
+            "wind_speed": 0.4
+          },
+          "T": {
+            "slope": 18.67
+          },
+          "I": {
+            "vulnerable": 934
+          },
+          "F": {}
+        },
+        "path_confidence": 0.93
+      }
+    },
+    "countermeasures": {
+      "immediate_recommendation": {
+        "decision": "즉각적인 대피를 권장합니다.",
+        "primary_reason": "인구 밀집도와 화재 지속 시간이 대피 필요성을 높이고 있습니다.",
+        "risk_level": "높음"
+      },
+      "safety_assessment": {
+        "prohibitive_factors": {
+          "fire": "화재 지속 시간이 길어 위험이 증가합니다.",
+          "visibility": "가시성이 낮아 대피가 어려울 수 있습니다.",
+          "support": "대피 지원 인프라가 부족합니다.",
+          "intensity": "화재 강도가 약하지만 지속적입니다."
+        },
+        "favorable_factors": {
+          "wind": "바람 속도가 낮아 화재 확산이 제한적입니다.",
+          "humidity": "높은 습도가 화재 확산을 억제합니다."
+        },
+        "net_assessment": "위험 요소가 복합적으로 작용하여 대피가 필요합니다.",
+        "evacuation_zones": {
+          "safe_zone": "효죽마을회관이 안전 구역입니다.",
+          "danger_zone": "화재 발생 지역은 위험 구역입니다.",
+          "buffer_zone": "위험 구역 주변은 완충 구역입니다."
+        },
+        "evacuation_sequence": {
+          "phase_1": "취약계층 우선 대피",
+          "phase_2": "일반 주민 대피",
+          "phase_3": "대피 완료 후 상황 점검"
+        }
+      },
+      "alternative_strategies": {
+        "option_1": {
+          "action": "대피소를 확보합니다.",
+          "timing": "즉시"
+        },
+        "option_2": {
+          "action": "대피 경로를 안내합니다.",
+          "method": "모바일 앱 활용"
+        },
+        "option_3": {
+          "action": "주민 안전 교육을 실시합니다.",
+          "condition": "화재 발생 전"
+        }
+      },
+      "safety_requirements": {
+        "minimum_conditions": [
+          "대피소 확보",
+          "대피 경로 명확화",
+          "주민 안전 교육"
+        ],
+        "key_insights": "인구 밀집도가 대피의 주요 위험 요소입니다."
+      }
+    },
+    "decision_answer": {
+      "conclusion": "현재 상황에서는 즉각적인 대피가 필요합니다. 인구 밀집도와 화재 지속 시간이 대피 필요성을 높이고 있습니다.",
+      "safety_verdict": {
+        "decision": "즉각적인 대피를 권장합니다.",
+        "safety_level": "높음",
+        "confidence": "95%",
+        "primary_factor": "인구 밀집도"
+      },
+      "critical_risks": {
+        "risk_1": "화재 지속 시간의 증가",
+        "risk_2": "인구 밀집으로 인한 대피 지연",
+        "risk_3": "가시성 저하로 인한 사고 위험",
+        "risk_4": "대피 지원 인프라 부족"
+      },
+      "clear_message": "즉각 대피가 필요합니다.",
+      "critical_action": {
+        "action_1": "대피소로 이동하십시오.",
+        "action_2": "주변 사람에게 알리십시오.",
+        "action_3": "대피 경로를 확인하십시오.",
+        "action_4": "안전한 장소에 도착하십시오."
+      }
+    },
+    "complete_reasoning": {
+      "reasoning_path_description": "인구 밀집도가 대피에 매우 높은 위험을 초래하고 있습니다. 화재 지속 시간과 바람 속도 또한 대피 필요성에 간접적으로 영향을 미치고 있습니다. 이러한 요소들이 복합적으로 작용하여 즉각적인 대피가 필요하다는 결론에 도달했습니다.선택 경로 L0_ROOT -> L1_I1 -> L2_I1O1 -> L3_O1W1I1는 바람, 발생/운영, 인프라 축의 상호작용을 핵심 근거로 합니다. L1에서는 인구 밀집도가 대피에 미치는 영향 평가를 검토하고, L2에서 인구 밀집도와 화재 지속 시간를 종합했습니다. 최종 L3 판단은 \"IF 화재 지속 시간이 길고 바람 속도가 높으며 인구 밀집도가 높으면 THEN 대피 필요성 증가\"로 수렴했으며, 이에 따라 위험도와 실행 가능성을 함께 평가하였습니다.",
+      "risk_scoring": "위험도는 높음으로 평가되며, 인구 밀집도와 화재 지속 시간이 주요 요인입니다.",
+      "confidence_scoring": "신뢰도는 95%로, 대피 필요성에 대한 확신이 높습니다.",
+      "complete_reasoning_countermeasures": "질의자는 자발적 대피 권고와 강제 대피 명령 중 현 상황에 적합한 방안을 물었습니다. 최종 경로 및 위험도 판단에 따르면, 인구 밀집도와 화재 지속 시간이 대피 필요성을 높이고 있으며, 이로 인해 즉각적인 대피가 필요하다는 결론에 도달했습니다. 현재 상황에서는 인구 밀집도가 대피의 주요 위험 요소로 작용하고 있습니다.\n\n즉각적인 대피를 권장하는 이유는 인구 밀집도와 화재 지속 시간이 대피 필요성을 높이고 있기 때문입니다. 안전 평가 결과, 화재 지속 시간이 길어 위험이 증가하고 있으며, 가시성이 낮아 대피가 어려울 수 있습니다. 그러나 바람 속도가 낮고 높은 습도가 화재 확산을 억제하는 긍정적인 요소도 존재합니다. 이러한 복합적인 위험 요소를 고려할 때, 대피가 필요하다는 판단이 내려졌습니다.\n\n대안 전략으로는 대피소 확보, 대피 경로 안내, 주민 안전 교육이 있습니다. 대피소 확보는 즉시 이루어져야 하며, 대피 경로 안내는 모바일 앱을 활용하여 신속하게 진행할 수 있습니다. 주민 안전 교육은 화재 발생 전 실시하여 대피 시 혼란을 최소화하는 데 기여할 수 있습니다. 따라서, 질의자의 상황에서 취해야 할 핵심 대응방안은 즉각적인 대피를 권장하며, 대피소 확보와 대피 경로 안내를 통해 안전을 확보하는 것입니다.",
+      "query": "자발적 대피 권고와 강제 대피 명령 중 현 상황에 적합한 것은 무엇입니까?"
+    }
+  },
+  "file_info": {
+    "labelling_file_name": "GR20220225_T_P0001_T016.json",
+    "labelling_file_format": "json"
+  }
+}

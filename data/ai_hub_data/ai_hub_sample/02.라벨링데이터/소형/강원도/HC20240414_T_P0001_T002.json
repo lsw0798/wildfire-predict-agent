@@ -1,0 +1,906 @@
+{
+  "labelling_data_info": {
+    "query": {
+      "query_text": "연료 습도가 10% 이하로 떨어지면 확산 속도가 얼마나 증가합니까?",
+      "query_purpose": "경과예측",
+      "query_subject": "도달시간",
+      "query_type": "conditional"
+    },
+    "tree_of_thought": {
+      "level_0_input": {
+        "L0_node_id": "ROOT",
+        "L0_thought": "산불 확산 속도 예측",
+        "L0_context": {
+          "weather_conditions": {
+            "wind_speed": 1.4,
+            "wind_direction": 250.0,
+            "humidity_percent": 19.0,
+            "temperature": 29.4,
+            "surface_temperature": 16.4,
+            "drought_days": 35.0,
+            "visibility": 4413.0
+          },
+          "terrain_conditions": {
+            "elevation": 309.67,
+            "slope": 14.41,
+            "slope_aspect": 264.46,
+            "curvature": 0.001,
+            "topographic_position_index": 3.39,
+            "terrain_complexity": 62.82,
+            "hydrological_features": 1.6
+          },
+          "fuel_conditions": {
+            "fuel_type": "초지",
+            "fuel_density": 0.0
+          },
+          "Infra_Social": {
+            "population": 2383.0,
+            "vulnerable": 1932.0,
+            "fire_station_distance": 1.6,
+            "road_accessibility": "보통",
+            "Important_Infra_distance": 1.42,
+            "shelter": "서곡리 향기나는 마을회관"
+          },
+          "occurrence_status": {
+            "fire_duration": 183.0,
+            "drought_duration_days": 35.0,
+            "wildfire_duration_time": "1:03",
+            "flame_length": 1.0,
+            "fire_intensity": "약함",
+            "fire_length": 2.2,
+            "wind_slope_alignment": 14.41
+          }
+        },
+        "L0_branches": [
+          "L1_W1",
+          "L1_O1",
+          "L1_T1",
+          "L1_F1",
+          "L1_I1"
+        ],
+        "L0_reasoning_description": "연료 습도와 풍속이 중요 요소로 판단됨.",
+        "L0_confidence_score": 0.85,
+        "L0_status": "start"
+      },
+      "level_1_branches": {
+        "L1_W1": {
+          "L1_node_id": "L1_W1",
+          "L1_parent": "ROOT",
+          "L1_thought": "풍속과 경사도가 산불 확산에 미치는 영향.",
+          "L1_data_node": "wind_speed_risk, slope_risk",
+          "L1_value": [
+            1.4,
+            14.41
+          ],
+          "L1_reasoning_type": "직접인과",
+          "L1_calculation": {
+            "wind_speed_risk": "3 (중간)",
+            "slope_risk": "2 (낮음)",
+            "average_risk": "2.5"
+          },
+          "L1_if_then": "IF 풍속이 증가 THEN 확산 속도 증가",
+          "L1_risk_scoring_description": "풍속이 높을수록 확산 속도가 증가할 위험.",
+          "L1_confidence_score": 0.8,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_W1T1",
+            "L2_W1O1",
+            "L2_W1F1"
+          ],
+          "L1_reasoning_description": "풍속과 경사도는 산불 확산에 중요한 요소."
+        },
+        "L1_O1": {
+          "L1_node_id": "L1_O1",
+          "L1_parent": "ROOT",
+          "L1_thought": "연료 수분 함량이 산불 확산에 미치는 영향.",
+          "L1_data_node": "humidity_effect, fire_duration_risk",
+          "L1_value": [
+            19.0,
+            183.0
+          ],
+          "L1_reasoning_type": "임계값 판단",
+          "L1_calculation": {
+            "humidity_effect": "4 (높음)",
+            "fire_duration_risk": "3 (중간)",
+            "average_risk": "3.5"
+          },
+          "L1_if_then": "IF 연료 수분이 10% 이하 THEN 확산 속도 급증",
+          "L1_risk_scoring_description": "연료 수분이 낮을수록 확산 속도가 급증할 위험.",
+          "L1_confidence_score": 0.9,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_O1W1",
+            "L2_O1T1"
+          ],
+          "L1_reasoning_description": "연료 수분 함량은 산불 확산에 결정적인 요소."
+        },
+        "L1_T1": {
+          "L1_node_id": "L1_T1",
+          "L1_parent": "ROOT",
+          "L1_thought": "지형적 요인이 산불 확산에 미치는 영향.",
+          "L1_data_node": "elevation_risk, slope_risk",
+          "L1_value": [
+            309.67,
+            14.41
+          ],
+          "L1_reasoning_type": "간접인과",
+          "L1_calculation": {
+            "elevation_risk": "2 (낮음)",
+            "slope_risk": "3 (중간)",
+            "average_risk": "2.5"
+          },
+          "L1_if_then": "IF 경사가 가파르면 THEN 확산 속도 증가",
+          "L1_risk_scoring_description": "지형적 요인이 확산 속도에 미치는 영향.",
+          "L1_confidence_score": 0.75,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_T1O1",
+            "L2_T1W1"
+          ],
+          "L1_reasoning_description": "지형적 요인은 산불 확산에 영향을 미친다."
+        },
+        "L1_F1": {
+          "L1_node_id": "L1_F1",
+          "L1_parent": "ROOT",
+          "L1_thought": "연료 유형이 산불 확산에 미치는 영향.",
+          "L1_data_node": "fuel_density_risk, fuel_moisture_risk",
+          "L1_value": [
+            0.0,
+            0.0
+          ],
+          "L1_reasoning_type": "증폭효과",
+          "L1_calculation": {
+            "fuel_density_risk": "5 (매우 높음)",
+            "fuel_moisture_risk": "5 (매우 높음)",
+            "average_risk": "5"
+          },
+          "L1_if_then": "IF 연료 밀도가 높으면 THEN 확산 속도 급증",
+          "L1_risk_scoring_description": "연료 유형이 확산 속도에 미치는 영향.",
+          "L1_confidence_score": 0.85,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_F1W1",
+            "L2_F1T1"
+          ],
+          "L1_reasoning_description": "연료 유형은 산불 확산에 큰 영향을 미친다."
+        },
+        "L1_I1": {
+          "L1_node_id": "L1_I1",
+          "L1_parent": "ROOT",
+          "L1_thought": "인구 밀집 지역이 산불 확산에 미치는 영향.",
+          "L1_data_node": "population_risk, vulnerable_risk",
+          "L1_value": [
+            2383.0,
+            1932.0
+          ],
+          "L1_reasoning_type": "시너지",
+          "L1_calculation": {
+            "population_risk": "3 (중간)",
+            "vulnerable_risk": "4 (높음)",
+            "average_risk": "3.5"
+          },
+          "L1_if_then": "IF 인구 밀집 THEN 피해 가능성 증가",
+          "L1_risk_scoring_description": "인구 밀집 지역에서의 피해 가능성.",
+          "L1_confidence_score": 0.8,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_I1W1",
+            "L2_I1O1"
+          ],
+          "L1_reasoning_description": "인구 밀집 지역은 산불 피해를 증가시킨다."
+        }
+      },
+      "level_2_branches": {
+        "L2_W1O1": {
+          "L2_node_id": "L2_W1O1",
+          "L2_parent": "L1_W1",
+          "L2_thought": "풍속과 연료 수분의 상관관계",
+          "L2_data_combination": "풍속과 연료 수분 함량의 조합",
+          "L2_values": [
+            1.4,
+            19.0
+          ],
+          "L2_reasoning_type": "직접인과",
+          "L2_calculation": {
+            "humidity_effect": "4 (높음)",
+            "wind_speed_risk": "3 (중간)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 풍속이 증가 AND 연료 수분이 낮으면 THEN 확산 속도 급증",
+          "L2_risk_scoring_description": "풍속과 연료 수분이 낮을수록 확산 속도가 급증할 위험.",
+          "L2_confidence_score": 0.85,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_W1O1I1"
+          ],
+          "L2_reasoning_description": "풍속과 연료 수분은 산불 확산에 중요한 요소."
+        },
+        "L2_W1T1": {
+          "L2_node_id": "L2_W1T1",
+          "L2_parent": "L1_W1",
+          "L2_thought": "풍속과 지형적 요인의 상관관계",
+          "L2_data_combination": "풍속과 경사도의 조합",
+          "L2_values": [
+            1.4,
+            14.41
+          ],
+          "L2_reasoning_type": "간접인과",
+          "L2_calculation": {
+            "wind_speed_risk": "3 (중간)",
+            "slope_risk": "3 (중간)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 풍속이 증가 AND 경사가 가파르면 THEN 확산 속도 증가",
+          "L2_risk_scoring_description": "풍속과 경사도가 높을수록 확산 속도가 증가할 위험.",
+          "L2_confidence_score": 0.75,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_W1T1O1"
+          ],
+          "L2_reasoning_description": "풍속과 경사도는 산불 확산에 영향을 미친다."
+        },
+        "L2_O1W1": {
+          "L2_node_id": "L2_O1W1",
+          "L2_parent": "L1_O1",
+          "L2_thought": "연료 수분과 풍속의 상관관계",
+          "L2_data_combination": "연료 수분과 풍속의 조합",
+          "L2_values": [
+            19.0,
+            1.4
+          ],
+          "L2_reasoning_type": "임계값 판단",
+          "L2_calculation": {
+            "humidity_effect": "4 (높음)",
+            "wind_speed_risk": "3 (중간)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 연료 수분이 10% 이하 AND 풍속이 증가하면 THEN 확산 속도 급증",
+          "L2_risk_scoring_description": "연료 수분이 낮고 풍속이 높을수록 확산 속도가 급증할 위험.",
+          "L2_confidence_score": 0.9,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_O1W1I1"
+          ],
+          "L2_reasoning_description": "연료 수분과 풍속은 산불 확산에 결정적인 요소."
+        },
+        "L2_T1O1": {
+          "L2_node_id": "L2_T1O1",
+          "L2_parent": "L1_T1",
+          "L2_thought": "지형적 요인과 연료 수분의 상관관계",
+          "L2_data_combination": "지형적 요인과 연료 수분의 조합",
+          "L2_values": [
+            14.41,
+            19.0
+          ],
+          "L2_reasoning_type": "간접인과",
+          "L2_calculation": {
+            "slope_risk": "3 (중간)",
+            "humidity_effect": "4 (높음)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 경사가 가파르고 연료 수분이 낮으면 THEN 확산 속도 증가",
+          "L2_risk_scoring_description": "지형적 요인과 연료 수분이 낮을수록 확산 속도가 증가할 위험.",
+          "L2_confidence_score": 0.8,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_T1O1W1"
+          ],
+          "L2_reasoning_description": "지형적 요인과 연료 수분은 산불 확산에 영향을 미친다."
+        },
+        "L2_I1O1": {
+          "L2_node_id": "L2_I1O1",
+          "L2_parent": "L1_I1",
+          "L2_thought": "인구 밀집과 연료 수분의 상관관계",
+          "L2_data_combination": "인구 밀집과 연료 수분의 조합",
+          "L2_values": [
+            2383.0,
+            19.0
+          ],
+          "L2_reasoning_type": "시너지",
+          "L2_calculation": {
+            "population_risk": "3 (중간)",
+            "humidity_effect": "4 (높음)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 인구 밀집 AND 연료 수분이 낮으면 THEN 피해 가능성 증가",
+          "L2_risk_scoring_description": "인구 밀집 지역에서 연료 수분이 낮을수록 피해 가능성이 증가할 위험.",
+          "L2_confidence_score": 0.8,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_I1O1W1"
+          ],
+          "L2_reasoning_description": "인구 밀집 지역과 연료 수분은 산불 피해를 증가시킨다."
+        },
+        "L2_I1W1": {
+          "L2_node_id": "L2_I1W1",
+          "L2_parent": "L1_I1",
+          "L2_thought": "인구 밀집과 풍속의 상관관계",
+          "L2_data_combination": "인구 밀집과 풍속의 조합",
+          "L2_values": [
+            2383.0,
+            1.4
+          ],
+          "L2_reasoning_type": "시너지",
+          "L2_calculation": {
+            "population_risk": "3 (중간)",
+            "wind_speed_risk": "3 (중간)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 인구 밀집 AND 풍속이 증가하면 THEN 피해 가능성 증가",
+          "L2_risk_scoring_description": "인구 밀집 지역에서 풍속이 높을수록 피해 가능성이 증가할 위험.",
+          "L2_confidence_score": 0.75,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_I1W1T1"
+          ],
+          "L2_reasoning_description": "인구 밀집 지역과 풍속은 산불 피해를 증가시킨다."
+        },
+        "L2_O1T1": {
+          "L2_node_id": "L2_O1T1",
+          "L2_parent": "L1_O1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "연료 수분 함량과 지형적 요인의 상관관계",
+          "L2_data_combination": "연료 수분과 지형적 요인의 조합",
+          "L2_values": [
+            19.0,
+            14.41
+          ],
+          "L2_reasoning_type": "간접인과",
+          "L2_calculation": {
+            "humidity_effect": "4 (높음)",
+            "slope_risk": "3 (중간)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 연료 수분이 낮고 경사가 가파르면 THEN 확산 속도 증가",
+          "L2_risk_scoring_description": "연료 수분과 지형적 요인이 낮을수록 확산 속도가 증가할 위험.",
+          "L2_confidence_score": 0.8,
+          "L2_reasoning_description": "연료 수분과 지형적 요인은 산불 확산에 중요한 영향을 미친다."
+        },
+        "L2_T1W1": {
+          "L2_node_id": "L2_T1W1",
+          "L2_parent": "L1_T1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "지형적 요인과 풍속의 상관관계",
+          "L2_data_combination": "지형적 요인과 풍속의 조합",
+          "L2_values": [
+            14.41,
+            1.4
+          ],
+          "L2_reasoning_type": "간접인과",
+          "L2_calculation": {
+            "slope_risk": "3 (중간)",
+            "wind_speed_risk": "3 (중간)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 경사가 가파르고 풍속이 증가하면 THEN 확산 속도 증가",
+          "L2_risk_scoring_description": "지형적 요인과 풍속이 높을수록 확산 속도가 증가할 위험.",
+          "L2_confidence_score": 0.75,
+          "L2_reasoning_description": "지형적 요인과 풍속은 산불 확산에 영향을 미친다."
+        },
+        "L2_F1W1": {
+          "L2_node_id": "L2_F1W1",
+          "L2_parent": "L1_F1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "연료 유형과 풍속의 상관관계",
+          "L2_data_combination": "연료 유형과 풍속의 조합",
+          "L2_values": [
+            0.0,
+            1.4
+          ],
+          "L2_reasoning_type": "증폭효과",
+          "L2_calculation": {
+            "fuel_density_risk": "5 (매우 높음)",
+            "wind_speed_risk": "3 (중간)",
+            "average_risk": "4.0"
+          },
+          "L2_if_then": "IF 연료 밀도가 높고 풍속이 증가하면 THEN 확산 속도 급증",
+          "L2_risk_scoring_description": "연료 유형과 풍속이 높을수록 확산 속도가 급증할 위험.",
+          "L2_confidence_score": 0.85,
+          "L2_reasoning_description": "연료 유형과 풍속은 산불 확산에 큰 영향을 미친다."
+        },
+        "L2_F1T1": {
+          "L2_node_id": "L2_F1T1",
+          "L2_parent": "L1_F1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "연료 유형과 지형적 요인의 상관관계",
+          "L2_data_combination": "연료 유형과 지형적 요인의 조합",
+          "L2_values": [
+            0.0,
+            14.41
+          ],
+          "L2_reasoning_type": "증폭효과",
+          "L2_calculation": {
+            "fuel_density_risk": "5 (매우 높음)",
+            "slope_risk": "3 (중간)",
+            "average_risk": "4.0"
+          },
+          "L2_if_then": "IF 연료 밀도가 높고 경사가 가파르면 THEN 확산 속도 급증",
+          "L2_risk_scoring_description": "연료 유형과 지형적 요인이 높을수록 확산 속도가 급증할 위험.",
+          "L2_confidence_score": 0.85,
+          "L2_reasoning_description": "연료 유형과 지형적 요인은 산불 확산에 큰 영향을 미친다."
+        },
+        "L2_W1F1": {
+          "L2_node_id": "L2_W1F1",
+          "L2_parent": "L1_W1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "풍속과 연료 유형의 상관관계",
+          "L2_data_combination": "풍속과 연료 유형의 조합",
+          "L2_values": [
+            1.4,
+            0.0
+          ],
+          "L2_reasoning_type": "증폭효과",
+          "L2_calculation": {
+            "wind_speed_risk": "3 (중간)",
+            "fuel_density_risk": "5 (매우 높음)",
+            "average_risk": "4.0"
+          },
+          "L2_if_then": "IF 풍속이 증가하고 연료 밀도가 높으면 THEN 확산 속도 급증",
+          "L2_risk_scoring_description": "풍속과 연료 유형이 높을수록 확산 속도가 급증할 위험.",
+          "L2_confidence_score": 0.85,
+          "L2_reasoning_description": "풍속과 연료 유형은 산불 확산에 큰 영향을 미친다."
+        }
+      },
+      "level_3_branches": {
+        "L3_W1O1I1": {
+          "L3_node_id": "L3_W1O1I1",
+          "L3_parent": "L2_W1O1",
+          "L3_thought": "풍속, 연료 수분, 인구 밀집",
+          "L3_data_combination": "풍속, 연료 수분, 인구 밀집의 조합",
+          "L3_values": [
+            1.4,
+            19.0,
+            2383.0
+          ],
+          "L3_reasoning_type": "직접인과",
+          "L3_calculation": {
+            "humidity_effect": "4 (높음)",
+            "wind_speed_risk": "3 (중간)",
+            "population_risk": "3 (중간)",
+            "weighted_average": "(4×0.5)+(3×0.3)+(3×0.2) = 3.5"
+          },
+          "L3_if_then": "IF 풍속 증가 AND 연료 수분 낮음 AND 인구 밀집 THEN 확산 속도 급증",
+          "L3_risk_scoring_description": "세 요소가 모두 낮을수록 확산 속도가 급증할 위험.",
+          "L3_confidence_score": 0.85,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "세 가지 요소가 산불 확산에 중요한 영향을 미친다."
+        },
+        "L3_W1T1O1": {
+          "L3_node_id": "L3_W1T1O1",
+          "L3_parent": "L2_W1T1",
+          "L3_thought": "풍속, 경사도, 연료 수분",
+          "L3_data_combination": "풍속, 경사도, 연료 수분의 조합",
+          "L3_values": [
+            1.4,
+            14.41,
+            19.0
+          ],
+          "L3_reasoning_type": "간접인과",
+          "L3_calculation": {
+            "humidity_effect": "4 (높음)",
+            "wind_speed_risk": "3 (중간)",
+            "slope_risk": "3 (중간)",
+            "weighted_average": "(4×0.5)+(3×0.3)+(3×0.2) = 3.5"
+          },
+          "L3_if_then": "IF 풍속 증가 AND 경사도 가파르면 AND 연료 수분 낮음 THEN 확산 속도 증가",
+          "L3_risk_scoring_description": "세 요소가 모두 높을수록 확산 속도가 증가할 위험.",
+          "L3_confidence_score": 0.8,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "세 가지 요소가 산불 확산에 영향을 미친다."
+        },
+        "L3_O1W1I1": {
+          "L3_node_id": "L3_O1W1I1",
+          "L3_parent": "L2_O1W1",
+          "L3_thought": "연료 수분, 풍속, 인구 밀집",
+          "L3_data_combination": "연료 수분, 풍속, 인구 밀집의 조합",
+          "L3_values": [
+            19.0,
+            1.4,
+            2383.0
+          ],
+          "L3_reasoning_type": "임계값 판단",
+          "L3_calculation": {
+            "humidity_effect": "4 (높음)",
+            "wind_speed_risk": "3 (중간)",
+            "population_risk": "3 (중간)",
+            "weighted_average": "(4×0.5)+(3×0.3)+(3×0.2) = 3.5"
+          },
+          "L3_if_then": "IF 연료 수분 낮음 AND 풍속 증가 AND 인구 밀집 THEN 피해 가능성 증가",
+          "L3_risk_scoring_description": "세 요소가 모두 낮을수록 피해 가능성이 증가할 위험.",
+          "L3_confidence_score": 0.9,
+          "L3_status": "selected",
+          "L3_reasoning_description": "세 가지 요소가 산불 피해에 결정적인 영향을 미친다."
+        },
+        "L3_T1O1W1": {
+          "L3_node_id": "L3_T1O1W1",
+          "L3_parent": "L2_T1O1",
+          "L3_thought": "지형적 요인, 연료 수분, 풍속",
+          "L3_data_combination": "지형적 요인, 연료 수분, 풍속의 조합",
+          "L3_values": [
+            14.41,
+            19.0,
+            1.4
+          ],
+          "L3_reasoning_type": "간접인과",
+          "L3_calculation": {
+            "slope_risk": "3 (중간)",
+            "humidity_effect": "4 (높음)",
+            "wind_speed_risk": "3 (중간)",
+            "weighted_average": "(4×0.5)+(3×0.3)+(3×0.2) = 3.5"
+          },
+          "L3_if_then": "IF 경사가 가파르고 연료 수분 낮음 AND 풍속 증가 THEN 확산 속도 증가",
+          "L3_risk_scoring_description": "세 요소가 모두 낮을수록 확산 속도가 증가할 위험.",
+          "L3_confidence_score": 0.8,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "세 가지 요소가 산불 확산에 영향을 미친다."
+        },
+        "L3_I1O1W1": {
+          "L3_node_id": "L3_I1O1W1",
+          "L3_parent": "L2_I1O1",
+          "L3_status": "pruning",
+          "L3_thought": "인구 밀집, 연료 수분, 풍속",
+          "L3_data_combination": "인구 밀집, 연료 수분, 풍속의 조합",
+          "L3_values": [
+            2383.0,
+            19.0,
+            1.4
+          ],
+          "L3_reasoning_type": "시너지",
+          "L3_calculation": {
+            "population_risk": "3 (중간)",
+            "humidity_effect": "4 (높음)",
+            "wind_speed_risk": "3 (중간)",
+            "weighted_average": "(4×0.5)+(3×0.3)+(3×0.2) = 3.5"
+          },
+          "L3_if_then": "IF 인구 밀집 AND 연료 수분 낮음 AND 풍속 증가 THEN 피해 가능성 증가",
+          "L3_risk_scoring_description": "세 요소가 모두 낮을수록 피해 가능성이 증가할 위험.",
+          "L3_confidence_score": 0.85,
+          "L3_reasoning_description": "인구 밀집, 연료 수분, 풍속은 산불 피해에 중요한 영향을 미친다."
+        },
+        "L3_I1W1T1": {
+          "L3_node_id": "L3_I1W1T1",
+          "L3_parent": "L2_I1W1",
+          "L3_status": "pruning",
+          "L3_thought": "인구 밀집, 풍속, 지형적 요인",
+          "L3_data_combination": "인구 밀집, 풍속, 지형적 요인의 조합",
+          "L3_values": [
+            2383.0,
+            1.4,
+            14.41
+          ],
+          "L3_reasoning_type": "시너지",
+          "L3_calculation": {
+            "population_risk": "3 (중간)",
+            "wind_speed_risk": "3 (중간)",
+            "slope_risk": "3 (중간)",
+            "weighted_average": "(3×0.5)+(3×0.3)+(3×0.2) = 3.0"
+          },
+          "L3_if_then": "IF 인구 밀집 AND 풍속 증가 AND 경사가 가파르면 THEN 피해 가능성 증가",
+          "L3_risk_scoring_description": "세 요소가 모두 높을수록 피해 가능성이 증가할 위험.",
+          "L3_confidence_score": 0.75,
+          "L3_reasoning_description": "인구 밀집, 풍속, 지형적 요인은 산불 피해에 영향을 미친다."
+        }
+      },
+      "backtracking_events": [
+        {
+          "event_id": "BT1",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.65,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_O1 -> L2_O1T1",
+          "problem": "연료 수분과 화재 지속 시간이 산불 확산에 미치는 영향 개선 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "연료 수분과 화재 지속 시간이 산불 확산에 중대한 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.65",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2 단계에서 다른 노드 조합 시도",
+            "alternative_combination": "L2_O1W1",
+            "simplification": "연료 수분과 풍속 조합으로 대체",
+            "structural_change": "L2_O1W1로 변경",
+            "selected_alternative": "L2_O1W1",
+            "rationale": "연료 수분과 풍속이 산불 확산에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_O1T1 대신 L2_O1W1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_O1 -> L2_O1W1",
+            "new_score": 0.85,
+            "weight_adjustment": 0.2
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 연료 수분과 풍속의 중요성 확인"
+        },
+        {
+          "event_id": "BT2",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.7,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_T1 -> L2_T1W1",
+          "problem": "지형적 요인과 화재 지속 시간이 산불 확산에 미치는 영향 개선 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "지형적 요인과 화재 지속 시간이 산불 확산에 중대한 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.7",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2 단계에서 다른 노드 조합 시도",
+            "alternative_combination": "L2_T1O1",
+            "simplification": "지형적 요인과 연료 수분 조합으로 대체",
+            "structural_change": "L2_T1O1로 변경",
+            "selected_alternative": "L2_T1O1",
+            "rationale": "지형적 요인과 연료 수분이 산불 확산에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_T1W1 대신 L2_T1O1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_T1 -> L2_T1O1",
+            "new_score": 0.75,
+            "weight_adjustment": 0.15
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 지형적 요인과 연료 수분의 중요성 확인"
+        },
+        {
+          "event_id": "BT3",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.6,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_F1 -> L2_F1W1",
+          "problem": "연료 유형과 화재 지속 시간이 산불 확산에 미치는 영향 개선 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "연료 유형과 화재 지속 시간이 산불 확산에 중대한 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.6",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2 단계에서 다른 노드 조합 시도",
+            "alternative_combination": "L2_F1T1",
+            "simplification": "연료 유형과 지형적 요인 조합으로 대체",
+            "structural_change": "L2_F1T1로 변경",
+            "selected_alternative": "L2_F1T1",
+            "rationale": "연료 유형과 지형적 요인이 산불 확산에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_F1W1 대신 L2_F1T1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_F1 -> L2_F1T1",
+            "new_score": 0.7,
+            "weight_adjustment": 0.1
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 연료 유형과 지형적 요인의 중요성 확인"
+        },
+        {
+          "event_id": "BT4",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.65,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_F1 -> L2_F1T1",
+          "problem": "연료 유형과 지형적 요인이 산불 확산에 미치는 영향 개선 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "연료 유형과 지형적 요인이 산불 확산에 중대한 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.65",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2 단계에서 다른 노드 조합 시도",
+            "alternative_combination": "L2_F1W1",
+            "simplification": "연료 유형과 풍속 조합으로 대체",
+            "structural_change": "L2_F1W1로 변경",
+            "selected_alternative": "L2_F1W1",
+            "rationale": "연료 유형과 풍속이 산불 확산에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_F1T1 대신 L2_F1W1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_F1 -> L2_F1W1",
+            "new_score": 0.75,
+            "weight_adjustment": 0.15
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 연료 유형과 풍속의 중요성 확인"
+        },
+        {
+          "event_id": "BT5",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.7,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_W1 -> L2_W1F1",
+          "problem": "풍속과 화재 지속 시간이 산불 확산에 미치는 영향 개선 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "풍속과 화재 지속 시간이 산불 확산에 중대한 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.7",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2 단계에서 다른 노드 조합 시도",
+            "alternative_combination": "L2_W1T1",
+            "simplification": "풍속과 지형적 요인 조합으로 대체",
+            "structural_change": "L2_W1T1로 변경",
+            "selected_alternative": "L2_W1T1",
+            "rationale": "풍속과 지형적 요인이 산불 확산에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_W1F1 대신 L2_W1T1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_W1 -> L2_W1T1",
+            "new_score": 0.75,
+            "weight_adjustment": 0.1
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 풍속과 지형적 요인의 중요성 확인"
+        }
+      ],
+      "pruning_events": [
+        {
+          "pruning_id": "P1",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_W1O1I1",
+          "score": 0.85,
+          "threshold": 0.9,
+          "reason": "풍속, 연료 수분, 인구 밀집에 대한 신뢰도가 기준치(0.90)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_W1O1I1는 \"풍속, 연료 수분, 인구 밀집\" 분석에서 신뢰도 0.85가 기준 0.90보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P2",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_W1T1O1",
+          "score": 0.8,
+          "threshold": 0.85,
+          "reason": "풍속, 경사도, 연료 수분에 대한 신뢰도가 기준치(0.85)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_W1T1O1는 \"풍속, 경사도, 연료 수분\" 분석에서 신뢰도 0.80가 기준 0.85보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P3",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_T1O1W1",
+          "score": 0.8,
+          "threshold": 0.85,
+          "reason": "지형적 요인, 연료 수분, 풍속에 대한 신뢰도가 기준치(0.85)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_T1O1W1는 \"지형적 요인, 연료 수분, 풍속\" 분석에서 신뢰도 0.80가 기준 0.85보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P4",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_I1O1W1",
+          "score": 0.85,
+          "threshold": 0.9,
+          "reason": "인구 밀집, 연료 수분, 풍속에 대한 신뢰도가 기준치(0.90)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_I1O1W1는 \"인구 밀집, 연료 수분, 풍속\" 분석에서 신뢰도 0.85가 기준 0.90보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P5",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_I1W1T1",
+          "score": 0.75,
+          "threshold": 0.8,
+          "reason": "인구 밀집, 풍속, 지형적 요인에 대한 신뢰도가 기준치(0.80)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_I1W1T1는 \"인구 밀집, 풍속, 지형적 요인\" 분석에서 신뢰도 0.75가 기준 0.80보다 낮아 추론 경로에서 제거하였습니다."
+        }
+      ],
+      "final_selection": {
+        "selected_path": "ROOT → L1_O1 → L2_O1W1 → L3_O1W1I1",
+        "best_l3_node_id": "L3_O1W1I1",
+        "reasoning_chain": "① L1: 연료 수분 함량이 산불 확산에 결정적인 요소. ② L2: 연료 수분과 풍속은 산불 확산에 중요한 요소. ③ L3: 세 가지 요소가 산불 피해에 결정적인 영향을 미친다.",
+        "path_selection_reasoning": "여러 L3 중 이 경로를 선택한 이유는 연료 수분과 풍속이 모두 낮을수록 피해 가능성이 증가하기 때문입니다.",
+        "selected_path_risk_scoring_description": "최종 경로의 위험도 평가 결과, 연료 수분과 풍속이 낮을수록 피해 가능성이 증가할 위험이 높습니다.",
+        "comprehensive_scoring_matrix": {
+          "path_1": {
+            "risk_level": "높음",
+            "confidence": 0.95
+          },
+          "path_2": {
+            "risk_level": "보통",
+            "confidence": 0.9
+          },
+          "path_3": {
+            "risk_level": "낮음",
+            "confidence": 0.85
+          }
+        },
+        "scoring_criteria": "신뢰도, 위험도, 대응 가능성을 종합적으로 평가하였습니다.",
+        "key_nodes_used": {
+          "O": {
+            "humidity_effect": "4 (높음)",
+            "fire_duration_risk": "3 (중간)"
+          },
+          "W": {
+            "wind_speed": "1.4"
+          },
+          "T": {
+            "slope": "14.41"
+          },
+          "I": {
+            "population": "2383.0"
+          },
+          "F": {
+            "fuel_moisture": "0.0"
+          }
+        },
+        "path_confidence": 0.9
+      }
+    },
+    "countermeasures": {
+      "immediate_recommendation": {
+        "decision": "연료 습도를 즉시 점검하고 조절해야 합니다.",
+        "primary_reason": "연료 습도가 낮을수록 산불 확산 속도가 증가하기 때문입니다.",
+        "risk_level": "높음"
+      },
+      "safety_assessment": {
+        "prohibitive_factors": {
+          "fire": "현재 화재 강도가 약하지만, 확산 가능성이 높습니다.",
+          "visibility": "가시거리가 양호하여 초기 대응이 가능합니다.",
+          "support": "소방 자원은 충분하나, 신속한 배치가 필요합니다.",
+          "intensity": "화재 강도가 약하나, 연료 습도가 낮아 위험합니다."
+        },
+        "favorable_factors": {
+          "wind": "풍속이 낮아 화재 확산 속도는 다소 완화됩니다.",
+          "humidity": "현재 습도가 낮아 화재 위험이 증가합니다."
+        },
+        "net_assessment": "현재 상황은 위험도가 높으며, 즉각적인 조치가 필요합니다.",
+        "evacuation_zones": {
+          "safe_zone": "서곡리 향기나는 마을회관은 안전 지역입니다.",
+          "danger_zone": "화재 발생 지역은 위험 지역입니다.",
+          "buffer_zone": "위험 지역과 안전 지역 사이의 완충 지역이 필요합니다."
+        },
+        "evacuation_sequence": {
+          "phase_1": "위험 지역 주민을 즉시 대피시킵니다.",
+          "phase_2": "완충 지역 주민을 대피시킵니다.",
+          "phase_3": "안전 지역으로의 대피를 완료합니다."
+        }
+      },
+      "alternative_strategies": {
+        "option_1": {
+          "action": "연료 습도를 높이기 위한 물 뿌리기",
+          "timing": "즉시 시행"
+        },
+        "option_2": {
+          "action": "풍속에 따른 화재 진압 전략 조정",
+          "method": "풍속에 따라 진압 자원 배치"
+        },
+        "option_3": {
+          "action": "주민 대피 훈련 실시",
+          "condition": "화재 발생 시 즉각 시행"
+        }
+      },
+      "safety_requirements": {
+        "minimum_conditions": [
+          "연료 습도 10% 이상 유지",
+          "풍속 2m/s 이하 유지",
+          "주민 대피 경로 확보"
+        ],
+        "key_insights": "연료 습도와 풍속은 화재 확산에 결정적인 영향을 미칩니다."
+      }
+    },
+    "decision_answer": {
+      "conclusion": "연료 습도가 10% 이하로 떨어지면 화재 확산 속도가 급격히 증가합니다. 따라서 즉각적인 조치가 필요합니다.",
+      "safety_verdict": {
+        "decision": "현재 상황은 매우 위험합니다.",
+        "safety_level": "위험",
+        "confidence": "95%",
+        "primary_factor": "연료 습도"
+      },
+      "critical_risks": {
+        "risk_1": "연료 습도가 낮아 화재 확산 속도가 증가합니다.",
+        "risk_2": "풍속이 낮아도 화재가 확산될 수 있습니다.",
+        "risk_3": "주민 대피가 지연될 경우 피해가 커질 수 있습니다.",
+        "risk_4": "화재 강도가 약하나, 연료 조건이 나쁩니다."
+      },
+      "clear_message": "즉각적인 연료 습도 조절 필요.",
+      "critical_action": {
+        "action_1": "연료 습도 점검 및 조절",
+        "action_2": "주민 대피 경로 확보",
+        "action_3": "소방 자원 배치",
+        "action_4": "화재 진압 전략 조정"
+      }
+    },
+    "complete_reasoning": {
+      "reasoning_path_description": "연료 수분 함량은 산불 확산에 결정적인 요소입니다. 연료 수분과 풍속은 산불 확산에 중요한 요소로 작용합니다. 이 세 가지 요소가 산불 피해에 결정적인 영향을 미치므로, 즉각적인 조치가 필요합니다.선택 경로 L0_ROOT -> L1_O1 -> L2_O1W1 -> L3_O1W1I1는 발생/운영, 바람, 인프라 축의 상호작용을 핵심 근거로 합니다. L1에서는 연료 수분 함량이 산불 확산에 미치는 영향.를 검토하고, L2에서 연료 수분과 풍속의 상관관계를 종합했습니다. 최종 L3 판단은 \"IF 연료 수분 낮음 AND 풍속 증가 AND 인구 밀집 THEN 피해 가능성 증가\"로 수렴했으며, 이에 따라 위험도와 실행 가능성을 함께 평가하였습니다.",
+      "risk_scoring": "최종 경로의 위험도는 높음으로 평가되었습니다.",
+      "confidence_scoring": "신뢰도는 95%로 매우 높습니다.",
+      "complete_reasoning_countermeasures": "질의자는 연료 습도가 10% 이하로 떨어질 경우 화재 확산 속도가 얼마나 증가하는지를 물었습니다. 최종 경로 및 위험도 판단에 따르면, 연료 습도와 풍속이 낮을수록 화재 피해 가능성이 높아지며, 현재 상황은 매우 위험하다고 평가되었습니다. 연료 습도가 낮아지면 화재 확산 속도가 급격히 증가하므로 즉각적인 조치가 필요합니다.\n\n즉각 조치로는 연료 습도를 즉시 점검하고 조절하는 것이 필수적입니다. 이는 연료 습도가 낮을수록 화재 확산 속도가 증가하기 때문입니다. 안전 평가 결과, 현재 화재 강도는 약하지만, 연료 습도가 낮아 위험이 크며, 소방 자원은 충분하나 신속한 배치가 필요합니다. 따라서, 주민 대피 경로를 확보하고, 위험 지역 주민을 즉시 대피시키는 것이 중요합니다.\n\n대안 전략으로는 연료 습도를 높이기 위한 물 뿌리기, 풍속에 따른 화재 진압 전략 조정, 주민 대피 훈련 실시 등이 있습니다. 이러한 대안들은 각각의 상황에 따라 효과적일 수 있으며, 즉각적인 조치와 병행하여 시행될 수 있습니다. 따라서, 질의자의 상황에서 취해야 할 핵심 대응방안은 연료 습도를 즉시 점검하고 조절하며, 주민 대피를 신속히 진행하는 것입니다.",
+      "query": "연료 습도가 10% 이하로 떨어지면 확산 속도가 얼마나 증가합니까?"
+    }
+  },
+  "file_info": {
+    "labelling_file_name": "HC20240414_T_P0001_T002.json",
+    "labelling_file_format": "json"
+  }
+}

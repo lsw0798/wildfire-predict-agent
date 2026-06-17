@@ -1,0 +1,60 @@
+name: Frontend Playwright CI
+
+on:
+  push:
+    paths:
+      - "frontend/**"
+      - ".github/workflows/frontend-playwright-ci.yml"
+  pull_request:
+    paths:
+      - "frontend/**"
+      - ".github/workflows/frontend-playwright-ci.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: frontend-playwright-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify-frontend-handoff:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run frontend CI verification
+        run: npm run test:ci
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: frontend/playwright-report
+          if-no-files-found: ignore
+          retention-days: 7
+
+      - name: Upload Playwright raw results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-test-results
+          path: frontend/test-results
+          if-no-files-found: ignore
+          retention-days: 7

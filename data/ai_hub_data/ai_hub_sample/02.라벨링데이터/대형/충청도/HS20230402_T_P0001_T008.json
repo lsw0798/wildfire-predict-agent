@@ -1,0 +1,915 @@
+{
+  "labelling_data_info": {
+    "query": {
+      "query_text": "불이 꺼진 것 같은데 집으로 돌아가도 안전합니까?",
+      "query_purpose": "피해예측",
+      "query_subject": "진화벙법",
+      "query_type": "conditional"
+    },
+    "tree_of_thought": {
+      "level_0_input": {
+        "L0_node_id": "ROOT",
+        "L0_thought": "집으로 돌아가도 안전한가?",
+        "L0_context": {
+          "weather_conditions": {
+            "wind_speed": 2.9,
+            "wind_direction": 70.0,
+            "humidity_percent": 20.0,
+            "temperature": 21.5,
+            "surface_temperature": 23.1,
+            "drought_days": 35.0,
+            "visibility": 3701.0
+          },
+          "terrain_conditions": {
+            "elevation": 49.72,
+            "slope": 5.3,
+            "slope_aspect": 89.46,
+            "curvature": -0.0007,
+            "topographic_position_index": -5.96,
+            "terrain_complexity": 32.09,
+            "hydrological_features": 1.09
+          },
+          "fuel_conditions": {
+            "fuel_type": "침엽수림",
+            "fuel_moisture": 16.0,
+            "fuel_density": 4.62,
+            "fuel_average_age": 45.0,
+            "surface_fuel_depth": 2.0,
+            "canopy_height": 10.0,
+            "canopy_coverage": 75.0
+          },
+          "Infra_Social": {
+            "population": 2925.0,
+            "vulnerable": 1696.0,
+            "fire_station_distance": 4.86,
+            "road_accessibility": "아주 좋음",
+            "Important_Infra_distance": 0.81,
+            "shelter": "신리마을회관"
+          },
+          "occurrence_status": {
+            "fire_duration": 420.0,
+            "drought_duration_days": 35.0,
+            "wildfire_duration_time": "7:00",
+            "flame_length": 2.0,
+            "fire_intensity": "매우강함",
+            "fire_length": 3.3,
+            "wind_slope_alignment": 70.0
+          }
+        },
+        "L0_branches": [
+          "L1_W1",
+          "L1_O1",
+          "L1_T1",
+          "L1_F1",
+          "L1_I1"
+        ],
+        "L0_reasoning_description": "주변 환경과 위험 요소를 고려한 판단",
+        "L0_confidence_score": 0.85,
+        "L0_status": "start"
+      },
+      "level_1_branches": {
+        "L1_W1": {
+          "L1_node_id": "L1_W1",
+          "L1_parent": "ROOT",
+          "L1_thought": "풍속이 안전한지 확인해야 합니다.",
+          "L1_data_node": "wind_speed_risk, humidity_effect",
+          "L1_value": [
+            2.9,
+            20.0
+          ],
+          "L1_reasoning_type": "직접인과",
+          "L1_calculation": {
+            "wind_speed_risk": "2 (중간)",
+            "humidity_effect": "3 (높음)",
+            "average_risk": "2.5"
+          },
+          "L1_if_then": "IF 풍속이 3 이상 THEN 위험 증가",
+          "L1_risk_scoring_description": "풍속이 높아질수록 위험이 증가합니다.",
+          "L1_confidence_score": 0.8,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_W1T1",
+            "L2_W1O1",
+            "L2_W1F1"
+          ],
+          "L1_reasoning_description": "풍속과 습도를 고려한 판단입니다."
+        },
+        "L1_O1": {
+          "L1_node_id": "L1_O1",
+          "L1_parent": "ROOT",
+          "L1_thought": "화재 지속 시간이 중요합니다.",
+          "L1_data_node": "fire_duration_risk, flame_length_risk",
+          "L1_value": [
+            420.0,
+            2.0
+          ],
+          "L1_reasoning_type": "간접인과",
+          "L1_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "flame_length_risk": "3 (중간)",
+            "average_risk": "3.5"
+          },
+          "L1_if_then": "IF 화재 지속 시간이 길면 THEN 위험 증가",
+          "L1_risk_scoring_description": "화재 지속 시간이 길어질수록 위험이 커집니다.",
+          "L1_confidence_score": 0.9,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_O1W1",
+            "L2_O1T1"
+          ],
+          "L1_reasoning_description": "화재 지속 시간과 화염 길이를 고려한 판단입니다."
+        },
+        "L1_T1": {
+          "L1_node_id": "L1_T1",
+          "L1_parent": "ROOT",
+          "L1_thought": "지면 온도가 중요합니다.",
+          "L1_data_node": "surface_temp_risk, temperature_risk",
+          "L1_value": [
+            23.1,
+            21.5
+          ],
+          "L1_reasoning_type": "임계값 판단",
+          "L1_calculation": {
+            "surface_temp_risk": "3 (중간)",
+            "temperature_risk": "2 (낮음)",
+            "average_risk": "2.5"
+          },
+          "L1_if_then": "IF 지면 온도가 25 이상 THEN 위험 증가",
+          "L1_risk_scoring_description": "지면 온도가 높아질수록 위험이 증가합니다.",
+          "L1_confidence_score": 0.75,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_T1O1",
+            "L2_T1W1"
+          ],
+          "L1_reasoning_description": "지면 온도와 기온을 고려한 판단입니다."
+        },
+        "L1_F1": {
+          "L1_node_id": "L1_F1",
+          "L1_parent": "ROOT",
+          "L1_thought": "연료 수분 함량이 중요합니다.",
+          "L1_data_node": "fuel_moisture_risk, fuel_density_risk",
+          "L1_value": [
+            16.0,
+            4.62
+          ],
+          "L1_reasoning_type": "증폭효과",
+          "L1_calculation": {
+            "fuel_moisture_risk": "2 (낮음)",
+            "fuel_density_risk": "3 (중간)",
+            "average_risk": "2.5"
+          },
+          "L1_if_then": "IF 연료 수분 함량이 낮으면 THEN 위험 증가",
+          "L1_risk_scoring_description": "연료 수분 함량이 낮을수록 위험이 증가합니다.",
+          "L1_confidence_score": 0.7,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_F1W1",
+            "L2_F1T1"
+          ],
+          "L1_reasoning_description": "연료 수분 함량과 밀도를 고려한 판단입니다."
+        },
+        "L1_I1": {
+          "L1_node_id": "L1_I1",
+          "L1_parent": "ROOT",
+          "L1_thought": "인구 밀집 지역의 위험을 고려해야 합니다.",
+          "L1_data_node": "population_risk, vulnerable_risk",
+          "L1_value": [
+            2925.0,
+            1696.0
+          ],
+          "L1_reasoning_type": "시너지",
+          "L1_calculation": {
+            "population_risk": "3 (중간)",
+            "vulnerable_risk": "4 (높음)",
+            "average_risk": "3.5"
+          },
+          "L1_if_then": "IF 인구 밀집 지역 THEN 위험 증가",
+          "L1_risk_scoring_description": "인구 밀집 지역일수록 위험이 증가합니다.",
+          "L1_confidence_score": 0.85,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_I1O1",
+            "L2_I1W1"
+          ],
+          "L1_reasoning_description": "인구와 취약 계층을 고려한 판단입니다."
+        }
+      },
+      "level_2_branches": {
+        "L2_W1O1": {
+          "L2_node_id": "L2_W1O1",
+          "L2_parent": "L1_W1",
+          "L2_thought": "풍속과 화재 지속 시간",
+          "L2_data_combination": "풍속과 화재 지속 시간을 조합하여 위험 평가",
+          "L2_values": [
+            2.9,
+            420.0
+          ],
+          "L2_reasoning_type": "직접인과",
+          "L2_calculation": {
+            "wind_speed_risk": "2 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 풍속이 3 이상 AND 화재 지속 시간이 길면 THEN 위험 증가",
+          "L2_risk_scoring_description": "풍속과 화재 지속 시간이 높을수록 위험이 증가합니다.",
+          "L2_confidence_score": 0.85,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_W1O1I1"
+          ],
+          "L2_reasoning_description": "풍속과 화재 지속 시간을 고려한 판단입니다."
+        },
+        "L2_W1T1": {
+          "L2_node_id": "L2_W1T1",
+          "L2_parent": "L1_W1",
+          "L2_thought": "풍속과 지면 온도",
+          "L2_data_combination": "풍속과 지면 온도를 조합하여 위험 평가",
+          "L2_values": [
+            2.9,
+            23.1
+          ],
+          "L2_reasoning_type": "임계값 판단",
+          "L2_calculation": {
+            "wind_speed_risk": "2 (중간)",
+            "surface_temp_risk": "3 (중간)",
+            "average_risk": "2.5"
+          },
+          "L2_if_then": "IF 풍속이 3 이상 AND 지면 온도가 25 이상 THEN 위험 증가",
+          "L2_risk_scoring_description": "풍속과 지면 온도가 높을수록 위험이 증가합니다.",
+          "L2_confidence_score": 0.75,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_W1T1O1"
+          ],
+          "L2_reasoning_description": "풍속과 지면 온도를 고려한 판단입니다."
+        },
+        "L2_O1W1": {
+          "L2_node_id": "L2_O1W1",
+          "L2_parent": "L1_O1",
+          "L2_thought": "화재 지속 시간과 풍속",
+          "L2_data_combination": "화재 지속 시간과 풍속을 조합하여 위험 평가",
+          "L2_values": [
+            420.0,
+            2.9
+          ],
+          "L2_reasoning_type": "간접인과",
+          "L2_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "wind_speed_risk": "2 (중간)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 화재 지속 시간이 길고 풍속이 높으면 THEN 위험 증가",
+          "L2_risk_scoring_description": "화재 지속 시간과 풍속이 높을수록 위험이 증가합니다.",
+          "L2_confidence_score": 0.9,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_O1W1I1"
+          ],
+          "L2_reasoning_description": "화재 지속 시간과 풍속을 고려한 판단입니다."
+        },
+        "L2_T1O1": {
+          "L2_node_id": "L2_T1O1",
+          "L2_parent": "L1_T1",
+          "L2_thought": "지면 온도와 화재 지속 시간",
+          "L2_data_combination": "지면 온도와 화재 지속 시간을 조합하여 위험 평가",
+          "L2_values": [
+            23.1,
+            420.0
+          ],
+          "L2_reasoning_type": "임계값 판단",
+          "L2_calculation": {
+            "surface_temp_risk": "3 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 지면 온도가 25 이상 AND 화재 지속 시간이 길면 THEN 위험 증가",
+          "L2_risk_scoring_description": "지면 온도와 화재 지속 시간이 높을수록 위험이 증가합니다.",
+          "L2_confidence_score": 0.8,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_T1O1W1"
+          ],
+          "L2_reasoning_description": "지면 온도와 화재 지속 시간을 고려한 판단입니다."
+        },
+        "L2_I1O1": {
+          "L2_node_id": "L2_I1O1",
+          "L2_parent": "L1_I1",
+          "L2_thought": "인구 밀집 지역과 화재 지속 시간",
+          "L2_data_combination": "인구 밀집 지역과 화재 지속 시간을 조합하여 위험 평가",
+          "L2_values": [
+            2925.0,
+            420.0
+          ],
+          "L2_reasoning_type": "시너지",
+          "L2_calculation": {
+            "population_risk": "3 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 인구 밀집 지역 AND 화재 지속 시간이 길면 THEN 위험 증가",
+          "L2_risk_scoring_description": "인구 밀집 지역과 화재 지속 시간이 높을수록 위험이 증가합니다.",
+          "L2_confidence_score": 0.85,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_I1O1W1"
+          ],
+          "L2_reasoning_description": "인구 밀집 지역과 화재 지속 시간을 고려한 판단입니다."
+        },
+        "L2_I1W1": {
+          "L2_node_id": "L2_I1W1",
+          "L2_parent": "L1_I1",
+          "L2_thought": "인구 밀집 지역과 풍속",
+          "L2_data_combination": "인구 밀집 지역과 풍속을 조합하여 위험 평가",
+          "L2_values": [
+            2925.0,
+            2.9
+          ],
+          "L2_reasoning_type": "시너지",
+          "L2_calculation": {
+            "population_risk": "3 (중간)",
+            "wind_speed_risk": "2 (중간)",
+            "average_risk": "2.5"
+          },
+          "L2_if_then": "IF 인구 밀집 지역 AND 풍속이 높으면 THEN 위험 증가",
+          "L2_risk_scoring_description": "인구 밀집 지역과 풍속이 높을수록 위험이 증가합니다.",
+          "L2_confidence_score": 0.8,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_I1W1F1"
+          ],
+          "L2_reasoning_description": "인구 밀집 지역과 풍속을 고려한 판단입니다."
+        },
+        "L2_O1T1": {
+          "L2_node_id": "L2_O1T1",
+          "L2_parent": "L1_O1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "지면 온도와 화재 지속 시간",
+          "L2_data_combination": "지면 온도와 화재 지속 시간을 조합하여 위험 평가",
+          "L2_values": [
+            23.1,
+            420.0
+          ],
+          "L2_reasoning_type": "임계값 판단",
+          "L2_calculation": {
+            "surface_temp_risk": "3 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 지면 온도가 25 이상 AND 화재 지속 시간이 길면 THEN 위험 증가",
+          "L2_risk_scoring_description": "지면 온도와 화재 지속 시간이 높을수록 위험이 증가합니다.",
+          "L2_confidence_score": 0.8,
+          "L2_reasoning_description": "지면 온도와 화재 지속 시간을 고려한 판단입니다."
+        },
+        "L2_T1W1": {
+          "L2_node_id": "L2_T1W1",
+          "L2_parent": "L1_T1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "지면 온도와 풍속",
+          "L2_data_combination": "지면 온도와 풍속을 조합하여 위험 평가",
+          "L2_values": [
+            23.1,
+            2.9
+          ],
+          "L2_reasoning_type": "임계값 판단",
+          "L2_calculation": {
+            "surface_temp_risk": "3 (중간)",
+            "wind_speed_risk": "2 (중간)",
+            "average_risk": "2.5"
+          },
+          "L2_if_then": "IF 지면 온도가 25 이상 AND 풍속이 3 이상 THEN 위험 증가",
+          "L2_risk_scoring_description": "지면 온도와 풍속이 높을수록 위험이 증가합니다.",
+          "L2_confidence_score": 0.75,
+          "L2_reasoning_description": "지면 온도와 풍속을 고려한 판단입니다."
+        },
+        "L2_F1W1": {
+          "L2_node_id": "L2_F1W1",
+          "L2_parent": "L1_F1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "연료 수분 함량과 풍속",
+          "L2_data_combination": "연료 수분 함량과 풍속을 조합하여 위험 평가",
+          "L2_values": [
+            16.0,
+            2.9
+          ],
+          "L2_reasoning_type": "증폭효과",
+          "L2_calculation": {
+            "fuel_moisture_risk": "2 (낮음)",
+            "wind_speed_risk": "2 (중간)",
+            "average_risk": "2.0"
+          },
+          "L2_if_then": "IF 연료 수분 함량이 낮고 풍속이 높으면 THEN 위험 증가",
+          "L2_risk_scoring_description": "연료 수분 함량이 낮고 풍속이 높을수록 위험이 증가합니다.",
+          "L2_confidence_score": 0.7,
+          "L2_reasoning_description": "연료 수분 함량과 풍속을 고려한 판단입니다."
+        },
+        "L2_F1T1": {
+          "L2_node_id": "L2_F1T1",
+          "L2_parent": "L1_F1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "연료 수분 함량과 지면 온도",
+          "L2_data_combination": "연료 수분 함량과 지면 온도를 조합하여 위험 평가",
+          "L2_values": [
+            16.0,
+            23.1
+          ],
+          "L2_reasoning_type": "임계값 판단",
+          "L2_calculation": {
+            "fuel_moisture_risk": "2 (낮음)",
+            "surface_temp_risk": "3 (중간)",
+            "average_risk": "2.5"
+          },
+          "L2_if_then": "IF 연료 수분 함량이 낮고 지면 온도가 25 이상이면 THEN 위험 증가",
+          "L2_risk_scoring_description": "연료 수분 함량이 낮고 지면 온도가 높을수록 위험이 증가합니다.",
+          "L2_confidence_score": 0.75,
+          "L2_reasoning_description": "연료 수분 함량과 지면 온도를 고려한 판단입니다."
+        },
+        "L2_W1F1": {
+          "L2_node_id": "L2_W1F1",
+          "L2_parent": "L1_W1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "풍속과 연료 수분 함량",
+          "L2_data_combination": "풍속과 연료 수분 함량을 조합하여 위험 평가",
+          "L2_values": [
+            2.9,
+            16.0
+          ],
+          "L2_reasoning_type": "증폭효과",
+          "L2_calculation": {
+            "wind_speed_risk": "2 (중간)",
+            "fuel_moisture_risk": "2 (낮음)",
+            "average_risk": "2.0"
+          },
+          "L2_if_then": "IF 풍속이 높고 연료 수분 함량이 낮으면 THEN 위험 증가",
+          "L2_risk_scoring_description": "풍속이 높고 연료 수분 함량이 낮을수록 위험이 증가합니다.",
+          "L2_confidence_score": 0.7,
+          "L2_reasoning_description": "풍속과 연료 수분 함량을 고려한 판단입니다."
+        }
+      },
+      "level_3_branches": {
+        "L3_W1O1I1": {
+          "L3_node_id": "L3_W1O1I1",
+          "L3_parent": "L2_W1O1",
+          "L3_thought": "풍속, 화재 지속 시간, 인구 밀집",
+          "L3_data_combination": "풍속, 화재 지속 시간, 인구 밀집 지역을 조합하여 위험 평가",
+          "L3_values": [
+            2.9,
+            420.0,
+            2925.0
+          ],
+          "L3_reasoning_type": "직접인과",
+          "L3_calculation": {
+            "wind_speed_risk": "2 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "population_risk": "3 (중간)",
+            "weighted_average": "(2×0.3)+(4×0.5)+(3×0.2) = 3.3"
+          },
+          "L3_if_then": "IF 풍속이 3 이상 AND 화재 지속 시간이 길고 인구 밀집 지역 THEN 위험 증가",
+          "L3_risk_scoring_description": "풍속, 화재 지속 시간, 인구 밀집 지역이 높을수록 위험이 증가합니다.",
+          "L3_confidence_score": 0.85,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "풍속, 화재 지속 시간, 인구 밀집 지역을 고려한 판단입니다."
+        },
+        "L3_W1T1O1": {
+          "L3_node_id": "L3_W1T1O1",
+          "L3_parent": "L2_W1T1",
+          "L3_thought": "풍속, 지면 온도, 화재 지속 시간",
+          "L3_data_combination": "풍속, 지면 온도, 화재 지속 시간을 조합하여 위험 평가",
+          "L3_values": [
+            2.9,
+            23.1,
+            420.0
+          ],
+          "L3_reasoning_type": "임계값 판단",
+          "L3_calculation": {
+            "wind_speed_risk": "2 (중간)",
+            "surface_temp_risk": "3 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "weighted_average": "(2×0.3)+(3×0.2)+(4×0.5) = 3.3"
+          },
+          "L3_if_then": "IF 풍속이 3 이상 AND 지면 온도가 25 이상 AND 화재 지속 시간이 길면 THEN 위험 증가",
+          "L3_risk_scoring_description": "풍속, 지면 온도, 화재 지속 시간이 높을수록 위험이 증가합니다.",
+          "L3_confidence_score": 0.8,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "풍속, 지면 온도, 화재 지속 시간을 고려한 판단입니다."
+        },
+        "L3_O1W1I1": {
+          "L3_node_id": "L3_O1W1I1",
+          "L3_parent": "L2_O1W1",
+          "L3_thought": "화재 지속 시간, 풍속, 인구 밀집",
+          "L3_data_combination": "화재 지속 시간, 풍속, 인구 밀집 지역을 조합하여 위험 평가",
+          "L3_values": [
+            420.0,
+            2.9,
+            2925.0
+          ],
+          "L3_reasoning_type": "간접인과",
+          "L3_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "wind_speed_risk": "2 (중간)",
+            "population_risk": "3 (중간)",
+            "weighted_average": "(4×0.5)+(2×0.3)+(3×0.2) = 3.3"
+          },
+          "L3_if_then": "IF 화재 지속 시간이 길고 풍속이 높고 인구 밀집 지역 THEN 위험 증가",
+          "L3_risk_scoring_description": "화재 지속 시간, 풍속, 인구 밀집 지역이 높을수록 위험이 증가합니다.",
+          "L3_confidence_score": 0.9,
+          "L3_status": "selected",
+          "L3_reasoning_description": "화재 지속 시간, 풍속, 인구 밀집 지역을 고려한 판단입니다."
+        },
+        "L3_I1W1F1": {
+          "L3_node_id": "L3_I1W1F1",
+          "L3_parent": "L2_I1W1",
+          "L3_thought": "인구 밀집, 풍속, 연료 수분",
+          "L3_data_combination": "인구 밀집 지역, 풍속, 연료 수분 함량을 조합하여 위험 평가",
+          "L3_values": [
+            2925.0,
+            2.9,
+            16.0
+          ],
+          "L3_reasoning_type": "시너지",
+          "L3_calculation": {
+            "population_risk": "3 (중간)",
+            "wind_speed_risk": "2 (중간)",
+            "fuel_moisture_risk": "2 (낮음)",
+            "weighted_average": "(3×0.4)+(2×0.4)+(2×0.2) = 2.6"
+          },
+          "L3_if_then": "IF 인구 밀집 지역 AND 풍속이 높고 연료 수분 함량이 낮으면 THEN 위험 증가",
+          "L3_risk_scoring_description": "인구 밀집 지역, 풍속, 연료 수분 함량이 낮을수록 위험이 증가합니다.",
+          "L3_confidence_score": 0.75,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "인구 밀집 지역, 풍속, 연료 수분 함량을 고려한 판단입니다."
+        },
+        "L3_T1O1W1": {
+          "L3_node_id": "L3_T1O1W1",
+          "L3_parent": "L2_T1O1",
+          "L3_status": "pruning",
+          "L3_thought": "지면 온도, 화재 지속 시간, 풍속",
+          "L3_data_combination": "지면 온도, 화재 지속 시간, 풍속을 조합하여 위험 평가",
+          "L3_values": [
+            23.1,
+            420.0,
+            2.9
+          ],
+          "L3_reasoning_type": "임계값 판단",
+          "L3_calculation": {
+            "surface_temp_risk": "3 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "wind_speed_risk": "2 (중간)",
+            "weighted_average": "(3×0.3)+(4×0.5)+(2×0.2) = 3.4"
+          },
+          "L3_if_then": "IF 지면 온도가 25 이상 AND 화재 지속 시간이 길고 풍속이 높으면 THEN 위험 증가",
+          "L3_risk_scoring_description": "지면 온도, 화재 지속 시간, 풍속이 높을수록 위험이 증가합니다.",
+          "L3_confidence_score": 0.8,
+          "L3_reasoning_description": "지면 온도, 화재 지속 시간, 풍속을 고려한 판단입니다."
+        },
+        "L3_I1O1W1": {
+          "L3_node_id": "L3_I1O1W1",
+          "L3_parent": "L2_I1O1",
+          "L3_status": "pruning",
+          "L3_thought": "인구 밀집 지역, 화재 지속 시간, 풍속",
+          "L3_data_combination": "인구 밀집 지역, 화재 지속 시간, 풍속을 조합하여 위험 평가",
+          "L3_values": [
+            2925.0,
+            420.0,
+            2.9
+          ],
+          "L3_reasoning_type": "시너지",
+          "L3_calculation": {
+            "population_risk": "3 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "wind_speed_risk": "2 (중간)",
+            "weighted_average": "(3×0.4)+(4×0.5)+(2×0.1) = 3.5"
+          },
+          "L3_if_then": "IF 인구 밀집 지역 AND 화재 지속 시간이 길고 풍속이 높으면 THEN 위험 증가",
+          "L3_risk_scoring_description": "인구 밀집 지역, 화재 지속 시간, 풍속이 높을수록 위험이 증가합니다.",
+          "L3_confidence_score": 0.85,
+          "L3_reasoning_description": "인구 밀집 지역, 화재 지속 시간, 풍속을 고려한 판단입니다."
+        }
+      },
+      "backtracking_events": [
+        {
+          "event_id": "BT1",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.65,
+          "threshold": 0.85,
+          "original_path": "L0_ROOT -> L1_O1 -> L2_O1T1",
+          "problem": "화재 지속 시간이 대피소 접근에 미치는 영향 개선 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "화재 지속 시간이 대피소 접근에 중대한 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.65",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2 단계에서 다른 node 조합 시도",
+            "alternative_combination": "L2_O1W1",
+            "simplification": "화재 지속 시간과 풍속 조합으로 대체",
+            "structural_change": "L2_O1W1로 변경",
+            "selected_alternative": "L2_O1W1",
+            "rationale": "화재 지속 시간과 풍속의 조합이 더 높은 위험도를 나타낸다."
+          },
+          "new_attempt": {
+            "target_path": "L2_O1T1 대신 L2_O1W1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_O1 -> L2_O1W1",
+            "new_score": 0.9,
+            "weight_adjustment": 0.15
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 화재 지속 시간과 풍속의 중요성 확인"
+        },
+        {
+          "event_id": "BT2",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.7,
+          "threshold": 0.85,
+          "original_path": "L0_ROOT -> L1_T1 -> L2_T1W1",
+          "problem": "지면 온도가 대피소 접근에 미치는 영향 개선 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "지면 온도가 대피소 접근에 중대한 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.7",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2 단계에서 다른 node 조합 시도",
+            "alternative_combination": "L2_T1O1",
+            "simplification": "지면 온도와 화재 지속 시간 조합으로 대체",
+            "structural_change": "L2_T1O1로 변경",
+            "selected_alternative": "L2_T1O1",
+            "rationale": "지면 온도와 화재 지속 시간의 조합이 더 높은 위험도를 나타낸다."
+          },
+          "new_attempt": {
+            "target_path": "L2_T1W1 대신 L2_T1O1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_T1 -> L2_T1O1",
+            "new_score": 0.85,
+            "weight_adjustment": 0.1
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 지면 온도와 화재 지속 시간의 중요성 확인"
+        },
+        {
+          "event_id": "BT3",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.6,
+          "threshold": 0.85,
+          "original_path": "L0_ROOT -> L1_F1 -> L2_F1W1",
+          "problem": "연료 수분 함량이 대피소 접근에 미치는 영향 개선 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "연료 수분 함량이 대피소 접근에 중대한 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.6",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2 단계에서 다른 node 조합 시도",
+            "alternative_combination": "L2_F1T1",
+            "simplification": "연료 수분 함량과 지면 온도 조합으로 대체",
+            "structural_change": "L2_F1T1로 변경",
+            "selected_alternative": "L2_F1T1",
+            "rationale": "연료 수분 함량과 지면 온도의 조합이 더 높은 위험도를 나타낸다."
+          },
+          "new_attempt": {
+            "target_path": "L2_F1W1 대신 L2_F1T1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_F1 -> L2_F1T1",
+            "new_score": 0.75,
+            "weight_adjustment": 0.05
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 연료 수분 함량과 지면 온도의 중요성 확인"
+        },
+        {
+          "event_id": "BT4",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.65,
+          "threshold": 0.85,
+          "original_path": "L0_ROOT -> L1_F1 -> L2_F1T1",
+          "problem": "지면 온도와 화재 지속 시간이 대피소 접근에 미치는 영향 개선 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "지면 온도와 화재 지속 시간이 대피소 접근에 중대한 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.65",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2 단계에서 다른 node 조합 시도",
+            "alternative_combination": "L2_F1W1",
+            "simplification": "지면 온도와 연료 수분 함량 조합으로 대체",
+            "structural_change": "L2_F1W1로 변경",
+            "selected_alternative": "L2_F1W1",
+            "rationale": "지면 온도와 연료 수분 함량의 조합이 더 높은 위험도를 나타낸다."
+          },
+          "new_attempt": {
+            "target_path": "L2_F1T1 대신 L2_F1W1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_F1 -> L2_F1W1",
+            "new_score": 0.7,
+            "weight_adjustment": 0.05
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 지면 온도와 연료 수분 함량의 중요성 확인"
+        },
+        {
+          "event_id": "BT5",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.7,
+          "threshold": 0.85,
+          "original_path": "L0_ROOT -> L1_W1 -> L2_W1F1",
+          "problem": "풍속과 화재 지속 시간이 대피소 접근에 미치는 영향 개선 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "풍속과 화재 지속 시간이 대피소 접근에 중대한 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.7",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2 단계에서 다른 node 조합 시도",
+            "alternative_combination": "L2_W1T1",
+            "simplification": "풍속과 지면 온도 조합으로 대체",
+            "structural_change": "L2_W1T1로 변경",
+            "selected_alternative": "L2_W1T1",
+            "rationale": "풍속과 지면 온도의 조합이 더 높은 위험도를 나타낸다."
+          },
+          "new_attempt": {
+            "target_path": "L2_W1F1 대신 L2_W1T1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_W1 -> L2_W1T1",
+            "new_score": 0.75,
+            "weight_adjustment": 0.05
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 풍속과 지면 온도의 중요성 확인"
+        }
+      ],
+      "pruning_events": [
+        {
+          "pruning_id": "P1",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_W1O1I1",
+          "score": 0.85,
+          "threshold": 0.9,
+          "reason": "풍속, 화재 지속 시간, 인구 밀집에 대한 신뢰도가 기준치(0.90)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_W1O1I1는 \"풍속, 화재 지속 시간, 인구 밀집\" 분석에서 신뢰도 0.85가 기준 0.90보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P2",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_W1T1O1",
+          "score": 0.8,
+          "threshold": 0.85,
+          "reason": "풍속, 지면 온도, 화재 지속 시간에 대한 신뢰도가 기준치(0.85)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_W1T1O1는 \"풍속, 지면 온도, 화재 지속 시간\" 분석에서 신뢰도 0.80가 기준 0.85보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P3",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_I1W1F1",
+          "score": 0.75,
+          "threshold": 0.8,
+          "reason": "인구 밀집, 풍속, 연료 수분에 대한 신뢰도가 기준치(0.80)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_I1W1F1는 \"인구 밀집, 풍속, 연료 수분\" 분석에서 신뢰도 0.75가 기준 0.80보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P4",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_T1O1W1",
+          "score": 0.8,
+          "threshold": 0.85,
+          "reason": "지면 온도, 화재 지속 시간, 풍속에 대한 신뢰도가 기준치(0.85)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_T1O1W1는 \"지면 온도, 화재 지속 시간, 풍속\" 분석에서 신뢰도 0.80가 기준 0.85보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P5",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_I1O1W1",
+          "score": 0.85,
+          "threshold": 0.9,
+          "reason": "인구 밀집 지역, 화재 지속 시간, 풍속에 대한 신뢰도가 기준치(0.90)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_I1O1W1는 \"인구 밀집 지역, 화재 지속 시간, 풍속\" 분석에서 신뢰도 0.85가 기준 0.90보다 낮아 추론 경로에서 제거하였습니다."
+        }
+      ],
+      "final_selection": {
+        "selected_path": "ROOT → L1_O1 → L2_O1W1 → L3_O1W1I1",
+        "best_l3_node_id": "L3_O1W1I1",
+        "reasoning_chain": "① L1: 화재 지속 시간과 풍속을 고려한 판단 ② L2: 화재 지속 시간과 풍속의 조합을 고려한 판단 ③ L3: 화재 지속 시간, 풍속, 인구 밀집 지역을 고려한 판단",
+        "path_selection_reasoning": "여러 L3 중 이 경로를 선택한 이유는 화재 지속 시간과 풍속, 인구 밀집 지역의 조합이 가장 높은 위험도를 나타내기 때문입니다.",
+        "selected_path_risk_scoring_description": "최종 경로의 위험도 평가 결과, 화재 지속 시간과 풍속, 인구 밀집 지역이 모두 높은 위험도를 나타내어 선택하였습니다.",
+        "comprehensive_scoring_matrix": {
+          "path_1": {
+            "risk_level": "높음",
+            "confidence": 0.95
+          },
+          "path_2": {
+            "risk_level": "보통",
+            "confidence": 0.9
+          },
+          "path_3": {
+            "risk_level": "낮음",
+            "confidence": 0.85
+          }
+        },
+        "scoring_criteria": "신뢰도, 위험도, 대응 가능성을 종합적으로 평가하였습니다.",
+        "key_nodes_used": {
+          "O": {
+            "fire_duration": 420.0,
+            "flame_length": 2.0
+          },
+          "W": {
+            "wind_speed": 2.9,
+            "humidity": 20.0
+          },
+          "T": {
+            "surface_temp": 23.1,
+            "temperature": 21.5
+          },
+          "I": {
+            "population": 2925.0,
+            "vulnerable": 1696.0
+          },
+          "F": {
+            "fuel_moisture": 16.0,
+            "fuel_density": 4.62
+          }
+        },
+        "path_confidence": 0.9
+      }
+    },
+    "countermeasures": {
+      "immediate_recommendation": {
+        "decision": "즉시 대피를 권장합니다.",
+        "primary_reason": "화재 지속 시간과 풍속이 높아 위험합니다.",
+        "risk_level": "높음"
+      },
+      "safety_assessment": {
+        "prohibitive_factors": {
+          "fire": "화재 지속 시간이 길고 강도가 매우 강합니다.",
+          "visibility": "가시거리가 제한적입니다.",
+          "support": "소방 지원이 부족할 수 있습니다.",
+          "intensity": "화재 강도가 매우 강합니다."
+        },
+        "favorable_factors": {
+          "wind": "풍속이 낮아 화재 확산이 제한적입니다.",
+          "humidity": "습도가 낮아 화재 위험이 증가합니다."
+        },
+        "net_assessment": "전반적으로 높은 위험 수준입니다.",
+        "evacuation_zones": {
+          "safe_zone": "신리마을회관",
+          "danger_zone": "화재 발생 지역",
+          "buffer_zone": "화재 주변 지역"
+        },
+        "evacuation_sequence": {
+          "phase_1": "가족과 함께 대피 준비를 합니다.",
+          "phase_2": "신리마을회관으로 이동합니다.",
+          "phase_3": "안전한 지역으로 대피합니다."
+        }
+      },
+      "alternative_strategies": {
+        "option_1": {
+          "action": "가족과 함께 대피소로 이동",
+          "timing": "즉시"
+        },
+        "option_2": {
+          "action": "소방서에 신고",
+          "method": "전화 또는 앱 사용"
+        },
+        "option_3": {
+          "action": "주변 이웃과 협력",
+          "condition": "안전한 상황에서"
+        }
+      },
+      "safety_requirements": {
+        "minimum_conditions": [
+          "가족과 함께 대피할 준비",
+          "대피소 위치 확인",
+          "소방서 연락처 확보"
+        ],
+        "key_insights": "화재 위험이 높으므로 즉각적인 대피가 필요합니다."
+      }
+    },
+    "decision_answer": {
+      "conclusion": "현재 화재 상황은 매우 위험합니다. 즉시 대피해야 합니다.",
+      "safety_verdict": {
+        "decision": "대피를 권장합니다.",
+        "safety_level": "높음",
+        "confidence": "95%",
+        "primary_factor": "화재 지속 시간과 강도"
+      },
+      "critical_risks": {
+        "risk_1": "화재 확산 위험",
+        "risk_2": "연기 흡입 위험",
+        "risk_3": "구조 요청 지연",
+        "risk_4": "인명 피해 가능성"
+      },
+      "clear_message": "즉시 대피하세요.",
+      "critical_action": {
+        "action_1": "가족과 함께 대피 준비",
+        "action_2": "신리마을회관으로 이동",
+        "action_3": "소방서에 신고",
+        "action_4": "주변 이웃과 협력"
+      }
+    },
+    "complete_reasoning": {
+      "reasoning_path_description": "화재 지속 시간과 풍속을 고려하여 위험도를 평가했습니다. 화재가 발생한 지역의 인구 밀집도를 분석하여 대피 필요성을 판단했습니다. 이 과정에서 화재 강도, 풍속, 인구 밀집 지역의 조합이 주요 판단 기준이 되었습니다.선택 경로 L0_ROOT -> L1_O1 -> L2_O1W1 -> L3_O1W1I1는 발생/운영, 인프라, 바람 축의 상호작용을 핵심 근거로 합니다. L1에서는 화재 지속 시간이 중요합니다.를 검토하고, L2에서 화재 지속 시간과 풍속를 종합했습니다. 최종 L3 판단은 \"IF 화재 지속 시간이 길고 풍속이 높고 인구 밀집 지역 THEN 위험 증가\"로 수렴했으며, 이에 따라 위험도와 실행 가능성을 함께 평가하였습니다.",
+      "risk_scoring": "최종 경로의 위험도는 높음으로 평가되었습니다.",
+      "confidence_scoring": "위험도 평가에 대한 신뢰도는 95%입니다.",
+      "complete_reasoning_countermeasures": "질의자는 집으로 돌아가는 것이 안전한지에 대한 질문을 하였습니다. 최종 경로 및 위험도 판단에 따르면, 화재 지속 시간과 풍속, 인구 밀집 지역의 조합이 높은 위험도를 나타내어 즉시 대피가 필요하다는 결론에 도달했습니다. \n즉각 조치로는 가족과 함께 대피 준비를 하고, 신리마을회관으로 이동하는 것이 권장됩니다. 화재 지속 시간이 길고 강도가 매우 강하여, 가시거리가 제한적이고 소방 지원이 부족할 수 있는 상황에서 대피는 필수적입니다. \n대안 전략으로는 즉시 대피소로 이동하는 것 외에도 소방서에 신고하거나 주변 이웃과 협력하는 방법이 있습니다. 그러나 화재 위험이 높기 때문에 즉각적인 대피가 가장 우선시되어야 합니다. \n따라서, 질의자의 상황에서 취해야 할 핵심 대응방안은 즉시 대피하여 안전한 지역으로 이동하는 것입니다.",
+      "query": "불이 꺼진 것 같은데 집으로 돌아가도 안전합니까?"
+    }
+  },
+  "file_info": {
+    "labelling_file_name": "HS20230402_T_P0001_T008.json",
+    "labelling_file_format": "json"
+  }
+}

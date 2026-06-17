@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.mypy_cache/
+
+# Node / Next
+node_modules/
+.next/
+out/
+
+# Environment files
+.env
+.env.*
+!.env.example
+!.env*.example
+
+# Local data secrets copied into the repo workspace for deployment prep
+/data/**/*.rtf
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/

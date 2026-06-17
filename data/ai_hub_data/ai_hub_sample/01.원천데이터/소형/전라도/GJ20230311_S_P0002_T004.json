@@ -1,0 +1,89 @@
+{
+  "raw_data_info": {
+    "fire_info": {
+      "fire_incident_id": "GJ20230311",
+      "region": "전라도",
+      "fire_size": "소형",
+      "incident_name": "광주 북 동림",
+      "fire_location": {
+        "lat": 35.17983,
+        "lon": 126.86591
+      },
+      "fire_report_number": "광주소방서-20230311-001",
+      "start_timestamp": "2023-03-11 15:51:00",
+      "detection_timestamp": "2023-03-11 15:51:00",
+      "end_timestamp": "2023-03-11 23:00:00",
+      "response_phase": "1단계",
+      "fire_cause": "쓰레기소각",
+      "affected_area": 3.9,
+      "fire_spread_track": "[35.179823,126.865917],[35.17899,126.866153],[35.17842,126.866759],[35.177995,126.867135],[35.177561,126.867682],[35.178481,126.867339],[35.179244,126.867199],[35.17981,126.866674],[35.179823,126.865917]"
+    }
+  },
+  "source_data_info": {
+    "file_name": "GJ20230311_S_P0002_T004",
+    "file_format": "json",
+    "user_info": {
+      "user_type": "RW",
+      "user_type_description": "구조요원",
+      "query_time": "2023-03-11 19:00",
+      "query_location": {
+        "lat": 35.179069,
+        "lon": 126.866799
+      },
+      "query_location_description": "다라 4234 8726"
+    },
+    "weather_conditions": {
+      "observation_time": "2023-03-11 19:00",
+      "observatory_type": "기상",
+      "observatory_location": "광주",
+      "temperature": 19.9,
+      "rainfall": 0.0,
+      "wind_speed": 1.8,
+      "wind_direction": 250.0,
+      "humidity_percent": 19.0,
+      "atmospheric_pressure": 1013.3,
+      "visibility": 1613.0,
+      "past_rainfall_7days": 0.0,
+      "surface_temperature": 20.2,
+      "observation_height": 10.0
+    },
+    "terrain_conditions": {
+      "elevation": 71.85,
+      "slope": 7.61,
+      "slope_aspect": 203.45,
+      "curvature": 0.0004,
+      "topographic_position_index": 3.77,
+      "terrain_complexity": 35.71,
+      "hydrological_features": 1.2
+    },
+    "fuel_conditions": {
+      "fuel_type": "관목",
+      "fuel_density": 0.0,
+      "surface_fuel_depth": 0.0,
+      "fuel_moisture": 0.0,
+      "fuel_average_age": 0.0,
+      "canopy_height": 0.0,
+      "canopy_coverage": 0.0
+    },
+    "Infra_Social": {
+      "population": 21885.0,
+      "households": 9966.0,
+      "vulnerable": 9200.0,
+      "fire_station_distance": 0.88,
+      "Important_Infra_distance": 0.32,
+      "road_accessibility": "나쁨",
+      "shelter": "한울초등학교"
+    },
+    "occurrence_status": {
+      "drought_duration_days": 35.0,
+      "wildfire_duration_time": "3:09",
+      "wind_direction_slope_aspect_alignment": {
+        "wind_direction": 250.0,
+        "slope_aspect": 203.45
+      },
+      "fire_length": 2.2,
+      "fire_intensity": "약함",
+      "flame_length": 1.0
+    }
+  }
+}

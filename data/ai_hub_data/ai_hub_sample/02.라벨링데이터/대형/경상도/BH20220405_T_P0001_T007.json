@@ -1,0 +1,901 @@
+{
+  "labelling_data_info": {
+    "query": {
+      "query_text": "이재민 발생 예상 규모와 필요 지원 물자는 얼마나 됩니까?",
+      "query_purpose": "피해예측",
+      "query_subject": "대피전략",
+      "query_type": "direct"
+    },
+    "tree_of_thought": {
+      "level_0_input": {
+        "L0_node_id": "ROOT",
+        "L0_thought": "이재민 발생 규모 예측",
+        "L0_context": {
+          "weather_conditions": {
+            "wind_speed": 1.2,
+            "wind_direction": 360.0,
+            "humidity_percent": 34.0,
+            "temperature": 11.4,
+            "surface_temperature": 21.0,
+            "drought_days": 35.0,
+            "visibility": 1360.0
+          },
+          "terrain_conditions": {
+            "elevation": 201.51,
+            "slope": 2.35,
+            "slope_aspect": 113.59,
+            "curvature": -0.0001,
+            "topographic_position_index": -10.85,
+            "terrain_complexity": 33.61,
+            "hydrological_features": 0.7
+          },
+          "fuel_conditions": {
+            "fuel_type": "초지",
+            "fuel_density": 0.0
+          },
+          "Infra_Social": {
+            "population": 8960.0,
+            "vulnerable": 5264.0,
+            "fire_station_distance": 4.82,
+            "road_accessibility": "보통",
+            "Important_Infra_distance": 0.33,
+            "shelter": ""
+          },
+          "occurrence_status": {
+            "fire_duration": 172,
+            "drought_duration_days": 35.0,
+            "wildfire_duration_time": "172:38",
+            "flame_length": 2.0,
+            "fire_intensity": "매우강함",
+            "fire_length": 3.3,
+            "wind_slope_alignment": 246.41
+          }
+        },
+        "L0_branches": [
+          "L1_W1",
+          "L1_O1",
+          "L1_T1",
+          "L1_F1",
+          "L1_I1"
+        ],
+        "L0_reasoning_description": "이재민 발생 규모 예측을 위한 기초 데이터 수집",
+        "L0_confidence_score": 0.85,
+        "L0_status": "start"
+      },
+      "level_1_branches": {
+        "L1_W1": {
+          "L1_node_id": "L1_W1",
+          "L1_parent": "ROOT",
+          "L1_thought": "풍향과 화선강도가 이재민 발생에 미치는 영향.",
+          "L1_data_node": "wind_speed_risk, fire_intensity_risk",
+          "L1_value": [
+            3,
+            4
+          ],
+          "L1_reasoning_type": "직접인과",
+          "L1_calculation": {
+            "wind_speed_risk": "3 (중간)",
+            "fire_intensity_risk": "4 (높음)",
+            "average_risk": "3.5"
+          },
+          "L1_if_then": "IF 풍향이 불리하면 THEN 이재민 발생 증가.",
+          "L1_risk_scoring_description": "풍향과 화선강도가 이재민 발생에 큰 영향을 미친다.",
+          "L1_confidence_score": 0.8,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_W1T1",
+            "L2_W1O1",
+            "L2_W1F1"
+          ],
+          "L1_reasoning_description": "풍향과 화선강도가 이재민 발생에 미치는 영향 분석."
+        },
+        "L1_O1": {
+          "L1_node_id": "L1_O1",
+          "L1_parent": "ROOT",
+          "L1_thought": "화재 지속 시간과 이재민 발생의 관계.",
+          "L1_data_node": "fire_duration_risk, flame_length_risk",
+          "L1_value": [
+            4,
+            5
+          ],
+          "L1_reasoning_type": "간접인과",
+          "L1_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "flame_length_risk": "5 (매우 높음)",
+            "average_risk": "4.5"
+          },
+          "L1_if_then": "IF 화재 지속 시간이 길면 THEN 이재민 발생 증가.",
+          "L1_risk_scoring_description": "화재 지속 시간이 이재민 발생에 큰 영향을 미친다.",
+          "L1_confidence_score": 0.9,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_O1W1",
+            "L2_O1I1"
+          ],
+          "L1_reasoning_description": "화재 지속 시간과 이재민 발생의 관계 분석."
+        },
+        "L1_T1": {
+          "L1_node_id": "L1_T1",
+          "L1_parent": "ROOT",
+          "L1_thought": "지형 복잡도가 이재민 발생에 미치는 영향.",
+          "L1_data_node": "slope_risk, terrain_complexity_risk",
+          "L1_value": [
+            2,
+            3
+          ],
+          "L1_reasoning_type": "임계값 판단",
+          "L1_calculation": {
+            "slope_risk": "2 (낮음)",
+            "terrain_complexity_risk": "3 (중간)",
+            "average_risk": "2.5"
+          },
+          "L1_if_then": "IF 지형 복잡도가 높으면 THEN 이재민 발생 증가.",
+          "L1_risk_scoring_description": "지형 복잡도가 이재민 발생에 영향을 미친다.",
+          "L1_confidence_score": 0.75,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_T1O1",
+            "L2_T1W1"
+          ],
+          "L1_reasoning_description": "지형 복잡도가 이재민 발생에 미치는 영향 분석."
+        },
+        "L1_F1": {
+          "L1_node_id": "L1_F1",
+          "L1_parent": "ROOT",
+          "L1_thought": "연료 유형이 화재 발생에 미치는 영향.",
+          "L1_data_node": "fuel_type_risk, fuel_moisture_effect",
+          "L1_value": [
+            3,
+            2
+          ],
+          "L1_reasoning_type": "증폭효과",
+          "L1_calculation": {
+            "fuel_type_risk": "3 (중간)",
+            "fuel_moisture_risk": "2 (낮음)",
+            "average_risk": "2.5"
+          },
+          "L1_if_then": "IF 연료 유형이 불리하면 THEN 화재 발생 증가.",
+          "L1_risk_scoring_description": "연료 유형이 화재 발생에 영향을 미친다.",
+          "L1_confidence_score": 0.7,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_F1W1",
+            "L2_F1T1"
+          ],
+          "L1_reasoning_description": "연료 유형이 화재 발생에 미치는 영향 분석."
+        },
+        "L1_I1": {
+          "L1_node_id": "L1_I1",
+          "L1_parent": "ROOT",
+          "L1_thought": "인구 밀도가 이재민 발생에 미치는 영향.",
+          "L1_data_node": "population_risk, vulnerable_risk",
+          "L1_value": [
+            4,
+            5
+          ],
+          "L1_reasoning_type": "시너지",
+          "L1_calculation": {
+            "population_risk": "4 (높음)",
+            "vulnerable_risk": "5 (매우 높음)",
+            "average_risk": "4.5"
+          },
+          "L1_if_then": "IF 인구 밀도가 높으면 THEN 이재민 발생 증가.",
+          "L1_risk_scoring_description": "인구 밀도가 이재민 발생에 큰 영향을 미친다.",
+          "L1_confidence_score": 0.85,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_I1W1",
+            "L2_I1T1"
+          ],
+          "L1_reasoning_description": "인구 밀도가 이재민 발생에 미치는 영향 분석."
+        }
+      },
+      "level_2_branches": {
+        "L2_W1O1": {
+          "L2_node_id": "L2_W1O1",
+          "L2_parent": "L1_W1",
+          "L2_thought": "풍향과 화재 지속 시간의 관계",
+          "L2_data_combination": "풍향과 화재 지속 시간의 상관관계 분석",
+          "L2_values": [
+            3,
+            4
+          ],
+          "L2_reasoning_type": "직접인과",
+          "L2_calculation": {
+            "wind_speed_risk": "3 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 풍향이 불리하고 화재 지속 시간이 길면 THEN 이재민 발생 증가.",
+          "L2_risk_scoring_description": "풍향과 화재 지속 시간이 이재민 발생에 큰 영향을 미친다.",
+          "L2_confidence_score": 0.8,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_W1O1I1"
+          ],
+          "L2_reasoning_description": "풍향과 화재 지속 시간의 관계 분석."
+        },
+        "L2_W1T1": {
+          "L2_node_id": "L2_W1T1",
+          "L2_parent": "L1_W1",
+          "L2_thought": "풍향과 지형 복잡도의 관계",
+          "L2_data_combination": "풍향과 지형 복잡도의 상관관계 분석",
+          "L2_values": [
+            3,
+            2
+          ],
+          "L2_reasoning_type": "간접인과",
+          "L2_calculation": {
+            "wind_speed_risk": "3 (중간)",
+            "terrain_complexity_risk": "2 (낮음)",
+            "average_risk": "2.5"
+          },
+          "L2_if_then": "IF 풍향이 불리하고 지형 복잡도가 높으면 THEN 이재민 발생 증가.",
+          "L2_risk_scoring_description": "풍향과 지형 복잡도가 이재민 발생에 영향을 미친다.",
+          "L2_confidence_score": 0.75,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_W1T1O1"
+          ],
+          "L2_reasoning_description": "풍향과 지형 복잡도의 관계 분석."
+        },
+        "L2_O1W1": {
+          "L2_node_id": "L2_O1W1",
+          "L2_parent": "L1_O1",
+          "L2_thought": "화재 지속 시간과 풍향의 관계",
+          "L2_data_combination": "화재 지속 시간과 풍향의 상관관계 분석",
+          "L2_values": [
+            4,
+            3
+          ],
+          "L2_reasoning_type": "간접인과",
+          "L2_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "wind_speed_risk": "3 (중간)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 화재 지속 시간이 길고 풍향이 불리하면 THEN 이재민 발생 증가.",
+          "L2_risk_scoring_description": "화재 지속 시간과 풍향이 이재민 발생에 큰 영향을 미친다.",
+          "L2_confidence_score": 0.85,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_O1W1I1"
+          ],
+          "L2_reasoning_description": "화재 지속 시간과 풍향의 관계 분석."
+        },
+        "L2_O1I1": {
+          "L2_node_id": "L2_O1I1",
+          "L2_parent": "L1_O1",
+          "L2_thought": "화재 지속 시간과 인구 밀도의 관계",
+          "L2_data_combination": "화재 지속 시간과 인구 밀도의 상관관계 분석",
+          "L2_values": [
+            4,
+            5
+          ],
+          "L2_reasoning_type": "시너지",
+          "L2_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "population_risk": "5 (매우 높음)",
+            "average_risk": "4.5"
+          },
+          "L2_if_then": "IF 화재 지속 시간이 길고 인구 밀도가 높으면 THEN 이재민 발생 증가.",
+          "L2_risk_scoring_description": "화재 지속 시간과 인구 밀도가 이재민 발생에 큰 영향을 미친다.",
+          "L2_confidence_score": 0.9,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_O1I1W1"
+          ],
+          "L2_reasoning_description": "화재 지속 시간과 인구 밀도의 관계 분석."
+        },
+        "L2_T1O1": {
+          "L2_node_id": "L2_T1O1",
+          "L2_parent": "L1_T1",
+          "L2_thought": "지형 복잡도와 화재 지속 시간의 관계",
+          "L2_data_combination": "지형 복잡도와 화재 지속 시간의 상관관계 분석",
+          "L2_values": [
+            2,
+            4
+          ],
+          "L2_reasoning_type": "임계값 판단",
+          "L2_calculation": {
+            "terrain_complexity_risk": "2 (낮음)",
+            "fire_duration_risk": "4 (높음)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 지형 복잡도가 높고 화재 지속 시간이 길면 THEN 이재민 발생 증가.",
+          "L2_risk_scoring_description": "지형 복잡도와 화재 지속 시간이 이재민 발생에 영향을 미친다.",
+          "L2_confidence_score": 0.8,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_T1O1W1"
+          ],
+          "L2_reasoning_description": "지형 복잡도와 화재 지속 시간의 관계 분석."
+        },
+        "L2_I1W1": {
+          "L2_node_id": "L2_I1W1",
+          "L2_parent": "L1_I1",
+          "L2_thought": "인구 밀도와 풍향의 관계",
+          "L2_data_combination": "인구 밀도와 풍향의 상관관계 분석",
+          "L2_values": [
+            4,
+            3
+          ],
+          "L2_reasoning_type": "시너지",
+          "L2_calculation": {
+            "population_risk": "4 (높음)",
+            "wind_speed_risk": "3 (중간)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 인구 밀도가 높고 풍향이 불리하면 THEN 이재민 발생 증가.",
+          "L2_risk_scoring_description": "인구 밀도와 풍향이 이재민 발생에 영향을 미친다.",
+          "L2_confidence_score": 0.85,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_I1W1T1"
+          ],
+          "L2_reasoning_description": "인구 밀도와 풍향의 관계 분석."
+        },
+        "L2_T1W1": {
+          "L2_node_id": "L2_T1W1",
+          "L2_parent": "L1_T1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "지형 복잡도가 이재민 발생에 미치는 영향.",
+          "L2_data_combination": "지형 복잡도와 이재민 발생의 상관관계 분석",
+          "L2_values": [
+            2,
+            4
+          ],
+          "L2_reasoning_type": "임계값 판단",
+          "L2_calculation": {
+            "terrain_complexity_risk": "2 (낮음)",
+            "average_risk": "2.0"
+          },
+          "L2_if_then": "IF 지형 복잡도가 높으면 THEN 이재민 발생 증가.",
+          "L2_risk_scoring_description": "지형 복잡도가 이재민 발생에 영향을 미친다.",
+          "L2_confidence_score": 0.75,
+          "L2_reasoning_description": "지형 복잡도와 이재민 발생의 관계 분석."
+        },
+        "L2_F1W1": {
+          "L2_node_id": "L2_F1W1",
+          "L2_parent": "L1_F1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "연료 유형이 화재 발생에 미치는 영향.",
+          "L2_data_combination": "연료 유형과 화재 발생의 상관관계 분석",
+          "L2_values": [
+            3,
+            2
+          ],
+          "L2_reasoning_type": "증폭효과",
+          "L2_calculation": {
+            "fuel_type_risk": "3 (중간)",
+            "average_risk": "2.5"
+          },
+          "L2_if_then": "IF 연료 유형이 불리하면 THEN 화재 발생 증가.",
+          "L2_risk_scoring_description": "연료 유형이 화재 발생에 영향을 미친다.",
+          "L2_confidence_score": 0.7,
+          "L2_reasoning_description": "연료 유형과 화재 발생의 관계 분석."
+        },
+        "L2_F1T1": {
+          "L2_node_id": "L2_F1T1",
+          "L2_parent": "L1_F1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "연료 유형과 지형 복잡도의 관계.",
+          "L2_data_combination": "연료 유형과 지형 복잡도의 상관관계 분석",
+          "L2_values": [
+            3,
+            2
+          ],
+          "L2_reasoning_type": "간접인과",
+          "L2_calculation": {
+            "fuel_type_risk": "3 (중간)",
+            "terrain_complexity_risk": "2 (낮음)",
+            "average_risk": "2.5"
+          },
+          "L2_if_then": "IF 연료 유형이 불리하고 지형 복잡도가 높으면 THEN 화재 발생 증가.",
+          "L2_risk_scoring_description": "연료 유형과 지형 복잡도가 화재 발생에 영향을 미친다.",
+          "L2_confidence_score": 0.75,
+          "L2_reasoning_description": "연료 유형과 지형 복잡도의 관계 분석."
+        },
+        "L2_I1T1": {
+          "L2_node_id": "L2_I1T1",
+          "L2_parent": "L1_I1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "인구 밀도와 지형 복잡도의 관계.",
+          "L2_data_combination": "인구 밀도와 지형 복잡도의 상관관계 분석",
+          "L2_values": [
+            4,
+            2
+          ],
+          "L2_reasoning_type": "시너지",
+          "L2_calculation": {
+            "population_risk": "4 (높음)",
+            "terrain_complexity_risk": "2 (낮음)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 인구 밀도가 높고 지형 복잡도가 높으면 THEN 이재민 발생 증가.",
+          "L2_risk_scoring_description": "인구 밀도와 지형 복잡도가 이재민 발생에 영향을 미친다.",
+          "L2_confidence_score": 0.8,
+          "L2_reasoning_description": "인구 밀도와 지형 복잡도의 관계 분석."
+        },
+        "L2_W1F1": {
+          "L2_node_id": "L2_W1F1",
+          "L2_parent": "L1_W1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "풍향과 연료 유형의 관계.",
+          "L2_data_combination": "풍향과 연료 유형의 상관관계 분석",
+          "L2_values": [
+            3,
+            2
+          ],
+          "L2_reasoning_type": "직접인과",
+          "L2_calculation": {
+            "wind_speed_risk": "3 (중간)",
+            "fuel_type_risk": "2 (낮음)",
+            "average_risk": "2.5"
+          },
+          "L2_if_then": "IF 풍향이 불리하고 연료 유형이 불리하면 THEN 화재 발생 증가.",
+          "L2_risk_scoring_description": "풍향과 연료 유형이 화재 발생에 영향을 미친다.",
+          "L2_confidence_score": 0.75,
+          "L2_reasoning_description": "풍향과 연료 유형의 관계 분석."
+        }
+      },
+      "level_3_branches": {
+        "L3_W1O1I1": {
+          "L3_node_id": "L3_W1O1I1",
+          "L3_parent": "L2_W1O1",
+          "L3_thought": "풍향, 화재 지속 시간, 인구 밀도의 관계",
+          "L3_data_combination": "풍향, 화재 지속 시간, 인구 밀도의 상관관계 분석",
+          "L3_values": [
+            3,
+            4,
+            5
+          ],
+          "L3_reasoning_type": "직접인과",
+          "L3_calculation": {
+            "wind_speed_risk": "3 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "population_risk": "5 (매우 높음)",
+            "weighted_average": "(3×0.3)+(4×0.4)+(5×0.3) = 4.2"
+          },
+          "L3_if_then": "IF 풍향이 불리하고 화재 지속 시간이 길며 인구 밀도가 높으면 THEN 이재민 발생 증가.",
+          "L3_risk_scoring_description": "세 가지 요소가 이재민 발생에 큰 영향을 미친다.",
+          "L3_confidence_score": 0.85,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "풍향, 화재 지속 시간, 인구 밀도의 관계 분석."
+        },
+        "L3_W1T1O1": {
+          "L3_node_id": "L3_W1T1O1",
+          "L3_parent": "L2_W1T1",
+          "L3_thought": "풍향, 지형 복잡도, 화재 지속 시간의 관계",
+          "L3_data_combination": "풍향, 지형 복잡도, 화재 지속 시간의 상관관계 분석",
+          "L3_values": [
+            3,
+            2,
+            4
+          ],
+          "L3_reasoning_type": "간접인과",
+          "L3_calculation": {
+            "wind_speed_risk": "3 (중간)",
+            "terrain_complexity_risk": "2 (낮음)",
+            "fire_duration_risk": "4 (높음)",
+            "weighted_average": "(3×0.4)+(2×0.3)+(4×0.3) = 3.1"
+          },
+          "L3_if_then": "IF 풍향이 불리하고 지형 복잡도가 높으며 화재 지속 시간이 길면 THEN 이재민 발생 증가.",
+          "L3_risk_scoring_description": "세 가지 요소가 이재민 발생에 영향을 미친다.",
+          "L3_confidence_score": 0.75,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "풍향, 지형 복잡도, 화재 지속 시간의 관계 분석."
+        },
+        "L3_O1W1I1": {
+          "L3_node_id": "L3_O1W1I1",
+          "L3_parent": "L2_O1W1",
+          "L3_thought": "화재 지속 시간, 풍향, 인구 밀도의 관계",
+          "L3_data_combination": "화재 지속 시간, 풍향, 인구 밀도의 상관관계 분석",
+          "L3_values": [
+            4,
+            3,
+            5
+          ],
+          "L3_reasoning_type": "시너지",
+          "L3_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "wind_speed_risk": "3 (중간)",
+            "population_risk": "5 (매우 높음)",
+            "weighted_average": "(4×0.4)+(3×0.3)+(5×0.3) = 4.2"
+          },
+          "L3_if_then": "IF 화재 지속 시간이 길고 풍향이 불리하며 인구 밀도가 높으면 THEN 이재민 발생 증가.",
+          "L3_risk_scoring_description": "세 가지 요소가 이재민 발생에 큰 영향을 미친다.",
+          "L3_confidence_score": 0.85,
+          "L3_status": "selected",
+          "L3_reasoning_description": "화재 지속 시간, 풍향, 인구 밀도의 관계 분석."
+        },
+        "L3_T1O1W1": {
+          "L3_node_id": "L3_T1O1W1",
+          "L3_parent": "L2_T1O1",
+          "L3_thought": "지형 복잡도, 화재 지속 시간, 풍향의 관계",
+          "L3_data_combination": "지형 복잡도, 화재 지속 시간, 풍향의 상관관계 분석",
+          "L3_values": [
+            2,
+            4,
+            3
+          ],
+          "L3_reasoning_type": "임계값 판단",
+          "L3_calculation": {
+            "terrain_complexity_risk": "2 (낮음)",
+            "fire_duration_risk": "4 (높음)",
+            "wind_speed_risk": "3 (중간)",
+            "weighted_average": "(2×0.3)+(4×0.4)+(3×0.3) = 3.1"
+          },
+          "L3_if_then": "IF 지형 복잡도가 높고 화재 지속 시간이 길며 풍향이 불리하면 THEN 이재민 발생 증가.",
+          "L3_risk_scoring_description": "세 가지 요소가 이재민 발생에 영향을 미친다.",
+          "L3_confidence_score": 0.8,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "지형 복잡도, 화재 지속 시간, 풍향의 관계 분석."
+        },
+        "L3_O1I1W1": {
+          "L3_node_id": "L3_O1I1W1",
+          "L3_parent": "L2_O1I1",
+          "L3_status": "pruning",
+          "L3_thought": "화재 지속 시간, 인구 밀도, 풍향의 관계",
+          "L3_data_combination": "화재 지속 시간, 인구 밀도, 풍향의 상관관계 분석",
+          "L3_values": [
+            4,
+            5,
+            3
+          ],
+          "L3_reasoning_type": "시너지",
+          "L3_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "population_risk": "5 (매우 높음)",
+            "wind_speed_risk": "3 (중간)",
+            "weighted_average": "(4×0.4)+(5×0.3)+(3×0.3) = 4.2"
+          },
+          "L3_if_then": "IF 화재 지속 시간이 길고 인구 밀도가 높으며 풍향이 불리하면 THEN 이재민 발생 증가.",
+          "L3_risk_scoring_description": "세 가지 요소가 이재민 발생에 큰 영향을 미친다.",
+          "L3_confidence_score": 0.85,
+          "L3_reasoning_description": "화재 지속 시간, 인구 밀도, 풍향의 관계 분석."
+        },
+        "L3_I1W1T1": {
+          "L3_node_id": "L3_I1W1T1",
+          "L3_parent": "L2_I1W1",
+          "L3_status": "pruning",
+          "L3_thought": "인구 밀도, 풍향, 지형 복잡도의 관계",
+          "L3_data_combination": "인구 밀도, 풍향, 지형 복잡도의 상관관계 분석",
+          "L3_values": [
+            4,
+            3,
+            2
+          ],
+          "L3_reasoning_type": "직접인과",
+          "L3_calculation": {
+            "population_risk": "4 (높음)",
+            "wind_speed_risk": "3 (중간)",
+            "terrain_complexity_risk": "2 (낮음)",
+            "weighted_average": "(4×0.4)+(3×0.3)+(2×0.3) = 3.3"
+          },
+          "L3_if_then": "IF 인구 밀도가 높고 풍향이 불리하며 지형 복잡도가 높으면 THEN 이재민 발생 증가.",
+          "L3_risk_scoring_description": "세 가지 요소가 이재민 발생에 영향을 미친다.",
+          "L3_confidence_score": 0.8,
+          "L3_reasoning_description": "인구 밀도, 풍향, 지형 복잡도의 관계 분석."
+        }
+      },
+      "backtracking_events": [
+        {
+          "event_id": "BT1",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.65,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_T1 -> L2_T1W1",
+          "problem": "지형 복잡도가 이재민 발생에 미치는 영향 분석 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "지형 복잡도가 이재민 발생에 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.65",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L1에서 다른 node 조합 시도",
+            "alternative_combination": "L1_I1",
+            "simplification": "지형 복잡도와 인구 밀도의 조합으로 대체",
+            "structural_change": "L1_I1로 변경",
+            "selected_alternative": "L1_I1",
+            "rationale": "인구 밀도가 이재민 발생에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L1_T1 대신 L1_I1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_I1 -> L2_I1T1",
+            "new_score": 0.75,
+            "weight_adjustment": 0.1
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 인구 밀도의 중요성 확인"
+        },
+        {
+          "event_id": "BT2",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.7,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_F1 -> L2_F1W1",
+          "problem": "연료 유형이 화재 발생에 미치는 영향 분석 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "연료 유형이 화재 발생에 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.7",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L1에서 다른 node 조합 시도",
+            "alternative_combination": "L1_W1",
+            "simplification": "연료 유형과 풍향의 조합으로 대체",
+            "structural_change": "L1_W1로 변경",
+            "selected_alternative": "L1_W1",
+            "rationale": "풍향이 화재 발생에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L1_F1 대신 L1_W1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_W1 -> L2_W1F1",
+            "new_score": 0.8,
+            "weight_adjustment": 0.1
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 풍향의 중요성 확인"
+        },
+        {
+          "event_id": "BT3",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.65,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_F1 -> L2_F1T1",
+          "problem": "연료 유형과 지형 복잡도의 관계 분석 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "연료 유형과 지형 복잡도가 화재 발생에 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.65",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L1에서 다른 node 조합 시도",
+            "alternative_combination": "L1_I1",
+            "simplification": "연료 유형과 인구 밀도의 조합으로 대체",
+            "structural_change": "L1_I1로 변경",
+            "selected_alternative": "L1_I1",
+            "rationale": "인구 밀도가 화재 발생에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L1_F1 대신 L1_I1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_I1 -> L2_I1T1",
+            "new_score": 0.75,
+            "weight_adjustment": 0.1
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 인구 밀도의 중요성 확인"
+        },
+        {
+          "event_id": "BT4",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.6,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_I1 -> L2_I1T1",
+          "problem": "인구 밀도가 이재민 발생에 미치는 영향 분석 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "인구 밀도가 이재민 발생에 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.6",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L1에서 다른 node 조합 시도",
+            "alternative_combination": "L1_O1",
+            "simplification": "인구 밀도와 화재 지속 시간의 조합으로 대체",
+            "structural_change": "L1_O1로 변경",
+            "selected_alternative": "L1_O1",
+            "rationale": "화재 지속 시간이 이재민 발생에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L1_I1 대신 L1_O1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_O1 -> L2_O1I1",
+            "new_score": 0.7,
+            "weight_adjustment": 0.1
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 화재 지속 시간의 중요성 확인"
+        },
+        {
+          "event_id": "BT5",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.7,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_W1 -> L2_W1F1",
+          "problem": "풍향과 연료 유형의 관계 분석 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "풍향이 화재 발생에 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.7",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L1에서 다른 node 조합 시도",
+            "alternative_combination": "L1_O1",
+            "simplification": "풍향과 화재 지속 시간의 조합으로 대체",
+            "structural_change": "L1_O1로 변경",
+            "selected_alternative": "L1_O1",
+            "rationale": "화재 지속 시간이 이재민 발생에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L1_W1 대신 L1_O1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_O1 -> L2_O1W1",
+            "new_score": 0.75,
+            "weight_adjustment": 0.1
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 화재 지속 시간의 중요성 확인"
+        }
+      ],
+      "pruning_events": [
+        {
+          "pruning_id": "P1",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_W1O1I1",
+          "score": 0.85,
+          "threshold": 0.9,
+          "reason": "풍향, 화재 지속 시간, 인구 밀도의 관계에 대한 신뢰도가 기준치(0.90)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_W1O1I1는 \"풍향, 화재 지속 시간, 인구 밀도의 관계\" 분석에서 신뢰도 0.85가 기준 0.90보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P2",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_W1T1O1",
+          "score": 0.75,
+          "threshold": 0.8,
+          "reason": "풍향, 지형 복잡도, 화재 지속 시간의 관계에 대한 신뢰도가 기준치(0.80)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_W1T1O1는 \"풍향, 지형 복잡도, 화재 지속 시간의 관계\" 분석에서 신뢰도 0.75가 기준 0.80보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P3",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_T1O1W1",
+          "score": 0.8,
+          "threshold": 0.85,
+          "reason": "지형 복잡도, 화재 지속 시간, 풍향의 관계에 대한 신뢰도가 기준치(0.85)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_T1O1W1는 \"지형 복잡도, 화재 지속 시간, 풍향의 관계\" 분석에서 신뢰도 0.80가 기준 0.85보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P4",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_O1I1W1",
+          "score": 0.85,
+          "threshold": 0.9,
+          "reason": "화재 지속 시간, 인구 밀도, 풍향의 관계에 대한 신뢰도가 기준치(0.90)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_O1I1W1는 \"화재 지속 시간, 인구 밀도, 풍향의 관계\" 분석에서 신뢰도 0.85가 기준 0.90보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P5",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_I1W1T1",
+          "score": 0.8,
+          "threshold": 0.85,
+          "reason": "인구 밀도, 풍향, 지형 복잡도의 관계에 대한 신뢰도가 기준치(0.85)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_I1W1T1는 \"인구 밀도, 풍향, 지형 복잡도의 관계\" 분석에서 신뢰도 0.80가 기준 0.85보다 낮아 추론 경로에서 제거하였습니다."
+        }
+      ],
+      "final_selection": {
+        "selected_path": "ROOT → L1_O1 → L2_O1W1 → L3_O1W1I1",
+        "best_l3_node_id": "L3_O1W1I1",
+        "reasoning_chain": "① L1: 화재 지속 시간과 이재민 발생의 관계 분석 ② L2: 화재 지속 시간과 인구 밀도의 관계 분석 ③ L3: 화재 지속 시간, 풍향, 인구 밀도의 관계 분석",
+        "path_selection_reasoning": "여러 L3 중 이 경로를 선택한 이유는 화재 지속 시간, 인구 밀도, 풍향이 모두 이재민 발생에 큰 영향을 미치기 때문입니다.",
+        "selected_path_risk_scoring_description": "최종 경로의 위험도 평가 결과, 화재 지속 시간과 인구 밀도가 높아 이재민 발생 가능성이 큽니다.",
+        "comprehensive_scoring_matrix": {
+          "path_1": {
+            "risk_level": "높음",
+            "confidence": 0.85
+          },
+          "path_2": {
+            "risk_level": "보통",
+            "confidence": 0.8
+          },
+          "path_3": {
+            "risk_level": "낮음",
+            "confidence": 0.75
+          }
+        },
+        "scoring_criteria": "신뢰도, 위험도, 대응 가능성을 종합적으로 고려하여 최종 경로를 선정하였습니다.",
+        "key_nodes_used": {
+          "O": {
+            "fire_duration": 4,
+            "fire_duration_risk": "4 (높음)"
+          },
+          "W": {
+            "wind_speed": 3,
+            "wind_speed_risk": "3 (중간)"
+          },
+          "I": {
+            "population": 8960,
+            "vulnerable": 5264,
+            "vulnerable_risk": "5 (매우 높음)"
+          }
+        },
+        "path_confidence": 0.85
+      }
+    },
+    "countermeasures": {
+      "immediate_recommendation": {
+        "decision": "즉각적인 대피를 권장합니다.",
+        "primary_reason": "화재 지속 시간과 인구 밀도가 높아 이재민 발생 가능성이 큽니다.",
+        "risk_level": "높음"
+      },
+      "safety_assessment": {
+        "prohibitive_factors": {
+          "fire": "화재 강도가 매우 강합니다.",
+          "visibility": "시정거리가 제한적입니다.",
+          "support": "구조 지원이 부족할 수 있습니다.",
+          "intensity": "화재의 강도가 매우 높습니다."
+        },
+        "favorable_factors": {
+          "wind": "바람 속도가 낮아 화재 확산이 제한적입니다.",
+          "humidity": "습도가 낮아 화재 진압에 유리합니다."
+        },
+        "net_assessment": "위험 요소가 많아 대피가 필요합니다.",
+        "evacuation_zones": {
+          "safe_zone": "안전한 대피소는 5km 이내에 위치합니다.",
+          "danger_zone": "화재 발생 지역은 3km 반경입니다.",
+          "buffer_zone": "완충 지역은 1km로 설정합니다."
+        },
+        "evacuation_sequence": {
+          "phase_1": "위험 지역 주민을 우선 대피시킵니다.",
+          "phase_2": "인근 주민을 대피시킵니다.",
+          "phase_3": "잔여 주민을 대피시킵니다."
+        }
+      },
+      "alternative_strategies": {
+        "option_1": {
+          "action": "대피소를 확보합니다.",
+          "timing": "즉시"
+        },
+        "option_2": {
+          "action": "구조 인력을 배치합니다.",
+          "method": "신속한 대응"
+        },
+        "option_3": {
+          "action": "주민 안전 교육을 실시합니다.",
+          "condition": "화재 발생 전"
+        }
+      },
+      "safety_requirements": {
+        "minimum_conditions": [
+          "대피소 확보",
+          "구조 인력 배치",
+          "주민 안전 교육"
+        ],
+        "key_insights": "화재 발생 시 즉각적인 대피가 필수적입니다."
+      }
+    },
+    "decision_answer": {
+      "conclusion": "이재민 발생 규모는 상당할 것으로 예상됩니다. 즉각적인 대피와 지원이 필요합니다.",
+      "safety_verdict": {
+        "decision": "대피를 권장합니다.",
+        "safety_level": "높음",
+        "confidence": "85%",
+        "primary_factor": "화재 지속 시간과 인구 밀도"
+      },
+      "critical_risks": {
+        "risk_1": "화재 강도가 매우 강함.",
+        "risk_2": "인구 밀도가 높음.",
+        "risk_3": "구조 지원이 부족할 수 있음.",
+        "risk_4": "시정거리가 제한적임."
+      },
+      "clear_message": "즉시 대피가 필요합니다.",
+      "critical_action": {
+        "action_1": "대피소를 확보합니다.",
+        "action_2": "구조 인력을 배치합니다.",
+        "action_3": "주민 안전 교육을 실시합니다.",
+        "action_4": "위험 지역 주민을 우선 대피시킵니다."
+      }
+    },
+    "complete_reasoning": {
+      "reasoning_path_description": "화재 지속 시간과 인구 밀도의 관계를 분석했습니다. 화재 지속 시간이 길어질수록 이재민 발생 가능성이 높아집니다. 또한, 인구 밀도가 높을수록 대피가 필요합니다.선택 경로 L0_ROOT -> L1_O1 -> L2_O1I1 -> L3_O1W1I1는 바람, 발생/운영, 인프라 축의 상호작용을 핵심 근거로 합니다. L1에서는 화재 지속 시간과 이재민 발생의 관계.를 검토하고, L2에서 화재 지속 시간과 인구 밀도의 관계를 종합했습니다. 최종 L3 판단은 \"IF 화재 지속 시간이 길고 풍향이 불리하며 인구 밀도가 높으면 THEN 이재민 발생 증가.\"로 수렴했으며, 이에 따라 위험도와 실행 가능성을 함께 평가하였습니다.",
+      "risk_scoring": "최종 경로의 위험도는 높음으로 평가되었습니다.",
+      "confidence_scoring": "신뢰도는 85%로 판단됩니다.",
+      "complete_reasoning_countermeasures": "질의자는 이재민 발생 예상 규모와 필요 지원 물자에 대해 물었습니다. 최종 경로 분석 결과, 화재 지속 시간과 인구 밀도가 높아 이재민 발생 가능성이 크며, 이에 따라 즉각적인 대피가 필요하다는 결론에 도달했습니다. \n즉각적인 대피를 권장하는 이유는 화재의 강도가 매우 높고, 인구 밀도가 높아 이재민 발생 규모가 상당할 것으로 예상되기 때문입니다. 안전 평가에 따르면, 화재의 강도와 시정거리 제한 등 여러 위험 요소가 존재하지만, 바람 속도가 낮아 화재 확산은 제한적입니다. 이러한 요소들을 종합적으로 고려할 때, 대피가 필수적입니다. \n대안 전략으로는 대피소 확보, 구조 인력 배치, 주민 안전 교육 등이 있습니다. 대피소 확보는 즉시 이루어져야 하며, 구조 인력은 신속하게 배치해야 합니다. 또한, 화재 발생 전 주민 안전 교육을 실시하여 대피 시 혼란을 최소화하는 것이 중요합니다. \n따라서, 질의자의 상황에서 취해야 할 핵심 대응방안은 즉각적인 대피소 확보와 구조 인력 배치, 그리고 주민 안전 교육을 통해 이재민 발생을 최소화하는 것입니다.",
+      "query": "이재민 발생 예상 규모와 필요 지원 물자는 얼마나 됩니까?"
+    }
+  },
+  "file_info": {
+    "labelling_file_name": "BH20220405_T_P0001_T007.json",
+    "labelling_file_format": "json"
+  }
+}

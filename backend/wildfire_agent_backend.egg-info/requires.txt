@@ -1,0 +1,6 @@
+fastapi<1.0.0,>=0.115.0
+uvicorn[standard]<1.0.0,>=0.30.0
+pydantic<3.0.0,>=2.8.0
+pydantic-settings<3.0.0,>=2.4.0
+openai<3.0.0,>=2.24.0
+langgraph<1.0.0,>=0.6.0

@@ -1,0 +1,89 @@
+{
+  "raw_data_info": {
+    "fire_info": {
+      "fire_incident_id": "GN20220305",
+      "region": "강원도",
+      "fire_size": "대형",
+      "incident_name": "강원 강릉 옥계 남양",
+      "fire_location": {
+        "lat": 37.560146,
+        "lon": 129.01296
+      },
+      "fire_report_number": "강릉소방서_20220305_001",
+      "start_timestamp": "2022-03-05 1:08",
+      "detection_timestamp": "2022-03-05 1:08",
+      "end_timestamp": "2022-03-11 13:00:00",
+      "response_phase": "3단계",
+      "fire_cause": "입산자실화",
+      "affected_area": 4190.38,
+      "fire_spread_track": "[37.549760, 128.990061], [37.544861, 129.004223], [37.532610, 129.022505], [37.528850, 129.039886], [37.530943, 129.053490], [37.541934, 129.071085], [37.545950, 129.087135], [37.556599, 129.095590], [37.568199, 129.092886], [37.583777, 129.085633], [37.592143, 129.071171], [37.584146, 129.044057], [37.577752, 129.035130], [37.575031, 129.019938], [37.569603, 129.013095], [37.567835, 129.005199], [37.560827, 128.999019]"
+    }
+  },
+  "source_data_info": {
+    "file_name": "GN20220305_S_P0001_T017",
+    "file_format": "json",
+    "user_info": {
+      "user_type": "FF",
+      "user_type_description": "진압대원",
+      "query_time": "2022-03-05 18:00",
+      "query_location": {
+        "lat": 37.53307,
+        "lon": 129.023386
+      },
+      "query_location_description": "마사 3459 4928"
+    },
+    "weather_conditions": {
+      "observation_time": "2022-03-05 18:00",
+      "observatory_type": "기상",
+      "observatory_location": "강릉",
+      "temperature": 7.0,
+      "rainfall": 0.0,
+      "wind_speed": 2.7,
+      "wind_direction": 290.0,
+      "humidity_percent": 15.0,
+      "atmospheric_pressure": 1008.8,
+      "visibility": 4484.0,
+      "past_rainfall_7days": 0.7,
+      "surface_temperature": 8.0,
+      "observation_height": 10.0
+    },
+    "terrain_conditions": {
+      "elevation": 357.19,
+      "slope": 19.02,
+      "slope_aspect": 88.45,
+      "curvature": -0.0035,
+      "topographic_position_index": -4.18,
+      "terrain_complexity": 23.42,
+      "hydrological_features": 0.7
+    },
+    "fuel_conditions": {
+      "fuel_type": "활엽수림",
+      "fuel_density": 12.51,
+      "surface_fuel_depth": 4.0,
+      "fuel_moisture": 20.0,
+      "fuel_average_age": 45.0,
+      "canopy_height": 16.0,
+      "canopy_coverage": 75.0
+    },
+    "Infra_Social": {
+      "population": 3248.0,
+      "households": 1884.0,
+      "vulnerable": 2095.0,
+      "fire_station_distance": 6.35,
+      "Important_Infra_distance": 1.5,
+      "road_accessibility": "보통",
+      "shelter": ""
+    },
+    "occurrence_status": {
+      "drought_duration_days": 35.0,
+      "wildfire_duration_time": "155:52",
+      "wind_direction_slope_aspect_alignment": {
+        "wind_direction": 290.0,
+        "slope_aspect": 88.45
+      },
+      "fire_length": 3.3,
+      "fire_intensity": "매우강함",
+      "flame_length": 2.0
+    }
+  }
+}

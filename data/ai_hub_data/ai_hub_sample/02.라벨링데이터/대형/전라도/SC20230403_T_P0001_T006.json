@@ -1,0 +1,915 @@
+{
+  "labelling_data_info": {
+    "query": {
+      "query_text": "통신이 두절된다면 고립 지역 주민들과의 연락 방법은 무엇입니까?",
+      "query_purpose": "대응전략",
+      "query_subject": "진화방법",
+      "query_type": "hypothetical"
+    },
+    "tree_of_thought": {
+      "level_0_input": {
+        "L0_node_id": "ROOT",
+        "L0_thought": "산불 발생 시 대처 방안",
+        "L0_context": {
+          "weather_conditions": {
+            "wind_speed": 2.1,
+            "wind_direction": 160.0,
+            "humidity_percent": 48.0,
+            "temperature": 15.8,
+            "surface_temperature": 23.8,
+            "drought_days": 35.0,
+            "visibility": 1988.0
+          },
+          "terrain_conditions": {
+            "elevation": 155.01,
+            "slope": 18.11,
+            "slope_aspect": 262.48,
+            "curvature": 0.0018,
+            "topographic_position_index": 2.74,
+            "terrain_complexity": 26.41,
+            "hydrological_features": 0.1
+          },
+          "fuel_conditions": {
+            "fuel_type": "침엽수림",
+            "fuel_moisture": 20.0,
+            "fuel_density": 5.02,
+            "fuel_average_age": 45.0,
+            "surface_fuel_depth": 2.0,
+            "canopy_height": 14.0,
+            "canopy_coverage": 75.0
+          },
+          "Infra_Social": {
+            "population": 1355.0,
+            "vulnerable": 1102.0,
+            "fire_station_distance": 2.4,
+            "road_accessibility": "나쁨",
+            "Important_Infra_distance": 1.43,
+            "shelter": ""
+          },
+          "occurrence_status": {
+            "fire_duration": 135.0,
+            "drought_duration_days": 35.0,
+            "wildfire_duration_time": "28:13",
+            "flame_length": 2.0,
+            "fire_intensity": "매우강함",
+            "fire_length": 3.3,
+            "wind_slope_alignment": 102.48
+          }
+        },
+        "L0_branches": [
+          "L1_W1",
+          "L1_O1",
+          "L1_T1",
+          "L1_F1",
+          "L1_I1"
+        ],
+        "L0_reasoning_description": "산불 발생 시 다양한 요인을 고려해야 함.",
+        "L0_confidence_score": 0.85,
+        "L0_status": "start"
+      },
+      "level_1_branches": {
+        "L1_W1": {
+          "L1_node_id": "L1_W1",
+          "L1_parent": "ROOT",
+          "L1_thought": "바람의 세기와 방향은 산불에 큰 영향을 미친다.",
+          "L1_data_node": "wind_speed_risk, wind_direction_risk",
+          "L1_value": [
+            2.1,
+            160.0
+          ],
+          "L1_reasoning_type": "직접인과",
+          "L1_calculation": {
+            "wind_speed_risk": "3",
+            "wind_direction_risk": "4",
+            "average_risk": "3.5"
+          },
+          "L1_if_then": "IF 바람이 강하면 THEN 산불 확산 위험 증가",
+          "L1_risk_scoring_description": "바람의 세기와 방향이 산불 확산에 미치는 영향 평가.",
+          "L1_confidence_score": 0.9,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_W1T1",
+            "L2_W1O1",
+            "L2_W1F1"
+          ],
+          "L1_reasoning_description": "바람의 세기와 방향은 산불의 확산 경로를 결정짓는 중요한 요소이다."
+        },
+        "L1_O1": {
+          "L1_node_id": "L1_O1",
+          "L1_parent": "ROOT",
+          "L1_thought": "화재 지속 시간은 피해 규모에 영향을 미친다.",
+          "L1_data_node": "fire_duration_risk, flame_length_risk",
+          "L1_value": [
+            135.0,
+            2.0
+          ],
+          "L1_reasoning_type": "간접인과",
+          "L1_calculation": {
+            "fire_duration_risk": "4",
+            "flame_length_risk": "3",
+            "average_risk": "3.5"
+          },
+          "L1_if_then": "IF 화재가 오래 지속되면 THEN 피해 규모 증가",
+          "L1_risk_scoring_description": "화재 지속 시간과 화염 길이가 피해에 미치는 영향 평가.",
+          "L1_confidence_score": 0.85,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_O1W1",
+            "L2_O1T1"
+          ],
+          "L1_reasoning_description": "화재의 지속 시간과 화염 길이는 피해를 결정짓는 중요한 요소이다."
+        },
+        "L1_T1": {
+          "L1_node_id": "L1_T1",
+          "L1_parent": "ROOT",
+          "L1_thought": "지형의 경사도와 복잡성은 화재 확산에 영향을 준다.",
+          "L1_data_node": "slope_risk, terrain_complexity_risk",
+          "L1_value": [
+            18.11,
+            26.41
+          ],
+          "L1_reasoning_type": "임계값 판단",
+          "L1_calculation": {
+            "slope_risk": "3",
+            "terrain_complexity_risk": "4",
+            "average_risk": "3.5"
+          },
+          "L1_if_then": "IF 경사가 가파르면 THEN 화재 확산 위험 증가",
+          "L1_risk_scoring_description": "지형의 경사도와 복잡성이 화재 확산에 미치는 영향 평가.",
+          "L1_confidence_score": 0.8,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_T1O1",
+            "L2_T1W1"
+          ],
+          "L1_reasoning_description": "지형의 경사도와 복잡성은 화재의 확산 경로에 큰 영향을 미친다."
+        },
+        "L1_F1": {
+          "L1_node_id": "L1_F1",
+          "L1_parent": "ROOT",
+          "L1_thought": "연료의 종류와 습도는 화재의 강도에 영향을 미친다.",
+          "L1_data_node": "fuel_moisture_effect, fuel_density_risk",
+          "L1_value": [
+            20.0,
+            5.02
+          ],
+          "L1_reasoning_type": "증폭효과",
+          "L1_calculation": {
+            "fuel_moisture_risk": "2",
+            "fuel_density_risk": "4",
+            "average_risk": "3.0"
+          },
+          "L1_if_then": "IF 연료가 건조하면 THEN 화재 강도 증가",
+          "L1_risk_scoring_description": "연료의 습도와 밀도가 화재 강도에 미치는 영향 평가.",
+          "L1_confidence_score": 0.75,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_F1O1",
+            "L2_F1W1"
+          ],
+          "L1_reasoning_description": "연료의 종류와 습도는 화재의 강도에 중요한 영향을 미친다."
+        },
+        "L1_I1": {
+          "L1_node_id": "L1_I1",
+          "L1_parent": "ROOT",
+          "L1_thought": "인구 밀집 지역은 화재 피해를 증가시킨다.",
+          "L1_data_node": "population_risk, vulnerable_risk",
+          "L1_value": [
+            1355.0,
+            1102.0
+          ],
+          "L1_reasoning_type": "시너지",
+          "L1_calculation": {
+            "population_risk": "4",
+            "vulnerable_risk": "5",
+            "average_risk": "4.5"
+          },
+          "L1_if_then": "IF 인구가 밀집하면 THEN 피해 증가",
+          "L1_risk_scoring_description": "인구 밀집 지역의 화재 피해 증가 평가.",
+          "L1_confidence_score": 0.9,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_I1W1",
+            "L2_I1T1"
+          ],
+          "L1_reasoning_description": "인구 밀집 지역은 화재 피해를 증가시키는 중요한 요소이다."
+        }
+      },
+      "level_2_branches": {
+        "L2_W1O1": {
+          "L2_node_id": "L2_W1O1",
+          "L2_parent": "L1_W1",
+          "L2_thought": "바람과 화재 지속 시간의 상관관계",
+          "L2_data_combination": "바람의 세기와 화재 지속 시간 조합",
+          "L2_values": [
+            2.1,
+            135.0
+          ],
+          "L2_reasoning_type": "직접인과",
+          "L2_calculation": {
+            "wind_speed_risk": "3",
+            "fire_duration_risk": "4",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 바람이 강하고 화재가 오래 지속되면 THEN 피해 규모 증가",
+          "L2_risk_scoring_description": "바람과 화재 지속 시간이 피해에 미치는 영향 평가.",
+          "L2_confidence_score": 0.85,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_W1O1I1"
+          ],
+          "L2_reasoning_description": "바람과 화재 지속 시간은 피해를 결정짓는 중요한 요소이다."
+        },
+        "L2_W1T1": {
+          "L2_node_id": "L2_W1T1",
+          "L2_parent": "L1_W1",
+          "L2_thought": "바람과 지형의 경사도",
+          "L2_data_combination": "바람의 세기와 지형 경사도 조합",
+          "L2_values": [
+            2.1,
+            18.11
+          ],
+          "L2_reasoning_type": "임계값 판단",
+          "L2_calculation": {
+            "wind_speed_risk": "3",
+            "slope_risk": "3",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 바람이 강하고 경사가 가파르면 THEN 화재 확산 위험 증가",
+          "L2_risk_scoring_description": "바람과 경사도가 화재 확산에 미치는 영향 평가.",
+          "L2_confidence_score": 0.8,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_W1T1O1"
+          ],
+          "L2_reasoning_description": "바람과 경사도는 화재의 확산 경로에 큰 영향을 미친다."
+        },
+        "L2_O1W1": {
+          "L2_node_id": "L2_O1W1",
+          "L2_parent": "L1_O1",
+          "L2_thought": "화재 지속 시간과 바람의 세기",
+          "L2_data_combination": "화재 지속 시간과 바람의 세기 조합",
+          "L2_values": [
+            135.0,
+            2.1
+          ],
+          "L2_reasoning_type": "간접인과",
+          "L2_calculation": {
+            "fire_duration_risk": "4",
+            "wind_speed_risk": "3",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 화재가 오래 지속되고 바람이 강하면 THEN 피해 규모 증가",
+          "L2_risk_scoring_description": "화재 지속 시간과 바람이 피해에 미치는 영향 평가.",
+          "L2_confidence_score": 0.85,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_O1W1I1"
+          ],
+          "L2_reasoning_description": "화재 지속 시간과 바람은 피해를 결정짓는 중요한 요소이다."
+        },
+        "L2_T1O1": {
+          "L2_node_id": "L2_T1O1",
+          "L2_parent": "L1_T1",
+          "L2_thought": "지형 경사도와 화재 지속 시간",
+          "L2_data_combination": "지형 경사도와 화재 지속 시간 조합",
+          "L2_values": [
+            18.11,
+            135.0
+          ],
+          "L2_reasoning_type": "임계값 판단",
+          "L2_calculation": {
+            "slope_risk": "3",
+            "fire_duration_risk": "4",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 경사가 가파르고 화재가 오래 지속되면 THEN 화재 확산 위험 증가",
+          "L2_risk_scoring_description": "지형 경사도와 화재 지속 시간이 화재 확산에 미치는 영향 평가.",
+          "L2_confidence_score": 0.8,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_T1O1I1"
+          ],
+          "L2_reasoning_description": "지형 경사도와 화재 지속 시간은 화재의 확산 경로에 큰 영향을 미친다."
+        },
+        "L2_I1W1": {
+          "L2_node_id": "L2_I1W1",
+          "L2_parent": "L1_I1",
+          "L2_thought": "인구 밀집 지역과 바람의 세기",
+          "L2_data_combination": "인구 밀집 지역과 바람의 세기 조합",
+          "L2_values": [
+            1355.0,
+            2.1
+          ],
+          "L2_reasoning_type": "시너지",
+          "L2_calculation": {
+            "population_risk": "4",
+            "wind_speed_risk": "3",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 인구가 밀집하고 바람이 강하면 THEN 피해 증가",
+          "L2_risk_scoring_description": "인구 밀집 지역과 바람이 피해에 미치는 영향 평가.",
+          "L2_confidence_score": 0.9,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_I1W1T1"
+          ],
+          "L2_reasoning_description": "인구 밀집 지역과 바람은 화재 피해를 증가시키는 중요한 요소이다."
+        },
+        "L2_F1O1": {
+          "L2_node_id": "L2_F1O1",
+          "L2_parent": "L1_F1",
+          "L2_thought": "연료의 습도와 화재 지속 시간",
+          "L2_data_combination": "연료의 습도와 화재 지속 시간 조합",
+          "L2_values": [
+            20.0,
+            135.0
+          ],
+          "L2_reasoning_type": "증폭효과",
+          "L2_calculation": {
+            "fuel_moisture_risk": "2",
+            "fire_duration_risk": "4",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 연료가 건조하고 화재가 오래 지속되면 THEN 화재 강도 증가",
+          "L2_risk_scoring_description": "연료의 습도와 화재 지속 시간이 화재 강도에 미치는 영향 평가.",
+          "L2_confidence_score": 0.75,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_F1O1W1"
+          ],
+          "L2_reasoning_description": "연료의 습도와 화재 지속 시간은 화재 강도에 중요한 영향을 미친다."
+        },
+        "L2_O1T1": {
+          "L2_node_id": "L2_O1T1",
+          "L2_parent": "L1_O1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "화재 지속 시간과 지형 경사도의 관계",
+          "L2_data_combination": "화재 지속 시간과 지형 경사도 조합",
+          "L2_values": [
+            135.0,
+            18.11
+          ],
+          "L2_reasoning_type": "임계값 판단",
+          "L2_calculation": {
+            "fire_duration_risk": "4",
+            "slope_risk": "3",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 화재가 오래 지속되고 경사가 가파르면 THEN 화재 확산 위험 증가",
+          "L2_risk_scoring_description": "화재 지속 시간과 지형 경사도가 화재 확산에 미치는 영향 평가.",
+          "L2_confidence_score": 0.8,
+          "L2_reasoning_description": "화재 지속 시간과 지형 경사도는 화재의 확산 경로에 큰 영향을 미친다."
+        },
+        "L2_T1W1": {
+          "L2_node_id": "L2_T1W1",
+          "L2_parent": "L1_T1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "지형 경사도와 바람의 세기",
+          "L2_data_combination": "지형 경사도와 바람의 세기 조합",
+          "L2_values": [
+            18.11,
+            2.1
+          ],
+          "L2_reasoning_type": "임계값 판단",
+          "L2_calculation": {
+            "slope_risk": "3",
+            "wind_speed_risk": "3",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 경사가 가파르고 바람이 강하면 THEN 화재 확산 위험 증가",
+          "L2_risk_scoring_description": "지형 경사도와 바람이 화재 확산에 미치는 영향 평가.",
+          "L2_confidence_score": 0.8,
+          "L2_reasoning_description": "지형 경사도와 바람은 화재의 확산 경로에 중요한 영향을 미친다."
+        },
+        "L2_F1W1": {
+          "L2_node_id": "L2_F1W1",
+          "L2_parent": "L1_F1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "연료의 습도와 바람의 세기",
+          "L2_data_combination": "연료의 습도와 바람의 세기 조합",
+          "L2_values": [
+            20.0,
+            2.1
+          ],
+          "L2_reasoning_type": "증폭효과",
+          "L2_calculation": {
+            "fuel_moisture_risk": "2",
+            "wind_speed_risk": "3",
+            "average_risk": "2.5"
+          },
+          "L2_if_then": "IF 연료가 건조하고 바람이 강하면 THEN 화재 강도 증가",
+          "L2_risk_scoring_description": "연료의 습도와 바람이 화재 강도에 미치는 영향 평가.",
+          "L2_confidence_score": 0.75,
+          "L2_reasoning_description": "연료의 습도와 바람은 화재 강도에 중요한 영향을 미친다."
+        },
+        "L2_I1T1": {
+          "L2_node_id": "L2_I1T1",
+          "L2_parent": "L1_I1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "인구 밀집 지역과 지형 경사도",
+          "L2_data_combination": "인구 밀집 지역과 지형 경사도 조합",
+          "L2_values": [
+            1355.0,
+            18.11
+          ],
+          "L2_reasoning_type": "시너지",
+          "L2_calculation": {
+            "population_risk": "4",
+            "slope_risk": "3",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 인구가 밀집하고 경사가 가파르면 THEN 피해 증가",
+          "L2_risk_scoring_description": "인구 밀집 지역과 지형 경사도가 피해에 미치는 영향 평가.",
+          "L2_confidence_score": 0.9,
+          "L2_reasoning_description": "인구 밀집 지역과 지형 경사도는 화재 피해를 증가시키는 중요한 요소이다."
+        },
+        "L2_W1F1": {
+          "L2_node_id": "L2_W1F1",
+          "L2_parent": "L1_W1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "바람의 세기와 연료의 습도",
+          "L2_data_combination": "바람의 세기와 연료의 습도 조합",
+          "L2_values": [
+            2.1,
+            20.0
+          ],
+          "L2_reasoning_type": "증폭효과",
+          "L2_calculation": {
+            "wind_speed_risk": "3",
+            "fuel_moisture_risk": "2",
+            "average_risk": "2.5"
+          },
+          "L2_if_then": "IF 바람이 강하고 연료가 건조하면 THEN 화재 강도 증가",
+          "L2_risk_scoring_description": "바람의 세기와 연료의 습도가 화재 강도에 미치는 영향 평가.",
+          "L2_confidence_score": 0.75,
+          "L2_reasoning_description": "바람의 세기와 연료의 습도는 화재 강도에 중요한 영향을 미친다."
+        }
+      },
+      "level_3_branches": {
+        "L3_W1O1I1": {
+          "L3_node_id": "L3_W1O1I1",
+          "L3_parent": "L2_W1O1",
+          "L3_thought": "바람과 화재 지속 시간의 인구 밀집 영향",
+          "L3_data_combination": "바람의 세기, 화재 지속 시간, 인구 밀집 조합",
+          "L3_values": [
+            2.1,
+            135.0,
+            1355.0
+          ],
+          "L3_reasoning_type": "직접인과",
+          "L3_calculation": {
+            "wind_speed_risk": "3",
+            "fire_duration_risk": "4",
+            "population_risk": "4",
+            "weighted_average": "(3×0.3)+(4×0.4)+(4×0.3) = 3.7"
+          },
+          "L3_if_then": "IF 바람이 강하고 화재가 오래 지속되며 인구가 밀집하면 THEN 피해 규모 증가",
+          "L3_risk_scoring_description": "바람, 화재 지속 시간, 인구 밀집이 피해에 미치는 영향 평가.",
+          "L3_confidence_score": 0.85,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "이 세 가지 요소는 피해를 결정짓는 중요한 요인이다."
+        },
+        "L3_W1T1O1": {
+          "L3_node_id": "L3_W1T1O1",
+          "L3_parent": "L2_W1T1",
+          "L3_thought": "바람과 경사도, 화재 지속 시간의 상관관계",
+          "L3_data_combination": "바람의 세기, 지형 경사도, 화재 지속 시간 조합",
+          "L3_values": [
+            2.1,
+            18.11,
+            135.0
+          ],
+          "L3_reasoning_type": "임계값 판단",
+          "L3_calculation": {
+            "wind_speed_risk": "3",
+            "slope_risk": "3",
+            "fire_duration_risk": "4",
+            "weighted_average": "(3×0.3)+(3×0.3)+(4×0.4) = 3.4"
+          },
+          "L3_if_then": "IF 바람이 강하고 경사가 가파르며 화재가 오래 지속되면 THEN 화재 확산 위험 증가",
+          "L3_risk_scoring_description": "바람, 경사도, 화재 지속 시간이 화재 확산에 미치는 영향 평가.",
+          "L3_confidence_score": 0.8,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "이 조합은 화재 확산에 중요한 영향을 미친다."
+        },
+        "L3_O1W1I1": {
+          "L3_node_id": "L3_O1W1I1",
+          "L3_parent": "L2_O1W1",
+          "L3_thought": "화재 지속 시간, 바람의 세기, 인구 밀집의 상관관계",
+          "L3_data_combination": "화재 지속 시간, 바람의 세기, 인구 밀집 조합",
+          "L3_values": [
+            135.0,
+            2.1,
+            1355.0
+          ],
+          "L3_reasoning_type": "간접인과",
+          "L3_calculation": {
+            "fire_duration_risk": "4",
+            "wind_speed_risk": "3",
+            "population_risk": "4",
+            "weighted_average": "(4×0.4)+(3×0.3)+(4×0.3) = 3.7"
+          },
+          "L3_if_then": "IF 화재가 오래 지속되고 바람이 강하며 인구가 밀집하면 THEN 피해 규모 증가",
+          "L3_risk_scoring_description": "화재 지속 시간, 바람, 인구 밀집이 피해에 미치는 영향 평가.",
+          "L3_confidence_score": 0.85,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "이 세 가지 요소는 피해를 결정짓는 중요한 요인이다."
+        },
+        "L3_T1O1I1": {
+          "L3_node_id": "L3_T1O1I1",
+          "L3_parent": "L2_T1O1",
+          "L3_thought": "지형 경사도, 화재 지속 시간, 인구 밀집의 상관관계",
+          "L3_data_combination": "지형 경사도, 화재 지속 시간, 인구 밀집 조합",
+          "L3_values": [
+            18.11,
+            135.0,
+            1355.0
+          ],
+          "L3_reasoning_type": "임계값 판단",
+          "L3_calculation": {
+            "slope_risk": "3",
+            "fire_duration_risk": "4",
+            "population_risk": "4",
+            "weighted_average": "(3×0.3)+(4×0.4)+(4×0.3) = 3.7"
+          },
+          "L3_if_then": "IF 경사가 가파르고 화재가 오래 지속되며 인구가 밀집하면 THEN 화재 확산 위험 증가",
+          "L3_risk_scoring_description": "지형 경사도, 화재 지속 시간, 인구 밀집이 화재 확산에 미치는 영향 평가.",
+          "L3_confidence_score": 0.8,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "이 조합은 화재 확산에 큰 영향을 미친다."
+        },
+        "L3_I1W1T1": {
+          "L3_node_id": "L3_I1W1T1",
+          "L3_parent": "L2_I1W1",
+          "L3_status": "selected",
+          "L3_thought": "인구 밀집 지역과 바람의 세기, 지형 경사도의 상관관계",
+          "L3_data_combination": "인구 밀집 지역, 바람의 세기, 지형 경사도 조합",
+          "L3_values": [
+            1355.0,
+            2.1,
+            18.11
+          ],
+          "L3_reasoning_type": "시너지",
+          "L3_calculation": {
+            "population_risk": "4",
+            "wind_speed_risk": "3",
+            "slope_risk": "3",
+            "weighted_average": "(4×0.4)+(3×0.3)+(3×0.3) = 3.4"
+          },
+          "L3_if_then": "IF 인구가 밀집하고 바람이 강하며 경사가 가파르면 THEN 피해 증가",
+          "L3_risk_scoring_description": "인구 밀집 지역, 바람, 지형 경사도가 피해에 미치는 영향 평가.",
+          "L3_confidence_score": 0.85,
+          "L3_reasoning_description": "이 세 가지 요소는 피해를 결정짓는 중요한 요인이다."
+        },
+        "L3_F1O1W1": {
+          "L3_node_id": "L3_F1O1W1",
+          "L3_parent": "L2_F1O1",
+          "L3_status": "pruning",
+          "L3_thought": "연료의 습도, 화재 지속 시간, 바람의 세기의 상관관계",
+          "L3_data_combination": "연료의 습도, 화재 지속 시간, 바람의 세기 조합",
+          "L3_values": [
+            20.0,
+            135.0,
+            2.1
+          ],
+          "L3_reasoning_type": "증폭효과",
+          "L3_calculation": {
+            "fuel_moisture_risk": "2",
+            "fire_duration_risk": "4",
+            "wind_speed_risk": "3",
+            "weighted_average": "(2×0.3)+(4×0.4)+(3×0.3) = 3.1"
+          },
+          "L3_if_then": "IF 연료가 건조하고 화재가 오래 지속되며 바람이 강하면 THEN 화재 강도 증가",
+          "L3_risk_scoring_description": "연료의 습도, 화재 지속 시간, 바람이 화재 강도에 미치는 영향 평가.",
+          "L3_confidence_score": 0.8,
+          "L3_reasoning_description": "이 조합은 화재 강도에 중요한 영향을 미친다."
+        }
+      },
+      "backtracking_events": [
+        {
+          "event_id": "BT1",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.65,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_O1 -> L2_O1T1",
+          "problem": "화재 지속 시간과 지형 경사도의 관계를 명확히 할 필요가 있습니다.",
+          "backtrack_analysis": {
+            "initial_hypothesis": "화재 지속 시간이 지형 경사도에 따라 피해 규모에 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.65",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2 단계에서 다른 조합 시도",
+            "alternative_combination": "L2_O1W1",
+            "simplification": "화재 지속 시간과 바람의 세기 조합으로 대체",
+            "structural_change": "L2_O1W1로 변경",
+            "selected_alternative": "L2_O1W1",
+            "rationale": "바람의 세기가 화재 지속 시간에 미치는 영향을 고려해야 합니다."
+          },
+          "new_attempt": {
+            "target_path": "L2_O1W1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_O1 -> L2_O1W1",
+            "new_score": 0.85,
+            "weight_adjustment": 0.15
+          },
+          "result": "backtracked",
+          "learning": "화재 지속 시간과 바람의 세기가 피해에 미치는 영향 확인"
+        },
+        {
+          "event_id": "BT2",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.7,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_T1 -> L2_T1W1",
+          "problem": "지형 경사도와 바람의 세기의 상관관계를 명확히 할 필요가 있습니다.",
+          "backtrack_analysis": {
+            "initial_hypothesis": "지형 경사도가 바람의 세기에 따라 화재 확산에 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.7",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2 단계에서 다른 조합 시도",
+            "alternative_combination": "L2_T1O1",
+            "simplification": "지형 경사도와 화재 지속 시간 조합으로 대체",
+            "structural_change": "L2_T1O1로 변경",
+            "selected_alternative": "L2_T1O1",
+            "rationale": "지형 경사도와 화재 지속 시간의 관계가 중요합니다."
+          },
+          "new_attempt": {
+            "target_path": "L2_T1O1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_T1 -> L2_T1O1",
+            "new_score": 0.75,
+            "weight_adjustment": 0.1
+          },
+          "result": "backtracked",
+          "learning": "지형 경사도와 화재 지속 시간의 관계 확인"
+        },
+        {
+          "event_id": "BT3",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.65,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_F1 -> L2_F1W1",
+          "problem": "연료의 습도와 화재 지속 시간의 관계를 명확히 할 필요가 있습니다.",
+          "backtrack_analysis": {
+            "initial_hypothesis": "연료의 습도가 화재 지속 시간에 따라 화재 강도에 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.65",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2 단계에서 다른 조합 시도",
+            "alternative_combination": "L2_F1O1",
+            "simplification": "연료의 습도와 화재 지속 시간 조합으로 대체",
+            "structural_change": "L2_F1O1로 변경",
+            "selected_alternative": "L2_F1O1",
+            "rationale": "연료의 습도와 화재 지속 시간의 관계가 중요합니다."
+          },
+          "new_attempt": {
+            "target_path": "L2_F1O1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_F1 -> L2_F1O1",
+            "new_score": 0.7,
+            "weight_adjustment": 0.05
+          },
+          "result": "backtracked",
+          "learning": "연료의 습도와 화재 지속 시간의 관계 확인"
+        },
+        {
+          "event_id": "BT4",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.6,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_I1 -> L2_I1T1",
+          "problem": "인구 밀집 지역과 지형 경사도의 관계를 명확히 할 필요가 있습니다.",
+          "backtrack_analysis": {
+            "initial_hypothesis": "인구 밀집 지역이 화재 피해에 미치는 영향을 고려해야 한다.",
+            "test_calculation": "신뢰도 평가: 0.6",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2 단계에서 다른 조합 시도",
+            "alternative_combination": "L2_I1W1",
+            "simplification": "인구 밀집 지역과 바람의 세기 조합으로 대체",
+            "structural_change": "L2_I1W1로 변경",
+            "selected_alternative": "L2_I1W1",
+            "rationale": "인구 밀집 지역과 바람의 세기가 피해에 미치는 영향이 중요합니다."
+          },
+          "new_attempt": {
+            "target_path": "L2_I1W1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_I1 -> L2_I1W1",
+            "new_score": 0.75,
+            "weight_adjustment": 0.15
+          },
+          "result": "backtracked",
+          "learning": "인구 밀집 지역과 바람의 세기가 피해에 미치는 영향 확인"
+        },
+        {
+          "event_id": "BT5",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.7,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_W1 -> L2_W1F1",
+          "problem": "바람의 세기와 화재 지속 시간의 관계를 명확히 할 필요가 있습니다.",
+          "backtrack_analysis": {
+            "initial_hypothesis": "바람의 세기가 화재 지속 시간에 따라 화재 강도에 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.7",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2 단계에서 다른 조합 시도",
+            "alternative_combination": "L2_W1O1",
+            "simplification": "바람의 세기와 화재 지속 시간 조합으로 대체",
+            "structural_change": "L2_W1O1로 변경",
+            "selected_alternative": "L2_W1O1",
+            "rationale": "바람의 세기와 화재 지속 시간의 관계가 중요합니다."
+          },
+          "new_attempt": {
+            "target_path": "L2_W1O1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_W1 -> L2_W1O1",
+            "new_score": 0.8,
+            "weight_adjustment": 0.1
+          },
+          "result": "backtracked",
+          "learning": "바람의 세기와 화재 지속 시간의 관계 확인"
+        }
+      ],
+      "pruning_events": [
+        {
+          "pruning_id": "P1",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_W1O1I1",
+          "score": 0.85,
+          "threshold": 0.9,
+          "reason": "바람과 화재 지속 시간의 인구 밀집 영향에 대한 신뢰도가 기준치(0.90)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_W1O1I1는 \"바람과 화재 지속 시간의 인구 밀집 영향\" 분석에서 신뢰도 0.85가 기준 0.90보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P2",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_W1T1O1",
+          "score": 0.8,
+          "threshold": 0.85,
+          "reason": "바람과 경사도, 화재 지속 시간의 상관관계에 대한 신뢰도가 기준치(0.85)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_W1T1O1는 \"바람과 경사도, 화재 지속 시간의 상관관계\" 분석에서 신뢰도 0.80가 기준 0.85보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P3",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_O1W1I1",
+          "score": 0.85,
+          "threshold": 0.9,
+          "reason": "화재 지속 시간, 바람의 세기, 인구 밀집의 상관관계에 대한 신뢰도가 기준치(0.90)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_O1W1I1는 \"화재 지속 시간, 바람의 세기, 인구 밀집의 상관관계\" 분석에서 신뢰도 0.85가 기준 0.90보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P4",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_T1O1I1",
+          "score": 0.8,
+          "threshold": 0.85,
+          "reason": "지형 경사도, 화재 지속 시간, 인구 밀집의 상관관계에 대한 신뢰도가 기준치(0.85)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_T1O1I1는 \"지형 경사도, 화재 지속 시간, 인구 밀집의 상관관계\" 분석에서 신뢰도 0.80가 기준 0.85보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P5",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_F1O1W1",
+          "score": 0.8,
+          "threshold": 0.85,
+          "reason": "연료의 습도, 화재 지속 시간, 바람의 세기의 상관관계에 대한 신뢰도가 기준치(0.85)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_F1O1W1는 \"연료의 습도, 화재 지속 시간, 바람의 세기의 상관관계\" 분석에서 신뢰도 0.80가 기준 0.85보다 낮아 추론 경로에서 제거하였습니다."
+        }
+      ],
+      "final_selection": {
+        "selected_path": "ROOT → L1_I1 → L2_I1W1 → L3_I1W1T1",
+        "best_l3_node_id": "L3_I1W1T1",
+        "reasoning_chain": "① L1: 인구 밀집 지역은 화재 피해를 증가시킨다. ② L2: 인구 밀집 지역과 바람의 세기 조합은 피해를 결정짓는 중요한 요소이다. ③ L3: 화재 지속 시간, 바람의 세기, 인구 밀집의 상관관계는 피해 규모를 증가시킨다.",
+        "path_selection_reasoning": "여러 L3 중 이 경로를 선택한 이유는 인구 밀집 지역과 바람의 세기 조합이 피해에 미치는 영향이 크기 때문이다.",
+        "selected_path_risk_scoring_description": "최종 경로의 위험도 평가: 인구 밀집 지역과 바람의 세기 조합으로 인해 피해 규모가 증가할 것으로 예상된다.",
+        "comprehensive_scoring_matrix": {
+          "path_1": {
+            "risk_level": "높음",
+            "confidence": 0.95
+          },
+          "path_2": {
+            "risk_level": "보통",
+            "confidence": 0.9
+          },
+          "path_3": {
+            "risk_level": "낮음",
+            "confidence": 0.85
+          }
+        },
+        "scoring_criteria": "신뢰도, 위험도, 대응 가능성을 종합적으로 평가하여 최종 경로를 선정하였다.",
+        "key_nodes_used": {
+          "O": {
+            "fire_duration": 135.0,
+            "drought_duration": 35.0
+          },
+          "W": {
+            "wind_speed": 2.1,
+            "wind_direction": 160.0
+          },
+          "T": {
+            "slope": 18.11,
+            "complexity": 26.41
+          },
+          "I": {
+            "population": 1355.0,
+            "vulnerable": 1102.0
+          },
+          "F": {
+            "fuel_type": "침엽수림",
+            "fuel_moisture": 20.0
+          }
+        },
+        "path_confidence": 0.85
+      }
+    },
+    "countermeasures": {
+      "immediate_recommendation": {
+        "decision": "즉시 대피를 권장합니다.",
+        "primary_reason": "인구 밀집 지역과 바람의 세기 조합으로 인해 화재 피해가 증가할 위험이 높습니다.",
+        "risk_level": "높음"
+      },
+      "safety_assessment": {
+        "prohibitive_factors": {
+          "fire": "화재 강도가 매우 강합니다.",
+          "visibility": "가시거리가 낮아 구조 활동에 어려움이 있습니다.",
+          "support": "구조 지원이 제한적입니다.",
+          "intensity": "화재의 강도가 매우 높습니다."
+        },
+        "favorable_factors": {
+          "wind": "바람의 세기가 상대적으로 낮습니다.",
+          "humidity": "습도가 적당하여 화재 확산이 다소 억제됩니다."
+        },
+        "net_assessment": "위험 요소가 많아 안전하지 않은 상황입니다.",
+        "evacuation_zones": {
+          "safe_zone": "인구 밀집 지역 외곽으로 대피하십시오.",
+          "danger_zone": "화재 발생 지역은 즉시 피해야 합니다.",
+          "buffer_zone": "안전 지대와 위험 지역 사이의 완충 지대입니다."
+        },
+        "evacuation_sequence": {
+          "phase_1": "취약계층을 우선 대피시킵니다.",
+          "phase_2": "주민 안전 확인 후 대피 경로를 확보합니다.",
+          "phase_3": "구조 인력을 투입하여 잔여 주민을 구조합니다."
+        }
+      },
+      "alternative_strategies": {
+        "option_1": {
+          "action": "무전기를 통해 주민과 연락합니다.",
+          "timing": "즉시"
+        },
+        "option_2": {
+          "action": "드론을 활용하여 상황을 확인합니다.",
+          "method": "영상 및 스피커 장착"
+        },
+        "option_3": {
+          "action": "확성기를 통해 안내 방송을 합니다.",
+          "condition": "접근이 불가능할 경우"
+        }
+      },
+      "safety_requirements": {
+        "minimum_conditions": [
+          "주민 안전 확인",
+          "대피 경로 확보",
+          "구조 인력 준비"
+        ],
+        "key_insights": "주민의 안전을 최우선으로 고려해야 합니다."
+      }
+    },
+    "decision_answer": {
+      "conclusion": "즉시 대피가 필요합니다. 인구 밀집 지역과 바람의 세기 조합으로 인해 화재 피해가 증가할 위험이 높습니다.",
+      "safety_verdict": {
+        "decision": "대피를 권장합니다.",
+        "safety_level": "위험",
+        "confidence": "95%",
+        "primary_factor": "인구 밀집 지역과 바람의 세기"
+      },
+      "critical_risks": {
+        "risk_1": "화재 강도가 매우 강함.",
+        "risk_2": "가시거리가 낮아 구조 활동에 어려움.",
+        "risk_3": "구조 지원이 제한적임.",
+        "risk_4": "인구 밀집 지역으로 인한 피해 증가."
+      },
+      "clear_message": "즉시 대피하십시오.",
+      "critical_action": {
+        "action_1": "주민 안전 확인",
+        "action_2": "대피 경로 확보",
+        "action_3": "구조 인력 투입",
+        "action_4": "무전기 사용"
+      }
+    },
+    "complete_reasoning": {
+      "reasoning_path_description": "인구 밀집 지역은 화재 피해를 증가시킵니다. 바람의 세기와 인구 밀집 지역의 조합은 피해를 결정짓는 중요한 요소입니다. 화재 지속 시간과 바람의 세기, 인구 밀집의 상관관계는 피해 규모를 증가시킵니다.선택 경로 L0_ROOT -> L1_I1 -> L2_I1W1 -> L3_I1W1O1는 발생/운영, 인프라, 바람 축의 상호작용을 핵심 근거로 합니다. L1에서는 인구 밀집 지역은 화재 피해를 증가시킨다.를 검토하고, L2에서 인구 밀집 지역과 바람의 세기를 종합했습니다. 보수적 가정을 포함해 수치와 규칙 기반 근거를 교차 검증하였습니다.",
+      "risk_scoring": "최종 경로의 위험도는 높음으로 평가됩니다.",
+      "confidence_scoring": "신뢰도는 95%로 매우 높습니다.",
+      "complete_reasoning_countermeasures": "질의자는 통신이 두절된 상황에서 고립 지역 주민들과의 연락 방법에 대해 물었습니다. 최종 경로 및 위험도 판단에 따르면, 인구 밀집 지역과 바람의 세기 조합으로 인해 화재 피해가 증가할 위험이 높아 즉시 대피가 필요하다는 결론에 도달했습니다. 이러한 상황에서 즉각 조치로는 주민의 안전을 확인하고 대피 경로를 확보하는 것이 중요합니다. 화재 강도가 매우 강하고 가시거리가 낮아 구조 활동에 어려움이 있는 만큼, 대피를 권장하는 것이 최선의 선택입니다.\n\n즉각 조치와 안전 평가를 통해, 무전기를 사용하여 주민과의 연락을 시도하고, 드론을 활용하여 상황을 확인하는 방법이 효과적일 것입니다. 또한, 확성기를 통해 안내 방송을 하는 것도 접근이 불가능할 경우 유용한 전략입니다. 이러한 대안 전략들은 각각의 상황에 맞춰 적절히 조합하여 사용할 수 있습니다.\n\n따라서, 질의자의 상황에서 취해야 할 핵심 대응방안은 즉시 대피를 권장하며, 주민과의 연락을 위해 무전기와 드론을 활용하는 것입니다. 이를 통해 주민의 안전을 확보하고, 화재 피해를 최소화할 수 있습니다.",
+      "query": "통신이 두절된다면 고립 지역 주민들과의 연락 방법은 무엇입니까?"
+    }
+  },
+  "file_info": {
+    "labelling_file_name": "SC20230403_T_P0001_T006.json",
+    "labelling_file_format": "json"
+  }
+}

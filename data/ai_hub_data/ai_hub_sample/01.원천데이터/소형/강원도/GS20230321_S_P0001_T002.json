@@ -1,0 +1,89 @@
+{
+  "raw_data_info": {
+    "fire_info": {
+      "fire_incident_id": "GS20230321",
+      "region": "강원도",
+      "fire_size": "소형",
+      "incident_name": "강원 고성 간성",
+      "fire_location": {
+        "lat": 38.291169,
+        "lon": 128.33824
+      },
+      "fire_report_number": "고성소방서_20230321_001",
+      "start_timestamp": "2023-03-21 16:26:00",
+      "detection_timestamp": "2023-03-21 16:26:00",
+      "end_timestamp": "2023-03-21 22:43:00",
+      "response_phase": "초기대응",
+      "fire_cause": "입산자실화",
+      "affected_area": 3.0,
+      "fire_spread_track": "[38.291172, 128.338251], [38.291256, 128.338830], [38.291492, 128.338916], [38.291989, 128.338658], [38.292056, 128.337789], [38.291862, 128.337285], [38.291408, 128.337253], [38.291172, 128.337822]"
+    }
+  },
+  "source_data_info": {
+    "file_name": "GS20230321_S_P0001_T002",
+    "file_format": "json",
+    "user_info": {
+      "user_type": "CI",
+      "user_type_description": "시민",
+      "query_time": "2023-03-21 18:00",
+      "query_location": {
+        "lat": 38.291614,
+        "lon": 128.337807
+      },
+      "query_location_description": "라아 7326 3268"
+    },
+    "weather_conditions": {
+      "observation_time": "2023-03-21 18:00",
+      "observatory_type": "기상",
+      "observatory_location": "속초",
+      "temperature": 14.2,
+      "rainfall": 0.0,
+      "wind_speed": 3.3,
+      "wind_direction": 160.0,
+      "humidity_percent": 54.0,
+      "atmospheric_pressure": 1008.5,
+      "visibility": 1642.0,
+      "past_rainfall_7days": 0.0,
+      "surface_temperature": 17.4,
+      "observation_height": 10.0
+    },
+    "terrain_conditions": {
+      "elevation": 768.6,
+      "slope": 14.4,
+      "slope_aspect": 109.56,
+      "curvature": -0.0027,
+      "topographic_position_index": 6.16,
+      "terrain_complexity": 59.99,
+      "hydrological_features": 1.1
+    },
+    "fuel_conditions": {
+      "fuel_type": "관목",
+      "fuel_density": 0.0,
+      "surface_fuel_depth": 0.0,
+      "fuel_moisture": 0.0,
+      "fuel_average_age": 0.0,
+      "canopy_height": 0.0,
+      "canopy_coverage": 0.0
+    },
+    "Infra_Social": {
+      "population": 7396.0,
+      "households": 3735.0,
+      "vulnerable": 3628.0,
+      "fire_station_distance": 10.61,
+      "Important_Infra_distance": 2.18,
+      "road_accessibility": "보통",
+      "shelter": "진부리마을회관"
+    },
+    "occurrence_status": {
+      "drought_duration_days": 30.0,
+      "wildfire_duration_time": "6:17",
+      "wind_direction_slope_aspect_alignment": {
+        "wind_direction": 160.0,
+        "slope_aspect": 109.56
+      },
+      "fire_length": 1.0,
+      "fire_intensity": "보통",
+      "flame_length": 1.0
+    }
+  }
+}
