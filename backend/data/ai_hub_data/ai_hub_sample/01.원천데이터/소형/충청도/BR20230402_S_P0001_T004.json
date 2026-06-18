@@ -1,0 +1,89 @@
+{
+  "raw_data_info": {
+    "fire_info": {
+      "fire_incident_id": "BR20230402",
+      "region": "충청도",
+      "fire_size": "소형",
+      "incident_name": "충남 보령 청라 내현",
+      "fire_location": {
+        "lat": 36.39774,
+        "lon": 126.66492
+      },
+      "fire_report_number": "청라소방서-20230402-001",
+      "start_timestamp": "2023-04-02 13:46:00",
+      "detection_timestamp": "2023-04-02 13:46:00",
+      "end_timestamp": "2023-04-03 16:00:00",
+      "response_phase": "2단계",
+      "fire_cause": "농산폐기물소각",
+      "affected_area": 97.43,
+      "fire_spread_track": "[36.397613,126.665034],[36.398926,126.664133],[36.399479,126.661601],[36.403382,126.660571],[36.403831,126.657438],[36.400411,126.655336],[36.397786,126.654992],[36.395955,126.647997],[36.393261,126.65113],[36.395057,126.657396],[36.395541,126.661258],[36.394919,126.663232],[36.395921,126.665893],[36.397613,126.665034]"
+    }
+  },
+  "source_data_info": {
+    "file_name": "BR20230402_S_P0001_T004",
+    "file_format": "json",
+    "user_info": {
+      "user_type": "CI",
+      "user_type_description": "시민",
+      "query_time": "2023-04-02 17:00",
+      "query_location": {
+        "lat": 36.394016,
+        "lon": 126.65098
+      },
+      "query_location_description": "다바 2386 2217"
+    },
+    "weather_conditions": {
+      "observation_time": "2023-04-02 17:00",
+      "observatory_type": "기상",
+      "observatory_location": "보령",
+      "temperature": 22.8,
+      "rainfall": 0.0,
+      "wind_speed": 3.6,
+      "wind_direction": 50.0,
+      "humidity_percent": 14.0,
+      "atmospheric_pressure": 1015.1,
+      "visibility": 3160.0,
+      "past_rainfall_7days": 0.0,
+      "surface_temperature": 21.7,
+      "observation_height": 10.0
+    },
+    "terrain_conditions": {
+      "elevation": 61.95,
+      "slope": 19.87,
+      "slope_aspect": 72.65,
+      "curvature": 0.0002,
+      "topographic_position_index": -1.44,
+      "terrain_complexity": 32.07,
+      "hydrological_features": 0.2
+    },
+    "fuel_conditions": {
+      "fuel_type": "활엽수림",
+      "fuel_density": 11.79,
+      "surface_fuel_depth": 4.0,
+      "fuel_moisture": 12.0,
+      "fuel_average_age": 35.0,
+      "canopy_height": 14.0,
+      "canopy_coverage": 75.0
+    },
+    "Infra_Social": {
+      "population": 3454.0,
+      "households": 1954.0,
+      "vulnerable": 2373.0,
+      "fire_station_distance": 2.0,
+      "Important_Infra_distance": 0.72,
+      "road_accessibility": "나쁨",
+      "shelter": ""
+    },
+    "occurrence_status": {
+      "drought_duration_days": 35.0,
+      "wildfire_duration_time": "26:14",
+      "wind_direction_slope_aspect_alignment": {
+        "wind_direction": 50.0,
+        "slope_aspect": 72.65
+      },
+      "fire_length": 2.2,
+      "fire_intensity": "약함",
+      "flame_length": 1.0
+    }
+  }
+}

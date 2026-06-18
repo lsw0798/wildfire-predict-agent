@@ -1,0 +1,89 @@
+{
+  "raw_data_info": {
+    "fire_info": {
+      "fire_incident_id": "CD20250314",
+      "region": "경상도",
+      "fire_size": "중형",
+      "incident_name": "경북 청도 운문 신원",
+      "fire_location": {
+        "lat": 35.684945,
+        "lon": 128.959453
+      },
+      "fire_report_number": "금천소방서-20250314-001",
+      "start_timestamp": "2025-03-14 10:48:00",
+      "detection_timestamp": "2025-03-14 10:48:00",
+      "end_timestamp": "2025-03-15 9:00",
+      "response_phase": "2단계",
+      "fire_cause": "입산자실화추정",
+      "affected_area": 48.43,
+      "fire_spread_track": "[35.684946, 128.959300], [35.682889, 128.957454], [35.683063, 128.954751], [35.683238, 128.952240], [35.684144, 128.950416], [35.685015, 128.948700], [35.685573, 128.948056], [35.690279, 128.952047], [35.689965, 128.952820], [35.689233, 128.954751], [35.688152, 128.956596]"
+    }
+  },
+  "source_data_info": {
+    "file_name": "CD20250314_S_P0001_T010",
+    "file_format": "json",
+    "user_info": {
+      "user_type": "RW",
+      "user_type_description": "구조요원",
+      "query_time": "2025-03-14 20:00",
+      "query_location": {
+        "lat": 35.68371,
+        "lon": 128.952145
+      },
+      "query_location_description": "마마 3140 4402"
+    },
+    "weather_conditions": {
+      "observation_time": "2025-03-14 20:00",
+      "observatory_type": "기상",
+      "observatory_location": "밀양",
+      "temperature": 11.3,
+      "rainfall": 0.0,
+      "wind_speed": 2.1,
+      "wind_direction": 20.0,
+      "humidity_percent": 39.0,
+      "atmospheric_pressure": 1025.0,
+      "visibility": 4879.0,
+      "past_rainfall_7days": 0.0,
+      "surface_temperature": 13.9,
+      "observation_height": 10.0
+    },
+    "terrain_conditions": {
+      "elevation": 427.84,
+      "slope": 34.34,
+      "slope_aspect": 60.05,
+      "curvature": 0.0023,
+      "topographic_position_index": 11.21,
+      "terrain_complexity": 47.49,
+      "hydrological_features": 0.6
+    },
+    "fuel_conditions": {
+      "fuel_type": "침엽수림",
+      "fuel_density": 5.61,
+      "surface_fuel_depth": 2.0,
+      "fuel_moisture": 18.0,
+      "fuel_average_age": 35.0,
+      "canopy_height": 22.0,
+      "canopy_coverage": 75.0
+    },
+    "Infra_Social": {
+      "population": 1910.0,
+      "households": 1267.0,
+      "vulnerable": 1336.0,
+      "fire_station_distance": 4.98,
+      "Important_Infra_distance": 0.79,
+      "road_accessibility": "나쁨",
+      "shelter": ""
+    },
+    "occurrence_status": {
+      "drought_duration_days": 35.0,
+      "wildfire_duration_time": "22:12",
+      "wind_direction_slope_aspect_alignment": {
+        "wind_direction": 20.0,
+        "slope_aspect": 60.05
+      },
+      "fire_length": 2.2,
+      "fire_intensity": "약함",
+      "flame_length": 1.0
+    }
+  }
+}

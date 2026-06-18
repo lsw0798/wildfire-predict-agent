@@ -1,0 +1,910 @@
+{
+  "labelling_data_info": {
+    "query": {
+      "query_text": "야간에 기온이 하락하면 진화 효율이 얼마나 향상됩니까?",
+      "query_purpose": "대응전략",
+      "query_subject": "진화방법",
+      "query_type": "comparative"
+    },
+    "tree_of_thought": {
+      "level_0_input": {
+        "L0_node_id": "ROOT",
+        "L0_thought": "야간 기온 하락 시 진화 효율",
+        "L0_context": {
+          "weather_conditions": {
+            "wind_speed": 2.2,
+            "wind_direction": 20.0,
+            "humidity_percent": 51.0,
+            "temperature": 9.9,
+            "surface_temperature": 13.9,
+            "drought_days": 35.0,
+            "visibility": 4075.0
+          },
+          "terrain_conditions": {
+            "elevation": 427.84,
+            "slope": 34.34,
+            "slope_aspect": 60.05,
+            "curvature": 0.0023,
+            "topographic_position_index": 11.21,
+            "terrain_complexity": 47.49,
+            "hydrological_features": 0.6
+          },
+          "fuel_conditions": {
+            "fuel_type": "침엽수림",
+            "fuel_moisture": 18.0,
+            "fuel_density": 5.61,
+            "fuel_average_age": 35.0,
+            "surface_fuel_depth": 2.0,
+            "canopy_height": 22.0,
+            "canopy_coverage": 75.0
+          },
+          "Infra_Social": {
+            "population": 1910.0,
+            "vulnerable": 1336.0,
+            "fire_station_distance": 4.98,
+            "road_accessibility": "나쁨",
+            "Important_Infra_distance": 0.79,
+            "shelter": ""
+          },
+          "occurrence_status": {
+            "fire_duration": 132.0,
+            "drought_duration_days": 35.0,
+            "wildfire_duration_time": "22:12",
+            "flame_length": 1.0,
+            "fire_intensity": "약함",
+            "fire_length": 2.2,
+            "wind_slope_alignment": 40.05
+          }
+        },
+        "L0_branches": [
+          "L1_W1",
+          "L1_O1",
+          "L1_T1",
+          "L1_F1",
+          "L1_I1"
+        ],
+        "L0_reasoning_description": "기온 하락 시 진화 효율 증가 예측",
+        "L0_confidence_score": 0.85,
+        "L0_status": "start"
+      },
+      "level_1_branches": {
+        "L1_W1": {
+          "L1_node_id": "L1_W1",
+          "L1_parent": "ROOT",
+          "L1_thought": "풍속이 낮을수록 진화 효율이 증가할 수 있다.",
+          "L1_data_node": "wind_speed_risk, humidity_effect",
+          "L1_value": [
+            2.2,
+            51.0
+          ],
+          "L1_reasoning_type": "직접인과",
+          "L1_calculation": {
+            "wind_speed_risk": "2 (중간)",
+            "humidity_effect": "3 (높음)",
+            "average_risk": "2.5"
+          },
+          "L1_if_then": "IF 풍속이 낮고 습도가 높다면 THEN 진화 효율이 증가할 것이다.",
+          "L1_risk_scoring_description": "풍속과 습도가 진화에 미치는 영향 평가.",
+          "L1_confidence_score": 0.8,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_W1T1",
+            "L2_W1O1",
+            "L2_W1F1"
+          ],
+          "L1_reasoning_description": "풍속과 습도의 상관관계를 분석하였다."
+        },
+        "L1_O1": {
+          "L1_node_id": "L1_O1",
+          "L1_parent": "ROOT",
+          "L1_thought": "화재 지속 시간이 길어질수록 진화가 어려워진다.",
+          "L1_data_node": "fire_duration_risk, flame_length_risk",
+          "L1_value": [
+            132.0,
+            1.0
+          ],
+          "L1_reasoning_type": "간접인과",
+          "L1_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "flame_length_risk": "3 (중간)",
+            "average_risk": "3.5"
+          },
+          "L1_if_then": "IF 화재 지속 시간이 길다면 THEN 진화가 어려워질 것이다.",
+          "L1_risk_scoring_description": "화재 지속 시간과 진화의 관계를 평가.",
+          "L1_confidence_score": 0.75,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_O1W1",
+            "L2_O1T1"
+          ],
+          "L1_reasoning_description": "화재 지속 시간의 영향을 분석하였다."
+        },
+        "L1_T1": {
+          "L1_node_id": "L1_T1",
+          "L1_parent": "ROOT",
+          "L1_thought": "기온이 낮을수록 진화 효율이 높아질 수 있다.",
+          "L1_data_node": "temperature_risk, humidity_effect",
+          "L1_value": [
+            9.9,
+            51.0
+          ],
+          "L1_reasoning_type": "임계값 판단",
+          "L1_calculation": {
+            "temperature_risk": "2 (중간)",
+            "humidity_effect": "3 (높음)",
+            "average_risk": "2.5"
+          },
+          "L1_if_then": "IF 기온이 낮고 습도가 높다면 THEN 진화 효율이 높아질 것이다.",
+          "L1_risk_scoring_description": "기온과 습도의 상관관계를 평가.",
+          "L1_confidence_score": 0.85,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_T1O1",
+            "L2_T1W1"
+          ],
+          "L1_reasoning_description": "기온과 습도의 영향을 분석하였다."
+        },
+        "L1_F1": {
+          "L1_node_id": "L1_F1",
+          "L1_parent": "ROOT",
+          "L1_thought": "연료의 수분 함량이 낮을수록 화재 진압이 용이하다.",
+          "L1_data_node": "fuel_moisture_risk, fuel_density_risk",
+          "L1_value": [
+            18.0,
+            5.61
+          ],
+          "L1_reasoning_type": "증폭효과",
+          "L1_calculation": {
+            "fuel_moisture_risk": "3 (높음)",
+            "fuel_density_risk": "2 (중간)",
+            "average_risk": "2.5"
+          },
+          "L1_if_then": "IF 연료의 수분 함량이 낮다면 THEN 진화가 용이할 것이다.",
+          "L1_risk_scoring_description": "연료의 수분 함량과 진화의 관계를 평가.",
+          "L1_confidence_score": 0.7,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_F1O1",
+            "L2_F1W1"
+          ],
+          "L1_reasoning_description": "연료의 특성을 분석하였다."
+        },
+        "L1_I1": {
+          "L1_node_id": "L1_I1",
+          "L1_parent": "ROOT",
+          "L1_thought": "인구 밀집 지역일수록 진화의 위험이 증가한다.",
+          "L1_data_node": "population_risk, vulnerable_risk",
+          "L1_value": [
+            1910.0,
+            1336.0
+          ],
+          "L1_reasoning_type": "단계분석",
+          "L1_calculation": {
+            "population_risk": "4 (높음)",
+            "vulnerable_risk": "5 (매우 높음)",
+            "average_risk": "4.5"
+          },
+          "L1_if_then": "IF 인구가 밀집되어 있다면 THEN 진화의 위험이 증가할 것이다.",
+          "L1_risk_scoring_description": "인구 밀집과 진화의 위험을 평가.",
+          "L1_confidence_score": 0.9,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_I1W1",
+            "L2_I1T1"
+          ],
+          "L1_reasoning_description": "인구 밀집 지역의 위험성을 분석하였다."
+        }
+      },
+      "level_2_branches": {
+        "L2_W1O1": {
+          "L2_node_id": "L2_W1O1",
+          "L2_parent": "L1_W1",
+          "L2_thought": "풍속과 화재 지속 시간의 상관관계",
+          "L2_data_combination": "풍속과 화재 지속 시간의 조합",
+          "L2_values": [
+            2.2,
+            132.0
+          ],
+          "L2_reasoning_type": "직접인과",
+          "L2_calculation": {
+            "wind_speed_risk": "2 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 풍속이 낮고 화재 지속 시간이 길다면 THEN 진화 효율이 감소할 것이다.",
+          "L2_risk_scoring_description": "풍속과 화재 지속 시간의 영향을 평가.",
+          "L2_confidence_score": 0.78,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_W1O1I1"
+          ],
+          "L2_reasoning_description": "풍속과 화재 지속 시간의 관계를 분석하였다."
+        },
+        "L2_W1T1": {
+          "L2_node_id": "L2_W1T1",
+          "L2_parent": "L1_W1",
+          "L2_thought": "풍속과 기온의 상관관계",
+          "L2_data_combination": "풍속과 기온의 조합",
+          "L2_values": [
+            2.2,
+            9.9
+          ],
+          "L2_reasoning_type": "직접인과",
+          "L2_calculation": {
+            "wind_speed_risk": "2 (중간)",
+            "temperature_risk": "2 (중간)",
+            "average_risk": "2.0"
+          },
+          "L2_if_then": "IF 풍속이 낮고 기온이 낮다면 THEN 진화 효율이 증가할 것이다.",
+          "L2_risk_scoring_description": "풍속과 기온의 관계를 평가.",
+          "L2_confidence_score": 0.82,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_W1T1F1"
+          ],
+          "L2_reasoning_description": "풍속과 기온의 상관관계를 분석하였다."
+        },
+        "L2_O1W1": {
+          "L2_node_id": "L2_O1W1",
+          "L2_parent": "L1_O1",
+          "L2_thought": "화재 지속 시간과 풍속의 관계",
+          "L2_data_combination": "화재 지속 시간과 풍속의 조합",
+          "L2_values": [
+            132.0,
+            2.2
+          ],
+          "L2_reasoning_type": "간접인과",
+          "L2_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "wind_speed_risk": "2 (중간)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 화재 지속 시간이 길고 풍속이 낮다면 THEN 진화가 어려워질 것이다.",
+          "L2_risk_scoring_description": "화재 지속 시간과 풍속의 관계를 평가.",
+          "L2_confidence_score": 0.76,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_O1W1F1"
+          ],
+          "L2_reasoning_description": "화재 지속 시간과 풍속의 관계를 분석하였다."
+        },
+        "L2_T1O1": {
+          "L2_node_id": "L2_T1O1",
+          "L2_parent": "L1_T1",
+          "L2_thought": "기온과 화재 지속 시간의 관계",
+          "L2_data_combination": "기온과 화재 지속 시간의 조합",
+          "L2_values": [
+            9.9,
+            132.0
+          ],
+          "L2_reasoning_type": "임계값 판단",
+          "L2_calculation": {
+            "temperature_risk": "2 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 기온이 낮고 화재 지속 시간이 길다면 THEN 진화가 어려워질 것이다.",
+          "L2_risk_scoring_description": "기온과 화재 지속 시간의 관계를 평가.",
+          "L2_confidence_score": 0.8,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_T1O1I1"
+          ],
+          "L2_reasoning_description": "기온과 화재 지속 시간의 관계를 분석하였다."
+        },
+        "L2_F1O1": {
+          "L2_node_id": "L2_F1O1",
+          "L2_parent": "L1_F1",
+          "L2_thought": "연료 수분과 화재 지속 시간의 관계",
+          "L2_data_combination": "연료 수분과 화재 지속 시간의 조합",
+          "L2_values": [
+            18.0,
+            132.0
+          ],
+          "L2_reasoning_type": "증폭효과",
+          "L2_calculation": {
+            "fuel_moisture_risk": "3 (높음)",
+            "fire_duration_risk": "4 (높음)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 연료 수분이 낮고 화재 지속 시간이 길다면 THEN 진화가 어려워질 것이다.",
+          "L2_risk_scoring_description": "연료 수분과 화재 지속 시간의 관계를 평가.",
+          "L2_confidence_score": 0.72,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_F1O1W1"
+          ],
+          "L2_reasoning_description": "연료 수분과 화재 지속 시간의 관계를 분석하였다."
+        },
+        "L2_I1W1": {
+          "L2_node_id": "L2_I1W1",
+          "L2_parent": "L1_I1",
+          "L2_thought": "인구 밀집과 풍속의 관계",
+          "L2_data_combination": "인구 밀집과 풍속의 조합",
+          "L2_values": [
+            1910.0,
+            2.2
+          ],
+          "L2_reasoning_type": "단계분석",
+          "L2_calculation": {
+            "population_risk": "4 (높음)",
+            "wind_speed_risk": "2 (중간)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 인구가 밀집되어 있고 풍속이 낮다면 THEN 진화의 위험이 증가할 것이다.",
+          "L2_risk_scoring_description": "인구 밀집과 풍속의 관계를 평가.",
+          "L2_confidence_score": 0.88,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_I1W1T1"
+          ],
+          "L2_reasoning_description": "인구 밀집과 풍속의 관계를 분석하였다."
+        },
+        "L2_O1T1": {
+          "L2_node_id": "L2_O1T1",
+          "L2_parent": "L1_O1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "화재 지속 시간과 기온의 관계",
+          "L2_data_combination": "기온과 화재 지속 시간의 조합",
+          "L2_values": [
+            9.9,
+            132.0
+          ],
+          "L2_reasoning_type": "임계값 판단",
+          "L2_calculation": {
+            "temperature_risk": "2 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 기온이 낮고 화재 지속 시간이 길다면 THEN 진화가 어려워질 것이다.",
+          "L2_risk_scoring_description": "기온과 화재 지속 시간의 관계를 평가.",
+          "L2_confidence_score": 0.8,
+          "L2_reasoning_description": "기온과 화재 지속 시간의 관계를 분석하였다."
+        },
+        "L2_T1W1": {
+          "L2_node_id": "L2_T1W1",
+          "L2_parent": "L1_T1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "기온과 풍속의 관계",
+          "L2_data_combination": "기온과 풍속의 조합",
+          "L2_values": [
+            9.9,
+            2.2
+          ],
+          "L2_reasoning_type": "직접인과",
+          "L2_calculation": {
+            "temperature_risk": "2 (중간)",
+            "wind_speed_risk": "2 (중간)",
+            "average_risk": "2.0"
+          },
+          "L2_if_then": "IF 기온이 낮고 풍속이 낮다면 THEN 진화 효율이 증가할 것이다.",
+          "L2_risk_scoring_description": "기온과 풍속의 관계를 평가.",
+          "L2_confidence_score": 0.82,
+          "L2_reasoning_description": "기온과 풍속의 상관관계를 분석하였다."
+        },
+        "L2_F1W1": {
+          "L2_node_id": "L2_F1W1",
+          "L2_parent": "L1_F1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "연료 수분과 풍속의 관계",
+          "L2_data_combination": "연료 수분과 풍속의 조합",
+          "L2_values": [
+            18.0,
+            2.2
+          ],
+          "L2_reasoning_type": "증폭효과",
+          "L2_calculation": {
+            "fuel_moisture_risk": "3 (높음)",
+            "wind_speed_risk": "2 (중간)",
+            "average_risk": "2.5"
+          },
+          "L2_if_then": "IF 연료 수분이 낮고 풍속이 낮다면 THEN 진화가 용이할 것이다.",
+          "L2_risk_scoring_description": "연료 수분과 풍속의 관계를 평가.",
+          "L2_confidence_score": 0.75,
+          "L2_reasoning_description": "연료 수분과 풍속의 관계를 분석하였다."
+        },
+        "L2_I1T1": {
+          "L2_node_id": "L2_I1T1",
+          "L2_parent": "L1_I1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "인구 밀집과 기온의 관계",
+          "L2_data_combination": "인구 밀집과 기온의 조합",
+          "L2_values": [
+            1910.0,
+            9.9
+          ],
+          "L2_reasoning_type": "단계분석",
+          "L2_calculation": {
+            "population_risk": "4 (높음)",
+            "temperature_risk": "2 (중간)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 인구가 밀집되어 있고 기온이 낮다면 THEN 진화의 위험이 증가할 것이다.",
+          "L2_risk_scoring_description": "인구 밀집과 기온의 관계를 평가.",
+          "L2_confidence_score": 0.85,
+          "L2_reasoning_description": "인구 밀집과 기온의 관계를 분석하였다."
+        },
+        "L2_W1F1": {
+          "L2_node_id": "L2_W1F1",
+          "L2_parent": "L1_W1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "풍속과 연료 수분의 관계",
+          "L2_data_combination": "풍속과 연료 수분의 조합",
+          "L2_values": [
+            2.2,
+            18.0
+          ],
+          "L2_reasoning_type": "증폭효과",
+          "L2_calculation": {
+            "wind_speed_risk": "2 (중간)",
+            "fuel_moisture_risk": "3 (높음)",
+            "average_risk": "2.5"
+          },
+          "L2_if_then": "IF 풍속이 낮고 연료 수분이 낮다면 THEN 진화가 용이할 것이다.",
+          "L2_risk_scoring_description": "풍속과 연료 수분의 관계를 평가.",
+          "L2_confidence_score": 0.76,
+          "L2_reasoning_description": "풍속과 연료 수분의 관계를 분석하였다."
+        }
+      },
+      "level_3_branches": {
+        "L3_W1O1I1": {
+          "L3_node_id": "L3_W1O1I1",
+          "L3_parent": "L2_W1O1",
+          "L3_thought": "풍속, 화재 지속 시간, 인구 밀집의 관계",
+          "L3_data_combination": "풍속, 화재 지속 시간, 인구 밀집의 조합",
+          "L3_values": [
+            2.2,
+            132.0,
+            1910.0
+          ],
+          "L3_reasoning_type": "직접인과",
+          "L3_calculation": {
+            "wind_speed_risk": "2 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "population_risk": "4 (높음)",
+            "weighted_average": "(2×0.25)+(4×0.5)+(4×0.25) = 3.5"
+          },
+          "L3_if_then": "IF 풍속이 낮고 화재 지속 시간이 길며 인구가 밀집되어 있다면 THEN 진화 효율이 감소할 것이다.",
+          "L3_risk_scoring_description": "풍속, 화재 지속 시간, 인구 밀집의 영향을 평가.",
+          "L3_confidence_score": 0.76,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "세 가지 요소의 상관관계를 분석하였다."
+        },
+        "L3_W1T1F1": {
+          "L3_node_id": "L3_W1T1F1",
+          "L3_parent": "L2_W1T1",
+          "L3_thought": "풍속, 기온, 연료 수분의 관계",
+          "L3_data_combination": "풍속, 기온, 연료 수분의 조합",
+          "L3_values": [
+            2.2,
+            9.9,
+            18.0
+          ],
+          "L3_reasoning_type": "증폭효과",
+          "L3_calculation": {
+            "wind_speed_risk": "2 (중간)",
+            "temperature_risk": "2 (중간)",
+            "fuel_moisture_risk": "3 (높음)",
+            "weighted_average": "(2×0.33)+(2×0.33)+(3×0.34) = 2.33"
+          },
+          "L3_if_then": "IF 풍속이 낮고 기온이 낮으며 연료 수분이 낮다면 THEN 진화 효율이 증가할 것이다.",
+          "L3_risk_scoring_description": "세 가지 요소의 상관관계를 평가.",
+          "L3_confidence_score": 0.82,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "풍속, 기온, 연료 수분의 관계를 분석하였다."
+        },
+        "L3_O1W1F1": {
+          "L3_node_id": "L3_O1W1F1",
+          "L3_parent": "L2_O1W1",
+          "L3_thought": "화재 지속 시간, 풍속, 연료 수분의 관계",
+          "L3_data_combination": "화재 지속 시간, 풍속, 연료 수분의 조합",
+          "L3_values": [
+            132.0,
+            2.2,
+            18.0
+          ],
+          "L3_reasoning_type": "간접인과",
+          "L3_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "wind_speed_risk": "2 (중간)",
+            "fuel_moisture_risk": "3 (높음)",
+            "weighted_average": "(4×0.5)+(2×0.25)+(3×0.25) = 3.25"
+          },
+          "L3_if_then": "IF 화재 지속 시간이 길고 풍속이 낮으며 연료 수분이 낮다면 THEN 진화가 어려워질 것이다.",
+          "L3_risk_scoring_description": "세 가지 요소의 영향을 평가.",
+          "L3_confidence_score": 0.72,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "화재 지속 시간, 풍속, 연료 수분의 관계를 분석하였다."
+        },
+        "L3_T1O1I1": {
+          "L3_node_id": "L3_T1O1I1",
+          "L3_parent": "L2_T1O1",
+          "L3_thought": "기온, 화재 지속 시간, 인구 밀집의 관계",
+          "L3_data_combination": "기온, 화재 지속 시간, 인구 밀집의 조합",
+          "L3_values": [
+            9.9,
+            132.0,
+            1910.0
+          ],
+          "L3_reasoning_type": "임계값 판단",
+          "L3_calculation": {
+            "temperature_risk": "2 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "population_risk": "4 (높음)",
+            "weighted_average": "(2×0.25)+(4×0.5)+(4×0.25) = 3.5"
+          },
+          "L3_if_then": "IF 기온이 낮고 화재 지속 시간이 길며 인구가 밀집되어 있다면 THEN 진화가 어려워질 것이다.",
+          "L3_risk_scoring_description": "세 가지 요소의 영향을 평가.",
+          "L3_confidence_score": 0.8,
+          "L3_status": "selected",
+          "L3_reasoning_description": "기온, 화재 지속 시간, 인구 밀집의 관계를 분석하였다."
+        },
+        "L3_F1O1W1": {
+          "L3_node_id": "L3_F1O1W1",
+          "L3_parent": "L2_F1O1",
+          "L3_status": "pruning",
+          "L3_thought": "연료 수분, 화재 지속 시간, 풍속의 관계",
+          "L3_data_combination": "연료 수분, 화재 지속 시간, 풍속의 조합",
+          "L3_values": [
+            18.0,
+            132.0,
+            2.2
+          ],
+          "L3_reasoning_type": "간접인과",
+          "L3_calculation": {
+            "fuel_moisture_risk": "3 (높음)",
+            "fire_duration_risk": "4 (높음)",
+            "wind_speed_risk": "2 (중간)",
+            "weighted_average": "(3×0.5)+(4×0.25)+(2×0.25) = 3.25"
+          },
+          "L3_if_then": "IF 연료 수분이 낮고 화재 지속 시간이 길며 풍속이 낮다면 THEN 진화가 어려워질 것이다.",
+          "L3_risk_scoring_description": "세 가지 요소의 영향을 평가.",
+          "L3_confidence_score": 0.72,
+          "L3_reasoning_description": "연료 수분, 화재 지속 시간, 풍속의 관계를 분석하였다."
+        },
+        "L3_I1W1T1": {
+          "L3_node_id": "L3_I1W1T1",
+          "L3_parent": "L2_I1W1",
+          "L3_status": "pruning",
+          "L3_thought": "인구 밀집, 풍속, 기온의 관계",
+          "L3_data_combination": "인구 밀집, 풍속, 기온의 조합",
+          "L3_values": [
+            1910.0,
+            2.2,
+            9.9
+          ],
+          "L3_reasoning_type": "직접인과",
+          "L3_calculation": {
+            "population_risk": "4 (높음)",
+            "wind_speed_risk": "2 (중간)",
+            "temperature_risk": "2 (중간)",
+            "weighted_average": "(4×0.5)+(2×0.25)+(2×0.25) = 3.0"
+          },
+          "L3_if_then": "IF 인구가 밀집되어 있고 풍속이 낮으며 기온이 낮다면 THEN 진화의 위험이 증가할 것이다.",
+          "L3_risk_scoring_description": "세 가지 요소의 영향을 평가.",
+          "L3_confidence_score": 0.78,
+          "L3_reasoning_description": "인구 밀집, 풍속, 기온의 관계를 분석하였다."
+        }
+      },
+      "backtracking_events": [
+        {
+          "event_id": "BT1",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.65,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_O1 -> L2_O1T1",
+          "problem": "화재 지속 시간이 대피소 접근에 미치는 영향 개선 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "화재 지속 시간이 대피소 접근에 중대한 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.65",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L1에서 다른 node 조합 시도",
+            "alternative_combination": "L1_O1 -> L2_O1W1",
+            "simplification": "화재 지속 시간과 풍속 조합으로 대체",
+            "structural_change": "L1_O1 -> L2_O1W1로 변경",
+            "selected_alternative": "L2_O1W1",
+            "rationale": "풍속이 화재 지속 시간에 미치는 영향이 더 크다."
+          },
+          "new_attempt": {
+            "target_path": "L2_O1T1 대신 L2_O1W1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_O1 -> L2_O1W1",
+            "new_score": 0.78,
+            "weight_adjustment": 0.1
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 풍속의 중요성 확인"
+        },
+        {
+          "event_id": "BT2",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.7,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_T1 -> L2_T1W1",
+          "problem": "기온과 풍속의 조합으로 인한 진화 효율 저하 문제",
+          "backtrack_analysis": {
+            "initial_hypothesis": "기온과 풍속이 진화 효율에 미치는 영향을 분석한다.",
+            "test_calculation": "신뢰도 평가: 0.7",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L1에서 다른 node 조합 시도",
+            "alternative_combination": "L1_T1 -> L2_T1O1",
+            "simplification": "기온과 화재 지속 시간 조합으로 대체",
+            "structural_change": "L1_T1 -> L2_T1O1로 변경",
+            "selected_alternative": "L2_T1O1",
+            "rationale": "기온과 화재 지속 시간이 진화에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_T1W1 대신 L2_T1O1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_T1 -> L2_T1O1",
+            "new_score": 0.82,
+            "weight_adjustment": 0.1
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 화재 지속 시간의 중요성 확인"
+        },
+        {
+          "event_id": "BT3",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.68,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_F1 -> L2_F1W1",
+          "problem": "연료 수분과 풍속의 조합으로 인한 진화 효율 저하 문제",
+          "backtrack_analysis": {
+            "initial_hypothesis": "연료 수분과 풍속이 진화 효율에 미치는 영향을 분석한다.",
+            "test_calculation": "신뢰도 평가: 0.68",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L1에서 다른 node 조합 시도",
+            "alternative_combination": "L1_F1 -> L2_F1O1",
+            "simplification": "연료 수분과 화재 지속 시간 조합으로 대체",
+            "structural_change": "L1_F1 -> L2_F1O1로 변경",
+            "selected_alternative": "L2_F1O1",
+            "rationale": "연료 수분과 화재 지속 시간이 진화에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_F1W1 대신 L2_F1O1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_F1 -> L2_F1O1",
+            "new_score": 0.75,
+            "weight_adjustment": 0.1
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 화재 지속 시간의 중요성 확인"
+        },
+        {
+          "event_id": "BT4",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.6,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_I1 -> L2_I1T1",
+          "problem": "인구 밀집과 기온의 조합으로 인한 진화 효율 저하 문제",
+          "backtrack_analysis": {
+            "initial_hypothesis": "인구 밀집과 기온이 진화 효율에 미치는 영향을 분석한다.",
+            "test_calculation": "신뢰도 평가: 0.6",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L1에서 다른 node 조합 시도",
+            "alternative_combination": "L1_I1 -> L2_I1W1",
+            "simplification": "인구 밀집과 풍속 조합으로 대체",
+            "structural_change": "L1_I1 -> L2_I1W1로 변경",
+            "selected_alternative": "L2_I1W1",
+            "rationale": "인구 밀집과 풍속이 진화에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_I1T1 대신 L2_I1W1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_I1 -> L2_I1W1",
+            "new_score": 0.73,
+            "weight_adjustment": 0.1
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 풍속의 중요성 확인"
+        },
+        {
+          "event_id": "BT5",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.65,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_W1 -> L2_W1F1",
+          "problem": "풍속과 연료 수분의 조합으로 인한 진화 효율 저하 문제",
+          "backtrack_analysis": {
+            "initial_hypothesis": "풍속과 연료 수분이 진화 효율에 미치는 영향을 분석한다.",
+            "test_calculation": "신뢰도 평가: 0.65",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L1에서 다른 node 조합 시도",
+            "alternative_combination": "L1_W1 -> L2_W1O1",
+            "simplification": "풍속과 화재 지속 시간 조합으로 대체",
+            "structural_change": "L1_W1 -> L2_W1O1로 변경",
+            "selected_alternative": "L2_W1O1",
+            "rationale": "풍속과 화재 지속 시간이 진화에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_W1F1 대신 L2_W1O1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_W1 -> L2_W1O1",
+            "new_score": 0.76,
+            "weight_adjustment": 0.1
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 화재 지속 시간의 중요성 확인"
+        }
+      ],
+      "pruning_events": [
+        {
+          "pruning_id": "P1",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_W1O1I1",
+          "score": 0.76,
+          "threshold": 0.81,
+          "reason": "풍속, 화재 지속 시간, 인구 밀집의 관계에 대한 신뢰도가 기준치(0.81)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_W1O1I1는 \"풍속, 화재 지속 시간, 인구 밀집의 관계\" 분석에서 신뢰도 0.76가 기준 0.81보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P2",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_W1T1F1",
+          "score": 0.82,
+          "threshold": 0.87,
+          "reason": "풍속, 기온, 연료 수분의 관계에 대한 신뢰도가 기준치(0.87)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_W1T1F1는 \"풍속, 기온, 연료 수분의 관계\" 분석에서 신뢰도 0.82가 기준 0.87보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P3",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_O1W1F1",
+          "score": 0.72,
+          "threshold": 0.8,
+          "reason": "화재 지속 시간, 풍속, 연료 수분의 관계에 대한 신뢰도가 기준치(0.80)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_O1W1F1는 \"화재 지속 시간, 풍속, 연료 수분의 관계\" 분석에서 신뢰도 0.72가 기준 0.80보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P4",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_F1O1W1",
+          "score": 0.72,
+          "threshold": 0.8,
+          "reason": "연료 수분, 화재 지속 시간, 풍속의 관계에 대한 신뢰도가 기준치(0.80)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_F1O1W1는 \"연료 수분, 화재 지속 시간, 풍속의 관계\" 분석에서 신뢰도 0.72가 기준 0.80보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P5",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_I1W1T1",
+          "score": 0.78,
+          "threshold": 0.83,
+          "reason": "인구 밀집, 풍속, 기온의 관계에 대한 신뢰도가 기준치(0.83)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_I1W1T1는 \"인구 밀집, 풍속, 기온의 관계\" 분석에서 신뢰도 0.78가 기준 0.83보다 낮아 추론 경로에서 제거하였습니다."
+        }
+      ],
+      "final_selection": {
+        "selected_path": "ROOT → L1_T1 → L2_T1O1 → L3_T1O1I1",
+        "best_l3_node_id": "L3_T1O1I1",
+        "reasoning_chain": "① L1: 풍속과 습도의 상관관계를 분석하였다. ② L2: 풍속과 기온의 관계를 평가하였다. ③ L3: 기온, 화재 지속 시간, 인구 밀집의 관계를 분석하였다.",
+        "path_selection_reasoning": "여러 L3 중 이 경로를 선택한 이유는 기온과 화재 지속 시간, 인구 밀집의 관계가 진화 효율에 미치는 영향을 종합적으로 평가했기 때문입니다.",
+        "selected_path_risk_scoring_description": "최종 경로의 위험도 평가는 기온, 화재 지속 시간, 인구 밀집의 조합으로 이루어졌습니다.",
+        "comprehensive_scoring_matrix": {
+          "path_1": {
+            "risk_level": "높음",
+            "confidence": 0.95
+          },
+          "path_2": {
+            "risk_level": "보통",
+            "confidence": 0.9
+          },
+          "path_3": {
+            "risk_level": "낮음",
+            "confidence": 0.85
+          }
+        },
+        "scoring_criteria": "신뢰도, 위험도, 대응 가능성을 종합적으로 평가하였습니다.",
+        "key_nodes_used": {
+          "O": {
+            "fire_duration": 132.0
+          },
+          "W": {
+            "wind_speed": 2.2
+          },
+          "T": {
+            "temperature": 9.9
+          },
+          "I": {
+            "population": 1910.0
+          },
+          "F": {
+            "fuel_moisture": 18.0
+          }
+        },
+        "path_confidence": 0.82
+      }
+    },
+    "countermeasures": {
+      "immediate_recommendation": {
+        "decision": "기온 하락 시 진화 자원을 신속히 배치하라.",
+        "primary_reason": "기온이 하락하면 진화 효율이 증가하기 때문이다.",
+        "risk_level": "보통"
+      },
+      "safety_assessment": {
+        "prohibitive_factors": {
+          "fire": "화재 강도가 약하지만 지속 시간이 길다.",
+          "visibility": "야간 시야 제한이 우려된다.",
+          "support": "인구 밀집 지역이 인근에 있다.",
+          "intensity": "화재 강도는 약하나 지속성이 있다."
+        },
+        "favorable_factors": {
+          "wind": "풍속이 낮아 화재 확산이 제한적이다.",
+          "humidity": "습도가 적당하여 진화에 유리하다."
+        },
+        "net_assessment": "전반적으로 진화 가능성이 높으나 주의가 필요하다.",
+        "evacuation_zones": {
+          "safe_zone": "인근 대피소는 안전하다.",
+          "danger_zone": "화재 발생 지역은 위험하다.",
+          "buffer_zone": "완충 지역은 대피가 필요하다."
+        },
+        "evacuation_sequence": {
+          "phase_1": "위험 지역 주민 대피.",
+          "phase_2": "인근 지역 주민 대피.",
+          "phase_3": "대피소로의 안전한 이동."
+        }
+      },
+      "alternative_strategies": {
+        "option_1": {
+          "action": "기온 하락 시 진화 자원 배치",
+          "timing": "즉시"
+        },
+        "option_2": {
+          "action": "화재 강도 재평가",
+          "method": "정기적인 모니터링"
+        },
+        "option_3": {
+          "action": "주민 대피 훈련 실시",
+          "condition": "화재 발생 시"
+        }
+      },
+      "safety_requirements": {
+        "minimum_conditions": [
+          "기온 5도 이하",
+          "풍속 3m/s 이하",
+          "시야 확보"
+        ],
+        "key_insights": "기온 하락은 진화 효율을 높인다."
+      }
+    },
+    "decision_answer": {
+      "conclusion": "기온이 하락하면 진화 효율이 향상된다. 따라서 즉각적인 자원 배치가 필요하다.",
+      "safety_verdict": {
+        "decision": "진화 자원을 신속히 배치하라.",
+        "safety_level": "보통",
+        "confidence": "95%",
+        "primary_factor": "기온 하락"
+      },
+      "critical_risks": {
+        "risk_1": "야간 시야 제한으로 인한 위험.",
+        "risk_2": "인구 밀집 지역의 대피 어려움.",
+        "risk_3": "화재 지속 시간으로 인한 위험.",
+        "risk_4": "지형 인식 저하로 인한 사고 가능성."
+      },
+      "clear_message": "즉시 진화 자원 배치 필요.",
+      "critical_action": {
+        "action_1": "기온 하락 시 자원 배치.",
+        "action_2": "화재 강도 재평가.",
+        "action_3": "주민 대피 훈련 실시.",
+        "action_4": "정기적인 모니터링 수행."
+      }
+    },
+    "complete_reasoning": {
+      "reasoning_path_description": "기온과 화재 지속 시간, 인구 밀집의 관계를 분석하였다. 풍속과 습도의 상관관계를 평가하여 진화 효율을 높이는 방안을 모색하였다. 이 과정에서 기온 하락이 진화에 미치는 긍정적인 영향을 확인하였다.선택 경로 L0_ROOT -> L1_W1 -> L2_W1T1 -> L3_T1O1I1는 지형, 발생/운영, 바람 축의 상호작용을 핵심 근거로 합니다. L1에서는 풍속이 낮을수록 진화 효율이 증가할 수 있다.를 검토하고, L2에서 풍속과 기온의 상관관계를 종합했습니다. 최종 L3 판단은 \"IF 기온이 낮고 화재 지속 시간이 길며 인구가 밀집되어 있다면 THEN 진화가 어려워질 것이다.\"로 수렴했으며, 이에 따라 위험도와 실행 가능성을 함께 평가하였습니다.",
+      "risk_scoring": "기온, 화재 지속 시간, 인구 밀집의 조합으로 위험도를 평가하였다.",
+      "confidence_scoring": "신뢰도는 95%로 높다.",
+      "complete_reasoning_countermeasures": "질의자는 야간에 기온이 하락할 경우 진화 효율이 얼마나 향상되는지를 물었습니다. 최종 경로 및 위험도 판단에 따르면, 기온과 화재 지속 시간, 인구 밀집의 관계를 종합적으로 평가한 결과, 기온 하락이 진화 효율을 높이는 긍정적인 영향을 미친다는 결론에 도달했습니다. 이 경로는 기온 하락 시 진화 자원을 신속히 배치하는 것이 필요하다는 점을 강조합니다.\n\n즉각 조치로는 기온 하락 시 진화 자원을 신속히 배치하는 것이 있으며, 이는 기온이 하락할 때 진화 효율이 증가하기 때문입니다. 안전 평가에서는 화재 강도가 약하지만 지속 시간이 길고, 야간 시야 제한이 우려되는 점을 고려해야 합니다. 그러나 풍속이 낮고 습도가 적당하여 진화에 유리한 조건이 마련되어 있습니다. 전반적으로 진화 가능성이 높지만 주의가 필요하다는 점을 명심해야 합니다.\n\n대안 전략으로는 기온 하락 시 즉시 진화 자원을 배치하는 것 외에도 화재 강도를 정기적으로 재평가하고, 화재 발생 시 주민 대피 훈련을 실시하는 것이 있습니다. 이러한 대안들은 상황에 따라 유연하게 적용될 수 있으며, 각 전략의 효과를 비교하여 최적의 대응 방안을 마련하는 것이 중요합니다. 따라서, 질의자의 상황에서 취해야 할 핵심 대응방안은 기온 하락 시 진화 자원을 신속히 배치하고, 지속적인 모니터링과 주민 대피 훈련을 통해 안전성을 높이는 것입니다.",
+      "query": "야간에 기온이 하락하면 진화 효율이 얼마나 향상됩니까?"
+    }
+  },
+  "file_info": {
+    "labelling_file_name": "CD20250314_T_P0001_T017.json",
+    "labelling_file_format": "json"
+  }
+}

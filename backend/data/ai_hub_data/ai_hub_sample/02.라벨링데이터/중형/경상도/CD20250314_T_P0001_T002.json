@@ -1,0 +1,913 @@
+{
+  "labelling_data_info": {
+    "query": {
+      "query_text": "현재 기상 조건이 구조 작업에 미치는 영향은 어느 정도입니까?",
+      "query_purpose": "현황파악",
+      "query_subject": "진화방법",
+      "query_type": "composite"
+    },
+    "tree_of_thought": {
+      "level_0_input": {
+        "L0_node_id": "ROOT",
+        "L0_thought": "산불 구조 작업 영향 분석",
+        "L0_context": {
+          "weather_conditions": {
+            "wind_speed": 1.5,
+            "wind_direction": 140.0,
+            "humidity_percent": 12.0,
+            "temperature": 18.3,
+            "surface_temperature": 13.9,
+            "drought_days": 35.0,
+            "visibility": 5000.0
+          },
+          "terrain_conditions": {
+            "elevation": 427.84,
+            "slope": 34.34,
+            "slope_aspect": 60.05,
+            "curvature": 0.0023,
+            "topographic_position_index": 11.21,
+            "terrain_complexity": 47.49,
+            "hydrological_features": 0.6
+          },
+          "fuel_conditions": {
+            "fuel_type": "침엽수림",
+            "fuel_moisture": 18.0,
+            "fuel_density": 5.61,
+            "fuel_average_age": 35.0,
+            "surface_fuel_depth": 2.0,
+            "canopy_height": 22.0,
+            "canopy_coverage": 75.0
+          },
+          "Infra_Social": {
+            "population": 1910.0,
+            "vulnerable": 1336.0,
+            "fire_station_distance": 4.98,
+            "road_accessibility": "나쁨",
+            "Important_Infra_distance": 0.79,
+            "shelter": ""
+          },
+          "occurrence_status": {
+            "fire_duration": 132.0,
+            "drought_duration_days": 35.0,
+            "wildfire_duration_time": "22:12",
+            "flame_length": 1.0,
+            "fire_intensity": "약함",
+            "fire_length": 2.2,
+            "wind_slope_alignment": 79.95
+          }
+        },
+        "L0_branches": [
+          "L1_W1",
+          "L1_O1",
+          "L1_T1",
+          "L1_F1",
+          "L1_I1"
+        ],
+        "L0_reasoning_description": "기상 조건이 구조 작업에 미치는 영향 분석",
+        "L0_confidence_score": 0.85,
+        "L0_status": "start"
+      },
+      "level_1_branches": {
+        "L1_W1": {
+          "L1_node_id": "L1_W1",
+          "L1_parent": "ROOT",
+          "L1_thought": "풍속과 습도가 구조 작업에 미치는 영향 분석",
+          "L1_data_node": "wind_speed_risk, humidity_effect",
+          "L1_value": [
+            3,
+            4
+          ],
+          "L1_reasoning_type": "직접인과",
+          "L1_calculation": {
+            "wind_speed_risk": "3 (중간)",
+            "humidity_effect": "4 (높음)",
+            "average_risk": "3.5"
+          },
+          "L1_if_then": "IF 풍속이 높고 습도가 낮으면 THEN 화재 확산 위험 증가",
+          "L1_risk_scoring_description": "풍속과 습도가 높아 화재 확산 위험이 증가함.",
+          "L1_confidence_score": 0.8,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_W1O1",
+            "L2_W1T1",
+            "L2_W1F1"
+          ],
+          "L1_reasoning_description": "풍속과 습도가 구조 작업에 미치는 영향 분석."
+        },
+        "L1_O1": {
+          "L1_node_id": "L1_O1",
+          "L1_parent": "ROOT",
+          "L1_thought": "화재 지속시간과 강도가 구조 작업에 미치는 영향 분석",
+          "L1_data_node": "fire_duration_risk, fire_intensity_risk",
+          "L1_value": [
+            4,
+            5
+          ],
+          "L1_reasoning_type": "임계값 판단",
+          "L1_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "fire_intensity_risk": "5 (매우 높음)",
+            "average_risk": "4.5"
+          },
+          "L1_if_then": "IF 화재 지속시간이 길고 강도가 높으면 THEN 구조 작업 어려움",
+          "L1_risk_scoring_description": "화재 지속시간과 강도가 높아 구조 작업이 어려워짐.",
+          "L1_confidence_score": 0.9,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_O1W1",
+            "L2_O1T1"
+          ],
+          "L1_reasoning_description": "화재 지속시간과 강도가 구조 작업에 미치는 영향 분석."
+        },
+        "L1_T1": {
+          "L1_node_id": "L1_T1",
+          "L1_parent": "ROOT",
+          "L1_thought": "지형적 요인이 구조 작업에 미치는 영향 분석",
+          "L1_data_node": "slope_risk, elevation_risk",
+          "L1_value": [
+            2,
+            3
+          ],
+          "L1_reasoning_type": "간접인과",
+          "L1_calculation": {
+            "slope_risk": "2 (낮음)",
+            "elevation_risk": "3 (중간)",
+            "average_risk": "2.5"
+          },
+          "L1_if_then": "IF 지형이 복잡하면 THEN 구조 작업 어려움",
+          "L1_risk_scoring_description": "지형적 요인이 구조 작업에 미치는 영향이 낮음.",
+          "L1_confidence_score": 0.7,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_T1W1",
+            "L2_T1F1"
+          ],
+          "L1_reasoning_description": "지형적 요인이 구조 작업에 미치는 영향 분석."
+        },
+        "L1_F1": {
+          "L1_node_id": "L1_F1",
+          "L1_parent": "ROOT",
+          "L1_thought": "연료 조건이 구조 작업에 미치는 영향 분석",
+          "L1_data_node": "fuel_moisture_risk, fuel_density_risk",
+          "L1_value": [
+            3,
+            4
+          ],
+          "L1_reasoning_type": "증폭효과",
+          "L1_calculation": {
+            "fuel_moisture_risk": "3 (중간)",
+            "fuel_density_risk": "4 (높음)",
+            "average_risk": "3.5"
+          },
+          "L1_if_then": "IF 연료가 건조하고 밀도가 높으면 THEN 화재 위험 증가",
+          "L1_risk_scoring_description": "연료 조건이 구조 작업에 미치는 영향이 중간.",
+          "L1_confidence_score": 0.75,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_F1O1",
+            "L2_F1W1"
+          ],
+          "L1_reasoning_description": "연료 조건이 구조 작업에 미치는 영향 분석."
+        },
+        "L1_I1": {
+          "L1_node_id": "L1_I1",
+          "L1_parent": "ROOT",
+          "L1_thought": "인프라 조건이 구조 작업에 미치는 영향 분석",
+          "L1_data_node": "population_risk, fire_station_distance_risk",
+          "L1_value": [
+            2,
+            3
+          ],
+          "L1_reasoning_type": "단계분석",
+          "L1_calculation": {
+            "population_risk": "2 (낮음)",
+            "fire_station_distance_risk": "3 (중간)",
+            "average_risk": "2.5"
+          },
+          "L1_if_then": "IF 인프라가 부족하면 THEN 구조 작업 어려움",
+          "L1_risk_scoring_description": "인프라 조건이 구조 작업에 미치는 영향이 낮음.",
+          "L1_confidence_score": 0.65,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_I1W1",
+            "L2_I1T1"
+          ],
+          "L1_reasoning_description": "인프라 조건이 구조 작업에 미치는 영향 분석."
+        }
+      },
+      "level_2_branches": {
+        "L2_W1O1": {
+          "L2_node_id": "L2_W1O1",
+          "L2_parent": "L1_W1",
+          "L2_thought": "풍속과 화재 지속시간",
+          "L2_data_combination": "풍속과 화재 지속시간의 조합",
+          "L2_values": [
+            3,
+            4
+          ],
+          "L2_reasoning_type": "직접인과",
+          "L2_calculation": {
+            "wind_speed_risk": "3 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 풍속이 높고 화재 지속시간이 길면 THEN 구조 작업 어려움",
+          "L2_risk_scoring_description": "풍속과 화재 지속시간이 높아 구조 작업이 어려워짐.",
+          "L2_confidence_score": 0.85,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_W1O1I1"
+          ],
+          "L2_reasoning_description": "풍속과 화재 지속시간의 조합이 구조 작업에 미치는 영향 분석."
+        },
+        "L2_W1T1": {
+          "L2_node_id": "L2_W1T1",
+          "L2_parent": "L1_W1",
+          "L2_thought": "풍속과 지형적 요인",
+          "L2_data_combination": "풍속과 지형적 요인의 조합",
+          "L2_values": [
+            3,
+            2
+          ],
+          "L2_reasoning_type": "간접인과",
+          "L2_calculation": {
+            "wind_speed_risk": "3 (중간)",
+            "slope_risk": "2 (낮음)",
+            "average_risk": "2.5"
+          },
+          "L2_if_then": "IF 풍속이 높고 지형이 복잡하면 THEN 구조 작업 어려움",
+          "L2_risk_scoring_description": "풍속과 지형적 요인이 구조 작업에 미치는 영향이 중간.",
+          "L2_confidence_score": 0.75,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_W1T1F1"
+          ],
+          "L2_reasoning_description": "풍속과 지형적 요인의 조합이 구조 작업에 미치는 영향 분석."
+        },
+        "L2_O1W1": {
+          "L2_node_id": "L2_O1W1",
+          "L2_parent": "L1_O1",
+          "L2_thought": "화재 지속시간과 풍속",
+          "L2_data_combination": "화재 지속시간과 풍속의 조합",
+          "L2_values": [
+            4,
+            3
+          ],
+          "L2_reasoning_type": "임계값 판단",
+          "L2_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "wind_speed_risk": "3 (중간)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 화재 지속시간이 길고 풍속이 높으면 THEN 구조 작업 어려움",
+          "L2_risk_scoring_description": "화재 지속시간과 풍속이 높아 구조 작업이 어려워짐.",
+          "L2_confidence_score": 0.9,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_O1W1I1"
+          ],
+          "L2_reasoning_description": "화재 지속시간과 풍속의 조합이 구조 작업에 미치는 영향 분석."
+        },
+        "L2_O1T1": {
+          "L2_node_id": "L2_O1T1",
+          "L2_parent": "L1_O1",
+          "L2_thought": "화재 지속시간과 지형적 요인",
+          "L2_data_combination": "화재 지속시간과 지형적 요인의 조합",
+          "L2_values": [
+            4,
+            2
+          ],
+          "L2_reasoning_type": "간접인과",
+          "L2_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "slope_risk": "2 (낮음)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 화재 지속시간이 길고 지형이 복잡하면 THEN 구조 작업 어려움",
+          "L2_risk_scoring_description": "화재 지속시간과 지형적 요인이 구조 작업에 미치는 영향이 중간.",
+          "L2_confidence_score": 0.8,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_O1T1F1"
+          ],
+          "L2_reasoning_description": "화재 지속시간과 지형적 요인의 조합이 구조 작업에 미치는 영향 분석."
+        },
+        "L2_F1O1": {
+          "L2_node_id": "L2_F1O1",
+          "L2_parent": "L1_F1",
+          "L2_thought": "연료 조건과 화재 지속시간",
+          "L2_data_combination": "연료 조건과 화재 지속시간의 조합",
+          "L2_values": [
+            3,
+            4
+          ],
+          "L2_reasoning_type": "증폭효과",
+          "L2_calculation": {
+            "fuel_moisture_risk": "3 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 연료가 건조하고 화재 지속시간이 길면 THEN 화재 위험 증가",
+          "L2_risk_scoring_description": "연료 조건과 화재 지속시간이 높아 화재 위험이 증가함.",
+          "L2_confidence_score": 0.85,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_F1O1W1"
+          ],
+          "L2_reasoning_description": "연료 조건과 화재 지속시간의 조합이 구조 작업에 미치는 영향 분석."
+        },
+        "L2_F1W1": {
+          "L2_node_id": "L2_F1W1",
+          "L2_parent": "L1_F1",
+          "L2_thought": "연료 조건과 풍속",
+          "L2_data_combination": "연료 조건과 풍속의 조합",
+          "L2_values": [
+            3,
+            3
+          ],
+          "L2_reasoning_type": "직접인과",
+          "L2_calculation": {
+            "fuel_moisture_risk": "3 (중간)",
+            "wind_speed_risk": "3 (중간)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 연료가 건조하고 풍속이 높으면 THEN 화재 위험 증가",
+          "L2_risk_scoring_description": "연료 조건과 풍속이 높아 화재 위험이 증가함.",
+          "L2_confidence_score": 0.8,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_F1W1T1"
+          ],
+          "L2_reasoning_description": "연료 조건과 풍속의 조합이 구조 작업에 미치는 영향 분석."
+        },
+        "L2_T1W1": {
+          "L2_node_id": "L2_T1W1",
+          "L2_parent": "L1_T1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "지형적 요인과 풍속",
+          "L2_data_combination": "지형적 요인과 풍속의 조합",
+          "L2_values": [
+            2,
+            3
+          ],
+          "L2_reasoning_type": "간접인과",
+          "L2_calculation": {
+            "slope_risk": "2 (낮음)",
+            "wind_speed_risk": "3 (중간)",
+            "average_risk": "2.5"
+          },
+          "L2_if_then": "IF 지형이 복잡하고 풍속이 높으면 THEN 구조 작업 어려움",
+          "L2_risk_scoring_description": "지형적 요인과 풍속이 구조 작업에 미치는 영향이 중간.",
+          "L2_confidence_score": 0.75,
+          "L2_reasoning_description": "지형적 요인과 풍속의 조합이 구조 작업에 미치는 영향 분석."
+        },
+        "L2_T1F1": {
+          "L2_node_id": "L2_T1F1",
+          "L2_parent": "L1_T1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "지형적 요인과 연료 조건",
+          "L2_data_combination": "지형적 요인과 연료 조건의 조합",
+          "L2_values": [
+            2,
+            3
+          ],
+          "L2_reasoning_type": "간접인과",
+          "L2_calculation": {
+            "slope_risk": "2 (낮음)",
+            "fuel_moisture_risk": "3 (중간)",
+            "average_risk": "2.5"
+          },
+          "L2_if_then": "IF 지형이 복잡하고 연료가 건조하면 THEN 구조 작업 어려움",
+          "L2_risk_scoring_description": "지형적 요인과 연료 조건이 구조 작업에 미치는 영향이 중간.",
+          "L2_confidence_score": 0.75,
+          "L2_reasoning_description": "지형적 요인과 연료 조건의 조합이 구조 작업에 미치는 영향 분석."
+        },
+        "L2_I1W1": {
+          "L2_node_id": "L2_I1W1",
+          "L2_parent": "L1_I1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "인프라 조건과 풍속",
+          "L2_data_combination": "인프라 조건과 풍속의 조합",
+          "L2_values": [
+            2,
+            3
+          ],
+          "L2_reasoning_type": "직접인과",
+          "L2_calculation": {
+            "population_risk": "2 (낮음)",
+            "wind_speed_risk": "3 (중간)",
+            "average_risk": "2.5"
+          },
+          "L2_if_then": "IF 인프라가 부족하고 풍속이 높으면 THEN 구조 작업 어려움",
+          "L2_risk_scoring_description": "인프라 조건과 풍속이 구조 작업에 미치는 영향이 중간.",
+          "L2_confidence_score": 0.75,
+          "L2_reasoning_description": "인프라 조건과 풍속의 조합이 구조 작업에 미치는 영향 분석."
+        },
+        "L2_I1T1": {
+          "L2_node_id": "L2_I1T1",
+          "L2_parent": "L1_I1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "인프라 조건과 지형적 요인",
+          "L2_data_combination": "인프라 조건과 지형적 요인의 조합",
+          "L2_values": [
+            2,
+            2
+          ],
+          "L2_reasoning_type": "간접인과",
+          "L2_calculation": {
+            "population_risk": "2 (낮음)",
+            "slope_risk": "2 (낮음)",
+            "average_risk": "2.0"
+          },
+          "L2_if_then": "IF 인프라가 부족하고 지형이 복잡하면 THEN 구조 작업 어려움",
+          "L2_risk_scoring_description": "인프라 조건과 지형적 요인이 구조 작업에 미치는 영향이 낮음.",
+          "L2_confidence_score": 0.65,
+          "L2_reasoning_description": "인프라 조건과 지형적 요인의 조합이 구조 작업에 미치는 영향 분석."
+        },
+        "L2_W1F1": {
+          "L2_node_id": "L2_W1F1",
+          "L2_parent": "L1_W1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "풍속과 연료 조건",
+          "L2_data_combination": "풍속과 연료 조건의 조합",
+          "L2_values": [
+            3,
+            3
+          ],
+          "L2_reasoning_type": "직접인과",
+          "L2_calculation": {
+            "wind_speed_risk": "3 (중간)",
+            "fuel_moisture_risk": "3 (중간)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 풍속이 높고 연료가 건조하면 THEN 화재 위험 증가",
+          "L2_risk_scoring_description": "풍속과 연료 조건이 구조 작업에 미치는 영향이 중간.",
+          "L2_confidence_score": 0.8,
+          "L2_reasoning_description": "풍속과 연료 조건의 조합이 구조 작업에 미치는 영향 분석."
+        }
+      },
+      "level_3_branches": {
+        "L3_W1O1I1": {
+          "L3_node_id": "L3_W1O1I1",
+          "L3_parent": "L2_W1O1",
+          "L3_thought": "풍속, 화재 지속시간, 인프라",
+          "L3_data_combination": "풍속, 화재 지속시간, 인프라의 조합",
+          "L3_values": [
+            3,
+            4,
+            2
+          ],
+          "L3_reasoning_type": "직접인과",
+          "L3_calculation": {
+            "wind_speed_risk": "3 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "population_risk": "2 (낮음)",
+            "weighted_average": "(3×0.4)+(4×0.4)+(2×0.2) = 3.4"
+          },
+          "L3_if_then": "IF 풍속이 높고 화재 지속시간이 길며 인프라가 부족하면 THEN 구조 작업 어려움",
+          "L3_risk_scoring_description": "풍속과 화재 지속시간이 높고 인프라가 부족해 구조 작업이 어려워짐.",
+          "L3_confidence_score": 0.85,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "풍속, 화재 지속시간, 인프라의 조합이 구조 작업에 미치는 영향 분석."
+        },
+        "L3_W1T1F1": {
+          "L3_node_id": "L3_W1T1F1",
+          "L3_parent": "L2_W1T1",
+          "L3_thought": "풍속, 지형적 요인, 연료 조건",
+          "L3_data_combination": "풍속, 지형적 요인, 연료 조건의 조합",
+          "L3_values": [
+            3,
+            2,
+            3
+          ],
+          "L3_reasoning_type": "간접인과",
+          "L3_calculation": {
+            "wind_speed_risk": "3 (중간)",
+            "slope_risk": "2 (낮음)",
+            "fuel_moisture_risk": "3 (중간)",
+            "weighted_average": "(3×0.5)+(2×0.3)+(3×0.2) = 2.8"
+          },
+          "L3_if_then": "IF 풍속이 높고 지형이 복잡하며 연료가 건조하면 THEN 구조 작업 어려움",
+          "L3_risk_scoring_description": "풍속과 지형적 요인, 연료 조건이 복합적으로 작용해 구조 작업이 어려워짐.",
+          "L3_confidence_score": 0.75,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "풍속, 지형적 요인, 연료 조건의 조합이 구조 작업에 미치는 영향 분석."
+        },
+        "L3_O1W1I1": {
+          "L3_node_id": "L3_O1W1I1",
+          "L3_parent": "L2_O1W1",
+          "L3_thought": "화재 지속시간, 풍속, 인프라",
+          "L3_data_combination": "화재 지속시간, 풍속, 인프라의 조합",
+          "L3_values": [
+            4,
+            3,
+            2
+          ],
+          "L3_reasoning_type": "임계값 판단",
+          "L3_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "wind_speed_risk": "3 (중간)",
+            "population_risk": "2 (낮음)",
+            "weighted_average": "(4×0.5)+(3×0.3)+(2×0.2) = 3.4"
+          },
+          "L3_if_then": "IF 화재 지속시간이 길고 풍속이 높으며 인프라가 부족하면 THEN 구조 작업 어려움",
+          "L3_risk_scoring_description": "화재 지속시간과 풍속이 높고 인프라가 부족해 구조 작업이 어려워짐.",
+          "L3_confidence_score": 0.9,
+          "L3_status": "selected",
+          "L3_reasoning_description": "화재 지속시간, 풍속, 인프라의 조합이 구조 작업에 미치는 영향 분석."
+        },
+        "L3_O1T1F1": {
+          "L3_node_id": "L3_O1T1F1",
+          "L3_parent": "L2_O1T1",
+          "L3_thought": "화재 지속시간, 지형적 요인, 연료 조건",
+          "L3_data_combination": "화재 지속시간, 지형적 요인, 연료 조건의 조합",
+          "L3_values": [
+            4,
+            2,
+            3
+          ],
+          "L3_reasoning_type": "간접인과",
+          "L3_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "slope_risk": "2 (낮음)",
+            "fuel_moisture_risk": "3 (중간)",
+            "weighted_average": "(4×0.5)+(2×0.3)+(3×0.2) = 3.2"
+          },
+          "L3_if_then": "IF 화재 지속시간이 길고 지형이 복잡하며 연료가 건조하면 THEN 구조 작업 어려움",
+          "L3_risk_scoring_description": "화재 지속시간과 지형적 요인, 연료 조건이 복합적으로 작용해 구조 작업이 어려워짐.",
+          "L3_confidence_score": 0.8,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "화재 지속시간, 지형적 요인, 연료 조건의 조합이 구조 작업에 미치는 영향 분석."
+        },
+        "L3_F1O1W1": {
+          "L3_node_id": "L3_F1O1W1",
+          "L3_parent": "L2_F1O1",
+          "L3_status": "pruning",
+          "L3_thought": "연료 조건과 화재 지속시간",
+          "L3_data_combination": "연료 조건과 화재 지속시간의 조합",
+          "L3_values": [
+            3,
+            4
+          ],
+          "L3_reasoning_type": "증폭효과",
+          "L3_calculation": {
+            "fuel_moisture_risk": "3 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "weighted_average": "(3×0.5)+(4×0.5) = 3.5"
+          },
+          "L3_if_then": "IF 연료가 건조하고 화재 지속시간이 길면 THEN 화재 위험 증가",
+          "L3_risk_scoring_description": "연료 조건과 화재 지속시간이 높아 화재 위험이 증가함.",
+          "L3_confidence_score": 0.85,
+          "L3_reasoning_description": "연료 조건과 화재 지속시간의 조합이 구조 작업에 미치는 영향 분석."
+        },
+        "L3_F1W1T1": {
+          "L3_node_id": "L3_F1W1T1",
+          "L3_parent": "L2_F1W1",
+          "L3_status": "pruning",
+          "L3_thought": "연료 조건, 풍속, 지형적 요인",
+          "L3_data_combination": "연료 조건, 풍속, 지형적 요인의 조합",
+          "L3_values": [
+            3,
+            3,
+            2
+          ],
+          "L3_reasoning_type": "간접인과",
+          "L3_calculation": {
+            "fuel_moisture_risk": "3 (중간)",
+            "wind_speed_risk": "3 (중간)",
+            "slope_risk": "2 (낮음)",
+            "weighted_average": "(3×0.4)+(3×0.4)+(2×0.2) = 2.8"
+          },
+          "L3_if_then": "IF 연료가 건조하고 풍속이 높으며 지형이 복잡하면 THEN 구조 작업 어려움",
+          "L3_risk_scoring_description": "연료 조건과 풍속, 지형적 요인이 복합적으로 작용해 구조 작업이 어려워짐.",
+          "L3_confidence_score": 0.75,
+          "L3_reasoning_description": "연료 조건, 풍속, 지형적 요인의 조합이 구조 작업에 미치는 영향 분석."
+        }
+      },
+      "backtracking_events": [
+        {
+          "event_id": "BT1",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.65,
+          "threshold": 0.85,
+          "original_path": "L0_ROOT -> L1_T1 -> L2_T1W1",
+          "problem": "지형적 요인과 풍속이 구조 작업에 미치는 영향 개선 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "지형적 요인과 풍속이 구조 작업에 중대한 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.65",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2에서 다른 node 조합 시도",
+            "alternative_combination": "L2_T1F1",
+            "simplification": "풍속과 지형적 요인 조합으로 대체",
+            "structural_change": "L2_T1F1로 변경",
+            "selected_alternative": "L2_T1F1",
+            "rationale": "지형적 요인과 연료 조건이 구조 작업에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_T1W1 대신 L2_T1F1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_T1 -> L2_T1F1",
+            "new_score": 0.75,
+            "weight_adjustment": 0.1
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 지형적 요인과 연료 조건의 중요성 확인"
+        },
+        {
+          "event_id": "BT2",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.7,
+          "threshold": 0.85,
+          "original_path": "L0_ROOT -> L1_T1 -> L2_T1F1",
+          "problem": "지형적 요인과 화재 지속시간의 조합이 구조 작업에 미치는 영향 개선 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "지형적 요인과 화재 지속시간이 구조 작업에 중대한 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.7",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2에서 다른 node 조합 시도",
+            "alternative_combination": "L2_T1W1",
+            "simplification": "화재 지속시간과 지형적 요인 조합으로 대체",
+            "structural_change": "L2_T1W1로 변경",
+            "selected_alternative": "L2_T1W1",
+            "rationale": "화재 지속시간과 풍속이 구조 작업에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_T1F1 대신 L2_T1W1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_T1 -> L2_T1W1",
+            "new_score": 0.8,
+            "weight_adjustment": 0.05
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 지형적 요인과 화재 지속시간의 중요성 확인"
+        },
+        {
+          "event_id": "BT3",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.6,
+          "threshold": 0.85,
+          "original_path": "L0_ROOT -> L1_I1 -> L2_I1W1",
+          "problem": "인프라 조건과 풍속의 조합이 구조 작업에 미치는 영향 개선 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "인프라 조건과 풍속이 구조 작업에 중대한 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.6",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2에서 다른 node 조합 시도",
+            "alternative_combination": "L2_I1T1",
+            "simplification": "인프라 조건과 화재 지속시간 조합으로 대체",
+            "structural_change": "L2_I1T1로 변경",
+            "selected_alternative": "L2_I1T1",
+            "rationale": "인프라 조건과 화재 지속시간이 구조 작업에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_I1W1 대신 L2_I1T1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_I1 -> L2_I1T1",
+            "new_score": 0.7,
+            "weight_adjustment": 0.1
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 인프라 조건과 화재 지속시간의 중요성 확인"
+        },
+        {
+          "event_id": "BT4",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.65,
+          "threshold": 0.85,
+          "original_path": "L0_ROOT -> L1_I1 -> L2_I1T1",
+          "problem": "인프라 조건과 지형적 요인의 조합이 구조 작업에 미치는 영향 개선 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "인프라 조건과 지형적 요인이 구조 작업에 중대한 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.65",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2에서 다른 node 조합 시도",
+            "alternative_combination": "L2_I1W1",
+            "simplification": "인프라 조건과 화재 지속시간 조합으로 대체",
+            "structural_change": "L2_I1W1로 변경",
+            "selected_alternative": "L2_I1W1",
+            "rationale": "인프라 조건과 화재 지속시간이 구조 작업에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_I1T1 대신 L2_I1W1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_I1 -> L2_I1W1",
+            "new_score": 0.75,
+            "weight_adjustment": 0.1
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 인프라 조건과 화재 지속시간의 중요성 확인"
+        },
+        {
+          "event_id": "BT5",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.7,
+          "threshold": 0.85,
+          "original_path": "L0_ROOT -> L1_W1 -> L2_W1F1",
+          "problem": "풍속과 연료 조건의 조합이 구조 작업에 미치는 영향 개선 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "풍속과 연료 조건이 구조 작업에 중대한 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.7",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2에서 다른 node 조합 시도",
+            "alternative_combination": "L2_W1T1",
+            "simplification": "풍속과 화재 지속시간 조합으로 대체",
+            "structural_change": "L2_W1T1로 변경",
+            "selected_alternative": "L2_W1T1",
+            "rationale": "풍속과 화재 지속시간이 구조 작업에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_W1F1 대신 L2_W1T1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_W1 -> L2_W1T1",
+            "new_score": 0.75,
+            "weight_adjustment": 0.05
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 풍속과 화재 지속시간의 중요성 확인"
+        }
+      ],
+      "pruning_events": [
+        {
+          "pruning_id": "P1",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_W1O1I1",
+          "score": 0.85,
+          "threshold": 0.9,
+          "reason": "풍속, 화재 지속시간, 인프라에 대한 신뢰도가 기준치(0.90)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_W1O1I1는 \"풍속, 화재 지속시간, 인프라\" 분석에서 신뢰도 0.85가 기준 0.90보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P2",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_W1T1F1",
+          "score": 0.75,
+          "threshold": 0.8,
+          "reason": "풍속, 지형적 요인, 연료 조건에 대한 신뢰도가 기준치(0.80)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_W1T1F1는 \"풍속, 지형적 요인, 연료 조건\" 분석에서 신뢰도 0.75가 기준 0.80보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P3",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_O1T1F1",
+          "score": 0.8,
+          "threshold": 0.85,
+          "reason": "화재 지속시간, 지형적 요인, 연료 조건에 대한 신뢰도가 기준치(0.85)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_O1T1F1는 \"화재 지속시간, 지형적 요인, 연료 조건\" 분석에서 신뢰도 0.80가 기준 0.85보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P4",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_F1O1W1",
+          "score": 0.85,
+          "threshold": 0.9,
+          "reason": "연료 조건과 화재 지속시간에 대한 신뢰도가 기준치(0.90)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_F1O1W1는 \"연료 조건과 화재 지속시간\" 분석에서 신뢰도 0.85가 기준 0.90보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P5",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_F1W1T1",
+          "score": 0.75,
+          "threshold": 0.8,
+          "reason": "연료 조건, 풍속, 지형적 요인에 대한 신뢰도가 기준치(0.80)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_F1W1T1는 \"연료 조건, 풍속, 지형적 요인\" 분석에서 신뢰도 0.75가 기준 0.80보다 낮아 추론 경로에서 제거하였습니다."
+        }
+      ],
+      "final_selection": {
+        "selected_path": "ROOT → L1_O1 → L2_O1W1 → L3_O1W1I1",
+        "best_l3_node_id": "L3_O1W1I1",
+        "reasoning_chain": "① L1: 화재 지속시간과 강도가 구조 작업에 미치는 영향 분석 ② L2: 화재 지속시간과 풍속의 조합이 구조 작업에 미치는 영향 분석 ③ L3: 화재 지속시간, 풍속, 인프라의 조합이 구조 작업에 미치는 영향 분석.",
+        "path_selection_reasoning": "여러 L3 중 이 경로를 선택한 이유는 화재 지속시간과 풍속이 높고 인프라가 부족해 구조 작업이 어려워짐을 고려했기 때문입니다.",
+        "selected_path_risk_scoring_description": "최종 경로의 위험도 평가 결과, 화재 지속시간과 풍속이 높고 인프라가 부족해 구조 작업이 어려워질 가능성이 높습니다.",
+        "comprehensive_scoring_matrix": {
+          "path_1": {
+            "risk_level": "높음",
+            "confidence": 0.9
+          },
+          "path_2": {
+            "risk_level": "보통",
+            "confidence": 0.85
+          },
+          "path_3": {
+            "risk_level": "낮음",
+            "confidence": 0.8
+          }
+        },
+        "scoring_criteria": "신뢰도, 위험도, 대응 가능성을 종합적으로 고려하여 최종 경로를 선정하였습니다.",
+        "key_nodes_used": {
+          "O": {
+            "fire_duration": 4,
+            "fire_intensity": 5
+          },
+          "W": {
+            "wind_speed": 3,
+            "humidity": 4
+          },
+          "T": {
+            "slope": 2,
+            "elevation": 3
+          },
+          "I": {
+            "population": 2,
+            "fire_station_distance": 3
+          },
+          "F": {
+            "fuel_moisture": 3,
+            "fuel_density": 4
+          }
+        },
+        "path_confidence": 0.9
+      }
+    },
+    "countermeasures": {
+      "immediate_recommendation": {
+        "decision": "구조 작업을 즉시 중단하고 대피를 권장합니다.",
+        "primary_reason": "화재 지속시간과 풍속이 높아 구조 작업이 위험합니다.",
+        "risk_level": "높음"
+      },
+      "safety_assessment": {
+        "prohibitive_factors": {
+          "fire": "화재 강도가 약하지만 지속시간이 길어 위험합니다.",
+          "visibility": "가시거리가 양호하나 불안정합니다.",
+          "support": "인프라가 부족하여 구조 지원이 어렵습니다.",
+          "intensity": "화재 강도가 약하나 지속적인 위험이 존재합니다."
+        },
+        "favorable_factors": {
+          "wind": "풍속이 낮아 화재 확산 속도는 느립니다.",
+          "humidity": "습도가 낮아 화재 진압에 유리할 수 있습니다."
+        },
+        "net_assessment": "전반적으로 구조 작업에 부정적인 요소가 많습니다.",
+        "evacuation_zones": {
+          "safe_zone": "주민 대피소는 안전합니다.",
+          "danger_zone": "화재 발생 지역은 위험합니다.",
+          "buffer_zone": "완충 지역은 대피 경로로 활용 가능합니다."
+        },
+        "evacuation_sequence": {
+          "phase_1": "취약계층을 우선 대피시킵니다.",
+          "phase_2": "주민들을 안전한 대피소로 안내합니다.",
+          "phase_3": "구조 요원은 안전 확보 후 작업을 재개합니다."
+        }
+      },
+      "alternative_strategies": {
+        "option_1": {
+          "action": "주민 안전 확인 후 대피 경로를 확보합니다.",
+          "timing": "즉시"
+        },
+        "option_2": {
+          "action": "구조 작업을 중단하고 상황을 모니터링합니다.",
+          "method": "실시간 데이터 분석"
+        },
+        "option_3": {
+          "action": "인근 소방서에 지원 요청합니다.",
+          "condition": "화재가 확산될 경우"
+        }
+      },
+      "safety_requirements": {
+        "minimum_conditions": [
+          "주민 대피 완료",
+          "구조 요원 안전 확보",
+          "화재 진압 장비 준비"
+        ],
+        "key_insights": "현재 화재 상황은 구조 작업에 매우 위험합니다."
+      }
+    },
+    "decision_answer": {
+      "conclusion": "현재 기상 조건은 구조 작업에 부정적인 영향을 미칩니다. 화재 지속시간과 풍속이 높아 즉각적인 대피가 필요합니다.",
+      "safety_verdict": {
+        "decision": "구조 작업을 중단하고 대피를 권장합니다.",
+        "safety_level": "높음",
+        "confidence": "90%",
+        "primary_factor": "화재 지속시간과 풍속"
+      },
+      "critical_risks": {
+        "risk_1": "화재 지속시간이 길어 위험합니다.",
+        "risk_2": "풍속이 높아 화재 확산 가능성이 있습니다.",
+        "risk_3": "인프라 부족으로 구조 작업이 어렵습니다.",
+        "risk_4": "주민 안전이 위협받고 있습니다."
+      },
+      "clear_message": "즉시 대피가 필요합니다.",
+      "critical_action": {
+        "action_1": "주민 대피소로 안내합니다.",
+        "action_2": "구조 작업을 중단합니다.",
+        "action_3": "상황을 지속적으로 모니터링합니다.",
+        "action_4": "소방서에 지원 요청합니다."
+      }
+    },
+    "complete_reasoning": {
+      "reasoning_path_description": "화재 지속시간과 강도가 구조 작업에 미치는 영향을 분석했습니다. 화재 지속시간이 길고 풍속이 높아 구조 작업이 어려워질 가능성이 큽니다. 인프라 부족으로 인해 구조 작업의 안전성이 더욱 저하됩니다.선택 경로 L0_ROOT -> L1_O1 -> L2_O1W1 -> L3_O1W1I1는 바람, 발생/운영, 인프라 축의 상호작용을 핵심 근거로 합니다. L1에서는 화재 지속시간과 강도가 구조 작업에 미치는 영향 분석를 검토하고, L2에서 화재 지속시간과 풍속를 종합했습니다. 최종 L3 판단은 \"IF 화재 지속시간이 길고 풍속이 높으며 인프라가 부족하면 THEN 구조 작업 어려움\"로 수렴했으며, 이에 따라 위험도와 실행 가능성을 함께 평가하였습니다.",
+      "risk_scoring": "최종 경로의 위험도는 높음으로 평가되었습니다.",
+      "confidence_scoring": "신뢰도는 90%로 높은 편입니다.",
+      "complete_reasoning_countermeasures": "질의자는 현재 기상 조건이 구조 작업에 미치는 영향을 물었습니다. 최종 경로 및 위험도 판단에 따르면, 화재 지속시간과 풍속이 높고 인프라가 부족하여 구조 작업이 어려워질 가능성이 높습니다. 이러한 요소들은 구조 작업의 안전성을 크게 저하시킵니다.\n\n즉각 조치로는 구조 작업을 즉시 중단하고 대피를 권장하는 것이며, 이는 화재 지속시간과 풍속이 높아 구조 작업이 위험하다는 판단에 기반합니다. 안전 평가 결과, 화재 강도가 약하더라도 지속적인 위험이 존재하며, 인프라 부족으로 인해 구조 지원이 어렵다는 점이 강조됩니다. 따라서, 주민 대피소는 안전하지만 화재 발생 지역은 위험하므로, 취약계층을 우선 대피시키는 것이 중요합니다.\n\n대안 전략으로는 주민 안전 확인 후 대피 경로를 확보하는 것, 구조 작업을 중단하고 상황을 모니터링하는 것, 인근 소방서에 지원 요청하는 것 등이 있습니다. 이러한 대안들은 상황에 따라 유연하게 적용될 수 있으며, 즉각적인 대피와 안전 확보가 최우선입니다. 따라서, 질의자의 상황에서 취해야 할 핵심 대응방안은 즉시 대피를 권장하고, 구조 작업을 중단하여 안전을 확보하는 것입니다.",
+      "query": "현재 기상 조건이 구조 작업에 미치는 영향은 어느 정도입니까?"
+    }
+  },
+  "file_info": {
+    "labelling_file_name": "CD20250314_T_P0001_T002.json",
+    "labelling_file_format": "json"
+  }
+}

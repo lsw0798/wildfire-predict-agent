@@ -1,0 +1,89 @@
+{
+  "raw_data_info": {
+    "fire_info": {
+      "fire_incident_id": "BY20230402",
+      "region": "충청도",
+      "fire_size": "중형",
+      "incident_name": "충남 부여 세도",
+      "fire_location": {
+        "lat": 36.16845,
+        "lon": 126.9295
+      },
+      "fire_report_number": "백제소방서-20230402-001",
+      "start_timestamp": "2023-04-02 15:03:00",
+      "detection_timestamp": "2023-04-02 15:03:00",
+      "end_timestamp": "2023-04-02 18:35:00",
+      "response_phase": "1단계",
+      "fire_cause": "담뱃불실화",
+      "affected_area": 24.4,
+      "fire_spread_track": "[36.168472,126.929491],[36.169529,126.929298],[36.169736,126.928075],[36.170239,126.926766],[36.169529,126.926358],[36.16842,126.926186],[36.167155,126.925714],[36.165458,126.925736],[36.164072,126.925392],[36.162495,126.925285],[36.161698,126.925028],[36.161387,126.927173],[36.16253,126.927173],[36.162859,126.927989],[36.163206,126.928525],[36.163725,126.929319],[36.164592,126.928654],[36.165388,126.928826],[36.166168,126.929684],[36.167121,126.92977],[36.167121,126.928289],[36.168073,126.928375],[36.168472,126.929491]"
+    }
+  },
+  "source_data_info": {
+    "file_name": "BY20230402_S_P0002_T002",
+    "file_format": "json",
+    "user_info": {
+      "user_type": "RW",
+      "user_type_description": "구조요원",
+      "query_time": "2023-04-02 17:00",
+      "query_location": {
+        "lat": 36.162272,
+        "lon": 126.926925
+      },
+      "query_location_description": "다마 4845 9628"
+    },
+    "weather_conditions": {
+      "observation_time": "2023-04-02 17:00",
+      "observatory_type": "기상",
+      "observatory_location": "부여",
+      "temperature": 22.6,
+      "rainfall": 0.0,
+      "wind_speed": 2.9,
+      "wind_direction": 90.0,
+      "humidity_percent": 22.0,
+      "atmospheric_pressure": 1015.4,
+      "visibility": 4146.0,
+      "past_rainfall_7days": 0.0,
+      "surface_temperature": 19.5,
+      "observation_height": 10.0
+    },
+    "terrain_conditions": {
+      "elevation": 34.66,
+      "slope": 4.79,
+      "slope_aspect": 186.8,
+      "curvature": 0.0013,
+      "topographic_position_index": 4.79,
+      "terrain_complexity": 24.52,
+      "hydrological_features": 2.4
+    },
+    "fuel_conditions": {
+      "fuel_type": "활엽수림",
+      "fuel_density": 4.98,
+      "surface_fuel_depth": 4.0,
+      "fuel_moisture": 15.0,
+      "fuel_average_age": 15.0,
+      "canopy_height": 4.0,
+      "canopy_coverage": 55.0
+    },
+    "Infra_Social": {
+      "population": 2844.0,
+      "households": 1656.0,
+      "vulnerable": 1990.0,
+      "fire_station_distance": 2.07,
+      "Important_Infra_distance": 1.17,
+      "road_accessibility": "나쁨",
+      "shelter": "두곡2리마을회관"
+    },
+    "occurrence_status": {
+      "drought_duration_days": 35.0,
+      "wildfire_duration_time": "1:57",
+      "wind_direction_slope_aspect_alignment": {
+        "wind_direction": 90.0,
+        "slope_aspect": 186.8
+      },
+      "fire_length": 3.3,
+      "fire_intensity": "매우강함",
+      "flame_length": 2.0
+    }
+  }
+}

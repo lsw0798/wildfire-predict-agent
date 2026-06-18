@@ -1,0 +1,89 @@
+{
+  "raw_data_info": {
+    "fire_info": {
+      "fire_incident_id": "GR20220225",
+      "region": "전라도",
+      "fire_size": "중형",
+      "incident_name": "전남 구례 간전 효곡",
+      "fire_location": {
+        "lat": 35.13715,
+        "lon": 127.5508
+      },
+      "fire_report_number": "구례소방서-20220225-001",
+      "start_timestamp": "2022-02-25 12:46:00",
+      "detection_timestamp": "2022-02-25 12:46:00",
+      "end_timestamp": "2022-03-01 10:00:00",
+      "response_phase": "1단계",
+      "fire_cause": "예초기불꽃",
+      "affected_area": 29.0,
+      "fire_spread_track": "[35.137127,127.550442],[35.136319,127.54761],[35.135512,127.547696],[35.133792,127.550657],[35.132915,127.552288],[35.13281,127.558768],[35.134354,127.558553],[35.13639,127.554906],[35.137127,127.550442]"
+    }
+  },
+  "source_data_info": {
+    "file_name": "GR20220225_S_P0001_T016",
+    "file_format": "json",
+    "user_info": {
+      "user_type": "CI",
+      "user_type_description": "시민",
+      "query_time": "2022-02-26 04:00",
+      "query_location": {
+        "lat": 35.13281,
+        "lon": 127.558768
+      },
+      "query_location_description": "라라 0535 8195"
+    },
+    "weather_conditions": {
+      "observation_time": "2022-02-26 04:00",
+      "observatory_type": "기상",
+      "observatory_location": "남원",
+      "temperature": -3.9,
+      "rainfall": 0.0,
+      "wind_speed": 0.4,
+      "wind_direction": 0.0,
+      "humidity_percent": 92.0,
+      "atmospheric_pressure": 1008.6,
+      "visibility": 192.0,
+      "past_rainfall_7days": 0.0,
+      "surface_temperature": 2.3,
+      "observation_height": 10.0
+    },
+    "terrain_conditions": {
+      "elevation": 433.23,
+      "slope": 18.67,
+      "slope_aspect": 270.77,
+      "curvature": 0.0008,
+      "topographic_position_index": 2.88,
+      "terrain_complexity": 77.93,
+      "hydrological_features": 0.5
+    },
+    "fuel_conditions": {
+      "fuel_type": "활엽수림",
+      "fuel_density": 13.17,
+      "surface_fuel_depth": 4.0,
+      "fuel_moisture": 15.0,
+      "fuel_average_age": 55.0,
+      "canopy_height": 18.0,
+      "canopy_coverage": 75.0
+    },
+    "Infra_Social": {
+      "population": 1389.0,
+      "households": 846.0,
+      "vulnerable": 934.0,
+      "fire_station_distance": 9.0,
+      "Important_Infra_distance": 1.68,
+      "road_accessibility": "나쁨",
+      "shelter": "효죽마을회관"
+    },
+    "occurrence_status": {
+      "drought_duration_days": 35.0,
+      "wildfire_duration_time": "15:14",
+      "wind_direction_slope_aspect_alignment": {
+        "wind_direction": 0.0,
+        "slope_aspect": 270.77
+      },
+      "fire_length": 2.2,
+      "fire_intensity": "약함",
+      "flame_length": 1.0
+    }
+  }
+}

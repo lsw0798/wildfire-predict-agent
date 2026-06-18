@@ -1,0 +1,911 @@
+{
+  "labelling_data_info": {
+    "query": {
+      "query_text": "구조 인력을 고립 지역 진입에 투입할지 대피소 운영에 배치할지 결정해야 합니까?",
+      "query_purpose": "의사결정",
+      "query_subject": "피혜예상",
+      "query_type": "dilemma"
+    },
+    "tree_of_thought": {
+      "level_0_input": {
+        "L0_node_id": "ROOT",
+        "L0_thought": "구조 인력 배치 결정",
+        "L0_context": {
+          "weather_conditions": {
+            "wind_speed": 1.2,
+            "wind_direction": 270.0,
+            "humidity_percent": 18.0,
+            "temperature": 21.7,
+            "surface_temperature": 16.4,
+            "drought_days": 35.0,
+            "visibility": 5000.0
+          },
+          "terrain_conditions": {
+            "elevation": 175.22,
+            "slope": 25.73,
+            "slope_aspect": 189.72,
+            "curvature": -0.0019,
+            "topographic_position_index": 6.37,
+            "terrain_complexity": 21.23,
+            "hydrological_features": 1.2
+          },
+          "fuel_conditions": {
+            "fuel_type": "활엽수림",
+            "fuel_moisture": 15.0,
+            "fuel_density": 11.79,
+            "fuel_average_age": 35.0,
+            "surface_fuel_depth": 4.0,
+            "canopy_height": 14.0,
+            "canopy_coverage": 75.0
+          },
+          "Infra_Social": {
+            "population": 1785.0,
+            "vulnerable": 1082.0,
+            "fire_station_distance": 6.49,
+            "road_accessibility": "보통",
+            "Important_Infra_distance": 0.56,
+            "shelter": ""
+          },
+          "occurrence_status": {
+            "fire_duration": 292.0,
+            "drought_duration_days": 35.0,
+            "wildfire_duration_time": "6:52",
+            "flame_length": 1.0,
+            "fire_intensity": "약함",
+            "fire_length": 2.2,
+            "wind_slope_alignment": 270.0
+          }
+        },
+        "L0_branches": [
+          "L1_W1",
+          "L1_O1",
+          "L1_T1",
+          "L1_F1",
+          "L1_I1"
+        ],
+        "L0_reasoning_description": "구조 인력의 안전과 효율성을 고려한 결정",
+        "L0_confidence_score": 0.85,
+        "L0_status": "start"
+      },
+      "level_1_branches": {
+        "L1_W1": {
+          "L1_node_id": "L1_W1",
+          "L1_parent": "ROOT",
+          "L1_thought": "바람의 세기와 방향이 중요하다.",
+          "L1_data_node": "wind_speed_risk, wind_direction_risk",
+          "L1_value": [
+            3,
+            4
+          ],
+          "L1_reasoning_type": "직접인과",
+          "L1_calculation": {
+            "wind_speed_risk": "3 (중간)",
+            "wind_direction_risk": "4 (높음)",
+            "average_risk": "3.5"
+          },
+          "L1_if_then": "IF wind_speed > 3 THEN increase personnel in isolated areas",
+          "L1_risk_scoring_description": "바람의 세기와 방향이 구조에 미치는 영향 평가",
+          "L1_confidence_score": 0.8,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_W1O1",
+            "L2_W1T1",
+            "L2_W1F1"
+          ],
+          "L1_reasoning_description": "바람의 세기가 구조 작업에 미치는 영향을 고려"
+        },
+        "L1_O1": {
+          "L1_node_id": "L1_O1",
+          "L1_parent": "ROOT",
+          "L1_thought": "화재 지속 시간이 구조에 영향을 미친다.",
+          "L1_data_node": "fire_duration_risk, flame_length_risk",
+          "L1_value": [
+            4,
+            2
+          ],
+          "L1_reasoning_type": "간접인과",
+          "L1_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "flame_length_risk": "2 (낮음)",
+            "average_risk": "3.0"
+          },
+          "L1_if_then": "IF fire_duration > 6 THEN prioritize evacuation",
+          "L1_risk_scoring_description": "화재 지속 시간이 구조 작업에 미치는 영향 평가",
+          "L1_confidence_score": 0.75,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_O1W1",
+            "L2_O1T1"
+          ],
+          "L1_reasoning_description": "화재 지속 시간이 구조 작업에 미치는 영향을 고려"
+        },
+        "L1_T1": {
+          "L1_node_id": "L1_T1",
+          "L1_parent": "ROOT",
+          "L1_thought": "지형의 경사도와 복잡성이 중요하다.",
+          "L1_data_node": "slope_risk, terrain_complexity_risk",
+          "L1_value": [
+            3,
+            5
+          ],
+          "L1_reasoning_type": "임계값 판단",
+          "L1_calculation": {
+            "slope_risk": "3 (중간)",
+            "terrain_complexity_risk": "5 (매우 높음)",
+            "average_risk": "4.0"
+          },
+          "L1_if_then": "IF slope > 25 THEN increase safety measures",
+          "L1_risk_scoring_description": "지형의 경사도와 복잡성이 구조 작업에 미치는 영향 평가",
+          "L1_confidence_score": 0.85,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_T1O1",
+            "L2_T1W1"
+          ],
+          "L1_reasoning_description": "지형의 경사도와 복잡성이 구조 작업에 미치는 영향을 고려"
+        },
+        "L1_F1": {
+          "L1_node_id": "L1_F1",
+          "L1_parent": "ROOT",
+          "L1_thought": "연료의 습도와 밀도가 중요하다.",
+          "L1_data_node": "fuel_moisture_effect, fuel_density_risk",
+          "L1_value": [
+            2,
+            3
+          ],
+          "L1_reasoning_type": "증폭효과",
+          "L1_calculation": {
+            "fuel_moisture_risk": "2 (낮음)",
+            "fuel_density_risk": "3 (중간)",
+            "average_risk": "2.5"
+          },
+          "L1_if_then": "IF fuel_moisture < 15 THEN increase evacuation efforts",
+          "L1_risk_scoring_description": "연료의 습도와 밀도가 구조 작업에 미치는 영향 평가",
+          "L1_confidence_score": 0.7,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_F1O1",
+            "L2_F1W1"
+          ],
+          "L1_reasoning_description": "연료의 습도와 밀도가 구조 작업에 미치는 영향을 고려"
+        },
+        "L1_I1": {
+          "L1_node_id": "L1_I1",
+          "L1_parent": "ROOT",
+          "L1_thought": "인구 밀도와 취약계층이 중요하다.",
+          "L1_data_node": "population_risk, vulnerable_risk",
+          "L1_value": [
+            4,
+            5
+          ],
+          "L1_reasoning_type": "시너지",
+          "L1_calculation": {
+            "population_risk": "4 (높음)",
+            "vulnerable_risk": "5 (매우 높음)",
+            "average_risk": "4.5"
+          },
+          "L1_if_then": "IF vulnerable > 1000 THEN prioritize rescue operations",
+          "L1_risk_scoring_description": "인구 밀도와 취약계층이 구조 작업에 미치는 영향 평가",
+          "L1_confidence_score": 0.9,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_I1O1",
+            "L2_I1W1"
+          ],
+          "L1_reasoning_description": "인구 밀도와 취약계층이 구조 작업에 미치는 영향을 고려"
+        }
+      },
+      "level_2_branches": {
+        "L2_W1O1": {
+          "L2_node_id": "L2_W1O1",
+          "L2_parent": "L1_W1",
+          "L2_thought": "바람과 화재 지속 시간의 조합",
+          "L2_data_combination": "바람의 세기와 화재 지속 시간의 상관관계",
+          "L2_values": [
+            3,
+            4
+          ],
+          "L2_reasoning_type": "직접인과",
+          "L2_calculation": {
+            "wind_speed_risk": "3 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF wind_speed > 3 AND fire_duration > 6 THEN increase personnel in isolated areas",
+          "L2_risk_scoring_description": "바람과 화재 지속 시간이 구조에 미치는 영향 평가",
+          "L2_confidence_score": 0.8,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_W1O1I1"
+          ],
+          "L2_reasoning_description": "바람과 화재 지속 시간의 조합이 구조 작업에 미치는 영향을 고려"
+        },
+        "L2_O1W1": {
+          "L2_node_id": "L2_O1W1",
+          "L2_parent": "L1_O1",
+          "L2_thought": "화재 지속 시간과 바람의 세기",
+          "L2_data_combination": "화재 지속 시간과 바람의 세기 조합",
+          "L2_values": [
+            4,
+            3
+          ],
+          "L2_reasoning_type": "간접인과",
+          "L2_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "wind_speed_risk": "3 (중간)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF fire_duration > 6 AND wind_speed > 3 THEN prioritize evacuation",
+          "L2_risk_scoring_description": "화재 지속 시간과 바람의 세기가 구조 작업에 미치는 영향 평가",
+          "L2_confidence_score": 0.75,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_O1W1F1"
+          ],
+          "L2_reasoning_description": "화재 지속 시간과 바람의 세기가 구조 작업에 미치는 영향을 고려"
+        },
+        "L2_T1O1": {
+          "L2_node_id": "L2_T1O1",
+          "L2_parent": "L1_T1",
+          "L2_thought": "지형과 화재 지속 시간",
+          "L2_data_combination": "지형의 경사도와 화재 지속 시간의 관계",
+          "L2_values": [
+            3,
+            4
+          ],
+          "L2_reasoning_type": "임계값 판단",
+          "L2_calculation": {
+            "slope_risk": "3 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF slope > 25 AND fire_duration > 6 THEN increase safety measures",
+          "L2_risk_scoring_description": "지형의 경사도와 화재 지속 시간이 구조 작업에 미치는 영향 평가",
+          "L2_confidence_score": 0.85,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_T1O1I1"
+          ],
+          "L2_reasoning_description": "지형의 경사도와 화재 지속 시간이 구조 작업에 미치는 영향을 고려"
+        },
+        "L2_I1O1": {
+          "L2_node_id": "L2_I1O1",
+          "L2_parent": "L1_I1",
+          "L2_thought": "인구 밀도와 화재 지속 시간",
+          "L2_data_combination": "인구 밀도와 화재 지속 시간의 상관관계",
+          "L2_values": [
+            4,
+            4
+          ],
+          "L2_reasoning_type": "시너지",
+          "L2_calculation": {
+            "population_risk": "4 (높음)",
+            "fire_duration_risk": "4 (높음)",
+            "average_risk": "4.0"
+          },
+          "L2_if_then": "IF vulnerable > 1000 AND fire_duration > 6 THEN prioritize rescue operations",
+          "L2_risk_scoring_description": "인구 밀도와 화재 지속 시간이 구조 작업에 미치는 영향 평가",
+          "L2_confidence_score": 0.9,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_I1O1F1"
+          ],
+          "L2_reasoning_description": "인구 밀도와 화재 지속 시간이 구조 작업에 미치는 영향을 고려"
+        },
+        "L2_F1O1": {
+          "L2_node_id": "L2_F1O1",
+          "L2_parent": "L1_F1",
+          "L2_thought": "연료의 습도와 화재 지속 시간",
+          "L2_data_combination": "연료의 습도와 화재 지속 시간의 관계",
+          "L2_values": [
+            2,
+            4
+          ],
+          "L2_reasoning_type": "증폭효과",
+          "L2_calculation": {
+            "fuel_moisture_risk": "2 (낮음)",
+            "fire_duration_risk": "4 (높음)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF fuel_moisture < 15 AND fire_duration > 6 THEN increase evacuation efforts",
+          "L2_risk_scoring_description": "연료의 습도와 화재 지속 시간이 구조 작업에 미치는 영향 평가",
+          "L2_confidence_score": 0.7,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_F1O1W1"
+          ],
+          "L2_reasoning_description": "연료의 습도와 화재 지속 시간이 구조 작업에 미치는 영향을 고려"
+        },
+        "L2_F1W1": {
+          "L2_node_id": "L2_F1W1",
+          "L2_parent": "L1_F1",
+          "L2_thought": "연료의 습도와 바람의 세기",
+          "L2_data_combination": "연료의 습도와 바람의 세기 조합",
+          "L2_values": [
+            2,
+            3
+          ],
+          "L2_reasoning_type": "증폭효과",
+          "L2_calculation": {
+            "fuel_moisture_risk": "2 (낮음)",
+            "wind_speed_risk": "3 (중간)",
+            "average_risk": "2.5"
+          },
+          "L2_if_then": "IF fuel_moisture < 15 AND wind_speed > 3 THEN increase evacuation efforts",
+          "L2_risk_scoring_description": "연료의 습도와 바람의 세기가 구조 작업에 미치는 영향 평가",
+          "L2_confidence_score": 0.7,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_F1W1T1"
+          ],
+          "L2_reasoning_description": "연료의 습도와 바람의 세기가 구조 작업에 미치는 영향을 고려"
+        },
+        "L2_W1T1": {
+          "L2_node_id": "L2_W1T1",
+          "L2_parent": "L1_W1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "바람의 세기와 지형의 경사도",
+          "L2_data_combination": "바람의 세기와 지형의 경사도 간의 관계",
+          "L2_values": [
+            3,
+            3
+          ],
+          "L2_reasoning_type": "직접인과",
+          "L2_calculation": {
+            "wind_speed_risk": "3 (중간)",
+            "slope_risk": "3 (중간)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF wind_speed > 3 AND slope > 25 THEN increase safety measures",
+          "L2_risk_scoring_description": "바람의 세기와 지형의 경사도가 구조 작업에 미치는 영향 평가",
+          "L2_confidence_score": 0.75,
+          "L2_reasoning_description": "바람의 세기와 지형의 경사도가 구조 작업에 미치는 영향을 고려"
+        },
+        "L2_O1T1": {
+          "L2_node_id": "L2_O1T1",
+          "L2_parent": "L1_O1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "화재 지속 시간과 지형의 경사도",
+          "L2_data_combination": "화재 지속 시간과 지형의 경사도 간의 관계",
+          "L2_values": [
+            4,
+            3
+          ],
+          "L2_reasoning_type": "임계값 판단",
+          "L2_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "slope_risk": "3 (중간)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF fire_duration > 6 AND slope > 25 THEN increase safety measures",
+          "L2_risk_scoring_description": "화재 지속 시간과 지형의 경사도가 구조 작업에 미치는 영향 평가",
+          "L2_confidence_score": 0.85,
+          "L2_reasoning_description": "화재 지속 시간과 지형의 경사도가 구조 작업에 미치는 영향을 고려"
+        },
+        "L2_T1W1": {
+          "L2_node_id": "L2_T1W1",
+          "L2_parent": "L1_T1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "지형의 경사도와 바람의 세기",
+          "L2_data_combination": "지형의 경사도와 바람의 세기 간의 관계",
+          "L2_values": [
+            3,
+            3
+          ],
+          "L2_reasoning_type": "직접인과",
+          "L2_calculation": {
+            "slope_risk": "3 (중간)",
+            "wind_speed_risk": "3 (중간)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF slope > 25 AND wind_speed > 3 THEN increase safety measures",
+          "L2_risk_scoring_description": "지형의 경사도와 바람의 세기가 구조 작업에 미치는 영향 평가",
+          "L2_confidence_score": 0.75,
+          "L2_reasoning_description": "지형의 경사도와 바람의 세기가 구조 작업에 미치는 영향을 고려"
+        },
+        "L2_I1W1": {
+          "L2_node_id": "L2_I1W1",
+          "L2_parent": "L1_I1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "인구 밀도와 바람의 세기",
+          "L2_data_combination": "인구 밀도와 바람의 세기 간의 관계",
+          "L2_values": [
+            4,
+            3
+          ],
+          "L2_reasoning_type": "간접인과",
+          "L2_calculation": {
+            "population_risk": "4 (높음)",
+            "wind_speed_risk": "3 (중간)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF vulnerable > 1000 AND wind_speed > 3 THEN prioritize rescue operations",
+          "L2_risk_scoring_description": "인구 밀도와 바람의 세기가 구조 작업에 미치는 영향 평가",
+          "L2_confidence_score": 0.8,
+          "L2_reasoning_description": "인구 밀도와 바람의 세기가 구조 작업에 미치는 영향을 고려"
+        },
+        "L2_W1F1": {
+          "L2_node_id": "L2_W1F1",
+          "L2_parent": "L1_W1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "바람의 세기와 연료의 습도",
+          "L2_data_combination": "바람의 세기와 연료의 습도 간의 관계",
+          "L2_values": [
+            3,
+            2
+          ],
+          "L2_reasoning_type": "증폭효과",
+          "L2_calculation": {
+            "wind_speed_risk": "3 (중간)",
+            "fuel_moisture_risk": "2 (낮음)",
+            "average_risk": "2.5"
+          },
+          "L2_if_then": "IF wind_speed > 3 AND fuel_moisture < 15 THEN increase evacuation efforts",
+          "L2_risk_scoring_description": "바람의 세기와 연료의 습도가 구조 작업에 미치는 영향 평가",
+          "L2_confidence_score": 0.7,
+          "L2_reasoning_description": "바람의 세기와 연료의 습도가 구조 작업에 미치는 영향을 고려"
+        }
+      },
+      "level_3_branches": {
+        "L3_W1O1I1": {
+          "L3_node_id": "L3_W1O1I1",
+          "L3_parent": "L2_W1O1",
+          "L3_thought": "바람, 화재 지속 시간, 인구 밀도",
+          "L3_data_combination": "바람의 세기, 화재 지속 시간, 인구 밀도 조합",
+          "L3_values": [
+            3,
+            4,
+            4
+          ],
+          "L3_reasoning_type": "직접인과",
+          "L3_calculation": {
+            "wind_speed_risk": "3 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "population_risk": "4 (높음)",
+            "weighted_average": "(3×0.3)+(4×0.4)+(4×0.3) = 3.7"
+          },
+          "L3_if_then": "IF wind_speed > 3 AND fire_duration > 6 AND vulnerable > 1000 THEN increase personnel in isolated areas",
+          "L3_risk_scoring_description": "바람, 화재 지속 시간, 인구 밀도가 구조에 미치는 영향 평가",
+          "L3_confidence_score": 0.8,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "바람, 화재 지속 시간, 인구 밀도의 조합이 구조 작업에 미치는 영향을 고려"
+        },
+        "L3_O1W1F1": {
+          "L3_node_id": "L3_O1W1F1",
+          "L3_parent": "L2_O1W1",
+          "L3_thought": "화재 지속 시간, 바람, 연료 습도",
+          "L3_data_combination": "화재 지속 시간, 바람의 세기, 연료 습도 조합",
+          "L3_values": [
+            4,
+            3,
+            2
+          ],
+          "L3_reasoning_type": "간접인과",
+          "L3_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "wind_speed_risk": "3 (중간)",
+            "fuel_moisture_risk": "2 (낮음)",
+            "weighted_average": "(4×0.4)+(3×0.3)+(2×0.3) = 3.3"
+          },
+          "L3_if_then": "IF fire_duration > 6 AND wind_speed > 3 AND fuel_moisture < 15 THEN prioritize evacuation",
+          "L3_risk_scoring_description": "화재 지속 시간, 바람, 연료 습도가 구조에 미치는 영향 평가",
+          "L3_confidence_score": 0.75,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "화재 지속 시간, 바람, 연료 습도의 조합이 구조 작업에 미치는 영향을 고려"
+        },
+        "L3_T1O1I1": {
+          "L3_node_id": "L3_T1O1I1",
+          "L3_parent": "L2_T1O1",
+          "L3_thought": "지형, 화재 지속 시간, 인구 밀도",
+          "L3_data_combination": "지형의 경사도, 화재 지속 시간, 인구 밀도 조합",
+          "L3_values": [
+            3,
+            4,
+            4
+          ],
+          "L3_reasoning_type": "임계값 판단",
+          "L3_calculation": {
+            "slope_risk": "3 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "population_risk": "4 (높음)",
+            "weighted_average": "(3×0.3)+(4×0.4)+(4×0.3) = 3.7"
+          },
+          "L3_if_then": "IF slope > 25 AND fire_duration > 6 AND vulnerable > 1000 THEN increase safety measures",
+          "L3_risk_scoring_description": "지형, 화재 지속 시간, 인구 밀도가 구조에 미치는 영향 평가",
+          "L3_confidence_score": 0.85,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "지형, 화재 지속 시간, 인구 밀도의 조합이 구조 작업에 미치는 영향을 고려"
+        },
+        "L3_I1O1F1": {
+          "L3_node_id": "L3_I1O1F1",
+          "L3_parent": "L2_I1O1",
+          "L3_thought": "인구 밀도, 화재 지속 시간, 연료 습도",
+          "L3_data_combination": "인구 밀도, 화재 지속 시간, 연료 습도 조합",
+          "L3_values": [
+            4,
+            4,
+            2
+          ],
+          "L3_reasoning_type": "시너지",
+          "L3_calculation": {
+            "population_risk": "4 (높음)",
+            "fire_duration_risk": "4 (높음)",
+            "fuel_moisture_risk": "2 (낮음)",
+            "weighted_average": "(4×0.4)+(4×0.4)+(2×0.2) = 3.6"
+          },
+          "L3_if_then": "IF vulnerable > 1000 AND fire_duration > 6 AND fuel_moisture < 15 THEN prioritize rescue operations",
+          "L3_risk_scoring_description": "인구 밀도, 화재 지속 시간, 연료 습도가 구조에 미치는 영향 평가",
+          "L3_confidence_score": 0.9,
+          "L3_status": "selected",
+          "L3_reasoning_description": "인구 밀도, 화재 지속 시간, 연료 습도의 조합이 구조 작업에 미치는 영향을 고려"
+        },
+        "L3_F1O1W1": {
+          "L3_node_id": "L3_F1O1W1",
+          "L3_parent": "L2_F1O1",
+          "L3_status": "pruning",
+          "L3_thought": "연료의 습도, 화재 지속 시간, 바람의 세기",
+          "L3_data_combination": "연료의 습도, 화재 지속 시간, 바람의 세기 조합",
+          "L3_values": [
+            2,
+            4,
+            3
+          ],
+          "L3_reasoning_type": "간접인과",
+          "L3_calculation": {
+            "fuel_moisture_risk": "2 (낮음)",
+            "fire_duration_risk": "4 (높음)",
+            "wind_speed_risk": "3 (중간)",
+            "weighted_average": "(2×0.3)+(4×0.4)+(3×0.3) = 3.1"
+          },
+          "L3_if_then": "IF fuel_moisture < 15 AND fire_duration > 6 AND wind_speed > 3 THEN prioritize evacuation",
+          "L3_risk_scoring_description": "연료의 습도, 화재 지속 시간, 바람의 세기가 구조에 미치는 영향 평가",
+          "L3_confidence_score": 0.75,
+          "L3_reasoning_description": "연료의 습도, 화재 지속 시간, 바람의 세기의 조합이 구조 작업에 미치는 영향을 고려"
+        },
+        "L3_F1W1T1": {
+          "L3_node_id": "L3_F1W1T1",
+          "L3_parent": "L2_F1W1",
+          "L3_status": "pruning",
+          "L3_thought": "연료의 습도, 바람의 세기, 지형의 경사도",
+          "L3_data_combination": "연료의 습도, 바람의 세기, 지형의 경사도 조합",
+          "L3_values": [
+            2,
+            3,
+            3
+          ],
+          "L3_reasoning_type": "증폭효과",
+          "L3_calculation": {
+            "fuel_moisture_risk": "2 (낮음)",
+            "wind_speed_risk": "3 (중간)",
+            "slope_risk": "3 (중간)",
+            "weighted_average": "(2×0.3)+(3×0.4)+(3×0.3) = 2.9"
+          },
+          "L3_if_then": "IF fuel_moisture < 15 AND wind_speed > 3 AND slope > 25 THEN increase evacuation efforts",
+          "L3_risk_scoring_description": "연료의 습도, 바람의 세기, 지형의 경사도가 구조에 미치는 영향 평가",
+          "L3_confidence_score": 0.7,
+          "L3_reasoning_description": "연료의 습도, 바람의 세기, 지형의 경사도의 조합이 구조 작업에 미치는 영향을 고려"
+        }
+      },
+      "backtracking_events": [
+        {
+          "event_id": "BT1",
+          "level": "L2",
+          "backtrack_reason": "L2 단계에서 바람의 세기와 지형의 경사도를 재검토하여 새로운 조합을 고려했습니다.",
+          "confidence_before": 0.65,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_W1 -> L2_W1T1",
+          "problem": "바람의 세기와 지형의 경사도가 구조 작업에 미치는 영향을 개선할 필요가 있습니다.",
+          "backtrack_analysis": {
+            "initial_hypothesis": "바람의 세기와 지형의 경사도가 구조 작업에 중대한 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.65",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2 단계에서 다른 node 조합 시도",
+            "alternative_combination": "L2_W1O1",
+            "simplification": "바람의 세기와 화재 지속 시간 조합으로 대체",
+            "structural_change": "L2_W1O1로 변경",
+            "selected_alternative": "L2_W1O1",
+            "rationale": "바람의 세기와 화재 지속 시간의 조합이 구조 작업에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_W1T1 대신 L2_W1O1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_W1 -> L2_W1O1",
+            "new_score": 0.78,
+            "weight_adjustment": 0.05
+          },
+          "result": "backtracked",
+          "learning": "L2 단계에서 바람의 세기와 화재 지속 시간의 중요성 확인"
+        },
+        {
+          "event_id": "BT2",
+          "level": "L2",
+          "backtrack_reason": "L2 단계에서 화재 지속 시간과 바람의 세기를 재검토하여 새로운 조합을 고려했습니다.",
+          "confidence_before": 0.7,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_O1 -> L2_O1T1",
+          "problem": "화재 지속 시간과 바람의 세기가 구조 작업에 미치는 영향을 개선할 필요가 있습니다.",
+          "backtrack_analysis": {
+            "initial_hypothesis": "화재 지속 시간과 바람의 세기가 구조 작업에 중대한 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.70",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2 단계에서 다른 node 조합 시도",
+            "alternative_combination": "L2_O1W1",
+            "simplification": "화재 지속 시간과 인구 밀도 조합으로 대체",
+            "structural_change": "L2_O1W1로 변경",
+            "selected_alternative": "L2_O1W1",
+            "rationale": "화재 지속 시간과 인구 밀도가 구조 작업에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_O1T1 대신 L2_O1W1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_O1 -> L2_O1W1",
+            "new_score": 0.82,
+            "weight_adjustment": 0.03
+          },
+          "result": "backtracked",
+          "learning": "L2 단계에서 화재 지속 시간과 인구 밀도의 중요성 확인"
+        },
+        {
+          "event_id": "BT3",
+          "level": "L2",
+          "backtrack_reason": "L2 단계에서 지형의 경사도와 바람의 세기를 재검토하여 새로운 조합을 고려했습니다.",
+          "confidence_before": 0.68,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_T1 -> L2_T1W1",
+          "problem": "지형의 경사도와 바람의 세기가 구조 작업에 미치는 영향을 개선할 필요가 있습니다.",
+          "backtrack_analysis": {
+            "initial_hypothesis": "지형의 경사도와 바람의 세기가 구조 작업에 중대한 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.68",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2 단계에서 다른 node 조합 시도",
+            "alternative_combination": "L2_T1O1",
+            "simplification": "지형의 경사도와 화재 지속 시간 조합으로 대체",
+            "structural_change": "L2_T1O1로 변경",
+            "selected_alternative": "L2_T1O1",
+            "rationale": "지형의 경사도와 화재 지속 시간이 구조 작업에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_T1W1 대신 L2_T1O1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_T1 -> L2_T1O1",
+            "new_score": 0.75,
+            "weight_adjustment": 0.02
+          },
+          "result": "backtracked",
+          "learning": "L2 단계에서 지형의 경사도와 화재 지속 시간의 중요성 확인"
+        },
+        {
+          "event_id": "BT4",
+          "level": "L2",
+          "backtrack_reason": "L2 단계에서 인구 밀도와 바람의 세기를 재검토하여 새로운 조합을 고려했습니다.",
+          "confidence_before": 0.72,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_I1 -> L2_I1W1",
+          "problem": "인구 밀도와 바람의 세기가 구조 작업에 미치는 영향을 개선할 필요가 있습니다.",
+          "backtrack_analysis": {
+            "initial_hypothesis": "인구 밀도와 바람의 세기가 구조 작업에 중대한 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.72",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2 단계에서 다른 node 조합 시도",
+            "alternative_combination": "L2_I1O1",
+            "simplification": "인구 밀도와 화재 지속 시간 조합으로 대체",
+            "structural_change": "L2_I1O1로 변경",
+            "selected_alternative": "L2_I1O1",
+            "rationale": "인구 밀도와 화재 지속 시간이 구조 작업에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_I1W1 대신 L2_I1O1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_I1 -> L2_I1O1",
+            "new_score": 0.8,
+            "weight_adjustment": 0.04
+          },
+          "result": "backtracked",
+          "learning": "L2 단계에서 인구 밀도와 화재 지속 시간의 중요성 확인"
+        },
+        {
+          "event_id": "BT5",
+          "level": "L2",
+          "backtrack_reason": "L2 단계에서 연료의 습도와 바람의 세기를 재검토하여 새로운 조합을 고려했습니다.",
+          "confidence_before": 0.66,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_W1 -> L2_W1F1",
+          "problem": "연료의 습도와 바람의 세기가 구조 작업에 미치는 영향을 개선할 필요가 있습니다.",
+          "backtrack_analysis": {
+            "initial_hypothesis": "연료의 습도와 바람의 세기가 구조 작업에 중대한 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.66",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2 단계에서 다른 node 조합 시도",
+            "alternative_combination": "L2_W1O1",
+            "simplification": "연료의 습도와 화재 지속 시간 조합으로 대체",
+            "structural_change": "L2_W1O1로 변경",
+            "selected_alternative": "L2_W1O1",
+            "rationale": "연료의 습도와 화재 지속 시간이 구조 작업에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_W1F1 대신 L2_W1O1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_W1 -> L2_W1O1",
+            "new_score": 0.77,
+            "weight_adjustment": 0.03
+          },
+          "result": "backtracked",
+          "learning": "L2 단계에서 연료의 습도와 화재 지속 시간의 중요성 확인"
+        }
+      ],
+      "pruning_events": [
+        {
+          "pruning_id": "P1",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_W1O1I1",
+          "score": 0.8,
+          "threshold": 0.85,
+          "reason": "바람, 화재 지속 시간, 인구 밀도에 대한 신뢰도가 기준치(0.85)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_W1O1I1는 \"바람, 화재 지속 시간, 인구 밀도\" 분석에서 신뢰도 0.80가 기준 0.85보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P2",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_O1W1F1",
+          "score": 0.75,
+          "threshold": 0.8,
+          "reason": "화재 지속 시간, 바람, 연료 습도에 대한 신뢰도가 기준치(0.80)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_O1W1F1는 \"화재 지속 시간, 바람, 연료 습도\" 분석에서 신뢰도 0.75가 기준 0.80보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P3",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_T1O1I1",
+          "score": 0.85,
+          "threshold": 0.9,
+          "reason": "지형, 화재 지속 시간, 인구 밀도에 대한 신뢰도가 기준치(0.90)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_T1O1I1는 \"지형, 화재 지속 시간, 인구 밀도\" 분석에서 신뢰도 0.85가 기준 0.90보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P4",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_F1O1W1",
+          "score": 0.75,
+          "threshold": 0.8,
+          "reason": "연료의 습도, 화재 지속 시간, 바람의 세기에 대한 신뢰도가 기준치(0.80)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_F1O1W1는 \"연료의 습도, 화재 지속 시간, 바람의 세기\" 분석에서 신뢰도 0.75가 기준 0.80보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P5",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_F1W1T1",
+          "score": 0.7,
+          "threshold": 0.8,
+          "reason": "연료의 습도, 바람의 세기, 지형의 경사도에 대한 신뢰도가 기준치(0.80)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_F1W1T1는 \"연료의 습도, 바람의 세기, 지형의 경사도\" 분석에서 신뢰도 0.70가 기준 0.80보다 낮아 추론 경로에서 제거하였습니다."
+        }
+      ],
+      "final_selection": {
+        "selected_path": "ROOT → L1_I1 → L2_I1O1 → L3_I1O1F1",
+        "best_l3_node_id": "L3_I1O1F1",
+        "reasoning_chain": "① L1: 인구 밀도와 취약계층이 중요하다. ② L2: 인구 밀도와 화재 지속 시간의 조합이 구조 작업에 미치는 영향을 고려한다. ③ L3: 인구 밀도, 화재 지속 시간, 연료 습도의 조합이 구조 작업에 미치는 영향을 고려한다.",
+        "path_selection_reasoning": "여러 L3 중 이 경로를 선택한 이유는 인구 밀도와 화재 지속 시간이 모두 높은 점수를 기록하여 구조 작업의 우선순위를 높이기 때문이다.",
+        "selected_path_risk_scoring_description": "최종 경로의 위험도 평가는 인구 밀도와 화재 지속 시간이 모두 높아 구조 작업에 큰 영향을 미친다.",
+        "comprehensive_scoring_matrix": {
+          "path_1": {
+            "risk_level": "높음",
+            "confidence": 0.95
+          },
+          "path_2": {
+            "risk_level": "보통",
+            "confidence": 0.9
+          },
+          "path_3": {
+            "risk_level": "낮음",
+            "confidence": 0.85
+          }
+        },
+        "scoring_criteria": "신뢰도, 위험도, 대응 가능성을 종합적으로 고려하여 최종 경로를 선정하였다.",
+        "key_nodes_used": {
+          "O": {
+            "population_risk": 4,
+            "fire_duration_risk": 4
+          },
+          "W": {
+            "wind_speed_risk": 3
+          },
+          "T": {
+            "slope_risk": 3
+          },
+          "I": {
+            "vulnerable_risk": 5
+          },
+          "F": {
+            "fuel_moisture_risk": 2
+          }
+        },
+        "path_confidence": 0.9
+      }
+    },
+    "countermeasures": {
+      "immediate_recommendation": {
+        "decision": "구조 인력을 대피소 운영에 배치해야 합니다.",
+        "primary_reason": "인구 밀도와 취약계층이 높아 대피소 운영이 우선입니다.",
+        "risk_level": "높음"
+      },
+      "safety_assessment": {
+        "prohibitive_factors": {
+          "fire": "화재 지속 시간이 길어 위험이 큽니다.",
+          "visibility": "시정거리가 짧아 구조 작업이 어렵습니다.",
+          "support": "구조 인력이 부족하여 지원이 필요합니다.",
+          "intensity": "화재 강도가 약하지만 지속 시간이 문제입니다."
+        },
+        "favorable_factors": {
+          "wind": "바람이 약해 화재 확산이 제한적입니다.",
+          "humidity": "습도가 낮아 연료의 인화 가능성이 높습니다."
+        },
+        "net_assessment": "위험 요소가 많아 구조 작업이 어렵습니다.",
+        "evacuation_zones": {
+          "safe_zone": "대피소는 안전한 지역에 위치합니다.",
+          "danger_zone": "화재 발생 지역은 위험합니다.",
+          "buffer_zone": "완충 지역은 대피 경로로 활용 가능합니다."
+        },
+        "evacuation_sequence": {
+          "phase_1": "취약계층을 우선 대피시킵니다.",
+          "phase_2": "일반 주민을 대피시킵니다.",
+          "phase_3": "구조 인력을 안전하게 배치합니다."
+        }
+      },
+      "alternative_strategies": {
+        "option_1": {
+          "action": "구조 인력을 대피소에 배치합니다.",
+          "timing": "즉시"
+        },
+        "option_2": {
+          "action": "대피소 운영을 강화합니다.",
+          "method": "인력 추가 배치"
+        },
+        "option_3": {
+          "action": "구조 작업을 연기합니다.",
+          "condition": "위험이 감소할 때까지"
+        }
+      },
+      "safety_requirements": {
+        "minimum_conditions": [
+          "구조 인력 확보",
+          "대피소 안전 점검",
+          "대피 경로 확보"
+        ],
+        "key_insights": "인구 밀도와 화재 지속 시간이 구조 작업에 큰 영향을 미칩니다."
+      }
+    },
+    "decision_answer": {
+      "conclusion": "구조 인력을 대피소 운영에 배치하는 것이 최선입니다. 인구 밀도와 취약계층이 많아 대피소 운영이 우선되어야 합니다.",
+      "safety_verdict": {
+        "decision": "구조 인력을 대피소에 배치합니다.",
+        "safety_level": "높음",
+        "confidence": "95%",
+        "primary_factor": "인구 밀도와 취약계층"
+      },
+      "critical_risks": {
+        "risk_1": "화재 지속 시간이 길어 위험합니다.",
+        "risk_2": "시정거리가 짧아 구조 작업이 어렵습니다.",
+        "risk_3": "취약계층이 많아 대피가 시급합니다.",
+        "risk_4": "구조 인력이 부족하여 지원이 필요합니다."
+      },
+      "clear_message": "대피소 운영이 우선입니다.",
+      "critical_action": {
+        "action_1": "취약계층을 우선 대피시킵니다.",
+        "action_2": "대피소 안전 점검을 실시합니다.",
+        "action_3": "구조 인력을 대피소에 배치합니다.",
+        "action_4": "대피 경로를 확보합니다."
+      }
+    },
+    "complete_reasoning": {
+      "reasoning_path_description": "인구 밀도와 취약계층이 높은 지역에서 화재가 발생했습니다. 화재 지속 시간과 인구 밀도를 고려하여 구조 작업의 우선순위를 정해야 합니다. 이 경로는 인구 밀도, 화재 지속 시간, 연료 습도의 조합을 통해 구조 작업의 필요성을 강조합니다.선택 경로 L0_ROOT -> L1_I1 -> L2_I1O1 -> L3_I1O1F1는 연료, 발생/운영, 인프라 축의 상호작용을 핵심 근거로 합니다. L1에서는 인구 밀도와 취약계층이 중요하다.를 검토하고, L2에서 인구 밀도와 화재 지속 시간를 종합했습니다. 최종 L3 판단은 \"IF vulnerable > 1000 AND fire_duration > 6 AND fuel_moisture < 15 THEN prioritize rescue operations\"로 수렴했으며, 이에 따라 위험도와 실행 가능성을 함께 평가하였습니다.",
+      "risk_scoring": "최종 경로의 위험도 평가는 인구 밀도와 화재 지속 시간이 모두 높아 구조 작업에 큰 영향을 미칩니다.",
+      "confidence_scoring": "위험도와 신뢰도를 종합적으로 고려하여 95%의 신뢰도를 부여합니다.",
+      "complete_reasoning_countermeasures": "질의자는 구조 인력을 고립 지역 진입에 투입할지 대피소 운영에 배치할지를 결정해야 하는 상황입니다. 최종 경로 및 위험도 판단에 따르면, 인구 밀도와 화재 지속 시간이 모두 높아 구조 작업에 큰 영향을 미치고 있으며, 이러한 요소들은 대피소 운영의 필요성을 더욱 강조합니다. 따라서, 구조 인력을 대피소 운영에 배치하는 것이 최선의 선택으로 평가됩니다.\n\n즉각 조치로는 구조 인력을 대피소 운영에 배치하는 것이 권장됩니다. 이는 인구 밀도와 취약계층이 높아 대피소 운영이 우선되어야 한다는 점에서 기인합니다. 안전 평가 결과, 화재 지속 시간이 길고 시정거리가 짧아 구조 작업이 어렵기 때문에, 대피소 운영이 안전한 선택으로 판단됩니다. 또한, 대피소는 안전한 지역에 위치하고 있어 취약계층을 우선적으로 대피시킬 수 있는 환경을 제공합니다.\n\n대안 전략으로는 구조 인력을 대피소에 즉시 배치하는 것 외에도 대피소 운영을 강화하기 위해 인력을 추가 배치하거나, 위험이 감소할 때까지 구조 작업을 연기하는 방법이 있습니다. 그러나 현재의 위험 요소를 고려할 때, 즉각적인 대피소 운영이 가장 효과적인 대응방안입니다. 따라서, 질의자의 상황에서 취해야 할 핵심 대응방안은 구조 인력을 대피소 운영에 배치하는 것입니다.",
+      "query": "구조 인력을 고립 지역 진입에 투입할지 대피소 운영에 배치할지 결정해야 합니까?"
+    }
+  },
+  "file_info": {
+    "labelling_file_name": "AS20240324_T_P0003_T004.json",
+    "labelling_file_format": "json"
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "raw_data_info": {
+    "fire_info": {
+      "fire_incident_id": "GN20230330",
+      "region": "강원도",
+      "fire_size": "소형",
+      "incident_name": "강원 강릉 연곡",
+      "fire_location": {
+        "lat": 37.84921,
+        "lon": 128.84603
+      },
+      "fire_report_number": "연곡소방서-20230330-001",
+      "start_timestamp": "2023-03-30 11:59:00",
+      "detection_timestamp": "2023-03-30 11:59:00",
+      "end_timestamp": "2023-03-30 12:58:00",
+      "response_phase": "초기 대응",
+      "fire_cause": "입산자실화",
+      "affected_area": 0.7,
+      "fire_spread_track": "[37.849233,128.846107],[37.848899,128.846344],[37.848568,128.846408],[37.848462,128.846934],[37.848496,128.847304],[37.848958,128.847373],[37.849339,128.847062],[37.849407,128.846612],[37.849233,128.846107]"
+    }
+  },
+  "source_data_info": {
+    "file_name": "GN20230330_S_P0002_T001",
+    "file_format": "json",
+    "user_info": {
+      "user_type": "FF",
+      "user_type_description": "진압대원",
+      "query_time": "2023-03-30 12:00",
+      "query_location": {
+        "lat": 37.848462,
+        "lon": 128.846934
+      },
+      "query_location_description": "마사 1850 8404"
+    },
+    "weather_conditions": {
+      "observation_time": "2023-03-30 12:00",
+      "observatory_type": "기상",
+      "observatory_location": "강릉",
+      "temperature": 25.2,
+      "rainfall": 0.0,
+      "wind_speed": 2.6,
+      "wind_direction": 320.0,
+      "humidity_percent": 13.0,
+      "atmospheric_pressure": 1013.7,
+      "visibility": 4966.0,
+      "past_rainfall_7days": 2.6,
+      "surface_temperature": 0.0,
+      "observation_height": 10.0
+    },
+    "terrain_conditions": {
+      "elevation": 12.94,
+      "slope": 2.86,
+      "slope_aspect": 293.53,
+      "curvature": 0.0,
+      "topographic_position_index": 0.53,
+      "terrain_complexity": 11.07,
+      "hydrological_features": 0.6
+    },
+    "fuel_conditions": {
+      "fuel_type": "활엽수림",
+      "fuel_density": 10.17,
+      "surface_fuel_depth": 4.0,
+      "fuel_moisture": 10.0,
+      "fuel_average_age": 15.0,
+      "canopy_height": 10.0,
+      "canopy_coverage": 75.0
+    },
+    "Infra_Social": {
+      "population": 6358.0,
+      "households": 3451.0,
+      "vulnerable": 3667.0,
+      "fire_station_distance": 1.62,
+      "Important_Infra_distance": 0.97,
+      "road_accessibility": "보통",
+      "shelter": "동덕2리마을회관"
+    },
+    "occurrence_status": {
+      "drought_duration_days": 35.0,
+      "wildfire_duration_time": "0:01",
+      "wind_direction_slope_aspect_alignment": {
+        "wind_direction": 320.0,
+        "slope_aspect": 293.53
+      },
+      "fire_length": 2.2,
+      "fire_intensity": "약함",
+      "flame_length": 1.0
+    }
+  }
+}

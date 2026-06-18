@@ -1,0 +1,89 @@
+{
+  "raw_data_info": {
+    "fire_info": {
+      "fire_incident_id": "GN20220304",
+      "region": "강원도",
+      "fire_size": "중형",
+      "incident_name": "강원 강릉 성산 송암",
+      "fire_location": {
+        "lat": 37.77208,
+        "lon": 128.82122
+      },
+      "fire_report_number": "강릉소방서-20220304-001",
+      "start_timestamp": "2022-03-04 22:19:00",
+      "detection_timestamp": "2022-03-04 22:19:00",
+      "end_timestamp": "2022-03-05 21:00:00",
+      "response_phase": "초기 대응",
+      "fire_cause": "입산자실화",
+      "affected_area": 30.89,
+      "fire_spread_track": "[37.77199,128.82112],[37.773686,128.820819],[37.775483,128.821249],[37.776128,128.822794],[37.775721,128.82554],[37.774398,128.830089],[37.772702,128.830862],[37.770972,128.827428],[37.771311,128.823309],[37.77199,128.82112]"
+    }
+  },
+  "source_data_info": {
+    "file_name": "GN20220304_S_P0002_T007",
+    "file_format": "json",
+    "user_info": {
+      "user_type": "RW",
+      "user_type_description": "구조요원",
+      "query_time": "2022-03-05 05:00",
+      "query_location": {
+        "lat": 37.771831,
+        "lon": 128.823051
+      },
+      "query_location_description": "마사 1652 7550"
+    },
+    "weather_conditions": {
+      "observation_time": "2022-03-05 05:00",
+      "observatory_type": "기상",
+      "observatory_location": "강릉",
+      "temperature": 7.0,
+      "rainfall": 0.0,
+      "wind_speed": 4.3,
+      "wind_direction": 270.0,
+      "humidity_percent": 30.0,
+      "atmospheric_pressure": 1002.5,
+      "visibility": 256.0,
+      "past_rainfall_7days": 0.7,
+      "surface_temperature": 10.7,
+      "observation_height": 10.0
+    },
+    "terrain_conditions": {
+      "elevation": 192.03,
+      "slope": 13.69,
+      "slope_aspect": 123.04,
+      "curvature": 0.0002,
+      "topographic_position_index": -6.5,
+      "terrain_complexity": 60.37,
+      "hydrological_features": 0.0
+    },
+    "fuel_conditions": {
+      "fuel_type": "혼효림",
+      "fuel_density": 7.02,
+      "surface_fuel_depth": 3.0,
+      "fuel_moisture": 0.0,
+      "fuel_average_age": 45.0,
+      "canopy_height": 10.0,
+      "canopy_coverage": 75.0
+    },
+    "Infra_Social": {
+      "population": 3355.0,
+      "households": 1764.0,
+      "vulnerable": 2068.0,
+      "fire_station_distance": 4.66,
+      "Important_Infra_distance": 2.3,
+      "road_accessibility": "보통",
+      "shelter": "위촌2리마을회관"
+    },
+    "occurrence_status": {
+      "drought_duration_days": 35.0,
+      "wildfire_duration_time": "6:41",
+      "wind_direction_slope_aspect_alignment": {
+        "wind_direction": 270.0,
+        "slope_aspect": 123.04
+      },
+      "fire_length": 2.2,
+      "fire_intensity": "약함",
+      "flame_length": 1.0
+    }
+  }
+}

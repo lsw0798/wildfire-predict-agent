@@ -1,0 +1,89 @@
+{
+  "raw_data_info": {
+    "fire_info": {
+      "fire_incident_id": "HC20240414",
+      "region": "강원도",
+      "fire_size": "소형",
+      "incident_name": "강원 홍천 내촌",
+      "fire_location": {
+        "lat": 37.802227,
+        "lon": 128.098801
+      },
+      "fire_report_number": "홍천소방서-20240414-001",
+      "start_timestamp": "2024-04-14 15:57:00",
+      "detection_timestamp": "2024-04-14 15:57:00",
+      "end_timestamp": "2024-04-14 19:00:00",
+      "response_phase": "초기 대응",
+      "fire_cause": "입산자실화",
+      "affected_area": 0.9,
+      "fire_spread_track": "[37.802267,128.098905],[37.802945,128.099441],[37.802207,128.10119],[37.801936,128.101061],[37.802173,128.100031],[37.80186,128.099688],[37.802267,128.098905]"
+    }
+  },
+  "source_data_info": {
+    "file_name": "HC20240414_S_P0001_T001",
+    "file_format": "json",
+    "user_info": {
+      "user_type": "CI",
+      "user_type_description": "시민",
+      "query_time": "2024-04-14 16:00",
+      "query_location": {
+        "lat": 37.802402,
+        "lon": 128.099667
+      },
+      "query_location_description": "라사 5279 7824"
+    },
+    "weather_conditions": {
+      "observation_time": "2024-04-14 16:00",
+      "observatory_type": "기상",
+      "observatory_location": "홍천",
+      "temperature": 29.9,
+      "rainfall": 0.0,
+      "wind_speed": 1.9,
+      "wind_direction": 230.0,
+      "humidity_percent": 18.0,
+      "atmospheric_pressure": 997.6,
+      "visibility": 4980.0,
+      "past_rainfall_7days": 0.0,
+      "surface_temperature": 16.4,
+      "observation_height": 10.0
+    },
+    "terrain_conditions": {
+      "elevation": 309.67,
+      "slope": 14.41,
+      "slope_aspect": 264.46,
+      "curvature": 0.001,
+      "topographic_position_index": 3.39,
+      "terrain_complexity": 62.82,
+      "hydrological_features": 1.6
+    },
+    "fuel_conditions": {
+      "fuel_type": "초지",
+      "fuel_density": 0.0,
+      "surface_fuel_depth": 0.0,
+      "fuel_moisture": 0.0,
+      "fuel_average_age": 0.0,
+      "canopy_height": 0.0,
+      "canopy_coverage": 0.0
+    },
+    "Infra_Social": {
+      "population": 2383.0,
+      "households": 1483.0,
+      "vulnerable": 1932.0,
+      "fire_station_distance": 1.6,
+      "Important_Infra_distance": 1.42,
+      "road_accessibility": "보통",
+      "shelter": "서곡리 향기나는 마을회관"
+    },
+    "occurrence_status": {
+      "drought_duration_days": 35.0,
+      "wildfire_duration_time": "0:03",
+      "wind_direction_slope_aspect_alignment": {
+        "wind_direction": 230.0,
+        "slope_aspect": 264.46
+      },
+      "fire_length": 2.2,
+      "fire_intensity": "약함",
+      "flame_length": 1.0
+    }
+  }
+}

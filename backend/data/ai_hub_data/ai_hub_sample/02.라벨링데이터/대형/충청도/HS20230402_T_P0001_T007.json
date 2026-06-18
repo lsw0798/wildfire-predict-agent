@@ -1,0 +1,906 @@
+{
+  "labelling_data_info": {
+    "query": {
+      "query_text": "지형과 기상 조건을 고려하면 재발화 위험은 얼마나 됩니까?",
+      "query_purpose": "경과예측",
+      "query_subject": "확산속도",
+      "query_type": "composite"
+    },
+    "tree_of_thought": {
+      "level_0_input": {
+        "L0_node_id": "ROOT",
+        "L0_thought": "재발화 위험 평가",
+        "L0_context": {
+          "weather_conditions": {
+            "wind_speed": 3.5,
+            "wind_direction": 70.0,
+            "humidity_percent": 18.0,
+            "temperature": 22.4,
+            "surface_temperature": 23.1,
+            "drought_days": 35.0,
+            "visibility": 4064.0
+          },
+          "terrain_conditions": {
+            "elevation": 49.72,
+            "slope": 5.3,
+            "slope_aspect": 89.46,
+            "curvature": -0.0007,
+            "topographic_position_index": -5.96,
+            "terrain_complexity": 32.09,
+            "hydrological_features": 1.09
+          },
+          "fuel_conditions": {
+            "fuel_type": "침엽수림",
+            "fuel_moisture": 16.0,
+            "fuel_density": 4.62,
+            "fuel_average_age": 45.0,
+            "surface_fuel_depth": 2.0,
+            "canopy_height": 10.0,
+            "canopy_coverage": 75.0
+          },
+          "Infra_Social": {
+            "population": 2925.0,
+            "vulnerable": 1696.0,
+            "fire_station_distance": 4.86,
+            "road_accessibility": "아주 좋음",
+            "Important_Infra_distance": 0.81,
+            "shelter": "신리마을회관"
+          },
+          "occurrence_status": {
+            "fire_duration": 360.0,
+            "drought_duration_days": 35.0,
+            "wildfire_duration_time": "6:00",
+            "flame_length": 2.0,
+            "fire_intensity": "매우강함",
+            "fire_length": 3.3,
+            "wind_slope_alignment": 70.0
+          }
+        },
+        "L0_branches": [
+          "L1_W1",
+          "L1_O1",
+          "L1_T1",
+          "L1_F1",
+          "L1_I1"
+        ],
+        "L0_reasoning_description": "기상과 지형 요소를 종합적으로 고려함.",
+        "L0_confidence_score": 0.85,
+        "L0_status": "start"
+      },
+      "level_1_branches": {
+        "L1_W1": {
+          "L1_node_id": "L1_W1",
+          "L1_parent": "ROOT",
+          "L1_thought": "풍속이 재발화 위험에 미치는 영향.",
+          "L1_data_node": "wind_speed_risk, humidity_effect",
+          "L1_value": [
+            3.5,
+            18.0
+          ],
+          "L1_reasoning_type": "직접인과",
+          "L1_calculation": {
+            "wind_speed_risk": "3 (중간)",
+            "humidity_effect": "2 (낮음)",
+            "average_risk": "2.5"
+          },
+          "L1_if_then": "IF 풍속이 높으면 THEN 재발화 위험 증가.",
+          "L1_risk_scoring_description": "풍속이 높을수록 재발화 위험이 증가함.",
+          "L1_confidence_score": 0.8,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_W1T1",
+            "L2_W1O1",
+            "L2_W1F1"
+          ],
+          "L1_reasoning_description": "풍속과 습도는 재발화에 중요한 요소."
+        },
+        "L1_O1": {
+          "L1_node_id": "L1_O1",
+          "L1_parent": "ROOT",
+          "L1_thought": "화재 지속 시간이 재발화 위험에 미치는 영향.",
+          "L1_data_node": "fire_duration_risk, drought_duration_risk",
+          "L1_value": [
+            360,
+            35
+          ],
+          "L1_reasoning_type": "간접인과",
+          "L1_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "drought_duration_risk": "3 (중간)",
+            "average_risk": "3.5"
+          },
+          "L1_if_then": "IF 화재 지속 시간이 길면 THEN 재발화 위험 증가.",
+          "L1_risk_scoring_description": "화재 지속 시간이 길수록 재발화 위험이 높아짐.",
+          "L1_confidence_score": 0.9,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_O1W1",
+            "L2_O1T1"
+          ],
+          "L1_reasoning_description": "화재 지속 시간과 건조 기간은 밀접한 관계가 있음."
+        },
+        "L1_T1": {
+          "L1_node_id": "L1_T1",
+          "L1_parent": "ROOT",
+          "L1_thought": "지형적 요소가 재발화 위험에 미치는 영향.",
+          "L1_data_node": "elevation_risk, slope_risk",
+          "L1_value": [
+            49.72,
+            5.3
+          ],
+          "L1_reasoning_type": "임계값 판단",
+          "L1_calculation": {
+            "elevation_risk": "2 (낮음)",
+            "slope_risk": "3 (중간)",
+            "average_risk": "2.5"
+          },
+          "L1_if_then": "IF 경사가 가파르면 THEN 재발화 위험 증가.",
+          "L1_risk_scoring_description": "지형적 요소가 재발화에 영향을 미침.",
+          "L1_confidence_score": 0.75,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_T1O1",
+            "L2_T1W1"
+          ],
+          "L1_reasoning_description": "지형적 요소는 화재 확산에 중요한 역할을 함."
+        },
+        "L1_F1": {
+          "L1_node_id": "L1_F1",
+          "L1_parent": "ROOT",
+          "L1_thought": "연료의 특성이 재발화 위험에 미치는 영향.",
+          "L1_data_node": "fuel_moisture_risk, fuel_density_risk",
+          "L1_value": [
+            16.0,
+            4.62
+          ],
+          "L1_reasoning_type": "증폭효과",
+          "L1_calculation": {
+            "fuel_moisture_risk": "3 (중간)",
+            "fuel_density_risk": "4 (높음)",
+            "average_risk": "3.5"
+          },
+          "L1_if_then": "IF 연료가 건조하면 THEN 재발화 위험 증가.",
+          "L1_risk_scoring_description": "연료의 수분 함량이 낮을수록 재발화 위험이 높아짐.",
+          "L1_confidence_score": 0.85,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_F1O1",
+            "L2_F1W1"
+          ],
+          "L1_reasoning_description": "연료의 특성은 화재의 강도에 큰 영향을 미침."
+        },
+        "L1_I1": {
+          "L1_node_id": "L1_I1",
+          "L1_parent": "ROOT",
+          "L1_thought": "인프라와 인구 밀도가 재발화 위험에 미치는 영향.",
+          "L1_data_node": "population_risk, fire_station_distance_risk",
+          "L1_value": [
+            2925,
+            4.86
+          ],
+          "L1_reasoning_type": "시너지",
+          "L1_calculation": {
+            "population_risk": "2 (낮음)",
+            "fire_station_distance_risk": "3 (중간)",
+            "average_risk": "2.5"
+          },
+          "L1_if_then": "IF 인구 밀도가 높으면 THEN 재발화 위험 증가.",
+          "L1_risk_scoring_description": "인구 밀도와 소방서 거리의 관계가 중요함.",
+          "L1_confidence_score": 0.7,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_I1O1",
+            "L2_I1W1"
+          ],
+          "L1_reasoning_description": "인프라와 인구 밀도는 화재 대응에 영향을 미침."
+        }
+      },
+      "level_2_branches": {
+        "L2_W1O1": {
+          "L2_node_id": "L2_W1O1",
+          "L2_parent": "L1_W1",
+          "L2_thought": "풍속과 화재 지속 시간의 조합",
+          "L2_data_combination": "풍속과 화재 지속 시간의 상관관계 분석",
+          "L2_values": [
+            3.5,
+            360
+          ],
+          "L2_reasoning_type": "직접인과",
+          "L2_calculation": {
+            "wind_speed_risk": "3 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 풍속이 높고 화재 지속 시간이 길면 THEN 재발화 위험 증가.",
+          "L2_risk_scoring_description": "풍속과 화재 지속 시간의 조합이 재발화 위험을 증가시킴.",
+          "L2_confidence_score": 0.85,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_W1O1I1"
+          ],
+          "L2_reasoning_description": "풍속과 화재 지속 시간은 재발화에 중요한 요소."
+        },
+        "L2_W1T1": {
+          "L2_node_id": "L2_W1T1",
+          "L2_parent": "L1_W1",
+          "L2_thought": "풍속과 지형적 요소의 조합",
+          "L2_data_combination": "풍속과 지형적 요소의 상관관계 분석",
+          "L2_values": [
+            3.5,
+            49.72
+          ],
+          "L2_reasoning_type": "간접인과",
+          "L2_calculation": {
+            "wind_speed_risk": "3 (중간)",
+            "elevation_risk": "2 (낮음)",
+            "average_risk": "2.5"
+          },
+          "L2_if_then": "IF 풍속이 높고 경사가 가파르면 THEN 재발화 위험 증가.",
+          "L2_risk_scoring_description": "풍속과 지형적 요소의 조합이 재발화 위험을 증가시킴.",
+          "L2_confidence_score": 0.75,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_W1T1O1"
+          ],
+          "L2_reasoning_description": "풍속과 지형적 요소는 재발화에 영향을 미침."
+        },
+        "L2_O1W1": {
+          "L2_node_id": "L2_O1W1",
+          "L2_parent": "L1_O1",
+          "L2_thought": "화재 지속 시간과 풍속의 조합",
+          "L2_data_combination": "화재 지속 시간과 풍속의 상관관계 분석",
+          "L2_values": [
+            360,
+            3.5
+          ],
+          "L2_reasoning_type": "간접인과",
+          "L2_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "wind_speed_risk": "3 (중간)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 화재 지속 시간이 길고 풍속이 높으면 THEN 재발화 위험 증가.",
+          "L2_risk_scoring_description": "화재 지속 시간과 풍속의 조합이 재발화 위험을 증가시킴.",
+          "L2_confidence_score": 0.9,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_O1W1I1"
+          ],
+          "L2_reasoning_description": "화재 지속 시간과 풍속은 밀접한 관계가 있음."
+        },
+        "L2_T1O1": {
+          "L2_node_id": "L2_T1O1",
+          "L2_parent": "L1_T1",
+          "L2_thought": "지형적 요소와 화재 지속 시간의 조합",
+          "L2_data_combination": "지형적 요소와 화재 지속 시간의 상관관계 분석",
+          "L2_values": [
+            49.72,
+            360
+          ],
+          "L2_reasoning_type": "임계값 판단",
+          "L2_calculation": {
+            "elevation_risk": "2 (낮음)",
+            "fire_duration_risk": "4 (높음)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 경사가 가파르고 화재 지속 시간이 길면 THEN 재발화 위험 증가.",
+          "L2_risk_scoring_description": "지형적 요소와 화재 지속 시간의 조합이 재발화 위험을 증가시킴.",
+          "L2_confidence_score": 0.8,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_T1O1I1"
+          ],
+          "L2_reasoning_description": "지형적 요소와 화재 지속 시간은 재발화에 영향을 미침."
+        },
+        "L2_F1O1": {
+          "L2_node_id": "L2_F1O1",
+          "L2_parent": "L1_F1",
+          "L2_thought": "연료 특성과 화재 지속 시간의 조합",
+          "L2_data_combination": "연료 특성과 화재 지속 시간의 상관관계 분석",
+          "L2_values": [
+            16.0,
+            360
+          ],
+          "L2_reasoning_type": "증폭효과",
+          "L2_calculation": {
+            "fuel_moisture_risk": "3 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 연료가 건조하고 화재 지속 시간이 길면 THEN 재발화 위험 증가.",
+          "L2_risk_scoring_description": "연료 특성과 화재 지속 시간의 조합이 재발화 위험을 증가시킴.",
+          "L2_confidence_score": 0.85,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_F1O1W1"
+          ],
+          "L2_reasoning_description": "연료 특성과 화재 지속 시간은 재발화에 큰 영향을 미침."
+        },
+        "L2_I1O1": {
+          "L2_node_id": "L2_I1O1",
+          "L2_parent": "L1_I1",
+          "L2_thought": "인프라와 화재 지속 시간의 조합",
+          "L2_data_combination": "인프라와 화재 지속 시간의 상관관계 분석",
+          "L2_values": [
+            2925,
+            360
+          ],
+          "L2_reasoning_type": "시너지",
+          "L2_calculation": {
+            "population_risk": "2 (낮음)",
+            "fire_duration_risk": "4 (높음)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 인구 밀도가 높고 화재 지속 시간이 길면 THEN 재발화 위험 증가.",
+          "L2_risk_scoring_description": "인프라와 화재 지속 시간의 조합이 재발화 위험을 증가시킴.",
+          "L2_confidence_score": 0.7,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_I1O1W1"
+          ],
+          "L2_reasoning_description": "인프라와 화재 지속 시간은 재발화에 영향을 미침."
+        },
+        "L2_O1T1": {
+          "L2_node_id": "L2_O1T1",
+          "L2_parent": "L1_O1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "화재 지속 시간과 지형적 요소의 조합",
+          "L2_data_combination": "화재 지속 시간과 지형적 요소의 상관관계 분석",
+          "L2_values": [
+            360,
+            49.72
+          ],
+          "L2_reasoning_type": "임계값 판단",
+          "L2_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "elevation_risk": "2 (낮음)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 화재 지속 시간이 길고 경사가 가파르면 THEN 재발화 위험 증가.",
+          "L2_risk_scoring_description": "화재 지속 시간과 지형적 요소의 조합이 재발화 위험을 증가시킴.",
+          "L2_confidence_score": 0.8,
+          "L2_reasoning_description": "화재 지속 시간과 지형적 요소는 재발화에 중요한 영향을 미침."
+        },
+        "L2_T1W1": {
+          "L2_node_id": "L2_T1W1",
+          "L2_parent": "L1_T1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "지형적 요소와 풍속의 조합",
+          "L2_data_combination": "지형적 요소와 풍속의 상관관계 분석",
+          "L2_values": [
+            49.72,
+            3.5
+          ],
+          "L2_reasoning_type": "간접인과",
+          "L2_calculation": {
+            "elevation_risk": "2 (낮음)",
+            "wind_speed_risk": "3 (중간)",
+            "average_risk": "2.5"
+          },
+          "L2_if_then": "IF 경사가 가파르고 풍속이 높으면 THEN 재발화 위험 증가.",
+          "L2_risk_scoring_description": "지형적 요소와 풍속의 조합이 재발화 위험을 증가시킴.",
+          "L2_confidence_score": 0.75,
+          "L2_reasoning_description": "지형적 요소와 풍속은 재발화에 영향을 미침."
+        },
+        "L2_F1W1": {
+          "L2_node_id": "L2_F1W1",
+          "L2_parent": "L1_F1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "연료 특성과 풍속의 조합",
+          "L2_data_combination": "연료 특성과 풍속의 상관관계 분석",
+          "L2_values": [
+            16.0,
+            3.5
+          ],
+          "L2_reasoning_type": "증폭효과",
+          "L2_calculation": {
+            "fuel_moisture_risk": "3 (중간)",
+            "wind_speed_risk": "3 (중간)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 연료가 건조하고 풍속이 높으면 THEN 재발화 위험 증가.",
+          "L2_risk_scoring_description": "연료 특성과 풍속의 조합이 재발화 위험을 증가시킴.",
+          "L2_confidence_score": 0.85,
+          "L2_reasoning_description": "연료 특성과 풍속은 재발화에 큰 영향을 미침."
+        },
+        "L2_I1W1": {
+          "L2_node_id": "L2_I1W1",
+          "L2_parent": "L1_I1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "인프라와 풍속의 조합",
+          "L2_data_combination": "인프라와 풍속의 상관관계 분석",
+          "L2_values": [
+            2925,
+            3.5
+          ],
+          "L2_reasoning_type": "시너지",
+          "L2_calculation": {
+            "population_risk": "2 (낮음)",
+            "wind_speed_risk": "3 (중간)",
+            "average_risk": "2.5"
+          },
+          "L2_if_then": "IF 인구 밀도가 높고 풍속이 높으면 THEN 재발화 위험 증가.",
+          "L2_risk_scoring_description": "인프라와 풍속의 조합이 재발화 위험을 증가시킴.",
+          "L2_confidence_score": 0.7,
+          "L2_reasoning_description": "인프라와 풍속은 재발화에 영향을 미침."
+        },
+        "L2_W1F1": {
+          "L2_node_id": "L2_W1F1",
+          "L2_parent": "L1_W1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "풍속과 연료 특성의 조합",
+          "L2_data_combination": "풍속과 연료 특성의 상관관계 분석",
+          "L2_values": [
+            3.5,
+            16.0
+          ],
+          "L2_reasoning_type": "증폭효과",
+          "L2_calculation": {
+            "wind_speed_risk": "3 (중간)",
+            "fuel_moisture_risk": "3 (중간)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 풍속이 높고 연료가 건조하면 THEN 재발화 위험 증가.",
+          "L2_risk_scoring_description": "풍속과 연료 특성의 조합이 재발화 위험을 증가시킴.",
+          "L2_confidence_score": 0.8,
+          "L2_reasoning_description": "풍속과 연료 특성은 재발화에 중요한 영향을 미침."
+        }
+      },
+      "level_3_branches": {
+        "L3_W1O1I1": {
+          "L3_node_id": "L3_W1O1I1",
+          "L3_parent": "L2_W1O1",
+          "L3_thought": "풍속, 화재 지속 시간, 인구 밀도의 조합",
+          "L3_data_combination": "풍속, 화재 지속 시간, 인구 밀도의 상관관계 분석",
+          "L3_values": [
+            3.5,
+            360,
+            2925
+          ],
+          "L3_reasoning_type": "직접인과",
+          "L3_calculation": {
+            "factor_1": "풍속 위험: 3 (중간)",
+            "factor_2": "화재 지속 시간 위험: 4 (높음)",
+            "factor_3": "인구 밀도 위험: 2 (낮음)",
+            "weighted_average": "(3×0.4)+(4×0.4)+(2×0.2) = 3.4"
+          },
+          "L3_if_then": "IF 풍속이 높고 화재 지속 시간이 길며 인구 밀도가 높으면 THEN 재발화 위험 증가.",
+          "L3_risk_scoring_description": "세 가지 요소의 조합이 재발화 위험을 증가시킴.",
+          "L3_confidence_score": 0.85,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "풍속, 화재 지속 시간, 인구 밀도는 재발화에 중요한 요소."
+        },
+        "L3_W1T1O1": {
+          "L3_node_id": "L3_W1T1O1",
+          "L3_parent": "L2_W1T1",
+          "L3_thought": "풍속, 지형적 요소, 화재 지속 시간의 조합",
+          "L3_data_combination": "풍속, 지형적 요소, 화재 지속 시간의 상관관계 분석",
+          "L3_values": [
+            3.5,
+            49.72,
+            360
+          ],
+          "L3_reasoning_type": "간접인과",
+          "L3_calculation": {
+            "factor_1": "풍속 위험: 3 (중간)",
+            "factor_2": "지형적 요소 위험: 2 (낮음)",
+            "factor_3": "화재 지속 시간 위험: 4 (높음)",
+            "weighted_average": "(3×0.4)+(2×0.3)+(4×0.3) = 3.1"
+          },
+          "L3_if_then": "IF 풍속이 높고 경사가 가파르며 화재 지속 시간이 길면 THEN 재발화 위험 증가.",
+          "L3_risk_scoring_description": "세 가지 요소의 조합이 재발화 위험을 증가시킴.",
+          "L3_confidence_score": 0.75,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "풍속, 지형적 요소, 화재 지속 시간은 재발화에 영향을 미침."
+        },
+        "L3_O1W1I1": {
+          "L3_node_id": "L3_O1W1I1",
+          "L3_parent": "L2_O1W1",
+          "L3_thought": "화재 지속 시간, 풍속, 인구 밀도의 조합",
+          "L3_data_combination": "화재 지속 시간, 풍속, 인구 밀도의 상관관계 분석",
+          "L3_values": [
+            360,
+            3.5,
+            2925
+          ],
+          "L3_reasoning_type": "간접인과",
+          "L3_calculation": {
+            "factor_1": "화재 지속 시간 위험: 4 (높음)",
+            "factor_2": "풍속 위험: 3 (중간)",
+            "factor_3": "인구 밀도 위험: 2 (낮음)",
+            "weighted_average": "(4×0.5)+(3×0.3)+(2×0.2) = 3.5"
+          },
+          "L3_if_then": "IF 화재 지속 시간이 길고 풍속이 높으며 인구 밀도가 높으면 THEN 재발화 위험 증가.",
+          "L3_risk_scoring_description": "세 가지 요소의 조합이 재발화 위험을 증가시킴.",
+          "L3_confidence_score": 0.9,
+          "L3_status": "selected",
+          "L3_reasoning_description": "화재 지속 시간, 풍속, 인구 밀도는 재발화에 밀접한 관계가 있음."
+        },
+        "L3_T1O1I1": {
+          "L3_node_id": "L3_T1O1I1",
+          "L3_parent": "L2_T1O1",
+          "L3_thought": "지형적 요소, 화재 지속 시간, 인구 밀도의 조합",
+          "L3_data_combination": "지형적 요소, 화재 지속 시간, 인구 밀도의 상관관계 분석",
+          "L3_values": [
+            49.72,
+            360,
+            2925
+          ],
+          "L3_reasoning_type": "임계값 판단",
+          "L3_calculation": {
+            "factor_1": "지형적 요소 위험: 2 (낮음)",
+            "factor_2": "화재 지속 시간 위험: 4 (높음)",
+            "factor_3": "인구 밀도 위험: 2 (낮음)",
+            "weighted_average": "(2×0.3)+(4×0.5)+(2×0.2) = 2.8"
+          },
+          "L3_if_then": "IF 경사가 가파르고 화재 지속 시간이 길며 인구 밀도가 높으면 THEN 재발화 위험 증가.",
+          "L3_risk_scoring_description": "세 가지 요소의 조합이 재발화 위험을 증가시킴.",
+          "L3_confidence_score": 0.8,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "지형적 요소, 화재 지속 시간, 인구 밀도는 재발화에 영향을 미침."
+        },
+        "L3_F1O1W1": {
+          "L3_node_id": "L3_F1O1W1",
+          "L3_parent": "L2_F1O1",
+          "L3_status": "pruning",
+          "L3_thought": "연료 특성, 화재 지속 시간, 풍속의 조합",
+          "L3_data_combination": "연료 특성, 화재 지속 시간, 풍속의 상관관계 분석",
+          "L3_values": [
+            16.0,
+            360,
+            3.5
+          ],
+          "L3_reasoning_type": "간접인과",
+          "L3_calculation": {
+            "factor_1": "연료 특성 위험: 3 (중간)",
+            "factor_2": "화재 지속 시간 위험: 4 (높음)",
+            "factor_3": "풍속 위험: 3 (중간)",
+            "weighted_average": "(3×0.3)+(4×0.5)+(3×0.2) = 3.5"
+          },
+          "L3_if_then": "IF 연료가 건조하고 화재 지속 시간이 길며 풍속이 높으면 THEN 재발화 위험 증가.",
+          "L3_risk_scoring_description": "세 가지 요소의 조합이 재발화 위험을 증가시킴.",
+          "L3_confidence_score": 0.85,
+          "L3_reasoning_description": "연료 특성, 화재 지속 시간, 풍속은 재발화에 밀접한 관계가 있음."
+        },
+        "L3_I1O1W1": {
+          "L3_node_id": "L3_I1O1W1",
+          "L3_parent": "L2_I1O1",
+          "L3_status": "pruning",
+          "L3_thought": "인프라, 화재 지속 시간, 풍속의 조합",
+          "L3_data_combination": "인프라, 화재 지속 시간, 풍속의 상관관계 분석",
+          "L3_values": [
+            2925,
+            360,
+            3.5
+          ],
+          "L3_reasoning_type": "간접인과",
+          "L3_calculation": {
+            "factor_1": "인프라 위험: 2 (낮음)",
+            "factor_2": "화재 지속 시간 위험: 4 (높음)",
+            "factor_3": "풍속 위험: 3 (중간)",
+            "weighted_average": "(2×0.3)+(4×0.5)+(3×0.2) = 3.1"
+          },
+          "L3_if_then": "IF 인구 밀도가 높고 화재 지속 시간이 길며 풍속이 높으면 THEN 재발화 위험 증가.",
+          "L3_risk_scoring_description": "세 가지 요소의 조합이 재발화 위험을 증가시킴.",
+          "L3_confidence_score": 0.8,
+          "L3_reasoning_description": "인프라, 화재 지속 시간, 풍속은 재발화에 영향을 미침."
+        }
+      },
+      "backtracking_events": [
+        {
+          "event_id": "BT1",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.65,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_O1 -> L2_O1T1",
+          "problem": "화재 지속 시간과 지형적 요소의 조합이 재발화 위험에 미치는 영향을 명확히 할 필요가 있습니다.",
+          "backtrack_analysis": {
+            "initial_hypothesis": "화재 지속 시간이 재발화 위험에 큰 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.65",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2 단계에서 다른 조합을 시도해야 한다.",
+            "alternative_combination": "L2_O1W1",
+            "simplification": "화재 지속 시간과 풍속 조합으로 대체",
+            "structural_change": "L2_O1W1로 변경",
+            "selected_alternative": "L2_O1W1",
+            "rationale": "풍속이 화재 지속 시간과 상호작용하여 재발화 위험을 증가시킨다."
+          },
+          "new_attempt": {
+            "target_path": "L2_O1T1 대신 L2_O1W1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_O1 -> L2_O1W1",
+            "new_score": 0.85,
+            "weight_adjustment": 0.15
+          },
+          "result": "backtracked",
+          "learning": "화재 지속 시간과 풍속의 상관관계를 통해 재발화 위험을 개선할 수 있다."
+        },
+        {
+          "event_id": "BT2",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.7,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_T1 -> L2_T1W1",
+          "problem": "지형적 요소와 풍속의 조합이 재발화 위험에 미치는 영향을 명확히 할 필요가 있습니다.",
+          "backtrack_analysis": {
+            "initial_hypothesis": "지형적 요소가 재발화 위험에 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.7",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2 단계에서 다른 조합을 시도해야 한다.",
+            "alternative_combination": "L2_T1O1",
+            "simplification": "지형적 요소와 화재 지속 시간 조합으로 대체",
+            "structural_change": "L2_T1O1로 변경",
+            "selected_alternative": "L2_T1O1",
+            "rationale": "지형적 요소와 화재 지속 시간이 재발화 위험에 중요한 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_T1W1 대신 L2_T1O1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_T1 -> L2_T1O1",
+            "new_score": 0.75,
+            "weight_adjustment": 0.1
+          },
+          "result": "backtracked",
+          "learning": "지형적 요소와 화재 지속 시간의 관계를 통해 재발화 위험을 개선할 수 있다."
+        },
+        {
+          "event_id": "BT3",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.68,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_F1 -> L2_F1W1",
+          "problem": "연료 특성과 풍속의 조합이 재발화 위험에 미치는 영향을 명확히 할 필요가 있습니다.",
+          "backtrack_analysis": {
+            "initial_hypothesis": "연료 특성이 재발화 위험에 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.68",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2 단계에서 다른 조합을 시도해야 한다.",
+            "alternative_combination": "L2_F1O1",
+            "simplification": "연료 특성과 화재 지속 시간 조합으로 대체",
+            "structural_change": "L2_F1O1로 변경",
+            "selected_alternative": "L2_F1O1",
+            "rationale": "연료 특성과 화재 지속 시간이 재발화 위험에 중요한 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_F1W1 대신 L2_F1O1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_F1 -> L2_F1O1",
+            "new_score": 0.82,
+            "weight_adjustment": 0.12
+          },
+          "result": "backtracked",
+          "learning": "연료 특성과 화재 지속 시간의 관계를 통해 재발화 위험을 개선할 수 있다."
+        },
+        {
+          "event_id": "BT4",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.72,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_I1 -> L2_I1W1",
+          "problem": "인프라와 풍속의 조합이 재발화 위험에 미치는 영향을 명확히 할 필요가 있습니다.",
+          "backtrack_analysis": {
+            "initial_hypothesis": "인프라와 인구 밀도가 재발화 위험에 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.72",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2 단계에서 다른 조합을 시도해야 한다.",
+            "alternative_combination": "L2_I1O1",
+            "simplification": "인프라와 화재 지속 시간 조합으로 대체",
+            "structural_change": "L2_I1O1로 변경",
+            "selected_alternative": "L2_I1O1",
+            "rationale": "인프라와 화재 지속 시간이 재발화 위험에 중요한 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_I1W1 대신 L2_I1O1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_I1 -> L2_I1O1",
+            "new_score": 0.78,
+            "weight_adjustment": 0.1
+          },
+          "result": "backtracked",
+          "learning": "인프라와 화재 지속 시간의 관계를 통해 재발화 위험을 개선할 수 있다."
+        },
+        {
+          "event_id": "BT5",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.75,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_W1 -> L2_W1F1",
+          "problem": "풍속과 연료 특성의 조합이 재발화 위험에 미치는 영향을 명확히 할 필요가 있습니다.",
+          "backtrack_analysis": {
+            "initial_hypothesis": "풍속이 재발화 위험에 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.75",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2 단계에서 다른 조합을 시도해야 한다.",
+            "alternative_combination": "L2_W1O1",
+            "simplification": "풍속과 화재 지속 시간 조합으로 대체",
+            "structural_change": "L2_W1O1로 변경",
+            "selected_alternative": "L2_W1O1",
+            "rationale": "풍속과 화재 지속 시간이 재발화 위험에 중요한 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_W1F1 대신 L2_W1O1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_W1 -> L2_W1O1",
+            "new_score": 0.8,
+            "weight_adjustment": 0.1
+          },
+          "result": "backtracked",
+          "learning": "풍속과 화재 지속 시간의 관계를 통해 재발화 위험을 개선할 수 있다."
+        }
+      ],
+      "pruning_events": [
+        {
+          "pruning_id": "P1",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_W1O1I1",
+          "score": 0.85,
+          "threshold": 0.9,
+          "reason": "풍속, 화재 지속 시간, 인구 밀도의 조합에 대한 신뢰도가 기준치(0.90)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_W1O1I1는 \"풍속, 화재 지속 시간, 인구 밀도의 조합\" 분석에서 신뢰도 0.85가 기준 0.90보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P2",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_W1T1O1",
+          "score": 0.75,
+          "threshold": 0.8,
+          "reason": "풍속, 지형적 요소, 화재 지속 시간의 조합에 대한 신뢰도가 기준치(0.80)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_W1T1O1는 \"풍속, 지형적 요소, 화재 지속 시간의 조합\" 분석에서 신뢰도 0.75가 기준 0.80보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P3",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_T1O1I1",
+          "score": 0.8,
+          "threshold": 0.85,
+          "reason": "지형적 요소, 화재 지속 시간, 인구 밀도의 조합에 대한 신뢰도가 기준치(0.85)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_T1O1I1는 \"지형적 요소, 화재 지속 시간, 인구 밀도의 조합\" 분석에서 신뢰도 0.80가 기준 0.85보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P4",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_F1O1W1",
+          "score": 0.85,
+          "threshold": 0.9,
+          "reason": "연료 특성, 화재 지속 시간, 풍속의 조합에 대한 신뢰도가 기준치(0.90)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_F1O1W1는 \"연료 특성, 화재 지속 시간, 풍속의 조합\" 분석에서 신뢰도 0.85가 기준 0.90보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P5",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_I1O1W1",
+          "score": 0.8,
+          "threshold": 0.85,
+          "reason": "인프라, 화재 지속 시간, 풍속의 조합에 대한 신뢰도가 기준치(0.85)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_I1O1W1는 \"인프라, 화재 지속 시간, 풍속의 조합\" 분석에서 신뢰도 0.80가 기준 0.85보다 낮아 추론 경로에서 제거하였습니다."
+        }
+      ],
+      "final_selection": {
+        "selected_path": "ROOT → L1_O1 → L2_O1W1 → L3_O1W1I1",
+        "best_l3_node_id": "L3_O1W1I1",
+        "reasoning_chain": "① L1: 화재 지속 시간이 재발화 위험에 미치는 영향. ② L2: 화재 지속 시간과 풍속의 조합. ③ L3: 화재 지속 시간, 풍속, 인구 밀도의 조합.",
+        "path_selection_reasoning": "여러 L3 중 이 경로를 선택한 이유는 화재 지속 시간, 풍속, 인구 밀도의 조합이 재발화 위험을 가장 높게 평가했기 때문입니다.",
+        "selected_path_risk_scoring_description": "최종 경로의 위험도 평가 결과, 화재 지속 시간, 풍속, 인구 밀도의 조합이 재발화 위험을 증가시키는 것으로 나타났습니다.",
+        "comprehensive_scoring_matrix": {
+          "path_1": {
+            "risk_level": "높음",
+            "confidence": 0.9
+          },
+          "path_2": {
+            "risk_level": "보통",
+            "confidence": 0.85
+          },
+          "path_3": {
+            "risk_level": "낮음",
+            "confidence": 0.75
+          }
+        },
+        "scoring_criteria": "신뢰도, 위험도, 대응 가능성을 종합적으로 고려하여 최종 경로를 선정하였습니다.",
+        "key_nodes_used": {
+          "O": {
+            "fire_duration": 360,
+            "drought_duration": 35
+          },
+          "W": {
+            "wind_speed": 3.5,
+            "humidity": 18.0
+          },
+          "I": {
+            "population": 2925,
+            "fire_station_distance": 4.86
+          }
+        },
+        "path_confidence": 0.9
+      }
+    },
+    "countermeasures": {
+      "immediate_recommendation": {
+        "decision": "즉시 대피 준비를 시작해야 합니다.",
+        "primary_reason": "화재 지속 시간과 풍속이 재발화 위험을 높이고 있습니다.",
+        "risk_level": "높음"
+      },
+      "safety_assessment": {
+        "prohibitive_factors": {
+          "fire": "화재 강도가 매우 강합니다.",
+          "visibility": "가시거리가 양호하지만 불안정합니다.",
+          "support": "소방 지원이 제한적입니다.",
+          "intensity": "화재 강도가 매우 강하여 위험합니다."
+        },
+        "favorable_factors": {
+          "wind": "풍속이 상대적으로 낮습니다.",
+          "humidity": "습도가 낮아 화재 확산이 우려됩니다."
+        },
+        "net_assessment": "전반적으로 재발화 위험이 높습니다.",
+        "evacuation_zones": {
+          "safe_zone": "신리마을회관이 안전 지역입니다.",
+          "danger_zone": "화재 발생 지역은 위험 지역입니다.",
+          "buffer_zone": "위험 지역 주변은 완충 지역입니다."
+        },
+        "evacuation_sequence": {
+          "phase_1": "가족과 함께 대피소로 이동합니다.",
+          "phase_2": "대피소에서 안전 확인을 합니다.",
+          "phase_3": "상황을 지속적으로 모니터링합니다."
+        }
+      },
+      "alternative_strategies": {
+        "option_1": {
+          "action": "대피소를 확인합니다.",
+          "timing": "즉시"
+        },
+        "option_2": {
+          "action": "가족과 집결합니다.",
+          "method": "전화 또는 메시지로 연락합니다."
+        },
+        "option_3": {
+          "action": "소방서에 연락합니다.",
+          "condition": "화재가 확산될 경우"
+        }
+      },
+      "safety_requirements": {
+        "minimum_conditions": [
+          "연료 수분 함량이 낮아야 합니다.",
+          "지면 온도가 발화점 이하이어야 합니다."
+        ],
+        "key_insights": "현재 기상 조건이 재발화 위험을 증가시키고 있습니다."
+      }
+    },
+    "decision_answer": {
+      "conclusion": "재발화 위험이 높으므로 즉시 대피해야 합니다. 대피소를 확인하고 가족과 집결하는 것이 중요합니다.",
+      "safety_verdict": {
+        "decision": "즉시 대피를 권장합니다.",
+        "safety_level": "위험",
+        "confidence": "90%",
+        "primary_factor": "화재 지속 시간과 풍속"
+      },
+      "critical_risks": {
+        "risk_1": "화재 강도가 매우 강함.",
+        "risk_2": "소방 지원이 제한적임.",
+        "risk_3": "재발화 위험이 높음.",
+        "risk_4": "가족의 안전이 위협받음."
+      },
+      "clear_message": "즉시 대피 준비하세요.",
+      "critical_action": {
+        "action_1": "대피소를 확인합니다.",
+        "action_2": "가족과 연락합니다.",
+        "action_3": "소방서에 신고합니다.",
+        "action_4": "상황을 지속적으로 모니터링합니다."
+      }
+    },
+    "complete_reasoning": {
+      "reasoning_path_description": "화재 지속 시간이 재발화 위험에 미치는 영향이 큽니다. 화재 지속 시간과 풍속의 조합이 재발화 위험을 높이고 있습니다. 인구 밀도 또한 위험을 증가시키는 중요한 요소입니다.선택 경로 L0_ROOT -> L1_O1 -> L2_O1W1 -> L3_O1W1I1는 인프라, 바람, 발생/운영 축의 상호작용을 핵심 근거로 합니다. L1에서는 화재 지속 시간이 재발화 위험에 미치는 영향.를 검토하고, L2에서 화재 지속 시간과 풍속의 조합를 종합했습니다. 최종 L3 판단은 \"IF 화재 지속 시간이 길고 풍속이 높으며 인구 밀도가 높으면 THEN 재발화 위험 증가.\"로 수렴했으며, 이에 따라 위험도와 실행 가능성을 함께 평가하였습니다.",
+      "risk_scoring": "최종 경로의 위험도는 높음으로 평가되었습니다.",
+      "confidence_scoring": "신뢰도는 90%로 높습니다.",
+      "complete_reasoning_countermeasures": "질의자는 지형과 기상 조건을 고려하여 재발화 위험에 대해 질문하였습니다. 최종 경로 및 위험도 판단에 따르면, 화재 지속 시간, 풍속, 인구 밀도의 조합이 재발화 위험을 가장 높게 평가하였으며, 위험도는 '높음'으로 나타났습니다. 이러한 요소들은 화재의 강도와 확산 속도에 직접적인 영향을 미치고 있습니다.\n\n즉각 조치로는 즉시 대피 준비를 시작해야 하며, 이는 화재 지속 시간과 풍속이 재발화 위험을 높이고 있기 때문입니다. 안전 평가 결과, 화재 강도가 매우 강하고 소방 지원이 제한적이므로, 대피소로의 이동이 필수적입니다. 대피소는 신리마을회관으로 설정되어 있으며, 가족과 함께 대피소로 이동한 후 안전을 확인하고 상황을 지속적으로 모니터링해야 합니다.\n\n대안 전략으로는 대피소를 즉시 확인하고, 가족과 연락하여 집결하는 방법이 있습니다. 또한, 화재가 확산될 경우 소방서에 연락하는 것도 중요합니다. 이러한 대안들은 상황에 따라 유연하게 적용할 수 있습니다. 따라서, 질의자의 상황에서 취해야 할 핵심 대응방안은 즉시 대피 준비를 하고, 대피소를 확인하며 가족과 연락하여 안전을 확보하는 것입니다.",
+      "query": "지형과 기상 조건을 고려하면 재발화 위험은 얼마나 됩니까?"
+    }
+  },
+  "file_info": {
+    "labelling_file_name": "HS20230402_T_P0001_T007.json",
+    "labelling_file_format": "json"
+  }
+}

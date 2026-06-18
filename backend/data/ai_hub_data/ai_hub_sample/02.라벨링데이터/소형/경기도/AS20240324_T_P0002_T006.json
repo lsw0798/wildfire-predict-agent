@@ -1,0 +1,913 @@
+{
+  "labelling_data_info": {
+    "query": {
+      "query_text": "1층과 고층 중 어느 쪽이 연기 피해가 더 심합니까?",
+      "query_purpose": "현황파악",
+      "query_subject": "피해예상",
+      "query_type": "hypothetical"
+    },
+    "tree_of_thought": {
+      "level_0_input": {
+        "L0_node_id": "ROOT",
+        "L0_thought": "고층과 저층 연기 피해 비교",
+        "L0_context": {
+          "weather_conditions": {
+            "wind_speed": 1.5,
+            "wind_direction": 230.0,
+            "humidity_percent": 17.0,
+            "temperature": 22.4,
+            "surface_temperature": 16.4,
+            "drought_days": 35.0,
+            "visibility": 5000.0
+          },
+          "terrain_conditions": {
+            "elevation": 177.36,
+            "slope": 9.48,
+            "slope_aspect": 174.79,
+            "curvature": 0.0012,
+            "topographic_position_index": -6.33,
+            "terrain_complexity": 25.71,
+            "hydrological_features": 1.2
+          },
+          "fuel_conditions": {
+            "fuel_type": "활엽수림",
+            "fuel_moisture": 15.0,
+            "fuel_density": 12.51,
+            "fuel_average_age": 35.0,
+            "surface_fuel_depth": 4.0,
+            "canopy_height": 16.0,
+            "canopy_coverage": 75.0
+          },
+          "Infra_Social": {
+            "population": 1785.0,
+            "vulnerable": 1082.0,
+            "fire_station_distance": 6.49,
+            "road_accessibility": "보통",
+            "Important_Infra_distance": 0.56,
+            "shelter": ""
+          },
+          "occurrence_status": {
+            "fire_duration": 352.0,
+            "drought_duration_days": 35.0,
+            "wildfire_duration_time": "6:52",
+            "flame_length": 1.0,
+            "fire_intensity": "약함",
+            "fire_length": 2.2,
+            "wind_slope_alignment": 55.21
+          }
+        },
+        "L0_branches": [
+          "L1_W1",
+          "L1_O1",
+          "L1_T1",
+          "L1_F1",
+          "L1_I1"
+        ],
+        "L0_reasoning_description": "연기 피해는 화선과 풍향에 따라 달라짐.",
+        "L0_confidence_score": 0.85,
+        "L0_status": "start"
+      },
+      "level_1_branches": {
+        "L1_W1": {
+          "L1_node_id": "L1_W1",
+          "L1_parent": "ROOT",
+          "L1_thought": "풍속과 습도가 연기 피해에 미치는 영향.",
+          "L1_data_node": "wind_speed_risk, humidity_effect",
+          "L1_value": [
+            1.5,
+            17.0
+          ],
+          "L1_reasoning_type": "직접인과",
+          "L1_calculation": {
+            "wind_speed_risk": "2 (중간)",
+            "humidity_effect": "3 (높음)",
+            "average_risk": "2.5"
+          },
+          "L1_if_then": "IF 풍속이 높고 습도가 낮으면 THEN 연기 피해가 증가할 수 있다.",
+          "L1_risk_scoring_description": "풍속과 습도가 연기 피해에 직접적인 영향을 미친다.",
+          "L1_confidence_score": 0.8,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_W1O1",
+            "L2_W1T1",
+            "L2_W1F1"
+          ],
+          "L1_reasoning_description": "풍속과 습도가 연기 확산에 중요한 역할을 한다."
+        },
+        "L1_O1": {
+          "L1_node_id": "L1_O1",
+          "L1_parent": "ROOT",
+          "L1_thought": "화선의 길이와 강도가 연기 피해에 미치는 영향.",
+          "L1_data_node": "fire_duration_risk, fire_intensity_risk",
+          "L1_value": [
+            352.0,
+            1.0
+          ],
+          "L1_reasoning_type": "간접인과",
+          "L1_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "fire_intensity_risk": "2 (중간)",
+            "average_risk": "3.0"
+          },
+          "L1_if_then": "IF 화선이 길고 강도가 높으면 THEN 연기 피해가 심각해질 수 있다.",
+          "L1_risk_scoring_description": "화선의 길이와 강도가 연기 피해에 큰 영향을 미친다.",
+          "L1_confidence_score": 0.75,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_O1W1",
+            "L2_O1T1"
+          ],
+          "L1_reasoning_description": "화선의 특성이 연기 피해를 결정짓는 중요한 요소이다."
+        },
+        "L1_T1": {
+          "L1_node_id": "L1_T1",
+          "L1_parent": "ROOT",
+          "L1_thought": "지형적 요인이 연기 피해에 미치는 영향.",
+          "L1_data_node": "elevation_risk, slope_risk",
+          "L1_value": [
+            177.36,
+            9.48
+          ],
+          "L1_reasoning_type": "임계값 판단",
+          "L1_calculation": {
+            "elevation_risk": "3 (중간)",
+            "slope_risk": "4 (높음)",
+            "average_risk": "3.5"
+          },
+          "L1_if_then": "IF 지형이 가파르면 THEN 연기 피해가 증가할 수 있다.",
+          "L1_risk_scoring_description": "지형적 요인이 연기 확산에 영향을 미친다.",
+          "L1_confidence_score": 0.7,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_T1O1",
+            "L2_T1W1"
+          ],
+          "L1_reasoning_description": "지형의 특성이 연기 피해에 중요한 역할을 한다."
+        },
+        "L1_F1": {
+          "L1_node_id": "L1_F1",
+          "L1_parent": "ROOT",
+          "L1_thought": "연료의 특성이 연기 피해에 미치는 영향.",
+          "L1_data_node": "fuel_moisture_risk, fuel_density_risk",
+          "L1_value": [
+            15.0,
+            12.51
+          ],
+          "L1_reasoning_type": "증폭효과",
+          "L1_calculation": {
+            "fuel_moisture_risk": "2 (중간)",
+            "fuel_density_risk": "3 (높음)",
+            "average_risk": "2.5"
+          },
+          "L1_if_then": "IF 연료의 습도가 낮고 밀도가 높으면 THEN 연기 피해가 증가할 수 있다.",
+          "L1_risk_scoring_description": "연료의 특성이 연기 피해에 영향을 미친다.",
+          "L1_confidence_score": 0.65,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_F1O1",
+            "L2_F1W1"
+          ],
+          "L1_reasoning_description": "연료의 특성이 연기 피해에 미치는 영향은 제한적이다."
+        },
+        "L1_I1": {
+          "L1_node_id": "L1_I1",
+          "L1_parent": "ROOT",
+          "L1_thought": "인구 밀집도가 연기 피해에 미치는 영향.",
+          "L1_data_node": "population_risk, vulnerable_risk",
+          "L1_value": [
+            1785.0,
+            1082.0
+          ],
+          "L1_reasoning_type": "시너지",
+          "L1_calculation": {
+            "population_risk": "3 (중간)",
+            "vulnerable_risk": "4 (높음)",
+            "average_risk": "3.5"
+          },
+          "L1_if_then": "IF 인구 밀집도가 높고 취약계층이 많으면 THEN 연기 피해가 심각해질 수 있다.",
+          "L1_risk_scoring_description": "인구 밀집도가 연기 피해에 큰 영향을 미친다.",
+          "L1_confidence_score": 0.9,
+          "L1_status": "continue",
+          "L1_branches": [
+            "L2_I1O1",
+            "L2_I1W1"
+          ],
+          "L1_reasoning_description": "인구 밀집도가 연기 피해에 중요한 역할을 한다."
+        }
+      },
+      "level_2_branches": {
+        "L2_W1O1": {
+          "L2_node_id": "L2_W1O1",
+          "L2_parent": "L1_W1",
+          "L2_thought": "풍속과 화선의 조합",
+          "L2_data_combination": "풍속과 화선의 길이 및 강도를 조합하여 연기 피해를 평가",
+          "L2_values": [
+            1.5,
+            352.0
+          ],
+          "L2_reasoning_type": "직접인과",
+          "L2_calculation": {
+            "wind_speed_risk": "2 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 풍속이 높고 화선이 길면 THEN 연기 피해가 심각해질 수 있다.",
+          "L2_risk_scoring_description": "풍속과 화선의 조합이 연기 피해에 큰 영향을 미친다.",
+          "L2_confidence_score": 0.78,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_W1O1I1"
+          ],
+          "L2_reasoning_description": "풍속과 화선의 조합이 연기 피해를 결정짓는 중요한 요소이다."
+        },
+        "L2_I1O1": {
+          "L2_node_id": "L2_I1O1",
+          "L2_parent": "L1_I1",
+          "L2_thought": "인구 밀집도와 화선의 조합",
+          "L2_data_combination": "인구 밀집도와 화선의 길이 및 강도를 조합하여 연기 피해를 평가",
+          "L2_values": [
+            1785.0,
+            352.0
+          ],
+          "L2_reasoning_type": "시너지",
+          "L2_calculation": {
+            "population_risk": "3 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 인구 밀집도가 높고 화선이 길면 THEN 연기 피해가 심각해질 수 있다.",
+          "L2_risk_scoring_description": "인구 밀집도와 화선의 조합이 연기 피해에 큰 영향을 미친다.",
+          "L2_confidence_score": 0.85,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_I1O1F1"
+          ],
+          "L2_reasoning_description": "인구 밀집도와 화선의 조합이 연기 피해를 결정짓는 중요한 요소이다."
+        },
+        "L2_T1O1": {
+          "L2_node_id": "L2_T1O1",
+          "L2_parent": "L1_T1",
+          "L2_thought": "지형과 화선의 조합",
+          "L2_data_combination": "지형적 요인과 화선의 길이 및 강도를 조합하여 연기 피해를 평가",
+          "L2_values": [
+            177.36,
+            352.0
+          ],
+          "L2_reasoning_type": "임계값 판단",
+          "L2_calculation": {
+            "elevation_risk": "3 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 지형이 가파르고 화선이 길면 THEN 연기 피해가 심각해질 수 있다.",
+          "L2_risk_scoring_description": "지형적 요인과 화선의 조합이 연기 피해에 큰 영향을 미친다.",
+          "L2_confidence_score": 0.72,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_T1O1W1"
+          ],
+          "L2_reasoning_description": "지형과 화선의 조합이 연기 피해를 결정짓는 중요한 요소이다."
+        },
+        "L2_F1O1": {
+          "L2_node_id": "L2_F1O1",
+          "L2_parent": "L1_F1",
+          "L2_thought": "연료 특성과 화선의 조합",
+          "L2_data_combination": "연료의 특성과 화선의 길이 및 강도를 조합하여 연기 피해를 평가",
+          "L2_values": [
+            15.0,
+            352.0
+          ],
+          "L2_reasoning_type": "증폭효과",
+          "L2_calculation": {
+            "fuel_moisture_risk": "2 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 연료의 습도가 낮고 화선이 길면 THEN 연기 피해가 심각해질 수 있다.",
+          "L2_risk_scoring_description": "연료의 특성과 화선의 조합이 연기 피해에 영향을 미친다.",
+          "L2_confidence_score": 0.68,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_F1O1W1"
+          ],
+          "L2_reasoning_description": "연료의 특성과 화선의 조합은 연기 피해에 미치는 영향이 제한적이다."
+        },
+        "L2_W1T1": {
+          "L2_node_id": "L2_W1T1",
+          "L2_parent": "L1_W1",
+          "L2_thought": "풍속과 지형의 조합",
+          "L2_data_combination": "풍속과 지형적 요인을 조합하여 연기 피해를 평가",
+          "L2_values": [
+            1.5,
+            177.36
+          ],
+          "L2_reasoning_type": "직접인과",
+          "L2_calculation": {
+            "wind_speed_risk": "2 (중간)",
+            "elevation_risk": "3 (중간)",
+            "average_risk": "2.5"
+          },
+          "L2_if_then": "IF 풍속이 높고 지형이 가파르면 THEN 연기 피해가 증가할 수 있다.",
+          "L2_risk_scoring_description": "풍속과 지형의 조합이 연기 피해에 영향을 미친다.",
+          "L2_confidence_score": 0.75,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_W1T1O1"
+          ],
+          "L2_reasoning_description": "풍속과 지형의 조합이 연기 피해를 결정짓는 중요한 요소이다."
+        },
+        "L2_I1W1": {
+          "L2_node_id": "L2_I1W1",
+          "L2_parent": "L1_I1",
+          "L2_thought": "인구 밀집도와 풍속의 조합",
+          "L2_data_combination": "인구 밀집도와 풍속을 조합하여 연기 피해를 평가",
+          "L2_values": [
+            1785.0,
+            1.5
+          ],
+          "L2_reasoning_type": "시너지",
+          "L2_calculation": {
+            "population_risk": "3 (중간)",
+            "wind_speed_risk": "2 (중간)",
+            "average_risk": "2.5"
+          },
+          "L2_if_then": "IF 인구 밀집도가 높고 풍속이 높으면 THEN 연기 피해가 증가할 수 있다.",
+          "L2_risk_scoring_description": "인구 밀집도와 풍속의 조합이 연기 피해에 영향을 미친다.",
+          "L2_confidence_score": 0.8,
+          "L2_status": "continue",
+          "L2_branches": [
+            "L3_I1W1T1"
+          ],
+          "L2_reasoning_description": "인구 밀집도와 풍속의 조합이 연기 피해를 결정짓는 중요한 요소이다."
+        },
+        "L2_O1W1": {
+          "L2_node_id": "L2_O1W1",
+          "L2_parent": "L1_O1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "화선의 길이와 강도가 연기 피해에 미치는 영향.",
+          "L2_data_combination": "화선의 길이 및 강도와 풍속을 조합하여 연기 피해를 평가",
+          "L2_values": [
+            352.0,
+            1.0
+          ],
+          "L2_reasoning_type": "간접인과",
+          "L2_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "wind_speed_risk": "2 (중간)",
+            "average_risk": "3.0"
+          },
+          "L2_if_then": "IF 화선이 길고 풍속이 높으면 THEN 연기 피해가 심각해질 수 있다.",
+          "L2_risk_scoring_description": "화선의 길이와 강도가 연기 피해에 큰 영향을 미친다.",
+          "L2_confidence_score": 0.8,
+          "L2_reasoning_description": "화선의 특성이 연기 피해를 결정짓는 중요한 요소이다."
+        },
+        "L2_O1T1": {
+          "L2_node_id": "L2_O1T1",
+          "L2_parent": "L1_O1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "화선의 길이와 지형적 요인의 조합",
+          "L2_data_combination": "화선의 길이 및 강도와 지형적 요인을 조합하여 연기 피해를 평가",
+          "L2_values": [
+            352.0,
+            177.36
+          ],
+          "L2_reasoning_type": "임계값 판단",
+          "L2_calculation": {
+            "fire_duration_risk": "4 (높음)",
+            "elevation_risk": "3 (중간)",
+            "average_risk": "3.5"
+          },
+          "L2_if_then": "IF 화선이 길고 지형이 가파르면 THEN 연기 피해가 심각해질 수 있다.",
+          "L2_risk_scoring_description": "화선의 길이와 지형적 요인이 연기 피해에 큰 영향을 미친다.",
+          "L2_confidence_score": 0.75,
+          "L2_reasoning_description": "화선의 특성과 지형적 요인의 조합이 연기 피해를 결정짓는 중요한 요소이다."
+        },
+        "L2_T1W1": {
+          "L2_node_id": "L2_T1W1",
+          "L2_parent": "L1_T1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "지형적 요인과 풍속의 조합",
+          "L2_data_combination": "지형적 요인과 풍속을 조합하여 연기 피해를 평가",
+          "L2_values": [
+            177.36,
+            1.5
+          ],
+          "L2_reasoning_type": "직접인과",
+          "L2_calculation": {
+            "elevation_risk": "3 (중간)",
+            "wind_speed_risk": "2 (중간)",
+            "average_risk": "2.5"
+          },
+          "L2_if_then": "IF 지형이 가파르고 풍속이 높으면 THEN 연기 피해가 증가할 수 있다.",
+          "L2_risk_scoring_description": "지형적 요인과 풍속의 조합이 연기 피해에 영향을 미친다.",
+          "L2_confidence_score": 0.7,
+          "L2_reasoning_description": "지형적 요인과 풍속의 조합이 연기 피해를 결정짓는 중요한 요소이다."
+        },
+        "L2_F1W1": {
+          "L2_node_id": "L2_F1W1",
+          "L2_parent": "L1_F1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "연료 특성과 풍속의 조합",
+          "L2_data_combination": "연료의 특성과 풍속을 조합하여 연기 피해를 평가",
+          "L2_values": [
+            15.0,
+            1.5
+          ],
+          "L2_reasoning_type": "증폭효과",
+          "L2_calculation": {
+            "fuel_moisture_risk": "2 (중간)",
+            "wind_speed_risk": "2 (중간)",
+            "average_risk": "2.0"
+          },
+          "L2_if_then": "IF 연료의 습도가 낮고 풍속이 높으면 THEN 연기 피해가 심각해질 수 있다.",
+          "L2_risk_scoring_description": "연료의 특성과 풍속의 조합이 연기 피해에 영향을 미친다.",
+          "L2_confidence_score": 0.65,
+          "L2_reasoning_description": "연료의 특성과 풍속의 조합은 연기 피해에 미치는 영향이 제한적이다."
+        },
+        "L2_W1F1": {
+          "L2_node_id": "L2_W1F1",
+          "L2_parent": "L1_W1",
+          "L2_status": "backtracking",
+          "L2_branches": [],
+          "L2_thought": "풍속과 연료 특성의 조합",
+          "L2_data_combination": "풍속과 연료의 특성을 조합하여 연기 피해를 평가",
+          "L2_values": [
+            1.5,
+            15.0
+          ],
+          "L2_reasoning_type": "직접인과",
+          "L2_calculation": {
+            "wind_speed_risk": "2 (중간)",
+            "fuel_moisture_risk": "2 (중간)",
+            "average_risk": "2.0"
+          },
+          "L2_if_then": "IF 풍속이 높고 연료의 습도가 낮으면 THEN 연기 피해가 증가할 수 있다.",
+          "L2_risk_scoring_description": "풍속과 연료의 특성의 조합이 연기 피해에 영향을 미친다.",
+          "L2_confidence_score": 0.7,
+          "L2_reasoning_description": "풍속과 연료의 특성의 조합이 연기 피해를 결정짓는 중요한 요소이다."
+        }
+      },
+      "level_3_branches": {
+        "L3_W1O1I1": {
+          "L3_node_id": "L3_W1O1I1",
+          "L3_parent": "L2_W1O1",
+          "L3_thought": "풍속, 화선, 인구 밀집도 조합",
+          "L3_data_combination": "풍속, 화선의 길이 및 강도, 인구 밀집도를 조합하여 연기 피해를 평가",
+          "L3_values": [
+            1.5,
+            352.0,
+            1785.0
+          ],
+          "L3_reasoning_type": "직접인과",
+          "L3_calculation": {
+            "wind_speed_risk": "2 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "population_risk": "3 (중간)",
+            "weighted_average": "(2×0.3)+(4×0.5)+(3×0.2) = 3.3"
+          },
+          "L3_if_then": "IF 풍속이 높고 화선이 길며 인구 밀집도가 높으면 THEN 연기 피해가 심각해질 수 있다.",
+          "L3_risk_scoring_description": "풍속, 화선, 인구 밀집도의 조합이 연기 피해에 큰 영향을 미친다.",
+          "L3_confidence_score": 0.8,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "이 세 가지 요소의 조합이 연기 피해를 결정짓는 중요한 요소이다."
+        },
+        "L3_I1O1F1": {
+          "L3_node_id": "L3_I1O1F1",
+          "L3_parent": "L2_I1O1",
+          "L3_thought": "인구 밀집도, 화선, 연료 특성 조합",
+          "L3_data_combination": "인구 밀집도, 화선의 길이 및 강도, 연료의 특성을 조합하여 연기 피해를 평가",
+          "L3_values": [
+            1785.0,
+            352.0,
+            15.0
+          ],
+          "L3_reasoning_type": "시너지",
+          "L3_calculation": {
+            "population_risk": "3 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "fuel_moisture_risk": "2 (중간)",
+            "weighted_average": "(3×0.4)+(4×0.4)+(2×0.2) = 3.4"
+          },
+          "L3_if_then": "IF 인구 밀집도가 높고 화선이 길며 연료의 습도가 낮으면 THEN 연기 피해가 심각해질 수 있다.",
+          "L3_risk_scoring_description": "이 세 가지 요소의 조합이 연기 피해에 큰 영향을 미친다.",
+          "L3_confidence_score": 0.85,
+          "L3_status": "selected",
+          "L3_reasoning_description": "인구 밀집도와 화선, 연료 특성의 조합이 연기 피해를 결정짓는 중요한 요소이다."
+        },
+        "L3_T1O1W1": {
+          "L3_node_id": "L3_T1O1W1",
+          "L3_parent": "L2_T1O1",
+          "L3_thought": "지형, 화선, 풍속 조합",
+          "L3_data_combination": "지형적 요인, 화선의 길이 및 강도, 풍속을 조합하여 연기 피해를 평가",
+          "L3_values": [
+            177.36,
+            352.0,
+            1.5
+          ],
+          "L3_reasoning_type": "임계값 판단",
+          "L3_calculation": {
+            "elevation_risk": "3 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "wind_speed_risk": "2 (중간)",
+            "weighted_average": "(3×0.3)+(4×0.5)+(2×0.2) = 3.4"
+          },
+          "L3_if_then": "IF 지형이 가파르고 화선이 길며 풍속이 높으면 THEN 연기 피해가 심각해질 수 있다.",
+          "L3_risk_scoring_description": "이 세 가지 요소의 조합이 연기 피해에 큰 영향을 미친다.",
+          "L3_confidence_score": 0.75,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "지형, 화선, 풍속의 조합이 연기 피해를 결정짓는 중요한 요소이다."
+        },
+        "L3_W1T1O1": {
+          "L3_node_id": "L3_W1T1O1",
+          "L3_parent": "L2_W1T1",
+          "L3_thought": "풍속, 지형, 화선 조합",
+          "L3_data_combination": "풍속, 지형적 요인, 화선의 길이 및 강도를 조합하여 연기 피해를 평가",
+          "L3_values": [
+            1.5,
+            177.36,
+            352.0
+          ],
+          "L3_reasoning_type": "직접인과",
+          "L3_calculation": {
+            "wind_speed_risk": "2 (중간)",
+            "elevation_risk": "3 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "weighted_average": "(2×0.3)+(3×0.2)+(4×0.5) = 3.3"
+          },
+          "L3_if_then": "IF 풍속이 높고 지형이 가파르며 화선이 길면 THEN 연기 피해가 심각해질 수 있다.",
+          "L3_risk_scoring_description": "이 세 가지 요소의 조합이 연기 피해에 큰 영향을 미친다.",
+          "L3_confidence_score": 0.7,
+          "L3_status": "pruning",
+          "L3_reasoning_description": "풍속, 지형, 화선의 조합이 연기 피해를 결정짓는 중요한 요소이다."
+        },
+        "L3_F1O1W1": {
+          "L3_node_id": "L3_F1O1W1",
+          "L3_parent": "L2_F1O1",
+          "L3_status": "pruning",
+          "L3_thought": "연료 특성과 화선의 조합",
+          "L3_data_combination": "연료의 특성과 화선의 길이 및 강도를 조합하여 연기 피해를 평가",
+          "L3_values": [
+            15.0,
+            352.0
+          ],
+          "L3_reasoning_type": "증폭효과",
+          "L3_calculation": {
+            "fuel_moisture_risk": "2 (중간)",
+            "fire_duration_risk": "4 (높음)",
+            "weighted_average": "(2×0.5)+(4×0.5) = 3.0"
+          },
+          "L3_if_then": "IF 연료의 습도가 낮고 화선이 길면 THEN 연기 피해가 심각해질 수 있다.",
+          "L3_risk_scoring_description": "연료 특성과 화선의 조합이 연기 피해에 큰 영향을 미친다.",
+          "L3_confidence_score": 0.75,
+          "L3_reasoning_description": "연료의 특성과 화선의 조합이 연기 피해를 결정짓는 중요한 요소이다."
+        },
+        "L3_I1W1T1": {
+          "L3_node_id": "L3_I1W1T1",
+          "L3_parent": "L2_I1W1",
+          "L3_status": "pruning",
+          "L3_thought": "인구 밀집도, 풍속, 지형 조합",
+          "L3_data_combination": "인구 밀집도, 풍속, 지형적 요인을 조합하여 연기 피해를 평가",
+          "L3_values": [
+            1785.0,
+            1.5,
+            177.36
+          ],
+          "L3_reasoning_type": "시너지",
+          "L3_calculation": {
+            "population_risk": "3 (중간)",
+            "wind_speed_risk": "2 (중간)",
+            "elevation_risk": "3 (중간)",
+            "weighted_average": "(3×0.4)+(2×0.3)+(3×0.3) = 2.9"
+          },
+          "L3_if_then": "IF 인구 밀집도가 높고 풍속이 높으며 지형이 가파르면 THEN 연기 피해가 심각해질 수 있다.",
+          "L3_risk_scoring_description": "이 세 가지 요소의 조합이 연기 피해에 큰 영향을 미친다.",
+          "L3_confidence_score": 0.8,
+          "L3_reasoning_description": "인구 밀집도와 풍속, 지형적 요인의 조합이 연기 피해를 결정짓는 중요한 요소이다."
+        }
+      },
+      "backtracking_events": [
+        {
+          "event_id": "BT1",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.65,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_O1 -> L2_O1W1",
+          "problem": "화선의 길이와 강도가 연기 피해에 미치는 영향 재평가 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "화선의 길이와 강도가 연기 피해에 큰 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.65",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2에서 다른 조합 시도",
+            "alternative_combination": "L2_I1O1",
+            "simplification": "인구 밀집도와 화선 길이 조합으로 대체",
+            "structural_change": "L2_I1O1로 변경",
+            "selected_alternative": "L2_I1O1",
+            "rationale": "인구 밀집도가 연기 피해에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_O1W1 대신 L2_I1O1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_I1 -> L2_I1O1",
+            "new_score": 0.85,
+            "weight_adjustment": 0.15
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 인구 밀집도의 중요성 확인"
+        },
+        {
+          "event_id": "BT2",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.68,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_O1 -> L2_O1T1",
+          "problem": "화선과 지형적 요인 조합의 재평가 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "화선의 길이와 지형적 요인이 연기 피해에 큰 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.68",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2에서 다른 조합 시도",
+            "alternative_combination": "L2_T1O1",
+            "simplification": "지형적 요인과 화선 길이 조합으로 대체",
+            "structural_change": "L2_T1O1로 변경",
+            "selected_alternative": "L2_T1O1",
+            "rationale": "지형적 요인이 연기 피해에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_O1T1 대신 L2_T1O1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_T1 -> L2_T1O1",
+            "new_score": 0.82,
+            "weight_adjustment": 0.12
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 지형적 요인의 중요성 확인"
+        },
+        {
+          "event_id": "BT3",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.7,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_T1 -> L2_T1W1",
+          "problem": "지형적 요인과 풍속 조합의 재평가 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "지형적 요인과 풍속이 연기 피해에 큰 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.7",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2에서 다른 조합 시도",
+            "alternative_combination": "L2_T1O1",
+            "simplification": "지형적 요인과 화선 길이 조합으로 대체",
+            "structural_change": "L2_T1O1로 변경",
+            "selected_alternative": "L2_T1O1",
+            "rationale": "지형적 요인이 연기 피해에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_T1W1 대신 L2_T1O1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_T1 -> L2_T1O1",
+            "new_score": 0.75,
+            "weight_adjustment": 0.1
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 지형적 요인의 중요성 확인"
+        },
+        {
+          "event_id": "BT4",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.65,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_F1 -> L2_F1W1",
+          "problem": "연료 특성과 풍속 조합의 재평가 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "연료 특성과 풍속이 연기 피해에 큰 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.65",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2에서 다른 조합 시도",
+            "alternative_combination": "L2_F1O1",
+            "simplification": "연료 특성과 화선 길이 조합으로 대체",
+            "structural_change": "L2_F1O1로 변경",
+            "selected_alternative": "L2_F1O1",
+            "rationale": "연료 특성이 연기 피해에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_F1W1 대신 L2_F1O1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_F1 -> L2_F1O1",
+            "new_score": 0.72,
+            "weight_adjustment": 0.07
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 연료 특성의 중요성 확인"
+        },
+        {
+          "event_id": "BT5",
+          "level": "L2",
+          "backtrack_reason": "L2 단계 세부 가설을 재검토하여 다른 조합을 고려했습니다.",
+          "confidence_before": 0.7,
+          "threshold": 0.8,
+          "original_path": "L0_ROOT -> L1_W1 -> L2_W1F1",
+          "problem": "풍속과 연료 특성 조합의 재평가 필요",
+          "backtrack_analysis": {
+            "initial_hypothesis": "풍속과 연료 특성이 연기 피해에 큰 영향을 미친다.",
+            "test_calculation": "신뢰도 평가: 0.7",
+            "failure_reason": "신뢰도 기준 미달",
+            "alternative_hypothesis": "L2에서 다른 조합 시도",
+            "alternative_combination": "L2_W1O1",
+            "simplification": "풍속과 화선 길이 조합으로 대체",
+            "structural_change": "L2_W1O1로 변경",
+            "selected_alternative": "L2_W1O1",
+            "rationale": "풍속이 연기 피해에 더 큰 영향을 미친다."
+          },
+          "new_attempt": {
+            "target_path": "L2_W1F1 대신 L2_W1O1 시도",
+            "path_reconstruction": "L0_ROOT -> L1_W1 -> L2_W1O1",
+            "new_score": 0.76,
+            "weight_adjustment": 0.08
+          },
+          "result": "backtracked",
+          "learning": "L2 분석에서 풍속의 중요성 확인"
+        }
+      ],
+      "pruning_events": [
+        {
+          "pruning_id": "P1",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_W1O1I1",
+          "score": 0.8,
+          "threshold": 0.85,
+          "reason": "풍속, 화선, 인구 밀집도 조합에 대한 신뢰도가 기준치(0.85)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_W1O1I1는 \"풍속, 화선, 인구 밀집도 조합\" 분석에서 신뢰도 0.80가 기준 0.85보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P2",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_T1O1W1",
+          "score": 0.75,
+          "threshold": 0.8,
+          "reason": "지형, 화선, 풍속 조합에 대한 신뢰도가 기준치(0.80)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_T1O1W1는 \"지형, 화선, 풍속 조합\" 분석에서 신뢰도 0.75가 기준 0.80보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P3",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_W1T1O1",
+          "score": 0.7,
+          "threshold": 0.8,
+          "reason": "풍속, 지형, 화선 조합에 대한 신뢰도가 기준치(0.80)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_W1T1O1는 \"풍속, 지형, 화선 조합\" 분석에서 신뢰도 0.70가 기준 0.80보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P4",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_F1O1W1",
+          "score": 0.75,
+          "threshold": 0.8,
+          "reason": "연료 특성과 화선의 조합에 대한 신뢰도가 기준치(0.80)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_F1O1W1는 \"연료 특성과 화선의 조합\" 분석에서 신뢰도 0.75가 기준 0.80보다 낮아 추론 경로에서 제거하였습니다."
+        },
+        {
+          "pruning_id": "P5",
+          "pruning_level": "L3",
+          "pruned_node_id": "L3_I1W1T1",
+          "score": 0.8,
+          "threshold": 0.85,
+          "reason": "인구 밀집도, 풍속, 지형 조합에 대한 신뢰도가 기준치(0.85)에 미달하여 가지치기하였습니다.",
+          "pruning_description": "L3 단계 노드 L3_I1W1T1는 \"인구 밀집도, 풍속, 지형 조합\" 분석에서 신뢰도 0.80가 기준 0.85보다 낮아 추론 경로에서 제거하였습니다."
+        }
+      ],
+      "final_selection": {
+        "selected_path": "ROOT → L1_I1 → L2_I1O1 → L3_I1O1F1",
+        "best_l3_node_id": "L3_I1O1F1",
+        "reasoning_chain": "① L1: 인구 밀집도가 연기 피해에 큰 영향을 미친다. ② L2: 인구 밀집도와 화선의 조합이 연기 피해에 큰 영향을 미친다. ③ L3: 인구 밀집도, 화선, 연료 특성의 조합이 연기 피해를 결정짓는 중요한 요소이다.",
+        "path_selection_reasoning": "여러 L3 중 이 경로를 선택한 이유는 인구 밀집도와 화선의 조합이 연기 피해에 미치는 영향이 크기 때문이다.",
+        "selected_path_risk_scoring_description": "최종 경로의 위험도 평가: 인구 밀집도와 화선의 조합이 연기 피해에 큰 영향을 미치며, 연료 특성도 고려되었다.",
+        "comprehensive_scoring_matrix": {
+          "path_1": {
+            "risk_level": "높음",
+            "confidence": 0.95
+          },
+          "path_2": {
+            "risk_level": "보통",
+            "confidence": 0.9
+          },
+          "path_3": {
+            "risk_level": "낮음",
+            "confidence": 0.85
+          }
+        },
+        "scoring_criteria": "신뢰도, 위험도, 대응 가능성을 종합하여 평가하였다.",
+        "key_nodes_used": {
+          "O": {
+            "fire_duration": 352.0,
+            "fire_intensity": 4
+          },
+          "W": {
+            "wind_speed": 1.5,
+            "humidity": 17.0
+          },
+          "T": {
+            "elevation": 177.36,
+            "slope": 9.48
+          },
+          "I": {
+            "population": 1785.0,
+            "vulnerable": 1082.0
+          },
+          "F": {
+            "fuel_type": "활엽수림",
+            "fuel_moisture": 15.0
+          }
+        },
+        "path_confidence": 0.85
+      }
+    },
+    "countermeasures": {
+      "immediate_recommendation": {
+        "decision": "고층 지역의 연기 피해가 더 클 수 있다.",
+        "primary_reason": "인구 밀집도와 화선의 조합이 연기 피해에 큰 영향을 미친다.",
+        "risk_level": "높음"
+      },
+      "safety_assessment": {
+        "prohibitive_factors": {
+          "fire": "화선 강도가 높고 화재 지속 시간이 길다.",
+          "visibility": "연기와 불꽃으로 가시성이 저하된다.",
+          "support": "대피소와의 거리로 인해 대피가 어려울 수 있다.",
+          "intensity": "화재 강도가 약하나 연기 피해는 심각할 수 있다."
+        },
+        "favorable_factors": {
+          "wind": "풍속이 낮아 연기 확산이 제한적이다.",
+          "humidity": "습도가 낮아 연기 발생이 증가할 수 있다."
+        },
+        "net_assessment": "전반적으로 연기 피해가 우려되는 상황이다.",
+        "evacuation_zones": {
+          "safe_zone": "대피소는 안전한 지역에 위치한다.",
+          "danger_zone": "화재 발생 지역은 위험하다.",
+          "buffer_zone": "위험 지역과 안전 지역 사이의 완충 지역이 필요하다."
+        },
+        "evacuation_sequence": {
+          "phase_1": "가족과 함께 대피 준비를 한다.",
+          "phase_2": "대피소 위치를 확인한다.",
+          "phase_3": "안전한 경로로 대피한다."
+        }
+      },
+      "alternative_strategies": {
+        "option_1": {
+          "action": "고층 건물의 환기 시스템을 점검한다.",
+          "timing": "즉시"
+        },
+        "option_2": {
+          "action": "연기 피해를 줄이기 위해 물을 뿌린다.",
+          "method": "소화기 사용"
+        },
+        "option_3": {
+          "action": "주변 주민과 협력하여 대피한다.",
+          "condition": "화재가 확산될 경우"
+        }
+      },
+      "safety_requirements": {
+        "minimum_conditions": [
+          "대피소와의 거리 확인",
+          "연기 발생 여부 모니터링",
+          "주변 인구 밀집도 파악"
+        ],
+        "key_insights": "인구 밀집도가 연기 피해에 큰 영향을 미친다."
+      }
+    },
+    "decision_answer": {
+      "conclusion": "고층 지역의 연기 피해가 더 심각할 수 있다. 인구 밀집도와 화선의 조합이 주요 원인이다.",
+      "safety_verdict": {
+        "decision": "고층 지역에서 대피가 필요하다.",
+        "safety_level": "위험",
+        "confidence": "95%",
+        "primary_factor": "인구 밀집도"
+      },
+      "critical_risks": {
+        "risk_1": "연기 피해로 인한 호흡기 질환 발생.",
+        "risk_2": "대피 지연으로 인한 인명 피해.",
+        "risk_3": "화재 확산으로 인한 추가 피해.",
+        "risk_4": "가시성 저하로 인한 사고 위험."
+      },
+      "clear_message": "고층 대피 필요.",
+      "critical_action": {
+        "action_1": "대피소 위치 확인",
+        "action_2": "가족과 함께 대피 준비",
+        "action_3": "안전한 경로로 대피",
+        "action_4": "주변 주민과 협력"
+      }
+    },
+    "complete_reasoning": {
+      "reasoning_path_description": "인구 밀집도가 연기 피해에 큰 영향을 미친다. 화선의 길이와 강도, 그리고 인구 밀집도의 조합이 연기 피해를 결정짓는 중요한 요소이다. 따라서 고층 지역에서의 연기 피해가 더 심각할 것으로 판단된다.선택 경로 L0_ROOT -> L1_I1 -> L2_I1O1 -> L3_I1O1F1는 인프라, 연료, 발생/운영 축의 상호작용을 핵심 근거로 합니다. L1에서는 인구 밀집도가 연기 피해에 미치는 영향.를 검토하고, L2에서 인구 밀집도와 화선의 조합를 종합했습니다. 최종 L3 판단은 \"IF 인구 밀집도가 높고 화선이 길며 연료의 습도가 낮으면 THEN 연기 피해가 심각해질 수 있다.\"로 수렴했으며, 이에 따라 위험도와 실행 가능성을 함께 평가하였습니다.",
+      "risk_scoring": "최종 경로의 위험도는 높음으로 평가되며, 인구 밀집도와 화선의 조합이 주요 요인이다.",
+      "confidence_scoring": "신뢰도는 95%로, 인구 밀집도와 화선의 조합이 연기 피해에 미치는 영향이 크다.",
+      "complete_reasoning_countermeasures": "질의자는 1층과 고층 중 어느 쪽이 연기 피해가 더 심한지를 물었습니다. 최종 판단에 따르면, 고층 지역에서의 연기 피해가 더 심각할 것으로 보이며, 이는 인구 밀집도와 화선의 조합이 주요 원인으로 작용하기 때문입니다. 위험도는 높음으로 평가되며, 신뢰도는 95%에 달합니다.\n\n즉각적인 조치로는 고층 지역의 연기 피해가 더 클 수 있다는 점을 인지하고, 대피소의 위치를 확인하는 것이 중요합니다. 안전 평가에 따르면, 화선 강도가 높고 화재 지속 시간이 길어 연기 피해가 우려되며, 가시성이 저하되어 대피가 어려울 수 있습니다. 따라서 대피소와의 거리를 확인하고, 연기 발생 여부를 모니터링하는 것이 필요합니다.\n\n대안 전략으로는 고층 건물의 환기 시스템을 즉시 점검하거나, 연기 피해를 줄이기 위해 소화기를 사용하여 물을 뿌리는 방법이 있습니다. 또한, 화재가 확산될 경우 주변 주민과 협력하여 대피하는 것도 고려해야 합니다. 따라서, 질의자의 상황에서 취해야 할 핵심 대응방안은 대피소 위치 확인과 가족과의 집결, 안전한 경로로의 대피입니다.",
+      "query": "1층과 고층 중 어느 쪽이 연기 피해가 더 심합니까?"
+    }
+  },
+  "file_info": {
+    "labelling_file_name": "AS20240324_T_P0002_T006.json",
+    "labelling_file_format": "json"
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "raw_data_info": {
+    "fire_info": {
+      "fire_incident_id": "AS20240324",
+      "region": "경기도",
+      "fire_size": "소형",
+      "incident_name": "경기 안성 고삼 쌍지",
+      "fire_location": {
+        "lat": 37.110673,
+        "lon": 127.297152
+      },
+      "fire_report_number": "안성소방서-20240324-001",
+      "start_timestamp": "2024-03-24 10:23:00",
+      "detection_timestamp": "2024-03-24 10:23:00",
+      "end_timestamp": "2024-03-24 17:15:00",
+      "response_phase": "초기 대응",
+      "fire_cause": "담뱃불실화",
+      "affected_area": 4.53,
+      "fire_spread_track": "[37.110629,127.297163],[37.110911,127.298321],[37.110826,127.299716],[37.109448,127.297699],[37.109945,127.296648],[37.110629,127.297163]"
+    }
+  },
+  "source_data_info": {
+    "file_name": "AS20240324_S_P0002_T007",
+    "file_format": "json",
+    "user_info": {
+      "user_type": "FF",
+      "user_type_description": "진압대원",
+      "query_time": "2024-03-24 17:00",
+      "query_location": {
+        "lat": 37.10968,
+        "lon": 127.298507
+      },
+      "query_location_description": "다사 8209 0124"
+    },
+    "weather_conditions": {
+      "observation_time": "2024-03-24 17:00",
+      "observatory_type": "기상",
+      "observatory_location": "원주",
+      "temperature": 22.2,
+      "rainfall": 0.0,
+      "wind_speed": 1.6,
+      "wind_direction": 230.0,
+      "humidity_percent": 18.0,
+      "atmospheric_pressure": 996.1,
+      "visibility": 5000.0,
+      "past_rainfall_7days": 14.3,
+      "surface_temperature": 16.4,
+      "observation_height": 10.0
+    },
+    "terrain_conditions": {
+      "elevation": 177.36,
+      "slope": 9.48,
+      "slope_aspect": 174.79,
+      "curvature": 0.0012,
+      "topographic_position_index": -6.33,
+      "terrain_complexity": 25.71,
+      "hydrological_features": 1.2
+    },
+    "fuel_conditions": {
+      "fuel_type": "활엽수림",
+      "fuel_density": 12.51,
+      "surface_fuel_depth": 4.0,
+      "fuel_moisture": 15.0,
+      "fuel_average_age": 35.0,
+      "canopy_height": 16.0,
+      "canopy_coverage": 75.0
+    },
+    "Infra_Social": {
+      "population": 1785.0,
+      "households": 1010.0,
+      "vulnerable": 1082.0,
+      "fire_station_distance": 6.49,
+      "Important_Infra_distance": 0.56,
+      "road_accessibility": "보통",
+      "shelter": ""
+    },
+    "occurrence_status": {
+      "drought_duration_days": 35.0,
+      "wildfire_duration_time": "6:52",
+      "wind_direction_slope_aspect_alignment": {
+        "wind_direction": 230.0,
+        "slope_aspect": 174.79
+      },
+      "fire_length": 2.2,
+      "fire_intensity": "약함",
+      "flame_length": 1.0
+    }
+  }
+}

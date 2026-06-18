@@ -1,0 +1,89 @@
+{
+  "raw_data_info": {
+    "fire_info": {
+      "fire_incident_id": "AD20230321",
+      "region": "경상도",
+      "fire_size": "소형",
+      "incident_name": "경북 안동 도산 의일",
+      "fire_location": {
+        "lat": 36.74187,
+        "lon": 128.80196
+      },
+      "fire_report_number": "안동소방서-20230321-001",
+      "start_timestamp": "2023-03-21 12:12:00",
+      "detection_timestamp": "2023-03-21 12:12:00",
+      "end_timestamp": "2023-03-21 23:00:00",
+      "response_phase": "1단계",
+      "fire_cause": "밭두렁소각",
+      "affected_area": 10.84,
+      "fire_spread_track": "[36.742693,128.801471],[36.741773,128.801986],[36.741575,128.800484],[36.742366,128.79748],[36.744601,128.79645],[36.745435,128.797105],[36.74559,128.798703],[36.744816,128.800076],[36.743647,128.801021],[36.742805,128.801364],[36.742693,128.801471]"
+    }
+  },
+  "source_data_info": {
+    "file_name": "AD20230321_S_P0001_T007",
+    "file_format": "json",
+    "user_info": {
+      "user_type": "CI",
+      "user_type_description": "시민",
+      "query_time": "2023-03-21 19:00",
+      "query_location": {
+        "lat": 36.742378,
+        "lon": 128.797557
+      },
+      "query_location_description": "마바 1584 6126"
+    },
+    "weather_conditions": {
+      "observation_time": "2023-03-21 19:00",
+      "observatory_type": "기상",
+      "observatory_location": "안동",
+      "temperature": 17.6,
+      "rainfall": 0.0,
+      "wind_speed": 3.0,
+      "wind_direction": 110.0,
+      "humidity_percent": 29.0,
+      "atmospheric_pressure": 994.2,
+      "visibility": 2291.0,
+      "past_rainfall_7days": 0.0,
+      "surface_temperature": 17.3,
+      "observation_height": 10.0
+    },
+    "terrain_conditions": {
+      "elevation": 353.69,
+      "slope": 2.36,
+      "slope_aspect": 280.28,
+      "curvature": 0.0003,
+      "topographic_position_index": 12.76,
+      "terrain_complexity": 42.49,
+      "hydrological_features": 2.4
+    },
+    "fuel_conditions": {
+      "fuel_type": "침엽수림",
+      "fuel_density": 5.48,
+      "surface_fuel_depth": 2.0,
+      "fuel_moisture": 12.0,
+      "fuel_average_age": 35.0,
+      "canopy_height": 20.0,
+      "canopy_coverage": 75.0
+    },
+    "Infra_Social": {
+      "population": 1367.0,
+      "households": 860.0,
+      "vulnerable": 1019.0,
+      "fire_station_distance": 2.02,
+      "Important_Infra_distance": 2.09,
+      "road_accessibility": "보통",
+      "shelter": "녹전초등학교"
+    },
+    "occurrence_status": {
+      "drought_duration_days": 35.0,
+      "wildfire_duration_time": "6:48",
+      "wind_direction_slope_aspect_alignment": {
+        "wind_direction": 110.0,
+        "slope_aspect": 280.28
+      },
+      "fire_length": 2.2,
+      "fire_intensity": "약함",
+      "flame_length": 1.0
+    }
+  }
+}
