@@ -8,11 +8,12 @@ from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 BACKEND_DIR = Path(__file__).resolve().parents[2]
 PROJECT_DIR = BACKEND_DIR.parent
-DEFAULT_DATA_DIR = PROJECT_DIR / "data"
+DEFAULT_DATA_DIR = BACKEND_DIR / "data"
 DEFAULT_PROCESSED_DATA_PATH = DEFAULT_DATA_DIR / "processed" / "incidents.json"
 DEFAULT_CORS_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "https://wildfire-predict-agent-lth9gx9oj-swzzangr7890-9379s-projects.vercel.app/"
 ]
 
 
@@ -20,7 +21,15 @@ def _resolve_project_path(value: str | Path) -> Path:
     candidate = Path(value).expanduser()
     if candidate.is_absolute():
         return candidate.resolve()
-    return (PROJECT_DIR / candidate).resolve()
+    backend_candidate = (BACKEND_DIR / candidate).resolve()
+    if backend_candidate.exists():
+        return backend_candidate
+
+    project_candidate = (PROJECT_DIR / candidate).resolve()
+    if project_candidate.exists():
+        return project_candidate
+
+    return backend_candidate
 
 
 class Settings(BaseSettings):

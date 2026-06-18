@@ -4,7 +4,7 @@ from datetime import date
 from pathlib import Path
 from typing import Any, Callable
 
-from app.core.config import PROJECT_DIR, get_settings
+from app.core.config import _resolve_project_path, get_settings
 from app.services.historical_wildfire import HistoricalWildfireService
 from app.services.realtime_wildfire import get_realtime_wildfire_status
 from app.services.spatial_radius import DEFAULT_HISTORICAL_ANALYSIS_RADIUS_KM
@@ -211,9 +211,7 @@ def _resolve_trend_csv_path(
     for candidate in candidates:
         if not candidate:
             continue
-        candidate_path = Path(candidate)
-        if not candidate_path.is_absolute():
-            candidate_path = (PROJECT_DIR / candidate_path).resolve()
+        candidate_path = _resolve_project_path(candidate)
         return str(candidate_path)
     return None
 

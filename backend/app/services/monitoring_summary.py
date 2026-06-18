@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from app.core.config import PROJECT_DIR
+from app.core.config import _resolve_project_path
 from app.services.group_b_context import get_historical_wildfire_service
 from app.services.historical_wildfire import HistoricalWildfireService
 
@@ -80,11 +80,11 @@ class MonitoringSummaryService:
         preview_bundle = self.historical_service.load_processed_preview_bundle()
         trend_preview = preview_bundle.get("trend_preview") if isinstance(preview_bundle, dict) else None
         if isinstance(trend_preview, dict) and trend_preview.get("path"):
-            return str(self._resolve_project_path(trend_preview["path"]))
+            return str(_resolve_project_path(trend_preview["path"]))
 
         summary = preview_bundle.get("processed_summary") if isinstance(preview_bundle, dict) else None
         if isinstance(summary, dict) and summary.get("trend_preview_path"):
-            return str(self._resolve_project_path(summary["trend_preview_path"]))
+            return str(_resolve_project_path(summary["trend_preview_path"]))
         return None
 
     def _build_watchpoint(self, *, bucket: dict[str, Any], max_year: int | None) -> dict[str, Any]:
@@ -144,13 +144,6 @@ class MonitoringSummaryService:
         if priority_score >= 20:
             return "medium"
         return "low"
-
-    @staticmethod
-    def _resolve_project_path(value: str | Path) -> Path:
-        candidate = Path(value)
-        if candidate.is_absolute():
-            return candidate
-        return (PROJECT_DIR / candidate).resolve()
 
     @staticmethod
     def _coerce_float(value: Any) -> float | None:
