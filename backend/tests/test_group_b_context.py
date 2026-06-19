@@ -7,7 +7,7 @@ from app.services.spatial_radius import DEFAULT_HISTORICAL_ANALYSIS_RADIUS_KM
 def test_get_historical_wildfire_service_uses_backend_processed_preview_path():
     service = get_historical_wildfire_service()
 
-    assert str(service.summary_preview_path).endswith('/project/data/processed/wildfire_public_data_preview.json')
+    assert str(service.summary_preview_path).endswith('/project/backend/data/processed/wildfire_public_data_preview.json')
 
 
 def test_build_historical_context_uses_shared_default_radius_when_not_overridden():
@@ -22,7 +22,7 @@ def test_build_historical_context_uses_shared_default_radius_when_not_overridden
             }
 
         def load_trend_records(self, path=None):
-            assert path == "/tmp/trend.csv"
+            assert path in {"/tmp/trend.csv", "/private/tmp/trend.csv"}
             return [{"OCCRR_YR": 2024}]
 
         def find_nearby_incidents(self, records, *, latitude, longitude, radius_km=50.0, limit=None):

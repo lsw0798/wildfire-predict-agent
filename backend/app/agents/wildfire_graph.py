@@ -8,7 +8,7 @@ from langgraph.graph import END, START, StateGraph
 
 from app.schemas.group_e import ToolSelectionDecision
 from app.schemas.report import AnalyzeRequest
-from app.services.confidence_metrics import build_confidence_metrics
+from app.services.confidence_metrics import build_confidence_metrics, diagnose_confidence_path
 from app.services.false_positive_review import review_false_positive
 from app.services.group_b_context import (
     RealtimeStatusProvider,
@@ -18,7 +18,9 @@ from app.services.group_b_context import (
 )
 from app.services.group_e_selector import SelectionDecider
 from app.services.historical_wildfire import HistoricalWildfireService
+from app.services.model_scoring import ModelScorer, build_model_scoring
 from app.services.risk_engine import score_risk
+from app.services.secondary_analysis import run_secondary_analysis
 from app.services.spatial_radius import DEFAULT_HISTORICAL_ANALYSIS_RADIUS_KM, cardinal_point
 
 ReportOrchestrator = Callable[..., dict]
@@ -29,10 +31,12 @@ class AnalysisGraphState(TypedDict, total=False):
     historical_service: HistoricalWildfireService
     realtime_status_provider: RealtimeStatusProvider
     selection_decider: SelectionDecider
+    model_scorer: ModelScorer | None
     selection: ToolSelectionDecision
     historical_context: dict[str, Any]
     realtime_context: dict[str, Any]
     derived_features: dict[str, Any]
+    model_scoring: dict[str, Any]
     initial_risk: dict[str, Any]
     initial_false_positive: dict[str, Any]
     final_risk: dict[str, Any]
@@ -43,6 +47,10 @@ class AnalysisGraphState(TypedDict, total=False):
     report: dict[str, Any]
     response: dict[str, Any]
     workflow_trace: list[str]
+    confidence_diagnostics: dict[str, Any]
+    route_decision: str
+    secondary_fetch_applied: list[str]
+    secondary_analysis_result: dict[str, Any]
 
 
 BASE_ACTIONS = {
@@ -66,7 +74,10 @@ def _get_analysis_graph():
     graph.add_node("fetch_historical", _fetch_historical_node)
     graph.add_node("fetch_realtime", _fetch_realtime_node)
     graph.add_node("derive_features", _derive_features_node)
+    graph.add_node("diagnose_path", _diagnose_path_node)
+    graph.add_node("augment_sources", _augment_sources_node)
     graph.add_node("primary_assessment", _primary_assessment_node)
+    graph.add_node("secondary_analysis", _secondary_analysis_node)
     graph.add_node("verification_gate", _verification_gate_node)
     graph.add_node("false_positive_review", _false_positive_review_node)
     graph.add_node("data_quality_review", _data_quality_review_node)
@@ -80,7 +91,17 @@ def _get_analysis_graph():
     graph.add_edge("fetch_historical", "fetch_realtime")
     graph.add_edge("fetch_realtime", "derive_features")
     graph.add_edge("derive_features", "primary_assessment")
-    graph.add_edge("primary_assessment", "verification_gate")
+    graph.add_edge("primary_assessment", "diagnose_path")
+    graph.add_conditional_edges(
+        "diagnose_path",
+        _diagnose_route,
+        {
+            "augment_sources": "augment_sources",
+            "secondary_analysis": "secondary_analysis",
+        },
+    )
+    graph.add_edge("augment_sources", "primary_assessment")
+    graph.add_edge("secondary_analysis", "verification_gate")
     graph.add_conditional_edges(
         "verification_gate",
         _verification_route,
@@ -110,6 +131,7 @@ def run_analysis_graph(
     historical_service: HistoricalWildfireService,
     realtime_status_provider: RealtimeStatusProvider,
     selection_decider: SelectionDecider,
+    model_scorer: ModelScorer | None = None,
 ) -> dict:
     final_state = _get_analysis_graph().invoke(
         {
@@ -117,6 +139,7 @@ def run_analysis_graph(
             "historical_service": historical_service,
             "realtime_status_provider": realtime_status_provider,
             "selection_decider": selection_decider,
+            "model_scorer": model_scorer,
             "workflow_trace": [],
             "agent_trace": [],
             "score_penalty": 0.0,
@@ -137,6 +160,7 @@ def generate_report(
     historical_context: dict | None = None,
     realtime_context: dict | None = None,
     derived_features: dict | None = None,
+    model_scorer: ModelScorer | None = None,
 ) -> dict:
     historical_context = historical_context or {}
     realtime_context = realtime_context or {}
@@ -148,6 +172,7 @@ def generate_report(
         **derived_features,
     }
 
+    model_scoring = build_model_scoring(features=features, model_scorer=model_scorer)
     initial_risk = score_risk(features)
     initial_false_positive = review_false_positive(features)
     final_risk, final_false_positive, agent_trace = _run_agent_loop(
@@ -165,6 +190,7 @@ def generate_report(
         realtime_context=realtime_context,
         derived_features=derived_features,
         initial_risk=initial_risk,
+        model_scoring=model_scoring,
         final_risk=final_risk,
         final_false_positive=final_false_positive,
         agent_trace=agent_trace,
@@ -252,12 +278,119 @@ def _derive_features_node(state: AnalysisGraphState) -> AnalysisGraphState:
 
 
 
+def _diagnose_path_node(state: AnalysisGraphState) -> AnalysisGraphState:
+    historical_context = state.get("historical_context", {})
+    realtime_context = state.get("realtime_context", {})
+    derived_features = state.get("derived_features", {})
+    model_scoring = state.get("model_scoring") or {}
+    initial_risk = state.get("initial_risk") or {}
+    diagnostics = diagnose_confidence_path(
+        estimated_fields=derived_features.get("estimated_fields") or [],
+        historical_source=str(historical_context.get("source", "unknown")),
+        realtime_source=str(realtime_context.get("source", "unknown")),
+        nearby_incident_count=int(historical_context.get("incident_count", 0) or 0),
+        model_feature_coverage=float(model_scoring.get("feature_coverage") or 0.0),
+        model_decision_mode=str(model_scoring.get("decision_mode", "rule_only_fallback")),
+        model_score=(float(model_scoring["ml_score"]) if model_scoring.get("ml_score") is not None else None),
+        rule_score=(float(initial_risk["risk_score"]) if initial_risk.get("risk_score") is not None else None),
+        model_confidence=float(model_scoring.get("ml_confidence") or 0.0),
+    )
+    previous_diagnostics = state.get("confidence_diagnostics") or {}
+    if state.get("secondary_fetch_applied") and diagnostics.get("route") == "stable":
+        previous_route = str(previous_diagnostics.get("route", "stable"))
+        if previous_route != "stable":
+            diagnostics = {
+                **diagnostics,
+                "route": previous_route,
+                "severity": previous_diagnostics.get("severity", diagnostics.get("severity", "low")),
+                "reasons": previous_diagnostics.get("reasons", diagnostics.get("reasons", [])),
+                "summary": previous_diagnostics.get("summary", diagnostics.get("summary", "")),
+            }
+    route = str(diagnostics.get("route", "stable"))
+    summary = str(diagnostics.get("summary", ""))
+    return {
+        "confidence_diagnostics": diagnostics,
+        "route_decision": route,
+        "agent_trace": [
+            *state.get("agent_trace", []),
+            f"agent loop step=diagnose-path route={route} summary={summary}",
+        ],
+        "workflow_trace": [
+            *state.get("workflow_trace", []),
+            f"langgraph node=diagnose_path route={route}",
+        ],
+    }
+
+
+
+def _diagnose_route(state: AnalysisGraphState) -> Literal["augment_sources", "secondary_analysis"]:
+    route = str(state.get("route_decision", "stable"))
+    if state.get("secondary_fetch_applied"):
+        return "secondary_analysis"
+    if route == "stable":
+        return "secondary_analysis"
+    return "augment_sources"
+
+
+
+def _augment_sources_node(state: AnalysisGraphState) -> AnalysisGraphState:
+    payload = state["payload"]
+    route = str(state.get("route_decision", "stable"))
+    historical_context = dict(state.get("historical_context", {}))
+    realtime_context = dict(state.get("realtime_context", {}))
+    applied: list[str] = []
+
+    if route in {"augment_historical", "augment_both"}:
+        historical_context = build_historical_context(
+            state["historical_service"],
+            latitude=payload.lat,
+            longitude=payload.lon,
+            radius_km=payload.radius_km,
+        )
+        applied.append("historical")
+
+    if route in {"augment_realtime", "augment_both"}:
+        realtime_context = build_realtime_context(
+            state["realtime_status_provider"],
+            latitude=payload.lat,
+            longitude=payload.lon,
+        )
+        applied.append("realtime")
+
+    derived_features = derive_group_b_features(
+        latitude=payload.lat,
+        longitude=payload.lon,
+        historical_context=historical_context,
+        realtime_context=realtime_context,
+    )
+    applied_text = ",".join(applied) if applied else "none"
+    return {
+        "historical_context": historical_context,
+        "realtime_context": realtime_context,
+        "derived_features": derived_features,
+        "secondary_fetch_applied": applied,
+        "agent_trace": [
+            *state.get("agent_trace", []),
+            f"agent loop step=augment-sources applied={applied_text}",
+        ],
+        "workflow_trace": [
+            *state.get("workflow_trace", []),
+            f"langgraph node=augment_sources applied={applied_text}",
+        ],
+    }
+
+
+
 def _primary_assessment_node(state: AnalysisGraphState) -> AnalysisGraphState:
     features = {
         **state.get("historical_context", {}),
         **state.get("realtime_context", {}),
         **state.get("derived_features", {}),
     }
+    model_scoring = build_model_scoring(
+        features=features,
+        model_scorer=state.get("model_scorer"),
+    )
     initial_risk = score_risk(features)
     initial_false_positive = review_false_positive(features)
     trace_line = (
@@ -268,12 +401,56 @@ def _primary_assessment_node(state: AnalysisGraphState) -> AnalysisGraphState:
     return {
         "initial_risk": initial_risk,
         "initial_false_positive": initial_false_positive,
+        "model_scoring": model_scoring,
         "final_risk": dict(initial_risk),
         "final_false_positive": dict(initial_false_positive),
-        "agent_trace": [*state.get("agent_trace", []), trace_line],
+        "agent_trace": [
+            *state.get("agent_trace", []),
+            trace_line,
+            (
+                "agent loop step=model-scoring "
+                f"mode={model_scoring.get('decision_mode', 'rule_only_fallback')} "
+                f"coverage={model_scoring.get('feature_coverage', 0.0)}"
+            ),
+        ],
         "workflow_trace": [
             *state.get("workflow_trace", []),
             "langgraph node=primary_assessment",
+        ],
+    }
+
+
+
+def _secondary_analysis_node(state: AnalysisGraphState) -> AnalysisGraphState:
+    route = str(state.get("route_decision", "stable"))
+    result = run_secondary_analysis(
+        route=route,
+        initial_risk=state["initial_risk"],
+        initial_false_positive=state["initial_false_positive"],
+        historical_context=state.get("historical_context", {}),
+        realtime_context=state.get("realtime_context", {}),
+        derived_features=state.get("derived_features", {}),
+        model_scoring=state.get("model_scoring"),
+    )
+    adjustments = list(result.get("adjustments") or [])
+    analysis_mode = str(result.get("analysis_mode", "stable"))
+    if adjustments:
+        trace_line = (
+            "agent loop step=secondary-analysis "
+            f"mode={analysis_mode} adjustments={' | '.join(adjustments)}"
+        )
+    else:
+        trace_line = f"agent loop step=secondary-analysis mode={analysis_mode} action=none"
+    return {
+        "final_risk": dict(result.get("final_risk") or state.get("final_risk", {})),
+        "final_false_positive": dict(
+            result.get("final_false_positive") or state.get("final_false_positive", {})
+        ),
+        "secondary_analysis_result": result,
+        "agent_trace": [*state.get("agent_trace", []), trace_line],
+        "workflow_trace": [
+            *state.get("workflow_trace", []),
+            f"langgraph node=secondary_analysis mode={analysis_mode}",
         ],
     }
 
@@ -447,9 +624,12 @@ def _compose_report_node(state: AnalysisGraphState) -> AnalysisGraphState:
         realtime_context=state.get("realtime_context", {}),
         derived_features=state.get("derived_features", {}),
         initial_risk=state["initial_risk"],
+        model_scoring=state.get("model_scoring"),
         final_risk=state.get("final_risk", state["initial_risk"]),
         final_false_positive=state.get("final_false_positive", state["initial_false_positive"]),
         agent_trace=state.get("agent_trace", []),
+        confidence_diagnostics=state.get("confidence_diagnostics"),
+        secondary_fetch_applied=state.get("secondary_fetch_applied"),
     )
     return {
         "report": report,
@@ -492,10 +672,23 @@ def _assemble_report(
     realtime_context: dict,
     derived_features: dict,
     initial_risk: dict,
+    model_scoring: dict | None,
     final_risk: dict,
     final_false_positive: dict,
     agent_trace: list[str],
+    confidence_diagnostics: dict | None = None,
+    secondary_fetch_applied: list[str] | None = None,
 ) -> dict:
+    if model_scoring is None:
+        model_scoring_payload: dict[str, Any] = build_model_scoring(
+            features={
+                **historical_context,
+                **realtime_context,
+                **derived_features,
+            }
+        )
+    else:
+        model_scoring_payload = model_scoring
     estimated_fields = derived_features.get("estimated_fields") or []
     confidence = _calculate_confidence(
         false_positive_risk=final_false_positive["false_positive_risk"],
@@ -560,6 +753,8 @@ def _assemble_report(
         confidence=confidence,
         confidence_metrics=confidence_metrics,
         estimated_fields=estimated_fields,
+        confidence_diagnostics=confidence_diagnostics,
+        secondary_fetch_applied=secondary_fetch_applied or [],
     )
     uncertainty_notes = _build_uncertainty_notes(
         base_false_positive_notes=final_false_positive["uncertainty_notes"],
@@ -570,12 +765,37 @@ def _assemble_report(
         agent_trace=agent_trace,
         lat=lat,
         lon=lon,
+        confidence_diagnostics=confidence_diagnostics,
+        model_scoring=model_scoring_payload,
+        secondary_fetch_applied=secondary_fetch_applied or [],
     )
     return {
         **final_risk,
         "false_positive_risk": final_false_positive["false_positive_risk"],
         "confidence": confidence,
+        "confidence_breakdown": {
+            "route": str((confidence_diagnostics or {}).get("route", "stable")),
+            "severity": str((confidence_diagnostics or {}).get("severity", "low")),
+            "source_quality_score": float(confidence_metrics["source_quality_score"]),
+            "confidence_lower_bound": float(confidence_metrics["confidence_lower_bound"]),
+            "confidence_upper_bound": float(confidence_metrics["confidence_upper_bound"]),
+            "estimated_field_count": str(len(estimated_fields)),
+            "historical_source": str(historical_context.get("source", "unknown")),
+            "realtime_source": str(realtime_context.get("source", "unknown")),
+        },
+        "confidence_reasons": list((confidence_diagnostics or {}).get("reasons") or []),
         "confidence_margin": confidence_metrics["confidence_margin"],
+        "reroute_applied": bool(secondary_fetch_applied),
+        "reroute_reason": str(
+            (confidence_diagnostics or {}).get("summary")
+            or ("현재 데이터 조합만으로 1차 분석을 유지합니다." if not secondary_fetch_applied else "")
+        ),
+        "model_score": model_scoring_payload.get("ml_score"),
+        "model_confidence": float(model_scoring_payload.get("ml_confidence") or 0.0),
+        "model_version": str(model_scoring_payload.get("model_version") or ""),
+        "model_feature_coverage": float(model_scoring_payload.get("feature_coverage") or 0.0),
+        "model_decision_mode": str(model_scoring_payload.get("decision_mode") or "rule_only_fallback"),
+        "model_reason": str(model_scoring_payload.get("reason") or ""),
         "analysis_radius_km": analysis_radius_km,
         "radius_points": _build_radius_points(lat=lat, lon=lon, radius_km=analysis_radius_km),
         "key_factors": key_factors,
@@ -690,6 +910,8 @@ def _build_data_quality_summary(
     confidence: float,
     confidence_metrics: dict[str, float | str],
     estimated_fields: list[str],
+    confidence_diagnostics: dict | None = None,
+    secondary_fetch_applied: list[str] | None = None,
 ) -> str:
     lower_bound = float(confidence_metrics["confidence_lower_bound"])
     upper_bound = float(confidence_metrics["confidence_upper_bound"])
@@ -699,6 +921,10 @@ def _build_data_quality_summary(
     )
     if estimated_fields:
         summary += f" 추정값이 포함된 항목은 {len(estimated_fields)}개입니다."
+    if confidence_diagnostics:
+        summary += f" 경로 진단: {confidence_diagnostics.get('summary', '')}"
+    if secondary_fetch_applied:
+        summary += f" 보강 조회 소스: {', '.join(secondary_fetch_applied)}."
     return summary
 
 
@@ -935,10 +1161,28 @@ def _build_uncertainty_notes(
     agent_trace: list[str],
     lat: float,
     lon: float,
+    confidence_diagnostics: dict | None = None,
+    model_scoring: dict | None = None,
+    secondary_fetch_applied: list[str] | None = None,
 ) -> list[str]:
+    diagnostics_reasons = []
+    diagnostics_summary = "none"
+    if confidence_diagnostics:
+        diagnostics_reasons = confidence_diagnostics.get("reasons") or []
+        diagnostics_summary = str(confidence_diagnostics.get("summary", "none"))
+
     return [
         *base_false_positive_notes,
         *agent_trace,
+        f"confidence_diagnostics summary={diagnostics_summary}",
+        f"confidence_diagnostics reasons={diagnostics_reasons or ['none']}",
+        (
+            "model_scoring decision_mode="
+            f"{(model_scoring or {}).get('decision_mode', 'rule_only_fallback')} "
+            f"version={(model_scoring or {}).get('model_version', 'unknown')} "
+            f"coverage={(model_scoring or {}).get('feature_coverage', 0.0)}"
+        ),
+        f"secondary_fetch_applied={secondary_fetch_applied or ['none']}",
         f"historical source={historical_context.get('source', 'unknown')} incident_count={historical_context.get('incident_count', 0)}",
         f"historical_context keys={sorted(historical_context.keys()) or ['none']}",
         f"realtime source={realtime_context.get('source', 'unknown')} reason={realtime_context.get('reason', 'none')}",

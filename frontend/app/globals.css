@@ -101,6 +101,12 @@ a {
   min-height: 100%;
 }
 
+.analysis-grid__left,
+.analysis-grid__right {
+  display: grid;
+  gap: 18px;
+}
+
 .panel {
   background: rgba(15, 29, 37, 0.84);
   border: 1px solid rgba(61, 103, 116, 0.38);
@@ -172,6 +178,10 @@ a {
   display: grid;
   gap: 14px;
   margin-top: 18px;
+}
+
+.cards--secondary {
+  margin-top: 0;
 }
 
 .cards--loading,
@@ -633,10 +643,22 @@ a {
 }
 
 .coverage-card__grid,
-.mapBoundsGrid,
-.supporting-evidence__grid {
+.mapBoundsGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.supporting-evidence__header {
+  align-items: flex-start;
+}
+
+.supporting-evidence__lead {
+  margin-top: -4px;
+}
+
+.supporting-evidence__stack {
+  display: grid;
   gap: 12px;
 }
 
@@ -649,9 +671,20 @@ a {
   border: 1px solid rgba(58, 100, 115, 0.24);
 }
 
+.supporting-evidence__group-header {
+  display: grid;
+  gap: 10px;
+}
+
 .supporting-evidence__group h4 {
   margin: 0;
   font-size: 1rem;
+}
+
+.supporting-evidence__group p {
+  margin: 6px 0 0;
+  color: #9eb7bf;
+  line-height: 1.6;
 }
 
 .mapSummaryCard {
@@ -746,11 +779,91 @@ a {
   pointer-events: none;
 }
 
+.forest-heatmap-card {
+  overflow: hidden;
+}
+
+.forest-heatmap__summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.forest-heatmap__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 0.34fr);
+  gap: 16px;
+  align-items: stretch;
+}
+
+.forest-heatmap__mapWrap {
+  position: relative;
+  min-height: 460px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(58, 100, 115, 0.36);
+  background: rgba(8, 20, 26, 0.52);
+}
+
+.forest-heatmap__map {
+  width: 100%;
+  min-height: 460px;
+  height: 100%;
+}
+
+.forest-heatmap__legend {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(8, 20, 26, 0.52);
+  border: 1px solid rgba(58, 100, 115, 0.24);
+  color: #c7d8dd;
+  line-height: 1.6;
+}
+
+.forest-heatmap__legend p,
+.forest-heatmap__selected p {
+  margin: 0;
+  color: #9eb7bf;
+}
+
+.forest-heatmap__legendBar {
+  height: 12px;
+  margin-top: 12px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #2f80ed 0%, #f2c94c 45%, #f2994a 68%, #eb5757 100%);
+  box-shadow: 0 0 24px rgba(242, 153, 74, 0.18);
+}
+
+.forest-heatmap__legendLabels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  color: #8db0bb;
+  font-size: 0.82rem;
+}
+
+.forest-heatmap__selected {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(16, 35, 44, 0.78);
+  border: 1px solid rgba(87, 164, 190, 0.28);
+}
+
+.forest-heatmap__selected strong {
+  color: #eaf4f6;
+}
+
 @media (max-width: 1080px) {
   .grid,
   .dashboard-layout,
   .overview-grid,
-  .hero--split {
+  .hero--split,
+  .forest-heatmap__layout {
     grid-template-columns: 1fr;
   }
 

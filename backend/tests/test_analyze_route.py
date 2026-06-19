@@ -11,17 +11,44 @@ from app.services.spatial_radius import DEFAULT_HISTORICAL_ANALYSIS_RADIUS_KM
 def test_analyze_route_delegates_to_injected_orchestrator():
     captured = {}
 
-    def stub_orchestrator(*, payload, historical_service, realtime_status_provider, selection_decider) -> dict:
+    def stub_orchestrator(
+        *,
+        payload,
+        historical_service,
+        realtime_status_provider,
+        selection_decider,
+        model_scorer,
+    ) -> dict:
         captured["payload"] = payload
         captured["historical_service"] = historical_service
         captured["realtime_status_provider"] = realtime_status_provider
         captured["selection_decider"] = selection_decider
+        captured["model_scorer"] = model_scorer
         return {
             "risk_level": "medium",
             "risk_score": 0.52,
             "false_positive_risk": "low",
             "confidence": 0.81,
+            "confidence_breakdown": {
+                "route": "augment_realtime",
+                "severity": "medium",
+                "source_quality_score": 0.74,
+                "confidence_lower_bound": 0.73,
+                "confidence_upper_bound": 0.89,
+                "estimated_field_count": "2",
+                "historical_source": "live",
+                "realtime_source": "fallback",
+            },
+            "confidence_reasons": ["realtime_source_not_live", "estimated_fields_ge_3"],
             "confidence_margin": 0.08,
+            "reroute_applied": True,
+            "reroute_reason": "실시간 관측 근거가 약해 realtime 소스를 보강 조회합니다.",
+            "model_score": 0.64,
+            "model_confidence": 0.83,
+            "model_version": "baseline-v1",
+            "model_feature_coverage": 0.67,
+            "model_decision_mode": "ml_model",
+            "model_reason": "stubbed_model_prediction",
             "analysis_radius_km": DEFAULT_HISTORICAL_ANALYSIS_RADIUS_KM,
             "radius_points": {
                 "north": {"lat": 38.0162, "lon": 126.9780},
@@ -49,7 +76,26 @@ def test_analyze_route_delegates_to_injected_orchestrator():
 
     assert isinstance(response, AnalyzeResponse)
     assert response.uncertainty_notes == ["graph completed"]
+    assert response.confidence_breakdown == {
+        "route": "augment_realtime",
+        "severity": "medium",
+        "source_quality_score": 0.74,
+        "confidence_lower_bound": 0.73,
+        "confidence_upper_bound": 0.89,
+        "estimated_field_count": "2",
+        "historical_source": "live",
+        "realtime_source": "fallback",
+    }
+    assert response.confidence_reasons == ["realtime_source_not_live", "estimated_fields_ge_3"]
     assert response.confidence_margin == 0.08
+    assert response.reroute_applied is True
+    assert response.reroute_reason == "실시간 관측 근거가 약해 realtime 소스를 보강 조회합니다."
+    assert response.model_score == pytest.approx(0.64)
+    assert response.model_confidence == pytest.approx(0.83)
+    assert response.model_version == "baseline-v1"
+    assert response.model_feature_coverage == pytest.approx(0.67)
+    assert response.model_decision_mode == "ml_model"
+    assert response.model_reason == "stubbed_model_prediction"
     assert response.analysis_radius_km == DEFAULT_HISTORICAL_ANALYSIS_RADIUS_KM
     assert response.radius_points["north"]["lat"] == pytest.approx(38.0162)
     assert response.risk_summary_text.startswith("현재 위치는")
@@ -61,6 +107,7 @@ def test_analyze_route_delegates_to_injected_orchestrator():
     assert hasattr(captured["historical_service"], "load_processed_summary_preview")
     assert callable(captured["realtime_status_provider"])
     assert callable(captured["selection_decider"])
+    assert captured["model_scorer"] is None
 
 
 def test_analyze_request_accepts_optional_radius_km_and_preserves_backward_compatibility():
@@ -152,7 +199,7 @@ def test_run_analysis_graph_builds_non_empty_group_b_contexts_via_injected_servi
             }
 
         def load_trend_records(self, path=None):
-            assert path == "/tmp/wildfire.csv"
+            assert path in {"/tmp/wildfire.csv", "/private/tmp/wildfire.csv"}
             return [
                 {
                     "OCCRR_YR": 2024,
@@ -232,7 +279,11 @@ def test_run_analysis_graph_builds_non_empty_group_b_contexts_via_injected_servi
 
     assert response["selected_tools"] == ["historical", "realtime"]
     assert response["selection_mode"] == "llm"
+    assert response["confidence_breakdown"]["route"] in {"stable", "augment_historical", "augment_realtime", "augment_both"}
+    assert isinstance(response["confidence_reasons"], list)
     assert response["analysis_radius_km"] == DEFAULT_HISTORICAL_ANALYSIS_RADIUS_KM
+    assert isinstance(response["reroute_applied"], bool)
+    assert response["reroute_reason"]
     assert set(response["radius_points"].keys()) == {"north", "south", "east", "west"}
     assert response["risk_summary_text"].startswith("현재 위치는")
     assert response["false_positive_summary_text"].startswith("오탐")
@@ -250,7 +301,7 @@ def test_run_analysis_graph_builds_non_empty_group_b_contexts_via_injected_servi
     assert any("langgraph node=build_response" in note for note in response["uncertainty_notes"])
 
 
-def test_run_analysis_graph_skips_unselected_realtime_lookup_and_returns_selection_metadata():
+def test_run_analysis_graph_can_recover_skipped_realtime_via_augmentation_when_estimates_stack_up():
     class StubHistoricalService:
         def load_processed_summary_preview(self):
             return {
@@ -289,8 +340,23 @@ def test_run_analysis_graph_skips_unselected_realtime_lookup_and_returns_selecti
                 "top_causes": [{"cause": "쓰레기소각", "count": 1}],
             }
 
-    def failing_realtime_provider(*, latitude: float, longitude: float):
-        raise AssertionError("realtime provider should not be called when Group E deselects realtime")
+    realtime_calls = {"count": 0}
+
+    def fallback_then_live_realtime_provider(*, latitude: float, longitude: float):
+        realtime_calls["count"] += 1
+        return {
+            "available": True,
+            "source": "live",
+            "items": [
+                {
+                    "humidity_percent": 24,
+                    "wind_speed": 6.5,
+                    "visibility": 2500,
+                    "surface_temperature": 31,
+                    "fire_intensity": "높음",
+                }
+            ],
+        }
 
     def selection_decider(*, lat: float, lon: float, user_type: str) -> ToolSelectionDecision:
         assert lat == pytest.approx(37.5402197416608)
@@ -307,18 +373,21 @@ def test_run_analysis_graph_skips_unselected_realtime_lookup_and_returns_selecti
     response = wildfire_graph.run_analysis_graph(
         payload=AnalyzeRequest(lat=37.5402197416608, lon=127.426770370139, user_type="공무원"),
         historical_service=StubHistoricalService(),
-        realtime_status_provider=failing_realtime_provider,
+        realtime_status_provider=fallback_then_live_realtime_provider,
         selection_decider=selection_decider,
     )
 
+    assert realtime_calls["count"] == 1
     assert response["selected_tools"] == ["historical"]
     assert response["selection_reason"] == "과거 인접 산불 이력만으로 1차 판단이 가능해 실시간 조회를 생략합니다."
     assert response["selection_mode"] == "rule_fallback"
     assert response["analysis_radius_km"] == DEFAULT_HISTORICAL_ANALYSIS_RADIUS_KM
     assert response["reviewed_signals"]
     assert response["false_positive_summary_text"]
-    assert any("realtime source=skipped" in note for note in response["uncertainty_notes"])
-    assert any("langgraph node=fetch_realtime source=skipped" in note for note in response["uncertainty_notes"])
+    assert any("confidence_diagnostics summary=" in note for note in response["uncertainty_notes"])
+    assert any("secondary_fetch_applied=['realtime']" in note for note in response["uncertainty_notes"])
+    assert any("langgraph node=diagnose_path route=augment_realtime" in note for note in response["uncertainty_notes"])
+    assert any("langgraph node=augment_sources applied=realtime" in note for note in response["uncertainty_notes"])
     assert any("langgraph node=compose_report" in note for note in response["uncertainty_notes"])
     assert any("langgraph node=build_response" in note for note in response["uncertainty_notes"])
 
@@ -538,3 +607,169 @@ def test_run_analysis_graph_passes_radius_override_to_historical_context_builder
     assert response["risk_level"] in {"low", "medium", "high", "critical"}
     assert response["analysis_radius_km"] == 12.5
     assert response["radius_points"]["north"]["lat"] > 37.5665
+
+
+def test_run_analysis_graph_applies_secondary_analysis_for_low_confidence_historical_reroute():
+    class StubHistoricalService:
+        def load_processed_summary_preview(self):
+            return {
+                "row_count": 2,
+                "trend_preview_path": "/tmp/wildfire.csv",
+                "preview_rows": [{"OCCRR_YR": 2024}],
+            }
+
+        def load_trend_records(self, path=None):
+            return [
+                {
+                    "OCCRR_YR": 2025,
+                    "FRFR_OCCRR_CAUS_NM": "입산자실화",
+                    "FRFR_OCCRR_LCTN_YCRD": 37.5666,
+                    "FRFR_OCCRR_LCTN_XCRD": 126.9781,
+                    "HMDT": 31.0,
+                    "WDSP": 4.0,
+                    "TPRT": 29.0,
+                    "FRFR_DMG_AREA": 0.9,
+                    "HASLV": 1600,
+                },
+                {
+                    "OCCRR_YR": 2024,
+                    "FRFR_OCCRR_CAUS_NM": "담뱃불실화",
+                    "FRFR_OCCRR_LCTN_YCRD": 37.5667,
+                    "FRFR_OCCRR_LCTN_XCRD": 126.9782,
+                    "HMDT": 33.0,
+                    "WDSP": 5.1,
+                    "TPRT": 30.0,
+                    "FRFR_DMG_AREA": 0.4,
+                    "HASLV": 1200,
+                },
+            ]
+
+        def find_nearby_incidents(self, records, *, latitude, longitude, radius_km=50.0, limit=None):
+            return records
+
+        def summarize_historical_context(self, records, *, top_n=3):
+            if not records:
+                return {"incident_count": 0, "latest_year": None, "top_causes": []}
+            return {
+                "incident_count": len(records),
+                "latest_year": 2025,
+                "top_causes": [{"cause": "입산자실화", "count": 1}],
+            }
+
+    def stub_realtime_provider(*, latitude: float, longitude: float):
+        return {
+            "available": True,
+            "source": "live",
+            "items": [
+                {
+                    "humidity_percent": 34,
+                    "wind_speed": 3.6,
+                    "visibility": 1400,
+                    "surface_temperature": 27,
+                    "fire_intensity": "보통",
+                }
+            ],
+        }
+
+    def selection_decider(*, lat: float, lon: float, user_type: str) -> ToolSelectionDecision:
+        return ToolSelectionDecision(
+            use_historical=False,
+            use_realtime=True,
+            selected_tools=["realtime"],
+            reason="실시간 우선으로 시작합니다.",
+            mode="llm",
+        )
+
+    response = wildfire_graph.run_analysis_graph(
+        payload=AnalyzeRequest(lat=37.5665, lon=126.9780, user_type="시민"),
+        historical_service=StubHistoricalService(),
+        realtime_status_provider=stub_realtime_provider,
+        selection_decider=selection_decider,
+    )
+
+    assert response["confidence_breakdown"]["route"] == "augment_historical"
+    assert response["reroute_applied"] is True
+    assert "historical 소스를 보강 조회합니다" in response["reroute_reason"]
+    assert any("agent loop step=secondary-analysis" in note for note in response["uncertainty_notes"])
+    assert response["risk_score"] >= 0.3
+
+
+def test_run_analysis_graph_uses_conservative_secondary_analysis_when_model_disagrees_with_rule_score():
+    class StubHistoricalService:
+        def load_processed_summary_preview(self):
+            return {
+                "row_count": 1,
+                "trend_preview_path": "/tmp/wildfire.csv",
+                "preview_rows": [{"OCCRR_YR": 2024}],
+            }
+
+        def load_trend_records(self, path=None):
+            return [
+                {
+                    "OCCRR_YR": 2024,
+                    "FRFR_OCCRR_CAUS_NM": "입산자실화",
+                    "FRFR_OCCRR_LCTN_YCRD": 37.5666,
+                    "FRFR_OCCRR_LCTN_XCRD": 126.9781,
+                    "HMDT": 24.0,
+                    "WDSP": 6.1,
+                    "TPRT": 31.0,
+                    "FRFR_DMG_AREA": 0.6,
+                    "HASLV": 1400,
+                }
+            ]
+
+        def find_nearby_incidents(self, records, *, latitude, longitude, radius_km=50.0, limit=None):
+            return records
+
+        def summarize_historical_context(self, records, *, top_n=3):
+            return {
+                "incident_count": len(records),
+                "latest_year": 2024,
+                "top_causes": [{"cause": "입산자실화", "count": 1}],
+            }
+
+    def stub_realtime_provider(*, latitude: float, longitude: float):
+        return {
+            "available": True,
+            "source": "live",
+            "items": [
+                {
+                    "humidity_percent": 23,
+                    "wind_speed": 6.3,
+                    "visibility": 900,
+                    "surface_temperature": 32,
+                    "fire_intensity": "높음",
+                }
+            ],
+        }
+
+    def selection_decider(*, lat: float, lon: float, user_type: str) -> ToolSelectionDecision:
+        return ToolSelectionDecision(
+            use_historical=True,
+            use_realtime=True,
+            selected_tools=["historical", "realtime"],
+            reason="모델과 규칙을 함께 비교합니다.",
+            mode="llm",
+        )
+
+    def stub_model_scorer(*, features: dict):
+        return {
+            "ml_score": 0.18,
+            "ml_confidence": 0.9,
+            "model_version": "baseline-v1",
+            "reason": "forced_disagreement",
+        }
+
+    response = wildfire_graph.run_analysis_graph(
+        payload=AnalyzeRequest(lat=37.5665, lon=126.9780, user_type="시민"),
+        historical_service=StubHistoricalService(),
+        realtime_status_provider=stub_realtime_provider,
+        selection_decider=selection_decider,
+        model_scorer=stub_model_scorer,
+    )
+
+    assert response["confidence_breakdown"]["route"] == "augment_both"
+    assert "model_rule_disagreement" in response["confidence_reasons"]
+    assert response["reroute_applied"] is True
+    assert any("model disagreement" in note for note in response["uncertainty_notes"])
+    assert response["model_decision_mode"] == "ml_model"

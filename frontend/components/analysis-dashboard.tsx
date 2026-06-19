@@ -246,7 +246,7 @@ export function AnalysisDashboard({
     <main className="main">
       <section className="hero hero--compact">
         <div className="hero__nav">
-          <span className="badge">Sprint B / Analyze</span>
+          <span className="badge">Analyze</span>
           <Link className="ghostLink" href="/">
             모니터링 개요로 이동
           </Link>
@@ -274,8 +274,8 @@ export function AnalysisDashboard({
         ) : null}
       </section>
 
-      <section className="grid">
-        <div className="panel">
+      <section className="grid analysis-grid">
+        <div className="panel analysis-grid__left">
           <form className="form" onSubmit={handleSubmit}>
             <label className="label" htmlFor="lat">
               위도
@@ -411,38 +411,47 @@ export function AnalysisDashboard({
                   selectionMode={result.selection_mode}
                   selectionReason={result.selection_reason}
                 />
-                <AnalysisCoverageCard
-                  confidenceMargin={result.confidence_margin}
-                  dataQualitySummary={result.data_quality_summary}
-                  radiusKm={result.analysis_radius_km}
-                  radiusPoints={result.radius_points}
-                />
                 <SupportingEvidenceCard
                   keyFactors={result.key_factors}
                   reviewedSignals={result.reviewed_signals}
                   xaiReasons={result.xai_reasons}
                 />
-                <FalsePositivePanel
+                <ActionGuide
+                  actions={result.recommended_actions}
                   isLoading={showRefreshingState}
-                  level={result.false_positive_risk}
-                  notes={result.uncertainty_notes}
                   status={showRefreshingState ? "loading" : "ready"}
-                  summaryText={result.false_positive_summary_text}
                 />
-                <ActionGuide actions={result.recommended_actions} isLoading={showRefreshingState} status={showRefreshingState ? "loading" : "ready"} />
               </>
             ) : !loading ? (
               <div className="card statusCard">좌표·반경·사용자 유형을 입력한 뒤 분석을 실행하면 결과가 여기에 표시됩니다.</div>
             ) : null}
           </div>
         </div>
-        <div className="panel">
+        <div className="panel analysis-grid__right">
           <MapPanel
             analysisRadiusKm={displayedRadiusKm}
             radiusPoints={result?.radius_points}
             selectedCoordinates={selectedCoordinates}
             onCoordinateSelect={handleCoordinateSelect}
           />
+
+          {result && !showInitialSkeleton ? (
+            <div className={`cards cards--secondary${showRefreshingState ? " cards--refreshing" : ""}`}>
+              <AnalysisCoverageCard
+                confidenceMargin={result.confidence_margin}
+                dataQualitySummary={result.data_quality_summary}
+                radiusKm={result.analysis_radius_km}
+                radiusPoints={result.radius_points}
+              />
+              <FalsePositivePanel
+                isLoading={showRefreshingState}
+                level={result.false_positive_risk}
+                notes={result.uncertainty_notes}
+                status={showRefreshingState ? "loading" : "ready"}
+                summaryText={result.false_positive_summary_text}
+              />
+            </div>
+          ) : null}
         </div>
       </section>
     </main>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
 import { buildAnalyzeHref } from "../lib/analyze-navigation";
+import { ForestHeatmapMap } from "./forest-heatmap-map";
 import { MonitoringFetchResult, MonitoringWatchpoint, fetchMonitoringSummary } from "../lib/monitoring";
 
 const fallbackHighlights = [
@@ -58,10 +59,6 @@ function getResultTone(status: MonitoringFetchResult["status"]) {
 
 function formatPriorityLabel(value: string) {
   return priorityLabelMap[value] ?? value;
-}
-
-function formatCoordinate(value: number) {
-  return value.toFixed(4);
 }
 
 function getSuggestedRadiusKm(watchpoint: MonitoringWatchpoint) {
@@ -125,7 +122,6 @@ export function MonitoringOverview() {
     return monitoringResult.summary.watchpoints;
   }, [monitoringResult]);
 
-  const topFiveWatchpoints = watchpoints.slice(0, 5);
   const topTenWatchpoints = watchpoints.slice(0, 10);
   const highPriorityCount = watchpoints.filter((item) => item.priority_label === "high").length;
   const monitoredProvinces = new Set(watchpoints.map((item) => item.province)).size;
@@ -136,20 +132,17 @@ export function MonitoringOverview() {
       <section className="hero hero--split">
         <div>
           <div className="hero__nav">
-            <span className="badge">Sprint B / Monitoring Overview</span>
-            <Link className="ghostLink" href="/analyze">
-              분석 워크플로 열기
-            </Link>
+            <span className="badge">Monitoring</span>
           </div>
           <h1>산불 운영 모니터링 개요</h1>
           <p>
-            홈 화면은 실제 감시 지점 상위 30개를 보여주는 운영 보드입니다. 지역별 누적 이력, 대표 발화 원인,
-            우선순위를 확인한 뒤 /analyze에서 특정 좌표를 정밀 검토할 수 있습니다.
+            홈 화면은 실제 감시 지점 상위 10개를 보여주는 운영 보드입니다. 지역별 누적 이력, 대표 발화 원인,
+            우선순위를 확인한 뒤 분석 화면에서 에서 특정 좌표를 정밀 검토할 수 있습니다.
           </p>
         </div>
         <div className="hero__actions">
           <Link className="button button--inline" href="/analyze">
-            좌표 분석 시작
+            좌표 분석
           </Link>
         </div>
       </section>
@@ -210,112 +203,9 @@ export function MonitoringOverview() {
             )}
           </div>
 
+          <ForestHeatmapMap />
+
           <div className="cards">
-            <div className="card panel-section">
-              <div className="card__header">
-                <div>
-                  <div className="badge">우선 점검 지역</div>
-                  <h3 className="card__title">관제 우선순위 Top 10</h3>
-                  <p className="card__lead">우선순위 점수와 최근 이력을 기준으로 먼저 확인해야 할 지역입니다. 클릭하면 /analyze가 자동 실행됩니다.</p>
-                </div>
-              </div>
-              {topTenWatchpoints.length > 0 ? (
-                <>
-                  <div className="inline-summary inline-summary--monitoring">
-                    <span className="card__lead">집중 감시 {highPriorityCount}개 / 총 {watchpoints.length}개 지점</span>
-                    <span className="badge">관할 시도 {monitoredProvinces}곳</span>
-                  </div>
-                  <div className="monitoring-list">
-                    {topTenWatchpoints.map((watchpoint, index) => {
-                      const analyzeHref = buildAnalyzeWatchpointHref(watchpoint, true);
-                      const priorityTone =
-                        watchpoint.priority_label === "high"
-                          ? "error"
-                          : watchpoint.priority_label === "medium"
-                            ? "loading"
-                            : "idle";
-
-                      return (
-                        <Link
-                          key={watchpoint.id}
-                          className="monitoring-list__item monitoring-list__item--stacked monitoring-list__item--link"
-                          href={analyzeHref}
-                        >
-                          <div className="monitoring-list__body">
-                            <div className="monitoring-list__titleRow">
-                              <strong>
-                                {index + 1}. {watchpoint.province} {watchpoint.city}
-                              </strong>
-                              <span className={`status-chip status-chip--${priorityTone}`}>{formatPriorityLabel(watchpoint.priority_label)}</span>
-                            </div>
-                            <div className="chipRow monitoring-list__chips">
-                              <span className="badge">누적 {watchpoint.incident_count}건</span>
-                              <span className="badge">최근 {watchpoint.latest_year ?? "-"}년</span>
-                              <span className="badge">원인 {watchpoint.top_cause ?? "미상"}</span>
-                            </div>
-                            <span className="ghostLink monitoring-list__action">
-                              분석 열기 · 권장 반경 {getSuggestedRadiusKm(watchpoint)}km
-                            </span>
-                          </div>
-                          <div className="monitoring-list__meta monitoring-list__meta--stacked">
-                            <small>우선순위 점수</small>
-                            <span>{watchpoint.priority_score}</span>
-                          </div>
-                        </Link>
-                      );
-                    })}
-                  </div>
-                </>
-              ) : (
-                <div className="empty-list">
-                  <p>모니터링 엔드포인트가 아직 없거나 감시 지점 데이터를 제공하지 않았습니다.</p>
-                  <Link className="ghostLink" href="/analyze">
-                    그래도 좌표 기반 분석으로 바로 이동할 수 있습니다.
-                  </Link>
-                </div>
-              )}
-            </div>
-
-            <div className="card panel-section">
-              <div className="card__header">
-                <div>
-                  <div className="badge">대표 감시 지점</div>
-                  <h3 className="card__title">좌표 기반 현장 확인용 Top 5</h3>
-                  <p className="card__lead">좌표와 권장 반경을 바로 채운 뒤, 분석 실행 버튼으로 정밀 검토를 이어갈 수 있습니다.</p>
-                </div>
-              </div>
-              {topFiveWatchpoints.length > 0 ? (
-                <div className="monitoring-list">
-                  {topFiveWatchpoints.map((watchpoint) => {
-                    const analyzeHref = buildAnalyzeWatchpointHref(watchpoint);
-                    return (
-                      <div key={`${watchpoint.id}-coordinate`} className="monitoring-list__item">
-                        <div>
-                          <strong>
-                            {watchpoint.province} {watchpoint.city}
-                          </strong>
-                          <div className="chipRow monitoring-list__chips">
-                            <span className="badge">위도 {formatCoordinate(watchpoint.lat)}</span>
-                            <span className="badge">경도 {formatCoordinate(watchpoint.lon)}</span>
-                            <span className="badge">반경 {getSuggestedRadiusKm(watchpoint)}km</span>
-                          </div>
-                          <Link className="ghostLink monitoring-list__action" href={analyzeHref}>
-                            좌표 자동 입력으로 분석 열기
-                          </Link>
-                        </div>
-                        <div className="monitoring-list__meta">
-                          <span>{watchpoint.incident_count}건</span>
-                          <small>{watchpoint.top_cause ?? "원인 미상"}</small>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              ) : (
-                <div className="empty-list">표시할 대표 감시 지점 좌표가 아직 없습니다.</div>
-              )}
-            </div>
-
             <div className="card panel-section">
               <div className="card__header">
                 <div>
@@ -351,9 +241,74 @@ export function MonitoringOverview() {
             <div className="badge">데이터 해석 기준</div>
             <h3 className="card__title">우선순위 점수 읽는 법</h3>
             <p className="card__lead">
-              현재 우선순위는 누적 발생 건수, 최신 연도 반영 여부, 대표 발화 원인을 조합해 계산합니다.
-              Sprint C에서는 실시간 기상·센서 입력까지 합쳐 더 동적인 모니터링 보드로 확장할 수 있습니다.
+              현재 우선순위는 누적 발생 건수, 최근 발생 이력, 대표 발화 원인을 기준으로 1차 산정합니다.
+              이후 위험도가 높거나 판정 신뢰도가 낮은 지점은 분석 에이전트가 과거 이력, 실시간 산불 정보, 오탐 가능성, 데이터 품질을 단계적으로 검토해 정밀 판단합니다.
             </p>
+          </div>
+
+          <div className="card panel-section">
+            <div className="card__header">
+              <div>
+                <div className="badge">우선 점검 지역</div>
+                <h3 className="card__title">관제 우선순위 Top 10</h3>
+                <p className="card__lead">우선순위 점수와 최근 이력을 기준으로 먼저 확인해야 할 지역입니다. 클릭하면 좌표 분석이 자동 실행됩니다.</p>
+              </div>
+            </div>
+            {topTenWatchpoints.length > 0 ? (
+              <>
+                <div className="inline-summary inline-summary--monitoring">
+                  <span className="card__lead">집중 감시 {highPriorityCount}개 / 총 {watchpoints.length}개 지점</span>
+                  <span className="badge">관할 시도 {monitoredProvinces}곳</span>
+                </div>
+                <div className="monitoring-list">
+                  {topTenWatchpoints.map((watchpoint, index) => {
+                    const analyzeHref = buildAnalyzeWatchpointHref(watchpoint, true);
+                    const priorityTone =
+                      watchpoint.priority_label === "high"
+                        ? "error"
+                        : watchpoint.priority_label === "medium"
+                          ? "loading"
+                          : "idle";
+
+                    return (
+                      <Link
+                        key={watchpoint.id}
+                        className="monitoring-list__item monitoring-list__item--stacked monitoring-list__item--link"
+                        href={analyzeHref}
+                      >
+                        <div className="monitoring-list__body">
+                          <div className="monitoring-list__titleRow">
+                            <strong>
+                              {index + 1}. {watchpoint.province} {watchpoint.city}
+                            </strong>
+                            <span className={`status-chip status-chip--${priorityTone}`}>{formatPriorityLabel(watchpoint.priority_label)}</span>
+                          </div>
+                          <div className="chipRow monitoring-list__chips">
+                            <span className="badge">누적 {watchpoint.incident_count}건</span>
+                            <span className="badge">최근 {watchpoint.latest_year ?? "-"}년</span>
+                            <span className="badge">원인 {watchpoint.top_cause ?? "미상"}</span>
+                          </div>
+                          <span className="ghostLink monitoring-list__action">
+                            분석 열기 · 권장 반경 {getSuggestedRadiusKm(watchpoint)}km
+                          </span>
+                        </div>
+                        <div className="monitoring-list__meta monitoring-list__meta--stacked">
+                          <small>우선순위 점수</small>
+                          <span>{watchpoint.priority_score}</span>
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </>
+            ) : (
+              <div className="empty-list">
+                <p>모니터링 엔드포인트가 아직 없거나 감시 지점 데이터를 제공하지 않았습니다.</p>
+                <Link className="ghostLink" href="/analyze">
+                  그래도 좌표 기반 분석으로 바로 이동할 수 있습니다.
+                </Link>
+              </div>
+            )}
           </div>
         </aside>
       </section>

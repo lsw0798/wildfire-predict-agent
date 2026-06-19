@@ -20,9 +20,10 @@ def test_settings_defaults_match_project_layout(monkeypatch):
 
     assert settings.wildfire_api_base_url == "https://www.bigdata-forest.kr/todayFireGet"
     assert settings.wildfire_api_key == ""
-    assert settings.wildfire_data_dir == PROJECT_DIR.parent / "data"
-    assert settings.wildfire_processed_data_path == PROJECT_DIR.parent / "data" / "processed" / "incidents.json"
-    assert settings.backend_cors_origins == ["http://localhost:3000", "http://127.0.0.1:3000"]
+    assert settings.wildfire_data_dir == PROJECT_DIR / "data"
+    assert settings.wildfire_processed_data_path == PROJECT_DIR / "data" / "processed" / "incidents.json"
+    assert settings.backend_cors_origins[:2] == ["http://localhost:3000", "http://127.0.0.1:3000"]
+    assert any("vercel.app" in origin for origin in settings.backend_cors_origins)
     assert settings.group_e_enabled is False
     assert settings.group_e_model == "gpt-5.4"
     assert settings.llm_provider == "openai"

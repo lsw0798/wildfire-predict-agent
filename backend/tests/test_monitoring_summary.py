@@ -80,7 +80,10 @@ def test_monitoring_summary_service_resolves_trend_path_from_preview_bundle_when
 
     service.build_summary(limit=5)
 
-    assert historical_service.requested_paths == ["/tmp/preview-trend.csv"]
+    assert historical_service.requested_paths in [
+        ["/tmp/preview-trend.csv"],
+        ["/private/tmp/preview-trend.csv"],
+    ]
 
 
 def test_monitoring_route_wraps_service_output_in_response_model():

@@ -22,7 +22,17 @@ class AnalyzeResponse(BaseModel):
     risk_score: float
     false_positive_risk: str
     confidence: float
+    confidence_breakdown: dict[str, float | str | list[str]] = Field(default_factory=dict)
+    confidence_reasons: list[str] = Field(default_factory=list)
     confidence_margin: float
+    reroute_applied: bool = False
+    reroute_reason: str = ""
+    model_score: float | None = None
+    model_confidence: float = 0.0
+    model_version: str = ""
+    model_feature_coverage: float = 0.0
+    model_decision_mode: str = "rule_only_fallback"
+    model_reason: str = ""
     analysis_radius_km: float
     radius_points: dict[str, dict[str, float]]
     key_factors: list[str]

@@ -9,6 +9,7 @@ from app.services.group_b_context import (
 )
 from app.services.group_e_selector import SelectionDecider, get_selection_decider
 from app.services.historical_wildfire import HistoricalWildfireService
+from app.services.model_scoring import ModelScorer, get_model_scorer
 
 router = APIRouter()
 
@@ -20,6 +21,7 @@ def analyze(
     historical_service: HistoricalWildfireService = Depends(get_historical_wildfire_service),
     realtime_status_provider: RealtimeStatusProvider = Depends(get_realtime_status_provider),
     selection_decider: SelectionDecider = Depends(get_selection_decider),
+    model_scorer: ModelScorer | None = Depends(get_model_scorer),
 ) -> AnalyzeResponse:
     if not callable(orchestrator) or hasattr(orchestrator, "dependency"):
         orchestrator = get_report_orchestrator()
@@ -29,11 +31,14 @@ def analyze(
         realtime_status_provider = get_realtime_status_provider()
     if not callable(selection_decider) or hasattr(selection_decider, "dependency"):
         selection_decider = get_selection_decider()
+    if model_scorer is not None and not callable(model_scorer):
+        model_scorer = get_model_scorer()
 
     report = orchestrator(
         payload=payload,
         historical_service=historical_service,
         realtime_status_provider=realtime_status_provider,
         selection_decider=selection_decider,
+        model_scorer=model_scorer,
     )
     return AnalyzeResponse(**report)

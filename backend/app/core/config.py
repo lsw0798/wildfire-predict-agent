@@ -13,7 +13,7 @@ DEFAULT_PROCESSED_DATA_PATH = DEFAULT_DATA_DIR / "processed" / "incidents.json"
 DEFAULT_CORS_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "https://wildfire-predict-agent-lth9gx9oj-swzzangr7890-9379s-projects.vercel.app/"
+    "https://wildfire-predict-agent-i8fatu5ik-swzzangr7890-9379s-projects.vercel.app"
 ]
 
 
